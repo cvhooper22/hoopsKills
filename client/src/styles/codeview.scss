@@ -1,0 +1,32 @@
+.code-view {
+    margin-top: 5vh;
+    
+    &__qr-code {
+        box-shadow: 0 2px 6px #b5b5b5;
+    }
+
+    .dropdown-trigger {
+        margin-top: 0.5rem;
+        background-color: white;
+        color: $blue-color1;
+        padding: 0;
+        border: none;
+    }
+
+    &__instructions {
+        max-width: 400px;
+        &__nested {
+            padding-left: 1.5rem;
+
+            .material-icons {
+                margin-right: 0.25rem;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 420px) {
+    .code-view__instructions {
+        width: 400px;
+    }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "boilerplate",
+  "name": "React Boilerplate App",
+  "icon": "fa-compass",
+  "endpoint": "<inserted>",
+  "default": true,
+  "providers": {
+    "navigation": {
+      "group": "Main",
+      "menu": [
+        {
+          "display": "React Boilerplate App",
+          "path": "boilerplate/main",
+          "default": true
+        }
+      ]
+    }
+  },
+  "meta": {
+    "featureFlag": "featureFlag.boilerplate",
+    "featureFlagInitialState": true
+  }
+}
