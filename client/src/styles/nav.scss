@@ -1,0 +1,22 @@
+.nav-container {
+  padding: 20px;
+  display: flex;
+
+  .nav-item {
+    padding: 0 4px;
+    display: inline-block;
+    
+    a {
+      padding: 6px 10px;
+      text-decoration: none;
+      
+      &:hover {
+        background-color: $navHighlightColor;
+      }
+
+      &.active {
+        background-color: $navHighlightColor;
+      }
+    }
+  }
+}

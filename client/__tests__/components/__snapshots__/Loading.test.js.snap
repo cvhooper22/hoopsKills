@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loading - Should render Loading 1`] = `
+<div
+  className="loading"
+>
+  <div
+    className="loading-icon"
+  >
+    <i
+      className="ids-icon__spinner fa-spin"
+    />
+  </div>
+</div>
+`;

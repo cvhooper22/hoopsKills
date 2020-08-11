@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainView - Should render MainView 1`] = `
+<div
+  className="container"
+>
+  <div
+    className="row"
+  >
+    <div
+      className="col-md-12"
+    >
+      <h1>
+        <i
+          className="ids-icon__dashboard"
+        />
+         Test - Main view
+      </h1>
+      <div
+        className="section"
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="col-md-12"
+          >
+            Test - Welcome to WebClient.React.Boilerplate
+          </div>
+        </div>
+      </div>
+      <div
+        className="section"
+      >
+        <div
+          className="row"
+        >
+          <div
+            className="col-md-12"
+          >
+            Test - Formatted time: Mar-11-2018
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="col-md-12"
+          >
+            Test - Plural formatted: Test - Total 0 items
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="col-md-12"
+          >
+            Test - Plural formatted: Test - Total 1 item
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="col-md-12"
+          >
+            Test - Plural formatted: Test - Total 157 items
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="col-md-12"
+          >
+            Test - Formatted number: 3,742
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="col-md-12"
+          >
+            Test - Truncated number: 3.7k
+          </div>
+        </div>
+        <div
+          className="row"
+        >
+          <div
+            className="col-md-12"
+          >
+            <button
+              className="ids-button ids-button-normal"
+              disabled={false}
+              onClick={[Function]}
+              type="button"
+            >
+              <span
+                className="ids-button-text"
+              >
+                views.mainview.reloadpage
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
