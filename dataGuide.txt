@@ -1,0 +1,5 @@
+To get a players stats this enpoint is used
+https://byucougars.com/fett/feeds/stats/1699/1289971
+
+the last part of the url is the player id
+could possibly collect all the ids from crawling the roster
