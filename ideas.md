@@ -10,7 +10,7 @@ Not a kill if it’s a foul leading to a free throw
 If it was a block, capture that and who
   - Block is “block” followed by “rebound def”
 It it was a steal, capture that and who
-  - Steal us “turnover” followed by “steal”
+  - Steal is “turnover” followed by “steal”
 Capture time started and ended
 - Related this, note time since last stop streak/kill
 NOT A KILL if the possession came after a missed FT
