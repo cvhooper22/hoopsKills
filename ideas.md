@@ -3,6 +3,11 @@
 CAL STATE FULLERTON ID
 1290251
 
+
+might need a game data object that has functions on it:
+log player action
+log stop
+etc
 Would be cool to have times on it
 
 # Rules
@@ -14,6 +19,10 @@ It it was a steal, capture that and who
 Capture time started and ended
 - Related this, note time since last stop streak/kill
 NOT A KILL if the possession came after a missed FT
+NOT A KILL if the possession was too close to halftime
+  - NEED TO DEFINE THIS
+
+When we move to the general case will have to enhance gameData with each team by period, then can track stops and kills according to the current team
 
 ## Is a play a stop?
   - def rebound (EXCEPT IF IT WAS A FT BEFORE)
@@ -76,3 +85,12 @@ Can do assisted buckets and assist maps here too
 General box score fun times
 How many threes were made by different players
 How many different players had an assist
+
+OTHER FUN STUFF
+Could rate a certain stat - kinda like the idea of clutch minutes
+Critical - clutch definition
+Bad - score within 7 OR margin > time left in second half
+OK - score from 7 - 15
+DOESN'T MATTER - Score + 15
+
+So for makes this is kinda flipped as far as the sentiment goes
