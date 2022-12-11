@@ -154,10 +154,28 @@ function addNewPeriodToData(dataByPeriod, visitor, home) {
   dataByPeriod.possessions.push({ ...makeBasePossession(visitor, home) });
 }
 
+function updateKills (dataByPeriod, play) {
+  dataByPeriod.kills.total = dataByPeriod.kills.total + 1;
+}
+
+function updateKillOpps(dataByPeriod, play) {
+  dataByPeriod.kills.opportunities = dataByPeriod.kills.opportunities + 1;
+}
+
 function getNextNonSubPlay(index, plays) {
   let currentIndex = index;
   let currentPlay = plays[index];
   while (currentPlay && currentPlay.action === 'SUB') {
+    currentIndex = index + 1;
+    currentPlay = plays[currentIndex]; 
+  }
+  return currentPlay;
+}
+
+function getNextNonFoulPlay(index, plays) {
+  let currentIndex = index;
+  let currentPlay = plays[index];
+  while (currentPlay && currentPlay.action === 'FOUL') {
     currentIndex = index + 1;
     currentPlay = plays[currentIndex]; 
   }
@@ -202,26 +220,50 @@ function playEndsStopStreak (playIndex, plays) {
   return endsStreak;
 }
 
+function playChangesPossession (index, plays, currentTeamInPossession) {
+  let changesPossession = false;
+  const play = plays[index];
+  const actionsThatChange = ['TURNOVER', 'MISS', 'GOOD']
+  if (actionsThatChange.includes(play.action)) {
+    changesPossession = true;
+    if (play.action === 'REBOUND' && play.type === 'OFF') {
+      changesPossession = false;
+    }
+  }
+  return changesPossession;
+}
+
+function newTeamInPossession (plays, playIndex) {
+  let nextTeamsPlay = nextNonSubPlay
+}
+
 function processStop(playIndex, gameData, periodIndex, plays) {
   const play = plays[playIndex];
   const currentStops = gameData.currentStopCount;
+  const periodData = gameData.dataByPeriod[periodIndex]
   gameData.currentStopCount = currentStops + 1;
   if (gameData.currentStopCount % 3 === 0) {
-    gameData.dataByPeriod[periodIndex]
+    updateKills(periodData, play);
+  } else if (gameData.currentStopCount % 3 === 1) {
+    updateKillOpps(periodData, play);
   }
 }
 
 function processPlay (play, gameData, playIndex, periodIndex, plays) {
   if (playIsStop(playIndex, plays)) {
+    console.log('A stop!');
     processStop(playIndex, gameData, periodIndex, plays);
   }
 
   if (playEndsStopStreak(playIndex, plays)) {
+    if (gameData.currentStopCount > gameData.longestStopStreak) {
+      gameData.longestStopStreak = gameData.currentStopCount;
+    }
     gameData.currentStopCount = 0;
   }
 
   if (playChangesPossession(playIndex, plays, gameData.currentTeamInPossession)) {
-    gameData.currentTeamInPossession = play.team;
+    gameData.currentTeamInPossession = newTeamInPossession(gameData.currentTeamInPossession, play);
   }
 }
 
@@ -246,6 +288,7 @@ function parseGame(playsByPeriod, visitor, home) {
   const gameData = {
     currentTeamInPossession: '',
     currentStopCount: 0,
+    longestStopStreak: 0,
     dataByPeriod,
     visitor,
     home
@@ -257,6 +300,7 @@ function parseGame(playsByPeriod, visitor, home) {
 
   gameData.currentTeamInPossession = currentPlay.team;
   dataByPeriod.possessions[0][gameData.currentTeamInPossession] = 1;
+  // debugger;
   while (currentPlay) {
     const {nextPlayIndex, nextPeriodIndex} = getNextIndices(playsByPeriod, playIndex, periodIndex);
     if (periodIndex !== nextPeriodIndex) {
