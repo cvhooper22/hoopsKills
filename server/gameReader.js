@@ -76,17 +76,17 @@ Shot Clock violation ? (unconfirmed)
 play.action === 'TURNOVER' && play.checkname === 'TEAM'
 */
 
-function isStop(play, prevPlay, nextPlay) {
-  const action = play.action;
-  const isStop = false;
-  switch(action)
-}
+// function isStop(play, prevPlay, nextPlay) {
+//   const action = play.action;
+//   const isStop = false;
+//   switch(action)
+// }
 
-function killsReducer(gameKills, currentPlay, i, )
+// function killsReducer(gameKills, currentPlay, i, )
 
-function parseHalf (plays, halfData) {
+// function parseHalf (plays, halfData) {
   
-}
+// }
 
 function tallyKillsData (killsByPeriod) {
   const initialData = {
@@ -228,9 +228,9 @@ function processPlay (play, gameData, playIndex, periodIndex, plays) {
 function parseGame(playsByPeriod, visitor, home) {
   // const myTeam = 'BYU'; may need to use this in the future
   const dataByPeriod = {
-    stopStreaks: {
+    stopStreaks: [{
       ...baseStopData,
-    },
+    }],
     kills: [
       {
         ...baseKillData
@@ -256,14 +256,14 @@ function parseGame(playsByPeriod, visitor, home) {
   let currentPlay = playsByPeriod[periodIndex]?.play?.[playIndex];
 
   gameData.currentTeamInPossession = currentPlay.team;
-  dataByPeriod.possessions[0][currentTeamInPossession] = 1;
+  dataByPeriod.possessions[0][gameData.currentTeamInPossession] = 1;
   while (currentPlay) {
     const {nextPlayIndex, nextPeriodIndex} = getNextIndices(playsByPeriod, playIndex, periodIndex);
     if (periodIndex !== nextPeriodIndex) {
       addNewPeriodToData(dataByPeriod, visitor, home);
       const firstNonSubPlay = getNextNonSubPlay(0, playsByPeriod[periodIndex]?.play);
       gameData.currentTeamInPossession = firstNonSubPlay.team;
-      dataByPeriod.possessions[periodIndex][currentTeamInPossession] = 1;
+      dataByPeriod.possessions[periodIndex][gameData.currentTeamInPossession] = 1;
     }
 
     processPlay(currentPlay, gameData, playIndex, periodIndex, playsByPeriod[periodIndex]?.play);

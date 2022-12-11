@@ -64,10 +64,12 @@ Ones that happen when the game is within 5 and/or with a certain amount of time 
 Could even tier it to what seems reasonable (down 5-8 with 4 minutes left)
 
 Could essentially track everything about the team/player. For instance, when did the turnovers happen, when did a player score their points, etc
+  - Something like what I did for Alex one time. When does a player take his shots, how is it spread out the game. Did time for Alex but possessions would be more meaningful since that would remove the addition of the time he was on defense and literally ccould not take a shot
 
 Something like this evenhttps://cbbstatistics.blogspot.com/2020/08/does-high-minutes-average-cause.html
 
-Lineups stuff
+
+# Lineups stuff
 +/- for players
 Stats for players
 A more intuitive lineup thing where you can see who’s on the court and stuff (run etc)
