@@ -1,5 +1,6 @@
 import React from 'react';
 import LineupRow from './LineupRow';
+import { getLineupHash } from '../../../utils/lineupUtils';
 
 export default function LineupTable ({lineups, filterPlayers}) {
   function renderFilterCount () {
@@ -23,7 +24,7 @@ export default function LineupTable ({lineups, filterPlayers}) {
         </div>
         <div className='lineup-table__body f1-scroll'>
           {
-            lineups.map((l) => <LineupRow lineup={l} />)
+            lineups.map((l) => <LineupRow lineup={l} key={getLineupHash(l.names)}/>)
           }
         </div>
       </div>

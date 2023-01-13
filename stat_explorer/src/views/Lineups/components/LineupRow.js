@@ -38,7 +38,6 @@ export default function LineupRow ({lineup}) {
     {stints: []},
     {stints: []}
   ]);
-  const displayStints = stintsByPeriod.filter(s => s.stints.length > 0);
   
   function handleTriggerClick () {
     setShowStints(!showStints);
@@ -55,20 +54,25 @@ export default function LineupRow ({lineup}) {
         <div className='lr--stint-count lineup-header f1'>{lineup.stints.length}</div>
         <div className='lr--avg-time f1'>{avgStintTime.toFixed(2)}</div>
       </div>
-      <div className="lineup-stints mt-m pb-m px-l">
+      <div className="lineup-stints mt-s pb-m px-l">
         <div className='trigger-row flex-jce' role="button" onClick={handleTriggerClick}>
           <span className="trigger-text mr-s">{`${showStints ? 'Hide' : 'View'} Stints`}</span>
           <div className={`trigger${showStints ? ' trigger--open' : ''}`} />
         </div>
         <div className={`flex-jce lineup-stints-container${showStints ? ' lineup-stints-container--open py-s mt-s' : ''}`}>
-          {displayStints.map((s, idx) => (
-            <div className='stint mx-l' key={`stint${idx}`}>
-              <div className="stint-title">{indexToLabel[idx]}</div>
-              <div className="stint-list">
-                {s.stints.map((st, idx) => (<div className="lineup-stint" key={`stint${idx}`}>{`${numberToGameTime(st.start, false)} to ${numberToGameTime(st.end, false, st.isEndPeriod)}`}</div>))}
+          {stintsByPeriod.map((s, idx) => {
+            if (!s.stints.length) {
+              return null;
+            }
+            return (
+              <div className='stint mx-l' key={`stint${idx}`}>
+                <div className="stint-title">{indexToLabel[idx]}</div>
+                <div className="stint-list">
+                  {s.stints.map((st, idx) => (<div className="lineup-stint" key={`stint${idx}`}>{`${numberToGameTime(st.start, false)} to ${numberToGameTime(st.end, false, st.isEndPeriod)}`}</div>))}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

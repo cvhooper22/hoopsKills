@@ -28,27 +28,30 @@ export function numberToGameTime (timeNumber, includePostfix=true, isEndPeriod=f
   let gameSeconds = 60 - seconds;
   let gameMinute = 0;
   let postFix = '';
+  const otStarts = [40,45,50,55];
   if (intPart < 40) {
     const min = intPart % 20;
     gameMinute = 19 - min;
   } else if (intPart !== 40){ // need to check this for end of game in OT too
     const min = intPart % 5;
     gameMinute = 5 - min;
+  } else if (otStarts.includes(intPart)) {
+    gameMinute = 4; // will be corrected in next step to 5
   }
   if (gameSeconds === 60) {
     gameMinute = gameMinute + 1;
     gameSeconds = 0;
   }
-  if (intPart >= 20) {
-    postFix = ' 2H';
-  } else if (intPart >= 40) {
-    postFix = ' OT';
-  } else if (intPart >= 45) {
-    postFix = ' 2OT';
+  if (intPart >= 55) {
+    postFix = ' 4OT';
   } else if (intPart >= 50) {
     postFix = ' 3OT';
-  } else if (intPart >= 55) {
-    postFix = ' 4OT';
+  } else if (intPart >= 45) {
+    postFix = ' 2OT';
+  } else if (intPart >= 40) {
+    postFix = ' OT';
+  } else if (intPart >= 20) {
+    postFix = ' 2H';
   }
   const secondString = gameSeconds.toString().padStart(2,'0');
   return `${gameMinute}:${secondString}${includePostfix ? postFix : ''}`;
@@ -159,10 +162,6 @@ function parseHalf(plays, lineupData, halfIndex, numHalves) {
         // console.log('new lineup is now', newLineup);
         const newHash = getLineupHash(newLineup);
         // update old lineup end
-        if (newHash === "GIGE-DAHA-JARO-FOTR-NOWA") {
-          console.log('Starters comiing back in, the play: ', play);
-          console.log('current lineup info for starters', lineupData.lineups["GIGE-DAHA-JARO-FOTR-NOWA"]);
-        }
         const oldHash = getLineupHash(lineupData.currentLineup);
         const oldStints = lineupData.lineups[oldHash].stints;
         oldStints[oldStints.length - 1].end = timeToNumber(play.time, halfIndex);
@@ -222,8 +221,11 @@ const generateLineupData = (game) => {
     }
   };
   const numHalves = game.plays.period.length;
-  parseHalf(game.plays.period[0].play, lineupData, 0, numHalves);
-  parseHalf(game.plays.period[1].play, lineupData, 1, numHalves);
+  game.plays.period.forEach((p, idx) => {
+    parseHalf(p.play, lineupData, idx, numHalves);
+  });
+  // parseHalf(game.plays.period[0].play, lineupData, 0, numHalves);
+  // parseHalf(game.plays.period[1].play, lineupData, 1, numHalves);
   Object.keys(lineupData.lineups).forEach(lKey => {
     const lineup = lineupData.lineups[lKey];
     const total = lineup.stints.reduce((count, stint) => {
@@ -232,7 +234,7 @@ const generateLineupData = (game) => {
     }, 0);
     lineup.totalTime = total;
   });
-  console.log("lineupDatas", lineupData);
+  // console.log("lineupDatas", lineupData);
   return lineupData;
 };
 

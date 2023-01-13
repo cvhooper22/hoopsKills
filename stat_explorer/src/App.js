@@ -26,7 +26,6 @@ const views = [
 export default function App() {
   const [currentView, setCurrentView] = useState(HOME_VIEW);
   function handleViewClick (view) {
-    console.log('set surrent view!', view);
     setCurrentView(view);
   }
   return (

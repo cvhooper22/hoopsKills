@@ -32,7 +32,7 @@ export default function PlayerFilters({ players, filterPlayers, onChange }) {
             const isChecked = filterPlayers.includes(p);
             const imageUrl = `${urls.espnPhotoStart}${info?.id}${urls.espnPhotoEnd}`;
             return (
-                <div className="player" role="button" onClick={getCheckboxHandler(p)}>
+                <div className="player" role="button" onClick={getCheckboxHandler(p)} key={p}>
                   <img className={isChecked ? 'active' : ''} src={imageUrl} />
                   <div className="player__number">
                     {`#${info?.no}`}

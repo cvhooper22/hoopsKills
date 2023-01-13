@@ -28,7 +28,6 @@ export default function Lineups() {
   }
 
   function onPlayerChange(player) {
-    console.log("the player changed", player);
     const newFilters = [...filterPlayers];
     if (filterPlayers.includes(player)) {
       const playerIndex = newFilters.findIndex((p) => p === player);
@@ -45,7 +44,6 @@ export default function Lineups() {
         return resp.json();
       })
       .then((data) => {
-        console.log("data is fetched, call it");
         const lineups = genLineupData(data[0].bbgame);
         const team = data[0].bbgame.team.find((t) => t.name === "BYU");
         const teamPlayers = team.player.filter(p => p.checkname !== 'TEAM');
@@ -69,9 +67,7 @@ export default function Lineups() {
     }
     return agg;
   }, []);
-  console.log('filteredLineups', filteredLineups);
   const currentLineups = filteredLineups.sort((lA, lB) => lB.totalTime - lA.totalTime);
-  console.log('currentLineups', currentLineups);
   const loading = Object.keys(lineupData.lineups).length === 0 && !err;
   return (
     <div className="lineups flex">
