@@ -83,6 +83,11 @@ const games = [
     name: "San Diego (A)",
     imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/USD_0.png?itok=fAaWm7y6",
     id: "1300202",
+  },
+  {
+    name: "Gonzaga",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/Gonzaga_Primary.png?itok=LcpDQizp",
+    id: "1300204",
   }
 ];
 

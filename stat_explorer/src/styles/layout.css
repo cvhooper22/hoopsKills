@@ -227,6 +227,7 @@
 .header__title {
   font-weight: bold;
   font-size: 1.35rem;
+  text-shadow: 1px 1px rgb(0 0 0 / 30%);
 }
 
 .nav {
