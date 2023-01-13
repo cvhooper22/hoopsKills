@@ -1,0 +1,40 @@
+.player-filters {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.player {
+  height: 50px;
+  width: 50px;
+  position: relative;
+  cursor: pointer;
+  margin: 0 0.5rem;
+}
+
+.player > img {
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  border: 1px solid lightgray;
+  transition: 200ms linear;
+}
+
+.player__number {
+  position: absolute;
+  background-color: rgba(0, 0, 255, 0.85);
+  color: white;
+  top: 35px;
+  left: 35px;
+  font-size: 8px;
+  border-radius: 18px;
+  height: 18px;
+  width: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player > img.active {
+  background-color: rgba(0, 0, 255, 0.75);
+  border-color: blue;
+}

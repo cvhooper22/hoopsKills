@@ -1,0 +1,240 @@
+.flex {
+  display: flex;
+}
+
+.scroll {
+  height: 100%;
+  overflow: auto;
+}
+
+.f1 {
+  flex: 1;
+}
+
+.f1-hide {
+  flex: 1;
+  overflow: hidden;
+}
+
+.f1-scroll {
+  flex: 1;
+  overflow: scroll;
+}
+
+.flex-c {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-aic {
+  display: flex;
+  align-items: center;
+}
+
+.flex-jcc {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-jce {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mt-m {
+  margin-top: 1rem;
+}
+
+.mt-l {
+  margin-top: 1.5rem;
+}
+
+.my-s {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.my-m {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.my-l {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.mx-s {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+.mx-m {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.mx-l {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.ml-s {
+  margin-left: var(--s);
+}
+
+.ml-m {
+  margin-left: var(--m);
+}
+
+.ml-l {
+  margin-left: var(--l);
+}
+
+.mr-xs {
+  margin-right: var(--xs);
+}
+
+.mr-s {
+  margin-right: 0.5rem;
+}
+
+.mr-m {
+  margin-right: var(--m);
+}
+
+.mr-l {
+  margin-right: var(--l);
+}
+
+.mt-s {
+  margin-top: 0.5rem;
+}
+
+.mb-s {
+  margin-bottom: 0.5rem;
+}
+
+.p-s {
+  padding: 0.5rem;
+}
+
+.p-m {
+  padding: 1rem;
+}
+
+.p-l {
+  padding: 1.5rem;
+}
+
+.px-s {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.px-m {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.px-l {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.py-s {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.py-m {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.py-l {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.pt-s {
+  padding-top: 0.5rem;
+}
+
+.pt-m {
+  padding-top: 1rem;
+}
+
+.pt-l {
+  padding-top: 1.5rem;
+}
+
+.pb-s {
+  padding-bottom: 0.5rem;
+}
+
+.pb-m {
+  padding-bottom: 1rem;
+}
+
+.pb-l {
+  padding-bottom: 1.5rem;
+}
+
+.pr-s {
+  padding-right: 0.5rem;
+}
+
+.pr-m {
+  padding-right: 1rem;
+}
+
+.pr-l {
+  padding-right: 1.5rem;
+}
+
+.pl-s {
+  padding-left: 0.5rem;
+}
+
+.pl-m {
+  padding-left: 1rem;
+}
+
+.pl-l {
+  padding-left: 1.5rem;
+}
+
+
+
+.header {
+  height: 3.5rem;
+  background-image: linear-gradient(to right top, #003fa2, #003b98, #00378d, #003383, #002f79);
+  color: white;
+}
+
+.header__logo {
+  height: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.header__title {
+  font-weight: bold;
+  font-size: 1.35rem;
+}
+
+.nav {
+  padding-left: calc(1rem + 40px + 0.5rem);
+}
+
+.home, .lineups {
+  background-color: var(--app-bg);
+  flex: 1;
+  padding: 1.5rem;
+}

@@ -1,0 +1,30 @@
+.games {
+  border-right: 1px solid rgba(0,0,0,.12);
+  flex-shrink: 0;
+}
+
+.game-row {
+  height: 40px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding-left: var(--l);
+  padding-right: var(--l);
+  border-right: 4px solid transparent;
+}
+
+.game-row.game-row--selected {
+  color: var(--royal-blue);
+  border-right-color: var(--royal-blue);
+  font-weight: bold;
+}
+
+.game-row:hover, .game-row.game-row--selected:hover {
+  background-color: var(--royal-blue);
+  color: white;
+  border-right-color: transparent;
+  font-weight: normal;
+}
+
+.game-row .game-logo {
+  width: 25px;
+}

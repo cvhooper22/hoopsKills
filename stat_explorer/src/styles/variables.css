@@ -1,0 +1,27 @@
+:root {
+  --royal-blue: #003fa2;
+  --blue-stop-1: #003C95;
+  --blue-stop-2: #003987;
+  --blue-stop-3: #00377A;
+  --blue-stop-4: #00346D;
+  --blue-stop-5: #003C95;
+  --navy-blue: #002e52;
+  --app-bg: #fffffd;
+  --lightest-blue: #edf4ff;
+  --sucess-1: #006141;
+  --sucess-2: #10A170;
+  --sucess-3: #E0FFE5;
+  --error-1: #A3082A;
+  --error-2: #E61744;
+  --error-3: #006141;
+  --almostBlack: #141414;
+  --gray4: #666666;
+  --gray3: #8F8F8F;
+  --gray2: #C5C5C5;
+  --gray1: #E6E6E6;
+  --xs: 0.25rem;
+  --s: 0.5rem;
+  --m: 1rem;
+  --l: 1.5rem;
+  --xl: 2rem;
+}

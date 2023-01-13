@@ -1,0 +1,46 @@
+nav.nav {
+  height: 3rem;
+  box-shadow: 0 0.125rem 0.5rem rgb(0 0 0 / 12%);
+  border-bottom: 1px solid rgba(0,0,0,.12);
+}
+
+nav li {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+nav li > sub {
+  font-size: 0.5rem;
+  text-transform: none;
+  padding-left: 0.25rem;
+  filter: opacity(0.4);
+}
+
+nav li:first-child {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  padding-left: 0;
+}
+
+nav ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+nav li:hover {
+  filter: opacity(0.66);
+}
+
+.nav__item--disabled {
+  color: gray;
+  pointer-events: none;
+}
+
+.nav__item--active {
+  color: var(--royal-blue);
+}

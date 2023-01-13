@@ -1,0 +1,12 @@
+.circle-badge {
+  height: 17px;
+  width: 17px;
+  border-radius: 17px;
+  background-color: var(--navy-blue);
+  color: white;
+  font-weight: bold;
+  font-size: 0.75rem;
+  display: inline-block;
+  border: 1px solid var(--navy-blue);
+  text-align: center;
+}

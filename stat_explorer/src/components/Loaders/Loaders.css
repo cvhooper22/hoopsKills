@@ -1,0 +1,22 @@
+@keyframes fade-in-out {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.y-ball-loader {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.top-ball {
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  animation: 2.5s linear fade-in-out infinite;
+}
