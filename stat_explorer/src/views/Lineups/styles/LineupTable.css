@@ -1,0 +1,26 @@
+.trigger-row {
+  cursor: pointer;
+}
+
+.stint-title {
+  font-weight: bold;
+}
+
+.lineup-table__headers {
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  box-shadow: 0 0.125rem 0.5rem rgb(0 0 0 / 12%);
+}
+
+.starter-badge {
+  color: var(--navy-blue);
+  background-color: white;
+}
+
+.lineup-table__legend {
+  text-align: right;
+}
+
+.lineup-table__body {
+  font-size: 0.9rem;
+}

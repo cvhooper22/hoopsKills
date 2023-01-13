@@ -1,0 +1,15 @@
+@import "styles/layout.css";
+@import "styles/typography.css";
+@import "styles/common.css";
+
+body {
+  margin: 0;
+  font-family: 'Noto Sans', sans-serif;;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}

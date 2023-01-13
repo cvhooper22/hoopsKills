@@ -1,0 +1,71 @@
+@import "./styles/styles.css";
+
+.lineups {
+  overflow: auto;
+  background-color: var(--app-bg);
+  height: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.lineups h1 {
+  margin-top: 0;
+}
+
+.lr--lineup {
+  flex: 4;
+}
+
+.lineup-table__headers {
+  background-color: var(--blue-stop-3);
+  color: white;
+}
+
+.lineup-table__legend__text {
+  font-size: 0.8rem;
+}
+
+.lineup-row:nth-child(2n) {
+  background-color: var(--lightest-blue);
+}
+
+.lineup-row:nth-child(2n) .lineup-stints-container {
+  background-color: #e0ecfe;
+}
+
+.trigger {
+  height: 0;
+  width: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid lightslategray;
+}
+
+.trigger-row {
+  align-items: center;
+}
+
+.trigger-text {
+  color: lightslategray;
+}
+
+.trigger.trigger--open {
+  border-top: none;
+  border-bottom: 5px solid lightslategray;
+}
+
+.lineup-stints {
+  font-size: 0.85rem;
+}
+
+.lineup-stints-container {
+  max-height: 0;
+  transition: 200ms linear;
+  overflow: hidden;
+  background-color: #f4f8ff;
+  color: lightslategray;
+}
+
+.lineup-stints-container.lineup-stints-container--open {
+  max-height: 10rem;
+}
