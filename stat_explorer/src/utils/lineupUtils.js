@@ -8,7 +8,56 @@ function sortPlayersByName(a, b) {
   return 0;
 }
 
-function getLineupHash(lineup) {
+function timeToNumber (timeString, periodIndex = 0) {
+  const [minute, seconds] = timeString.split(':').map(n => +n);
+  const offsets = [0,20,40,45,50,55];
+  const offset = offsets[periodIndex];
+  const periodStart = periodIndex < 2 ? 20 : 5;
+  const fractional = seconds/60;
+  const timeFromPeriodStart = periodStart - (minute + fractional);
+  return offset + timeFromPeriodStart;
+}
+
+export function numberToGameTime (timeNumber, includePostfix=true, isEndPeriod=false) {
+  if (isEndPeriod) {
+    return 'END';
+  }
+  const intPart = Math.floor(timeNumber);
+  const decimal = timeNumber - intPart;
+  const seconds = Math.floor(decimal * 60);
+  let gameSeconds = 60 - seconds;
+  let gameMinute = 0;
+  let postFix = '';
+  const otStarts = [40,45,50,55];
+  if (intPart < 40) {
+    const min = intPart % 20;
+    gameMinute = 19 - min;
+  } else if (intPart !== 40){ // need to check this for end of game in OT too
+    const min = intPart % 5;
+    gameMinute = 5 - min;
+  } else if (otStarts.includes(intPart)) {
+    gameMinute = 4; // will be corrected in next step to 5
+  }
+  if (gameSeconds === 60) {
+    gameMinute = gameMinute + 1;
+    gameSeconds = 0;
+  }
+  if (intPart >= 55) {
+    postFix = ' 4OT';
+  } else if (intPart >= 50) {
+    postFix = ' 3OT';
+  } else if (intPart >= 45) {
+    postFix = ' 2OT';
+  } else if (intPart >= 40) {
+    postFix = ' OT';
+  } else if (intPart >= 20) {
+    postFix = ' 2H';
+  }
+  const secondString = gameSeconds.toString().padStart(2,'0');
+  return `${gameMinute}:${secondString}${includePostfix ? postFix : ''}`;
+}
+
+export function getLineupHash(lineup) {
   // console.log('get hash for', lineup);
   const sortedLineup = lineup.sort(sortPlayersByName);
   return sortedLineup.reduce((agg, player) => {
@@ -25,7 +74,7 @@ function getLineupHash(lineup) {
 }
 
 export function lineupToString(lineup) {
-  return lineup.reduce((agg, player) => {
+  return lineup.names.reduce((agg, player) => {
     const lastName = player.split(",")[0];
     if (agg.length === 0) {
       return lastName;
@@ -98,7 +147,7 @@ function formNewLineup(subs, oldLineup) {
   );
 }
 
-function parseHalf(plays, lineupData) {
+function parseHalf(plays, lineupData, halfIndex, numHalves) {
   let skipIndex = -1;
   // console.log("plays", plays);
   plays.forEach((play, index) => {
@@ -112,15 +161,42 @@ function parseHalf(plays, lineupData) {
         const newLineup = formNewLineup(subData.subs, lineupData.currentLineup);
         // console.log('new lineup is now', newLineup);
         const newHash = getLineupHash(newLineup);
+        // update old lineup end
+        const oldHash = getLineupHash(lineupData.currentLineup);
+        const oldStints = lineupData.lineups[oldHash].stints;
+        oldStints[oldStints.length - 1].end = timeToNumber(play.time, halfIndex);
         // console.log('their new hash is', newHash);
         lineupData.currentLineup = newLineup;
         if (!lineupData.lineups[newHash]) {
-          lineupData.lineups[newHash] = newLineup;
+          lineupData.lineups[newHash] = {
+            names: newLineup,
+            stints: [
+              {
+                start: timeToNumber(play.time, halfIndex),
+              }
+            ]
+          };
+        } else {
+          // console.log('\nnew start of lineup, the play, ', play);
+          lineupData.lineups[newHash].stints.push({ start: timeToNumber(play.time, halfIndex) });
         }
         skipIndex = subData.lastSubIndex;
       }
     }
   });
+  const currentLineupKey = getLineupHash(lineupData.currentLineup);
+  const lineup = lineupData.lineups[currentLineupKey];
+  const lastStint = lineup.stints[lineup.stints.length - 1];
+  const endingTimes = [20,40,45,50,55];
+  let endTime = 40;
+  endTime = endingTimes[halfIndex];
+  lastStint.end = endTime;
+  lastStint.isEndPeriod = true;
+  if (numHalves - 1 === halfIndex) {
+    lineup.endGame = true;
+    lineupData.endingHash = getLineupHash(lineup.names);
+    lineup.isEndingLineup = true;
+  }
 }
 
 const generateLineupData = (game) => {
@@ -133,12 +209,32 @@ const generateLineupData = (game) => {
     currentLineup: starterNames,
     starterHash: getLineupHash(starterNames),
     lineups: {
-      [getLineupHash(starterNames)]: starterNames
+      [getLineupHash(starterNames)]: {
+        names: starterNames,
+        stints: [
+          {
+            start: 0,
+          }
+        ],
+        isStartingLineup: true,
+      }
     }
   };
-  parseHalf(game.plays.period[0].play, lineupData);
-  parseHalf(game.plays.period[1].play, lineupData);
-  console.log("lineupDatas", lineupData);
+  const numHalves = game.plays.period.length;
+  game.plays.period.forEach((p, idx) => {
+    parseHalf(p.play, lineupData, idx, numHalves);
+  });
+  // parseHalf(game.plays.period[0].play, lineupData, 0, numHalves);
+  // parseHalf(game.plays.period[1].play, lineupData, 1, numHalves);
+  Object.keys(lineupData.lineups).forEach(lKey => {
+    const lineup = lineupData.lineups[lKey];
+    const total = lineup.stints.reduce((count, stint) => {
+      const duration = stint.end - stint.start;
+      return count + duration;
+    }, 0);
+    lineup.totalTime = total;
+  });
+  // console.log("lineupDatas", lineupData);
   return lineupData;
 };
 
