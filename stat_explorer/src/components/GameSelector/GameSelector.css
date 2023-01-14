@@ -10,6 +10,7 @@
   padding-left: var(--l);
   padding-right: var(--l);
   border-right: 4px solid transparent;
+  flex-shrink: 0;
 }
 
 .game-row.game-row--selected {

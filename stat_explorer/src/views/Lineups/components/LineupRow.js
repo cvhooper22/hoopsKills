@@ -44,17 +44,17 @@ export default function LineupRow ({lineup}) {
   }
   return(
     <div className="lineup-row" key={getLineupHash(lineup.names)}>
-        <div className='flex-aic pt-m'>
+      <div className='flex-aic pt-s'>
         <div className='lr--lineup flex-center'>
           {lineupToString(lineup)}
           {lineup.isStartingLineup && <div className='circle-badge starter-badge ml-s'>S</div>}
           {lineup.isEndingLineup && <div className='circle-badge ender-badge ml-s'>E</div>}
           </div>
         <div className="lr--time f1">{lineup.totalTime.toFixed(2)}</div>
-        <div className='lr--stint-count lineup-header f1'>{lineup.stints.length}</div>
+        <div className='lr--stint-count f1'>{lineup.stints.length}</div>
         <div className='lr--avg-time f1'>{avgStintTime.toFixed(2)}</div>
       </div>
-      <div className="lineup-stints mt-s pb-m px-l">
+      <div className="lineup-stints mt-s pb-s px-l">
         <div className='trigger-row flex-jce' role="button" onClick={handleTriggerClick}>
           <span className="trigger-text mr-s">{`${showStints ? 'Hide' : 'View'} Stints`}</span>
           <div className={`trigger${showStints ? ' trigger--open' : ''}`} />

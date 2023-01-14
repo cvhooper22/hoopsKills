@@ -9,4 +9,5 @@
   display: inline-block;
   border: 1px solid var(--navy-blue);
   text-align: center;
+  flex-shrink: 0;
 }

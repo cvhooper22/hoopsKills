@@ -46,7 +46,7 @@ export default function Lineups() {
       .then((data) => {
         const lineups = genLineupData(data[0].bbgame);
         const team = data[0].bbgame.team.find((t) => t.name === "BYU");
-        const teamPlayers = team.player.filter(p => p.checkname !== 'TEAM');
+        const teamPlayers = team.player.filter(p => p.checkname !== 'TEAM' && p.gp !== "0");
         const players = teamPlayers.map((p) => p.checkname);
         setPlayers(players);
         setLineupData(lineups);
@@ -72,8 +72,8 @@ export default function Lineups() {
   return (
     <div className="lineups flex">
       <GameSelector onGameClick={handleGameChange} currentGame={currentGame}/>
-      <div className="f1 flex-c pr-l">
-        <h1>{nameFromId(currentGame)}</h1>
+      <div className="lineups-content f1 flex-c pr-l">
+        <h1 className="lineup-game-label">{nameFromId(currentGame)}</h1>
         {loading && <YBallLoader />}
         {!loading && !!Object.keys(lineupData.lineups).length && (
           <div className="f1-hide flex-c">
@@ -82,7 +82,7 @@ export default function Lineups() {
               filterPlayers={filterPlayers}
               onChange={onPlayerChange}
             />
-            {filterPlayers.length < 1 && <h4>{`Total Lineups: ${Object.keys(lineupData.lineups).length}`}</h4>}
+            {filterPlayers.length < 1 && <h4 className="lineups__totals">{`Total Lineups: ${Object.keys(lineupData.lineups).length}`}</h4>}
             <LineupTable lineups={currentLineups} filterPlayers={filterPlayers}/>
           </div>
         )}

@@ -1,0 +1,88 @@
+@media screen and (max-width: 700px) {
+  header {
+    justify-content: center;
+  }
+
+  nav.nav {
+    overflow-x: scroll;
+  }
+
+  nav.nav li{
+    flex-shrink: 0;
+  }
+
+  .feature-area {
+    flex-direction: column-reverse;
+  }
+
+  div.home-lineups {
+    margin-left: auto;
+    margin-right:auto;
+    margin-bottom: 3rem;
+  }
+
+  .home-image {
+    margin: auto;
+  }
+
+  div.lineups {
+    flex-direction: column;
+    padding-top: var(--s);
+    padding-right: 0;
+  }
+
+  .games.flex-c.scroll {
+    flex-direction: row;
+    height: auto;
+    width: 100%;
+    overflow-x: scroll;
+    border-right: none;
+    border-bottom: 1px solid rgba(0,0,0,.12);
+  }
+
+  div.game-row.game-row--selected {
+    border-bottom: 4px solid var(--royal-blue);
+    border-right-color: transparent;
+    border-left: 4px solid transparent;
+  }
+
+  .lineups h1.lineup-game-label {
+    margin-top: var(--m);
+    margin-bottom: var(--m);
+  }
+
+  h4.lineups__totals {
+    margin-top: var(--m);
+    margin-bottom: var(--m);
+  }
+
+  .lineup-table .lineup-table__legend {
+    text-align: center;
+  }
+
+  .player-filter__title {
+    margin-top: 0;
+    margin-bottom: var(--s);
+    font-weight: normal;
+  }
+
+  div.player-filters {
+    flex-wrap: nowrap;
+    height: 60px;
+    width: 100%;
+    overflow-x: scroll;
+  }
+
+  div.player-filter.flex-center {
+    flex-direction: column;
+  }
+
+  div.lineups-content.pr-l {
+    padding-right: 0;
+  }
+
+  div.lr--lineup {
+    flex: 3 1;
+    padding-left: var(--s);
+  }
+}
