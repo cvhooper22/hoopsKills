@@ -24,3 +24,7 @@
 .lineup-table__body {
   font-size: 0.9rem;
 }
+
+.lineup-table__headers {
+  font-weight: bold;
+}

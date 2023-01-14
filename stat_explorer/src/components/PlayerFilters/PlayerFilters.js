@@ -22,8 +22,8 @@ export default function PlayerFilters({ players, filterPlayers, onChange }) {
   // }, {selected: [], unselected: []});
   // const displayPlayers = [...selected, ...unselected];
   return (
-    <div className="flex-center">
-      <h4>Filter by player</h4>
+    <div className="player-filter flex-center">
+      <h4 className="player-filter__title">Filter by player</h4>
       <div className="player-filters">
         {players.map((p) => {
           const firstName = p.split(",")[1];

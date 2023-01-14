@@ -1,0 +1,20 @@
+.feature-area {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  height: 300px;
+}
+
+.home-image {
+  align-self: center;
+  transform: perspective(100px) rotateY(2deg);
+  box-shadow: -7px 7px 2px -3px rgb(100 100 100 / 10%);
+  border: 1px solid rgba(0,0,0,0.12);
+  height: 200px;
+}
+
+.home-lineups {
+  width: 300px;
+  margin-left: var(--xl);
+  margin-top: 3rem;
+}
