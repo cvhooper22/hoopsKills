@@ -36,6 +36,8 @@
     height: auto;
     width: 100%;
     overflow-x: scroll;
+    border-right: none;
+    border-bottom: 1px solid rgba(0,0,0,.12);
   }
 
   div.game-row.game-row--selected {
