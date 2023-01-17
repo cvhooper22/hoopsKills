@@ -42,6 +42,14 @@ export default function LineupRow ({lineup}) {
   function handleTriggerClick () {
     setShowStints(!showStints);
   }
+  const netClass = ['lr--net', 'f1'];
+  if (lineup.totalNet !== 0) {
+    if (lineup.totalNet < 0) {
+      netClass.push('lr--net--neg');
+    } else {
+      netClass.push('lr--net--pos');
+    }
+  }
   return(
     <div className="lineup-row" key={getLineupHash(lineup.names)}>
       <div className='flex-aic pt-s'>
@@ -52,7 +60,7 @@ export default function LineupRow ({lineup}) {
           </div>
         <div className="lr--time f1">{lineup.totalTime.toFixed(2)}</div>
         <div className='lr--stint-count f1'>{lineup.stints.length}</div>
-        <div className='lr--avg-time f1'>{avgStintTime.toFixed(2)}</div>
+        <div className={netClass.join(' ')}>{lineup.totalNet}</div>
       </div>
       <div className="lineup-stints mt-s pb-s px-l">
         <div className='trigger-row flex-jce' role="button" onClick={handleTriggerClick}>

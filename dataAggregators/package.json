@@ -1,0 +1,23 @@
+{
+  "name": "data-aggregators",
+  "version": "0.0.1",
+  "description": "For gathering data to power the BYU Hoops Stats app",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "dependencies": {
+    "node-fetch": "^2.6.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "none"
+  },
+  "keywords": [
+    "data",
+    "parse"
+  ],
+  "type": "commonjs",
+  "author": "Matt Freeman",
+  "license": "ISC"
+}

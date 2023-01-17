@@ -18,7 +18,7 @@ function timeToNumber (timeString, periodIndex = 0) {
   return offset + timeFromPeriodStart;
 }
 
-export function numberToGameTime (timeNumber, includePostfix=true, isEndPeriod=false) {
+exports.numberToGameTime = function numberToGameTime (timeNumber, includePostfix=true, isEndPeriod=false) {
   if (isEndPeriod) {
     return 'END';
   }
@@ -57,7 +57,7 @@ export function numberToGameTime (timeNumber, includePostfix=true, isEndPeriod=f
   return `${gameMinute}:${secondString}${includePostfix ? postFix : ''}`;
 }
 
-export function getLineupHash(lineup) {
+function getLineupHash(lineup) {
   // console.log('get hash for', lineup);
   const sortedLineup = lineup.sort(sortPlayersByName);
   return sortedLineup.reduce((agg, player) => {
@@ -73,7 +73,9 @@ export function getLineupHash(lineup) {
   }, "");
 }
 
-export function lineupToString(lineup) {
+
+
+function lineupToString(lineup) {
   return lineup.names.reduce((agg, player) => {
     const lastName = player.split(",")[0];
     if (agg.length === 0) {
@@ -170,6 +172,7 @@ function parseHalf(plays, lineupData, halfIndex, numHalves) {
     if (index > skipIndex) {
       // console.log("not a skip play");
       if (play.action === "GOOD") {
+        // console.log('a bucket, lineupData length', lineupData.gameScore);
         lineupData.gameScore.vscore = +play.vscore;
         lineupData.gameScore.hscore = +play.hscore;
       }
@@ -225,7 +228,7 @@ function parseHalf(plays, lineupData, halfIndex, numHalves) {
 }
 
 const generateLineupData = (game) => {
-  console.log("gen lineups");
+  // console.log("gen lineups");
   const teamData = game.team.find((t) => t.id === "BYU");
   const isVisitor = teamData.vh === "V";
   // console.log("teamData", teamData);
@@ -258,11 +261,12 @@ const generateLineupData = (game) => {
   };
   const numHalves = game.plays.period.length;
   game.plays.period.forEach((p, idx) => {
+    // console.log('in the iteration lineupData: ', lineupData.starterHash);
     parseHalf(p.play, lineupData, idx, numHalves);
   });
   // parseHalf(game.plays.period[0].play, lineupData, 0, numHalves);
   // parseHalf(game.plays.period[1].play, lineupData, 1, numHalves);
-  console.log('halves parsed');
+  // console.log('halves parsed');
   Object.keys(lineupData.lineups).forEach(lKey => {
     const lineup = lineupData.lineups[lKey];
     const { total, net } = lineup.stints.reduce((counts, stint) => {
@@ -274,8 +278,10 @@ const generateLineupData = (game) => {
     lineup.totalTime = total;
     lineup.totalNet = net;
   });
-  console.log("lineupDatas", lineupData);
+  // console.log("lineupDatas", lineupData);
   return lineupData;
 };
 
-export default generateLineupData;
+exports.generateLineupData =  generateLineupData;
+exports.getLineupHash = getLineupHash;
+exports.lineupToString = lineupToString;

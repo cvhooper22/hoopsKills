@@ -1,5 +1,5 @@
 import React from 'react';
-import LineupRow from './LineupRow';
+import SeasonLineupRow from './SeasonLineupRow';
 import { getLineupHash } from '../../../utils/lineupUtils';
 
 export default function LineupTable ({lineups, filterPlayers}) {
@@ -10,21 +10,15 @@ export default function LineupTable ({lineups, filterPlayers}) {
   return (
     <div className='lineup-table f1-hide flex-c'>
         {!!filterPlayers?.length && renderFilterCount()}
-        <div className='lineup-table__legend pb-s'>
-          <div className='circle-badge starter-badge mr-xs'>S</div>
-          <span className="lineup-table__legend__text mr-s">- Starters</span>
-          <div className='circle-badge ender-badge mr-xs'>E</div>
-          <span className="lineup-table__legend__text">- End of game lineup</span>
-        </div>
         <div className='lineup-table__headers py-m flex-aic'>
           <div className='lr--lineup lineup-header'>Lineup</div>
           <div className='lr--time lineup-header f1'>Total Time</div>
-          <div className='lr--stint-count lineup-header f1'>Times Seen</div>
+          <div className='lr--stint-count lineup-header f1'>Games Seen</div>
           <div className='lr--net lineup-header f1'>+ / -</div>
         </div>
         <div className='lineup-table__body f1-scroll'>
           {
-            lineups.map((l) => <LineupRow lineup={l} key={getLineupHash(l.names)}/>)
+            lineups.map((l) => <SeasonLineupRow lineup={l} key={getLineupHash(l.names)}/>)
           }
         </div>
       </div>

@@ -1,5 +1,6 @@
+
 const info = {
-  "ATIKIALLY ATIKI": { id: 4896973, no: 4 },
+  "ATIKIALLY ATIKI": { id: 4896973, no: 4, },
   TREDYNCHRISTENSEN: { id: 4905776, no: 10 },
   HAODONG: { id: 5105467, no: 55 },
   GIDEONGEORGE: { id: 4701218, no: 5 },

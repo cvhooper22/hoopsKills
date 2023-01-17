@@ -28,3 +28,15 @@
 .lineup-table__headers {
   font-weight: bold;
 }
+
+.lr--net.lr--net--pos {
+  color: var(--success-1);
+  font-weight: bold;
+  background-color: var(--success-3);
+}
+
+.lr--net.lr--net--neg {
+  color: var(--error-1);
+  background-color: var(--error-3);
+  font-weight: bold;
+}
