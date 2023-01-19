@@ -13,7 +13,7 @@ export default function LineupTable ({lineups, filterPlayers}) {
         <div className='lineup-table__headers py-m flex-aic'>
           <div className='lr--lineup lineup-header'>Lineup</div>
           <div className='lr--time lineup-header f1'>Total Time</div>
-          <div className='lr--stint-count lineup-header f1'>Games Seen</div>
+          <div className='lr--stint-count lineup-header f1'>Min / g</div>
           <div className='lr--net lineup-header f1'>+ / -</div>
         </div>
         <div className='lineup-table__body f1-scroll'>

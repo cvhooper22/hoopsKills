@@ -1,31 +1,25 @@
 import { useEffect, useState } from "react";
-import genLineupData from "../../utils/lineupUtils";
-import PlayerFilters from "../../components/PlayerFilters/PlayerFilters";
-import "./Lineups.css";
-import LineupTable from "./components/LineupTable";
-import YBallLoader from "../../components/Loaders/YBballLoader";
-import GameSelector from "../../components/GameSelector/GameSelector";
-import { nameFromId } from '../../constants/games';
+import { useParams } from "react-router-dom";
+import genLineupData from "../../../utils/lineupUtils";
+import PlayerFilters from "../../../components/PlayerFilters/PlayerFilters";
+import "../Lineups.css";
+import LineupTable from "./LineupTable";
+import YBallLoader from "../../../components/Loaders/YBballLoader";
+import { nameFromId, idFromPath } from '../../../constants/games';
 
 export default function Lineups() {
+  console.log('GameLineups::top');
+  const {name} = useParams();
   const [lineupData, setLineupData] = useState({
     lineups: {},
     starterHash: ""
   });
-  const [currentGame, setCurrentGame] = useState("1300215");
+  const [loading, setLoading] = useState(true);
+  const initialId = idFromPath(name);
+  console.log('\tinitial id is', initialId);
+  const [currentGame, setCurrentGame] = useState(initialId ?? "1300215");
   const [players, setPlayers] = useState([]);
   const [filterPlayers, setFilterPlayers] = useState([]);
-  const [err, setErr] = useState("");
-
-  function handleGameChange (gameId) {
-    if (gameId) {
-      setCurrentGame(gameId);
-      setLineupData({
-        lineups: {},
-        starterHash: ""
-      });
-    }
-  }
 
   function onPlayerChange(player) {
     const newFilters = [...filterPlayers];
@@ -39,6 +33,14 @@ export default function Lineups() {
   }
 
   useEffect(() => {
+    const newGameId = idFromPath(name);
+    if (newGameId !== currentGame) {
+        setLoading(true);
+        setCurrentGame(newGameId);
+    }
+  }, [name, currentGame]);
+
+  useEffect(() => {
     fetch(`https://gamestats.byucougars.com/boxscore/${currentGame}`)
       .then((resp) => {
         return resp.json();
@@ -50,11 +52,13 @@ export default function Lineups() {
         const players = teamPlayers.map((p) => p.checkname);
         setPlayers(players);
         setLineupData(lineups);
+        setLoading(false);
       })
       .catch((err) => {
-        setErr(err.toString());
+        console.error(err);
       });
   }, [currentGame]);
+
   const currentLineupKeys = Object.keys(lineupData.lineups).sort();
   const filteredLineups = currentLineupKeys.reduce((agg, key) => {
     const lineup = lineupData.lineups[key];
@@ -68,11 +72,8 @@ export default function Lineups() {
     return agg;
   }, []);
   const currentLineups = filteredLineups.sort((lA, lB) => lB.totalTime - lA.totalTime);
-  const loading = Object.keys(lineupData.lineups).length === 0 && !err;
   return (
-    <div className="lineups flex">
-      <GameSelector onGameClick={handleGameChange} currentGame={currentGame}/>
-      <div className="lineups-content f1 flex-c pr-l">
+    <>
         <h1 className="lineup-game-label">{nameFromId(currentGame)}</h1>
         {loading && <YBallLoader />}
         {!loading && !!Object.keys(lineupData.lineups).length && (
@@ -86,7 +87,6 @@ export default function Lineups() {
             <LineupTable lineups={currentLineups} filterPlayers={filterPlayers}/>
           </div>
         )}
-      </div>
-    </div>
+    </>
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function YBall ({width, height, lineColor, fillColor, classname}) {
+export default function YBall ({width, height, lineColor, fillColor, className}) {
   return (
     <svg
       id="svg"
@@ -10,7 +10,7 @@ export default function YBall ({width, height, lineColor, fillColor, classname})
       width={width ?? 400}
       height={height ?? 500}
       viewBox="0, 0, 400,500.55555555555554"
-      className={classname ?? "y-ball"}
+      className={className ?? "y-ball"}
     >
       <g id="svgg">
         <path id="outline" 

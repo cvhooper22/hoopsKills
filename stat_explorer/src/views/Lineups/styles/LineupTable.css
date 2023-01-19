@@ -6,6 +6,20 @@
   font-weight: bold;
 }
 
+.stint-net {
+  padding: var(--xs);
+  margin-left: var(--xs);
+  filter: opacity(0.75);
+}
+
+.stint-net.lr--net.lr--net--neg {
+  background-color: unset;
+}
+
+.stint-net.lr--net.lr--net--pos {
+  background-color: unset;
+}
+
 .lineup-table__headers {
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;

@@ -24,7 +24,9 @@ export default function LineupTable ({lineups, filterPlayers}) {
         </div>
         <div className='lineup-table__body f1-scroll'>
           {
-            lineups.map((l) => <LineupRow lineup={l} key={getLineupHash(l.names)}/>)
+            lineups.map((l) => {
+            return (<LineupRow lineup={l} key={getLineupHash(l.names)}/>);
+            }) 
           }
         </div>
       </div>

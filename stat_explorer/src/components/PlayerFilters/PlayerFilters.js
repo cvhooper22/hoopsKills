@@ -1,9 +1,9 @@
-import react, { useState } from "react";
+import React from "react";
 import playerInfo from '../../constants/playerInfo';
 import urls from "../../constants/assetUrls";
 import './PlayerFilters.css';
 
-export default function PlayerFilters({ players, filterPlayers, onChange }) {
+export default function PlayerFilters({ players, filterPlayers, onChange, delimiter=','}) {
   function getCheckboxHandler(player) {
     return () => {
       if (onChange) {
@@ -26,14 +26,14 @@ export default function PlayerFilters({ players, filterPlayers, onChange }) {
       <h4 className="player-filter__title">Filter by player</h4>
       <div className="player-filters">
         {players.map((p) => {
-          const firstName = p.split(",")[1];
-          const lastName = p.split(",")[0];
+          const firstName = p.split(delimiter)[1];
+          const lastName = p.split(delimiter)[0];
           const info = playerInfo[firstName + lastName];
             const isChecked = filterPlayers.includes(p);
             const imageUrl = `${urls.espnPhotoStart}${info?.id}${urls.espnPhotoEnd}`;
             return (
                 <div className="player" role="button" onClick={getCheckboxHandler(p)} key={p}>
-                  <img className={isChecked ? 'active' : ''} src={imageUrl} />
+                  <img className={isChecked ? 'active' : ''} src={imageUrl} alt={p}/>
                   <div className="player__number">
                     {`#${info?.no}`}
                   </div>

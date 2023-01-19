@@ -1,0 +1,54 @@
+.game {
+    filter: opacity(0.85);
+}
+
+.game__net--neg {
+    color: var(--error-2);
+    font-weight: bold;
+}
+
+.game__net--pos {
+    color: var(--success-2);
+    font-weight: bold;
+}
+
+.lineup-games {
+    flex-wrap: wrap;
+}
+
+.lineup-game-legend {
+    font-size: 0.7rem;
+}
+
+.game-legend__indicator {
+    height: 10px;
+    border-radius: 2px;
+    width: 10px;
+}
+
+.game-legend__away > .game-legend__indicator {
+    background-color: #CAE1FF;
+}
+
+.game-legend__neutral > .game-legend__indicator {
+    background-color: var(--gray2);
+}
+
+.game__img-container {
+    width: 20px;
+    height: 20px;
+    padding: var(--xs);
+    border-radius: 2px;
+}
+
+.game--away > .game__img-container {
+    background-color: #CAE1FF;
+}
+
+.game--neutral > .game__img-container {
+    background-color: var(--gray2);
+}
+
+.game__img-container > .game__logo {
+    width: 20px;
+}

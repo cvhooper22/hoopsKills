@@ -1,29 +1,17 @@
 import { useEffect, useState } from "react";
-import genLineupData, { lineupToString, numberToGameTime } from "../../utils/lineupUtils";
-import PlayerFilters from "./PlayerFilters/PlayerFilters";
-// import "./Lineups.css";
-import SeasonLineupTable from "./LineupTable";
-import BlockFacecLoader from "./Loaders/BlockFacecLoader";
-import { nameFromId } from '../../constants/games';
+import PlayerFilters from "../../../components/PlayerFilters/PlayerFilters";
+import "../Lineups.css";
+import SeasonLineupTable from "./SeasonLineupTable";
+import BlockFaceLoader from '../../../components/Loaders/BlockFaceLoader';
 import urls from '../../../constants/assetUrls';
-import playerInfo from '../../../constants/playerInfo';
+import {checknames} from '../../../constants/playerInfo';
 
 export default function SeasonLineups() {
   const [loading, setLoading] = useState(true);
-  const players = Object.keys(playerInfo);
+  const players = checknames;
+  // console.log('players', players);
   const [filterPlayers, setFilterPlayers] = useState([]);
-  const [err, setErr] = useState("");
-
-  // function handleGameChange (gameId) {
-  //   if (gameId) {
-  //     setCurrentGame(gameId);
-  //     setLineupData({
-  //       lineups: {},
-  //       starterHash: ""
-  //     });
-  //   }
-  // }
-
+  const [lineupData, setLineupData] = useState({});
   function onPlayerChange(player) {
     const newFilters = [...filterPlayers];
     if (filterPlayers.includes(player)) {
@@ -45,12 +33,13 @@ export default function SeasonLineups() {
         setLoading(false);
         setLineupData(lineups);
       })
-      .catch((err) => {
+      .catch((callErr) => {
         setLoading(false);
-        setErr(err.toString());
+        console.error(callErr);
       });
-  }, [currentGame]);
+  }, []);
   const currentLineupKeys = Object.keys(lineupData).sort();
+  // console.log('currentLineupKey', currentLineupKeys);
   const filteredLineups = currentLineupKeys.reduce((agg, key) => {
     const lineup = lineupData[key];
     let include = true;
@@ -62,25 +51,24 @@ export default function SeasonLineups() {
     }
     return agg;
   }, []);
-  const currentLineups = filteredLineups.sort((lA, lB) => lB.totalTime - lA.totalTime);
+  // console.log('filteredLineups', filteredLineups);
+  const currentLineups = filteredLineups.sort((lA, lB) => lB.totalMinutes - lA.totalMinutes);
+  // console.log('currentLineups', currentLineups);
   return (
-    <div className="lineups flex">
-      <GameSelector onGameClick={handleGameChange} currentGame={currentGame}/>
-      <div className="lineups-content f1 flex-c pr-l">
-        <h1 className="lineup-game-label">{nameFromId(currentGame)}</h1>
-        {loading && <BlockFacecLoader />}
-        {!loading && !!Object.keys(lineupData.lineups).length && (
+    <>
+        <h1 className="lineup-game-label">Season Lineups</h1>
+        <PlayerFilters
+          players={players}
+          filterPlayers={filterPlayers}
+          onChange={onPlayerChange}
+        />
+        {loading && <BlockFaceLoader />}
+        {!loading && currentLineupKeys.length && (
           <div className="f1-hide flex-c">
-            <PlayerFilters
-              players={players}
-              filterPlayers={filterPlayers}
-              onChange={onPlayerChange}
-            />
-            {filterPlayers.length < 1 && <h4 className="lineups__totals">{`Total Lineups: ${lineupData.length}`}</h4>}
+            {filterPlayers.length < 1 && <h4 className="lineups__totals">{`Total Lineups: ${currentLineupKeys.length}`}</h4>}
             <SeasonLineupTable lineups={currentLineups} filterPlayers={filterPlayers}/>
           </div>
         )}
-      </div>
-    </div>
+    </>
   );
 }

@@ -20,7 +20,6 @@ const indexToLabel = {
 
 export default function LineupRow ({lineup}) {
   const [showStints, setShowStints] = useState(false);
-  const avgStintTime = lineup.totalTime / (lineup.stints?.length ?? 1);
   const stintsByPeriod = lineup.stints.reduce((agg, stint) => {
     const startString = numberToGameTime(stint.start);
     const postFix = startString.split(' ')[1];
@@ -76,7 +75,23 @@ export default function LineupRow ({lineup}) {
               <div className='stint mx-l' key={`stint${idx}`}>
                 <div className="stint-title">{indexToLabel[idx]}</div>
                 <div className="stint-list">
-                  {s.stints.map((st, idx) => (<div className="lineup-stint" key={`stint${idx}`}>{`${numberToGameTime(st.start, false)} to ${numberToGameTime(st.end, false, st.isEndPeriod)}`}</div>))}
+                  {s.stints.map((st, idx) => {
+                    const stintNetClass = ['lr--net stint-net'];
+                    if (st.net !== 0) {
+                      if (st.net < 0) {
+                        stintNetClass.push('lr--net--neg');
+                      } else {
+                        stintNetClass.push('lr--net--pos');
+                      }
+                    }
+                    return (
+                      <div className="lineup-stint" key={`stint${idx}`}>
+                        {`${numberToGameTime(st.start, false)} to ${numberToGameTime(st.end, false, st.isEndPeriod)}`}
+                        <span className={stintNetClass.join(' ')}>({st.net})</span>
+                      </div>
+                    );
+                  }
+                  )}
                 </div>
               </div>
             );

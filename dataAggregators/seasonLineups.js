@@ -11,16 +11,14 @@ Season Lineup Data
     names: string[],
     totalMinutes: int,
     totalNet: int,
-    games: string[]
+    games: Game[]
   }
 }
 
 Game Data
 {
-  id: string,
   name: string,
-  oppScore: int,
-  teamScore: int,
+  net: int,
 }
 */
 function updateSeasonData (seasonLineupData, gameData, gameName) {
@@ -35,7 +33,10 @@ function updateSeasonData (seasonLineupData, gameData, gameName) {
         names: gameLineup.names,
         totalMinutes: gameLineup.totalTime,
         totalNet: gameLineup.totalNet,
-        games: [gameName],
+        games: [{
+          name: gameName,
+          net: gameLineup.totalNet,
+        }],
       };
       return;
     }
@@ -44,7 +45,7 @@ function updateSeasonData (seasonLineupData, gameData, gameName) {
       totalMinutes: seasonLineup.totalMinutes + gameLineup.totalTime,
       totalNet: seasonLineup.totalNet + gameLineup.totalNet,
     };
-    updatedSeasonLineup.games.push(gameName);
+    updatedSeasonLineup.games.push({name: gameName, net: gameLineup.totalNet});
     seasonLineupData[hash] = updatedSeasonLineup;
   });
   // console.log('end of updateSeasonData', Object.keys(seasonLineupData).length);
@@ -60,11 +61,11 @@ async function generateSeasonLineupData () {
       const data = await resp.json();
       const lineups = generateLineupData(data[0].bbgame);
       // console.log('lineups parsed');
-      const opponent = data[0].bbgame.team.find(t => t.id !== 'BYU');
+      // const opponent = data[0].bbgame.team.find(t => t.id !== 'BYU');
       // console.log('opponent is: ', opponent.name);
-      const location = opponent.vh === 'H' ? ' (A)' : '';
+      // const location = opponent.vh === 'H' ? ' (A)' : '';
       // console.log('call updateSeasonData');
-      updateSeasonData(seasonLineupData, lineups, `${opponent.name}${location}`);
+      updateSeasonData(seasonLineupData, lineups, g.name);
       console.log('\tupdateSeasonData complete, next iteration');
     } catch(err) {
         console.error(`Error fetching game info for ${g.name}: ${err.toString()}`);

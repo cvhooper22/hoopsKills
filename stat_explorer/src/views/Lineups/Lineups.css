@@ -29,10 +29,6 @@
   background-color: var(--lightest-blue);
 }
 
-.lineup-row:nth-child(2n) .lineup-stints-container {
-  background-color: #e0ecfe;
-}
-
 .trigger {
   height: 0;
   width: 0;
@@ -62,7 +58,6 @@
   max-height: 0;
   transition: 200ms linear;
   overflow: hidden;
-  background-color: #f4f8ff;
   color: lightslategray;
 }
 
