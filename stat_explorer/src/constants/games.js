@@ -141,6 +141,7 @@ export const gameNameToUrl = {
     "San Diego (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/USD_0.png?itok=fAaWm7y6",
     "Gonzaga": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/Gonzaga_Primary.png?itok=LcpDQizp",
     "Pepperdine": "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/pepp_0.png?itok=lc3Z2_eL",
+    "Santa Clara (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/school_logo_detail_page_0.png?itok=rmpq8YAE", 
 };
 
 export function nameFromId (gameId) {
