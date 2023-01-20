@@ -114,7 +114,7 @@ const games = [
     path: "pepp"
   },
   {
-    name: "Santa Clara",
+    name: "Santa Clara (A)",
     imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/school_logo_detail_page_0.png?itok=rmpq8YAE",
     id: "1300216",
     path: "santa-clara-a"
