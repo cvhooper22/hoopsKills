@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import genLineupData, { lineupToString, numberToGameTime } from "../../utils/lineupUtils";
+import genLineupData from "../../utils/lineupUtils";
 import PlayerFilters from "../../components/PlayerFilters/PlayerFilters";
 import "./Lineups.css";
 import LineupTable from "./components/LineupTable";
@@ -12,7 +12,7 @@ export default function Lineups() {
     lineups: {},
     starterHash: ""
   });
-  const [currentGame, setCurrentGame] = useState("1300202");
+  const [currentGame, setCurrentGame] = useState("1300215");
   const [players, setPlayers] = useState([]);
   const [filterPlayers, setFilterPlayers] = useState([]);
   const [err, setErr] = useState("");

@@ -1,0 +1,2772 @@
+{
+    "GIGE-SPJO-JARO-FOTR-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "TRAORE,FOUSSEYNI",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 111.79999999999998,
+        "totalNet": 28,
+        "games": [
+            {
+                "name": "Idaho State",
+                "net": 1
+            },
+            {
+                "name": "San Diego State (A)",
+                "net": 10
+            },
+            {
+                "name": "Missouri State",
+                "net": 5
+            },
+            {
+                "name": "Nicholls",
+                "net": 4
+            },
+            {
+                "name": "USC (N)",
+                "net": 3
+            },
+            {
+                "name": "Butler",
+                "net": -3
+            },
+            {
+                "name": "Portland",
+                "net": 2
+            },
+            {
+                "name": "Loyola Marymount (A)",
+                "net": -4
+            },
+            {
+                "name": "San Diego (A)",
+                "net": 4
+            },
+            {
+                "name": "Gonzaga",
+                "net": 6
+            }
+        ]
+    },
+    "ATAL-GIGE-SPJO-JARO-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 21.650000000000006,
+        "totalNet": 9,
+        "games": [
+            {
+                "name": "Idaho State",
+                "net": 0
+            },
+            {
+                "name": "San Diego State (A)",
+                "net": -2
+            },
+            {
+                "name": "Missouri State",
+                "net": 2
+            },
+            {
+                "name": "Nicholls",
+                "net": 0
+            },
+            {
+                "name": "USC (N)",
+                "net": 2
+            },
+            {
+                "name": "Pacific (A)",
+                "net": 0
+            },
+            {
+                "name": "Loyola Marymount (A)",
+                "net": -2
+            },
+            {
+                "name": "San Diego (A)",
+                "net": 8
+            },
+            {
+                "name": "Gonzaga",
+                "net": 1
+            }
+        ]
+    },
+    "ATAL-GIGE-SPJO-NOWA-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "JOHNSON,SPENCER",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 10.749999999999996,
+        "totalNet": -14,
+        "games": [
+            {
+                "name": "Idaho State",
+                "net": 0
+            },
+            {
+                "name": "San Diego State (A)",
+                "net": -11
+            },
+            {
+                "name": "USC (N)",
+                "net": 0
+            },
+            {
+                "name": "San Diego (A)",
+                "net": -3
+            }
+        ]
+    },
+    "ATAL-GIGE-DAHA-TRST-NOWA": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "STEWART,TREY",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 3.566666666666663,
+        "totalNet": 4,
+        "games": [
+            {
+                "name": "Idaho State",
+                "net": 0
+            },
+            {
+                "name": "San Diego State (A)",
+                "net": -2
+            },
+            {
+                "name": "Missouri State",
+                "net": 6
+            }
+        ]
+    },
+    "ATAL-DAHA-RISA-TRST-NOWA": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "HALL,DALLIN",
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 36.58333333333334,
+        "totalNet": -6,
+        "games": [
+            {
+                "name": "Idaho State",
+                "net": -6
+            },
+            {
+                "name": "San Diego State (A)",
+                "net": -3
+            },
+            {
+                "name": "Missouri State",
+                "net": -10
+            },
+            {
+                "name": "Nicholls",
+                "net": 3
+            },
+            {
+                "name": "USC (N)",
+                "net": 6
+            },
+            {
+                "name": "Butler",
+                "net": 3
+            },
+            {
+                "name": "South Dakota",
+                "net": 1
+            }
+        ]
+    },
+    "DAHA-RISA-TRST-FOTR-NOWA": {
+        "names": [
+            "HALL,DALLIN",
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 3.2666666666666657,
+        "totalNet": 6,
+        "games": [
+            {
+                "name": "Idaho State",
+                "net": 0
+            },
+            {
+                "name": "South Dakota",
+                "net": 6
+            }
+        ]
+    },
+    "GIGE-TRST-FOTR-NOWA-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "STEWART,TREY",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 6.083333333333334,
+        "totalNet": 1,
+        "games": [
+            {
+                "name": "Idaho State",
+                "net": 0
+            },
+            {
+                "name": "Butler",
+                "net": 0
+            },
+            {
+                "name": "South Dakota",
+                "net": 5
+            },
+            {
+                "name": "UVU",
+                "net": -4
+            }
+        ]
+    },
+    "GIGE-SPJO-FOTR-NOWA-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "JOHNSON,SPENCER",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 12.633333333333333,
+        "totalNet": -9,
+        "games": [
+            {
+                "name": "Idaho State",
+                "net": 1
+            },
+            {
+                "name": "San Diego State (A)",
+                "net": 0
+            },
+            {
+                "name": "Missouri State",
+                "net": -4
+            },
+            {
+                "name": "USC (N)",
+                "net": -3
+            },
+            {
+                "name": "Portland",
+                "net": -3
+            },
+            {
+                "name": "Gonzaga",
+                "net": 0
+            }
+        ]
+    },
+    "GIGE-DAHA-SPJO-FOTR-NOWA": {
+        "names": [
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 3.5500000000000007,
+        "totalNet": 3,
+        "games": [
+            {
+                "name": "Idaho State",
+                "net": 0
+            },
+            {
+                "name": "San Diego State (A)",
+                "net": 1
+            },
+            {
+                "name": "Nicholls",
+                "net": 0
+            },
+            {
+                "name": "Portland",
+                "net": 2
+            }
+        ]
+    },
+    "GIGE-DAHA-TRST-FOTR-NOWA": {
+        "names": [
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "STEWART,TREY",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 5.549999999999997,
+        "totalNet": 2,
+        "games": [
+            {
+                "name": "Idaho State",
+                "net": 2
+            },
+            {
+                "name": "South Dakota",
+                "net": 0
+            },
+            {
+                "name": "UVU",
+                "net": 0
+            }
+        ]
+    },
+    "GIGE-DAHA-SPJO-JARO-FOTR": {
+        "names": [
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "TRAORE,FOUSSEYNI"
+        ],
+        "totalMinutes": 40.199999999999996,
+        "totalNet": 7,
+        "games": [
+            {
+                "name": "Idaho State",
+                "net": 2
+            },
+            {
+                "name": "Missouri State",
+                "net": -4
+            },
+            {
+                "name": "Nicholls",
+                "net": -2
+            },
+            {
+                "name": "USC (N)",
+                "net": 0
+            },
+            {
+                "name": "Portland",
+                "net": 3
+            },
+            {
+                "name": "Loyola Marymount (A)",
+                "net": 4
+            },
+            {
+                "name": "San Diego (A)",
+                "net": -1
+            },
+            {
+                "name": "Gonzaga",
+                "net": 5
+            }
+        ]
+    },
+    "ATAL-GIGE-DAHA-SPJO-FOTR": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "TRAORE,FOUSSEYNI"
+        ],
+        "totalMinutes": 0,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "Idaho State",
+                "net": 0
+            }
+        ]
+    },
+    "GIGE-DAHA-SPJO-JARO-NOWA": {
+        "names": [
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 0.25,
+        "totalNet": 4,
+        "games": [
+            {
+                "name": "Idaho State",
+                "net": 4
+            },
+            {
+                "name": "Loyola Marymount (A)",
+                "net": 0
+            }
+        ]
+    },
+    "ATAL-GIGE-TRST-NOWA-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "STEWART,TREY",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 0.31666666666666643,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "San Diego State (A)",
+                "net": 0
+            }
+        ]
+    },
+    "ATAL-DAHA-JARO-RISA-TRST": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY"
+        ],
+        "totalMinutes": 5.483333333333331,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "San Diego State (A)",
+                "net": 3
+            },
+            {
+                "name": "Dayton (N)",
+                "net": -3
+            },
+            {
+                "name": "South Dakota",
+                "net": 0
+            }
+        ]
+    },
+    "DAHA-RISA-TRST-FOTR-RUWI": {
+        "names": [
+            "HALL,DALLIN",
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY",
+            "TRAORE,FOUSSEYNI",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 0.8833333333333329,
+        "totalNet": -2,
+        "games": [
+            {
+                "name": "San Diego State (A)",
+                "net": -2
+            }
+        ]
+    },
+    "DAHA-SPJO-RISA-FOTR-RUWI": {
+        "names": [
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "SAUNDERS,RICHIE",
+            "TRAORE,FOUSSEYNI",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 2.5,
+        "totalNet": 1,
+        "games": [
+            {
+                "name": "San Diego State (A)",
+                "net": 1
+            }
+        ]
+    },
+    "GIGE-DAHA-SPJO-FOTR-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "TRAORE,FOUSSEYNI",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 0.43333333333333357,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "San Diego State (A)",
+                "net": 0
+            }
+        ]
+    },
+    "GIGE-SPJO-TRST-FOTR-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "JOHNSON,SPENCER",
+            "STEWART,TREY",
+            "TRAORE,FOUSSEYNI",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 3.666666666666668,
+        "totalNet": 2,
+        "games": [
+            {
+                "name": "San Diego State (A)",
+                "net": 2
+            }
+        ]
+    },
+    "ATAL-GIGE-DAHA-SPJO-TRST": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "STEWART,TREY"
+        ],
+        "totalMinutes": 1.9666666666666686,
+        "totalNet": 1,
+        "games": [
+            {
+                "name": "San Diego State (A)",
+                "net": 1
+            }
+        ]
+    },
+    "ATAL-GIGE-DAHA-RISA-TRST": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY"
+        ],
+        "totalMinutes": 6.750000000000002,
+        "totalNet": -2,
+        "games": [
+            {
+                "name": "San Diego State (A)",
+                "net": -1
+            },
+            {
+                "name": "Dayton (N)",
+                "net": 0
+            },
+            {
+                "name": "Creighton (N)",
+                "net": 3
+            },
+            {
+                "name": "Pacific (A)",
+                "net": -4
+            }
+        ]
+    },
+    "DAHA-SPJO-JARO-RISA-FOTR": {
+        "names": [
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "TRAORE,FOUSSEYNI"
+        ],
+        "totalMinutes": 2.416666666666666,
+        "totalNet": -3,
+        "games": [
+            {
+                "name": "San Diego State (A)",
+                "net": 0
+            },
+            {
+                "name": "Pacific (A)",
+                "net": -2
+            },
+            {
+                "name": "San Diego (A)",
+                "net": -1
+            }
+        ]
+    },
+    "DAHA-JARO-RISA-TRST-FOTR": {
+        "names": [
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY",
+            "TRAORE,FOUSSEYNI"
+        ],
+        "totalMinutes": 2.0833333333333357,
+        "totalNet": -3,
+        "games": [
+            {
+                "name": "San Diego State (A)",
+                "net": -2
+            },
+            {
+                "name": "Dayton (N)",
+                "net": -1
+            },
+            {
+                "name": "UVU",
+                "net": 0
+            }
+        ]
+    },
+    "ATAL-JARO-RISA-TRST-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 3.1999999999999975,
+        "totalNet": 5,
+        "games": [
+            {
+                "name": "San Diego State (A)",
+                "net": -1
+            },
+            {
+                "name": "Nicholls",
+                "net": 6
+            }
+        ]
+    },
+    "ATAL-GIGE-DAHA-SPJO-NOWA": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 5.916666666666671,
+        "totalNet": -1,
+        "games": [
+            {
+                "name": "San Diego State (A)",
+                "net": 1
+            },
+            {
+                "name": "Nicholls",
+                "net": -3
+            },
+            {
+                "name": "USC (N)",
+                "net": 0
+            },
+            {
+                "name": "Butler",
+                "net": 0
+            },
+            {
+                "name": "Portland",
+                "net": 1
+            }
+        ]
+    },
+    "SPJO-JARO-RISA-FOTR-RUWI": {
+        "names": [
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "TRAORE,FOUSSEYNI",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 4.566666666666663,
+        "totalNet": 4,
+        "games": [
+            {
+                "name": "San Diego State (A)",
+                "net": 0
+            },
+            {
+                "name": "Butler",
+                "net": 4
+            },
+            {
+                "name": "Portland",
+                "net": 0
+            }
+        ]
+    },
+    "GIGE-SPJO-RISA-FOTR-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "JOHNSON,SPENCER",
+            "SAUNDERS,RICHIE",
+            "TRAORE,FOUSSEYNI",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 1.3666666666666636,
+        "totalNet": -2,
+        "games": [
+            {
+                "name": "San Diego State (A)",
+                "net": -2
+            },
+            {
+                "name": "Portland",
+                "net": 0
+            }
+        ]
+    },
+    "GIGE-SPJO-RISA-TRST-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "JOHNSON,SPENCER",
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 0.20000000000000284,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "San Diego State (A)",
+                "net": 0
+            }
+        ]
+    },
+    "ATAL-GIGE-DAHA-JARO-NOWA": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 7.300000000000006,
+        "totalNet": 8,
+        "games": [
+            {
+                "name": "Missouri State",
+                "net": 5
+            },
+            {
+                "name": "UVU",
+                "net": 1
+            },
+            {
+                "name": "Weber State",
+                "net": 0
+            },
+            {
+                "name": "Portland",
+                "net": 2
+            },
+            {
+                "name": "Loyola Marymount (A)",
+                "net": 0
+            }
+        ]
+    },
+    "ATAL-SPJO-JARO-RISA-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 9.333333333333336,
+        "totalNet": 3,
+        "games": [
+            {
+                "name": "Missouri State",
+                "net": -2
+            },
+            {
+                "name": "Butler",
+                "net": -2
+            },
+            {
+                "name": "Pacific (A)",
+                "net": 11
+            },
+            {
+                "name": "Portland",
+                "net": 0
+            },
+            {
+                "name": "Loyola Marymount (A)",
+                "net": -4
+            }
+        ]
+    },
+    "ATAL-RISA-TRST-NOWA-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 5.916666666666666,
+        "totalNet": 3,
+        "games": [
+            {
+                "name": "Missouri State",
+                "net": 0
+            },
+            {
+                "name": "Butler",
+                "net": -2
+            },
+            {
+                "name": "Dayton (N)",
+                "net": 3
+            },
+            {
+                "name": "Creighton (N)",
+                "net": 2
+            },
+            {
+                "name": "Lindenwood",
+                "net": 0
+            }
+        ]
+    },
+    "GIGE-JARO-TRST-FOTR-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "ROBINSON,JAXSON",
+            "STEWART,TREY",
+            "TRAORE,FOUSSEYNI",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 9.100000000000009,
+        "totalNet": -2,
+        "games": [
+            {
+                "name": "Missouri State",
+                "net": -1
+            },
+            {
+                "name": "Butler",
+                "net": 1
+            },
+            {
+                "name": "Dayton (N)",
+                "net": 3
+            },
+            {
+                "name": "UVU",
+                "net": -5
+            }
+        ]
+    },
+    "ATAL-GIGE-DAHA-JARO-TRST": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "STEWART,TREY"
+        ],
+        "totalMinutes": 4.249999999999998,
+        "totalNet": 2,
+        "games": [
+            {
+                "name": "Missouri State",
+                "net": 1
+            },
+            {
+                "name": "Dayton (N)",
+                "net": 3
+            },
+            {
+                "name": "South Dakota",
+                "net": 1
+            },
+            {
+                "name": "UVU",
+                "net": -3
+            }
+        ]
+    },
+    "ATAL-GIGE-DAHA-SPJO-JARO": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON"
+        ],
+        "totalMinutes": 7.266666666666678,
+        "totalNet": 6,
+        "games": [
+            {
+                "name": "Missouri State",
+                "net": 3
+            },
+            {
+                "name": "Portland",
+                "net": -1
+            },
+            {
+                "name": "San Diego (A)",
+                "net": 4
+            }
+        ]
+    },
+    "ATAL-DAHA-SPJO-JARO-RISA": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE"
+        ],
+        "totalMinutes": 5.199999999999999,
+        "totalNet": 2,
+        "games": [
+            {
+                "name": "Missouri State",
+                "net": 1
+            },
+            {
+                "name": "Pacific (A)",
+                "net": 4
+            },
+            {
+                "name": "Loyola Marymount (A)",
+                "net": -3
+            }
+        ]
+    },
+    "ATAL-GIGE-SPJO-JARO-TRST": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "STEWART,TREY"
+        ],
+        "totalMinutes": 0.38333333333332575,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "Missouri State",
+                "net": 0
+            }
+        ]
+    },
+    "JARO-RISA-TRST-FOTR-RUWI": {
+        "names": [
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY",
+            "TRAORE,FOUSSEYNI",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 3.8666666666666725,
+        "totalNet": -4,
+        "games": [
+            {
+                "name": "Nicholls",
+                "net": 0
+            },
+            {
+                "name": "Dayton (N)",
+                "net": -1
+            },
+            {
+                "name": "South Dakota",
+                "net": -3
+            }
+        ]
+    },
+    "RISA-TRST-FOTR-NOWA-RUWI": {
+        "names": [
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 6.366666666666664,
+        "totalNet": -4,
+        "games": [
+            {
+                "name": "Nicholls",
+                "net": 2
+            },
+            {
+                "name": "USC (N)",
+                "net": -2
+            },
+            {
+                "name": "Butler",
+                "net": 0
+            },
+            {
+                "name": "Dayton (N)",
+                "net": -5
+            },
+            {
+                "name": "South Dakota",
+                "net": 1
+            }
+        ]
+    },
+    "ATAL-DAHA-SPJO-RISA-NOWA": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "SAUNDERS,RICHIE",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 3.066666666666668,
+        "totalNet": -8,
+        "games": [
+            {
+                "name": "Nicholls",
+                "net": 0
+            },
+            {
+                "name": "Butler",
+                "net": -8
+            }
+        ]
+    },
+    "GIGE-SPJO-JARO-NOWA-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 4.816666666666663,
+        "totalNet": -11,
+        "games": [
+            {
+                "name": "Nicholls",
+                "net": 1
+            },
+            {
+                "name": "USC (N)",
+                "net": -12
+            }
+        ]
+    },
+    "GIGE-SPJO-JARO-RISA-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 0.4833333333333343,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "Nicholls",
+                "net": 0
+            }
+        ]
+    },
+    "GIGE-SPJO-JARO-RISA-TRST": {
+        "names": [
+            "GEORGE,GIDEON",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY"
+        ],
+        "totalMinutes": 1.6166666666666671,
+        "totalNet": 3,
+        "games": [
+            {
+                "name": "Nicholls",
+                "net": 3
+            }
+        ]
+    },
+    "GIGE-SPJO-JARO-TRST-FOTR": {
+        "names": [
+            "GEORGE,GIDEON",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "STEWART,TREY",
+            "TRAORE,FOUSSEYNI"
+        ],
+        "totalMinutes": 0.33333333333333215,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "USC (N)",
+                "net": 0
+            }
+        ]
+    },
+    "GIGE-SPJO-JARO-TRST-NOWA": {
+        "names": [
+            "GEORGE,GIDEON",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "STEWART,TREY",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 0.05000000000000071,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "USC (N)",
+                "net": 0
+            }
+        ]
+    },
+    "ATAL-GIGE-JARO-TRST-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "ROBINSON,JAXSON",
+            "STEWART,TREY",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 2.3500000000000014,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "USC (N)",
+                "net": 2
+            },
+            {
+                "name": "Butler",
+                "net": -1
+            },
+            {
+                "name": "UVU",
+                "net": -1
+            }
+        ]
+    },
+    "ATAL-JARO-TRST-NOWA-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "ROBINSON,JAXSON",
+            "STEWART,TREY",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 5.41666666666667,
+        "totalNet": 8,
+        "games": [
+            {
+                "name": "USC (N)",
+                "net": 6
+            },
+            {
+                "name": "South Dakota",
+                "net": -3
+            },
+            {
+                "name": "UVU",
+                "net": 6
+            },
+            {
+                "name": "Creighton (N)",
+                "net": -1
+            }
+        ]
+    },
+    "DAHA-JARO-TRST-FOTR-NOWA": {
+        "names": [
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "STEWART,TREY",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 1.3999999999999986,
+        "totalNet": 2,
+        "games": [
+            {
+                "name": "USC (N)",
+                "net": 2
+            }
+        ]
+    },
+    "DAHA-SPJO-JARO-FOTR-NOWA": {
+        "names": [
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 4.416666666666671,
+        "totalNet": 4,
+        "games": [
+            {
+                "name": "USC (N)",
+                "net": 2
+            },
+            {
+                "name": "Pacific (A)",
+                "net": 2
+            }
+        ]
+    },
+    "DAHA-SPJO-RISA-FOTR-NOWA": {
+        "names": [
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "SAUNDERS,RICHIE",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 3.4499999999999993,
+        "totalNet": 6,
+        "games": [
+            {
+                "name": "Butler",
+                "net": 3
+            },
+            {
+                "name": "Pacific (A)",
+                "net": 3
+            }
+        ]
+    },
+    "SPJO-RISA-FOTR-NOWA-RUWI": {
+        "names": [
+            "JOHNSON,SPENCER",
+            "SAUNDERS,RICHIE",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 1.1833333333333282,
+        "totalNet": -2,
+        "games": [
+            {
+                "name": "Butler",
+                "net": 0
+            },
+            {
+                "name": "Gonzaga",
+                "net": -2
+            }
+        ]
+    },
+    "ATAL-SPJO-FOTR-NOWA-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "JOHNSON,SPENCER",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 1.3500000000000014,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "Butler",
+                "net": 0
+            }
+        ]
+    },
+    "ATAL-TRST-FOTR-NOWA-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "STEWART,TREY",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 0.6499999999999986,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "Butler",
+                "net": 0
+            }
+        ]
+    },
+    "GIGE-JARO-FOTR-NOWA-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "ROBINSON,JAXSON",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 19.966666666666676,
+        "totalNet": -3,
+        "games": [
+            {
+                "name": "Butler",
+                "net": 0
+            },
+            {
+                "name": "Dayton (N)",
+                "net": 6
+            },
+            {
+                "name": "South Dakota",
+                "net": -6
+            },
+            {
+                "name": "Creighton (N)",
+                "net": 0
+            },
+            {
+                "name": "Utah",
+                "net": -5
+            },
+            {
+                "name": "Weber State",
+                "net": -5
+            },
+            {
+                "name": "Portland",
+                "net": 7
+            }
+        ]
+    },
+    "GIGE-DAHA-JARO-TRST-FOTR": {
+        "names": [
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "STEWART,TREY",
+            "TRAORE,FOUSSEYNI"
+        ],
+        "totalMinutes": 3.3333333333333286,
+        "totalNet": 1,
+        "games": [
+            {
+                "name": "Dayton (N)",
+                "net": 0
+            },
+            {
+                "name": "UVU",
+                "net": 1
+            }
+        ]
+    },
+    "GIGE-DAHA-FOTR-NOWA-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 6.78333333333333,
+        "totalNet": 5,
+        "games": [
+            {
+                "name": "Dayton (N)",
+                "net": 6
+            },
+            {
+                "name": "Weber State",
+                "net": 4
+            },
+            {
+                "name": "Pacific (A)",
+                "net": -5
+            }
+        ]
+    },
+    "GIGE-DAHA-JARO-FOTR-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "TRAORE,FOUSSEYNI",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 29.833333333333314,
+        "totalNet": 2,
+        "games": [
+            {
+                "name": "Dayton (N)",
+                "net": -9
+            },
+            {
+                "name": "South Dakota",
+                "net": 4
+            },
+            {
+                "name": "UVU",
+                "net": -1
+            },
+            {
+                "name": "Utah",
+                "net": 8
+            },
+            {
+                "name": "Weber State",
+                "net": -3
+            },
+            {
+                "name": "Pacific (A)",
+                "net": 1
+            },
+            {
+                "name": "San Diego (A)",
+                "net": 2
+            }
+        ]
+    },
+    "GIGE-RISA-TRST-FOTR-NOWA": {
+        "names": [
+            "GEORGE,GIDEON",
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 0.5666666666666664,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "Dayton (N)",
+                "net": 0
+            }
+        ]
+    },
+    "GIGE-DAHA-RISA-TRST-FOTR": {
+        "names": [
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY",
+            "TRAORE,FOUSSEYNI"
+        ],
+        "totalMinutes": 0.6000000000000014,
+        "totalNet": 1,
+        "games": [
+            {
+                "name": "Dayton (N)",
+                "net": 1
+            }
+        ]
+    },
+    "GIGE-DAHA-JARO-RISA-FOTR": {
+        "names": [
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "TRAORE,FOUSSEYNI"
+        ],
+        "totalMinutes": 13.349999999999996,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "Dayton (N)",
+                "net": -2
+            },
+            {
+                "name": "UVU",
+                "net": 2
+            },
+            {
+                "name": "Utah",
+                "net": 2
+            },
+            {
+                "name": "Loyola Marymount (A)",
+                "net": -2
+            }
+        ]
+    },
+    "ATAL-GIGE-DAHA-JARO-RISA": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE"
+        ],
+        "totalMinutes": 1.75,
+        "totalNet": -2,
+        "games": [
+            {
+                "name": "Dayton (N)",
+                "net": -2
+            }
+        ]
+    },
+    "ATAL-DAHA-JARO-RISA-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 3.3333333333333375,
+        "totalNet": 2,
+        "games": [
+            {
+                "name": "Dayton (N)",
+                "net": 0
+            },
+            {
+                "name": "UVU",
+                "net": 0
+            },
+            {
+                "name": "Creighton (N)",
+                "net": 0
+            },
+            {
+                "name": "Weber State",
+                "net": 2
+            }
+        ]
+    },
+    "ATAL-GIGE-JARO-RISA-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 10.2,
+        "totalNet": 6,
+        "games": [
+            {
+                "name": "Dayton (N)",
+                "net": -2
+            },
+            {
+                "name": "UVU",
+                "net": 2
+            },
+            {
+                "name": "Creighton (N)",
+                "net": 4
+            },
+            {
+                "name": "Utah",
+                "net": 2
+            },
+            {
+                "name": "Weber State",
+                "net": 0
+            }
+        ]
+    },
+    "GIGE-JARO-RISA-FOTR-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "TRAORE,FOUSSEYNI",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 14.316666666666672,
+        "totalNet": -10,
+        "games": [
+            {
+                "name": "Dayton (N)",
+                "net": 0
+            },
+            {
+                "name": "South Dakota",
+                "net": -3
+            },
+            {
+                "name": "UVU",
+                "net": 0
+            },
+            {
+                "name": "Creighton (N)",
+                "net": -6
+            },
+            {
+                "name": "Weber State",
+                "net": -1
+            }
+        ]
+    },
+    "GIGE-RISA-TRST-FOTR-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY",
+            "TRAORE,FOUSSEYNI",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 3.5,
+        "totalNet": -3,
+        "games": [
+            {
+                "name": "Dayton (N)",
+                "net": 0
+            },
+            {
+                "name": "Utah",
+                "net": -3
+            }
+        ]
+    },
+    "GIGE-DAHA-RISA-FOTR-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "SAUNDERS,RICHIE",
+            "TRAORE,FOUSSEYNI",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 5.8999999999999915,
+        "totalNet": -1,
+        "games": [
+            {
+                "name": "Dayton (N)",
+                "net": -3
+            },
+            {
+                "name": "Utah",
+                "net": 0
+            },
+            {
+                "name": "Weber State",
+                "net": 2
+            }
+        ]
+    },
+    "GIGE-DAHA-JARO-RISA-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 4.166666666666664,
+        "totalNet": 2,
+        "games": [
+            {
+                "name": "Dayton (N)",
+                "net": 1
+            },
+            {
+                "name": "Creighton (N)",
+                "net": 2
+            },
+            {
+                "name": "Utah",
+                "net": -1
+            }
+        ]
+    },
+    "ATAL-GIGE-DAHA-JARO-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 6.716666666666665,
+        "totalNet": 6,
+        "games": [
+            {
+                "name": "Dayton (N)",
+                "net": 1
+            },
+            {
+                "name": "Creighton (N)",
+                "net": 0
+            },
+            {
+                "name": "Utah",
+                "net": 0
+            },
+            {
+                "name": "Pacific (A)",
+                "net": 6
+            },
+            {
+                "name": "Portland",
+                "net": -1
+            }
+        ]
+    },
+    "ATAL-DAHA-RISA-TATO-NOWA": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "HALL,DALLIN",
+            "SAUNDERS,RICHIE",
+            "TOOLSON,TANNER",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 2.833333333333332,
+        "totalNet": -1,
+        "games": [
+            {
+                "name": "South Dakota",
+                "net": -1
+            }
+        ]
+    },
+    "RISA-TATO-FOTR-NOWA-RUWI": {
+        "names": [
+            "SAUNDERS,RICHIE",
+            "TOOLSON,TANNER",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 0.16666666666666785,
+        "totalNet": -1,
+        "games": [
+            {
+                "name": "South Dakota",
+                "net": -1
+            }
+        ]
+    },
+    "GIGE-TATO-FOTR-NOWA-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "TOOLSON,TANNER",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 1.7333333333333325,
+        "totalNet": -2,
+        "games": [
+            {
+                "name": "South Dakota",
+                "net": -2
+            }
+        ]
+    },
+    "DAHA-JARO-TRST-FOTR-RUWI": {
+        "names": [
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "STEWART,TREY",
+            "TRAORE,FOUSSEYNI",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 6.299999999999999,
+        "totalNet": -1,
+        "games": [
+            {
+                "name": "South Dakota",
+                "net": -3
+            },
+            {
+                "name": "UVU",
+                "net": 0
+            },
+            {
+                "name": "Creighton (N)",
+                "net": 0
+            },
+            {
+                "name": "Pacific (A)",
+                "net": 2
+            }
+        ]
+    },
+    "DAHA-JARO-FOTR-NOWA-RUWI": {
+        "names": [
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 3.9666666666666686,
+        "totalNet": -2,
+        "games": [
+            {
+                "name": "South Dakota",
+                "net": -3
+            },
+            {
+                "name": "Weber State",
+                "net": 1
+            }
+        ]
+    },
+    "ATAL-DAHA-JARO-NOWA-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 0.9000000000000021,
+        "totalNet": 2,
+        "games": [
+            {
+                "name": "South Dakota",
+                "net": 2
+            }
+        ]
+    },
+    "ATAL-DAHA-JARO-TRST-NOWA": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "STEWART,TREY",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 1.7999999999999972,
+        "totalNet": -2,
+        "games": [
+            {
+                "name": "South Dakota",
+                "net": -2
+            }
+        ]
+    },
+    "DAHA-JARO-RISA-FOTR-RUWI": {
+        "names": [
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "TRAORE,FOUSSEYNI",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 11.233333333333324,
+        "totalNet": 7,
+        "games": [
+            {
+                "name": "South Dakota",
+                "net": -2
+            },
+            {
+                "name": "UVU",
+                "net": 1
+            },
+            {
+                "name": "Creighton (N)",
+                "net": 6
+            },
+            {
+                "name": "Weber State",
+                "net": 0
+            },
+            {
+                "name": "Pacific (A)",
+                "net": -1
+            },
+            {
+                "name": "San Diego (A)",
+                "net": 2
+            },
+            {
+                "name": "Gonzaga",
+                "net": 1
+            }
+        ]
+    },
+    "DAHA-RISA-FOTR-NOWA-RUWI": {
+        "names": [
+            "HALL,DALLIN",
+            "SAUNDERS,RICHIE",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 3.8499999999999837,
+        "totalNet": 9,
+        "games": [
+            {
+                "name": "South Dakota",
+                "net": 7
+            },
+            {
+                "name": "Pacific (A)",
+                "net": 0
+            },
+            {
+                "name": "San Diego (A)",
+                "net": 2
+            }
+        ]
+    },
+    "DAHA-JARO-RISA-FOTR-NOWA": {
+        "names": [
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 1.033333333333335,
+        "totalNet": -5,
+        "games": [
+            {
+                "name": "South Dakota",
+                "net": 0
+            },
+            {
+                "name": "UVU",
+                "net": -5
+            }
+        ]
+    },
+    "DAHA-JARO-RISA-TRST-NOWA": {
+        "names": [
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 0.21666666666667567,
+        "totalNet": -1,
+        "games": [
+            {
+                "name": "South Dakota",
+                "net": 0
+            },
+            {
+                "name": "UVU",
+                "net": -1
+            }
+        ]
+    },
+    "DAHA-RISA-TRST-NOWA-RUWI": {
+        "names": [
+            "HALL,DALLIN",
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 0.05000000000000426,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "South Dakota",
+                "net": 0
+            }
+        ]
+    },
+    "DAHA-JARO-RISA-NOWA-RUWI": {
+        "names": [
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 0,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "South Dakota",
+                "net": 0
+            }
+        ]
+    },
+    "ATAL-GIGE-JARO-NOWA-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "ROBINSON,JAXSON",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 7.483333333333334,
+        "totalNet": -3,
+        "games": [
+            {
+                "name": "UVU",
+                "net": 0
+            },
+            {
+                "name": "Utah",
+                "net": -1
+            },
+            {
+                "name": "Weber State",
+                "net": 0
+            },
+            {
+                "name": "Portland",
+                "net": -2
+            },
+            {
+                "name": "San Diego (A)",
+                "net": 0
+            }
+        ]
+    },
+    "GIGE-DAHA-JARO-FOTR-NOWA": {
+        "names": [
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 74.81666666666668,
+        "totalNet": 28,
+        "games": [
+            {
+                "name": "UVU",
+                "net": -1
+            },
+            {
+                "name": "Creighton (N)",
+                "net": -5
+            },
+            {
+                "name": "Utah",
+                "net": 5
+            },
+            {
+                "name": "Lindenwood",
+                "net": 12
+            },
+            {
+                "name": "Weber State",
+                "net": 7
+            },
+            {
+                "name": "Pacific (A)",
+                "net": -4
+            },
+            {
+                "name": "Portland",
+                "net": 6
+            },
+            {
+                "name": "Loyola Marymount (A)",
+                "net": 8
+            }
+        ]
+    },
+    "JARO-RISA-FOTR-NOWA-RUWI": {
+        "names": [
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 6.6000000000000085,
+        "totalNet": -11,
+        "games": [
+            {
+                "name": "UVU",
+                "net": 1
+            },
+            {
+                "name": "Utah",
+                "net": -2
+            },
+            {
+                "name": "Weber State",
+                "net": -1
+            },
+            {
+                "name": "Loyola Marymount (A)",
+                "net": -4
+            },
+            {
+                "name": "Gonzaga",
+                "net": -5
+            }
+        ]
+    },
+    "JARO-TRST-FOTR-NOWA-RUWI": {
+        "names": [
+            "ROBINSON,JAXSON",
+            "STEWART,TREY",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 3.8499999999999996,
+        "totalNet": 1,
+        "games": [
+            {
+                "name": "UVU",
+                "net": -1
+            },
+            {
+                "name": "Creighton (N)",
+                "net": 2
+            }
+        ]
+    },
+    "ATAL-GIGE-DAHA-RISA-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "SAUNDERS,RICHIE",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 2.283333333333335,
+        "totalNet": -9,
+        "games": [
+            {
+                "name": "UVU",
+                "net": -7
+            },
+            {
+                "name": "Weber State",
+                "net": -2
+            }
+        ]
+    },
+    "GIGE-DAHA-JARO-NOWA-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 0.21666666666666856,
+        "totalNet": 2,
+        "games": [
+            {
+                "name": "UVU",
+                "net": 0
+            },
+            {
+                "name": "Weber State",
+                "net": 2
+            }
+        ]
+    },
+    "DAHA-JARO-TATO-NOWA-RUWI": {
+        "names": [
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "TOOLSON,TANNER",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 1.3999999999999986,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "UVU",
+                "net": 0
+            }
+        ]
+    },
+    "ATAL-JARO-RISA-NOWA-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 10.433333333333342,
+        "totalNet": 8,
+        "games": [
+            {
+                "name": "Creighton (N)",
+                "net": 1
+            },
+            {
+                "name": "Utah",
+                "net": 1
+            },
+            {
+                "name": "Lindenwood",
+                "net": 7
+            },
+            {
+                "name": "Loyola Marymount (A)",
+                "net": 0
+            },
+            {
+                "name": "San Diego (A)",
+                "net": -1
+            }
+        ]
+    },
+    "ATAL-GIGE-RISA-TRST-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 3.366666666666667,
+        "totalNet": 3,
+        "games": [
+            {
+                "name": "Creighton (N)",
+                "net": 3
+            }
+        ]
+    },
+    "DAHA-JARO-RISA-TRST-RUWI": {
+        "names": [
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 1.5,
+        "totalNet": -7,
+        "games": [
+            {
+                "name": "Creighton (N)",
+                "net": -7
+            }
+        ]
+    },
+    "DAHA-JARO-TRST-NOWA-RUWI": {
+        "names": [
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "STEWART,TREY",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 1.9166666666666714,
+        "totalNet": -1,
+        "games": [
+            {
+                "name": "Creighton (N)",
+                "net": -1
+            }
+        ]
+    },
+    "ATAL-DAHA-JARO-TRST-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "STEWART,TREY",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 0.9666666666666686,
+        "totalNet": -2,
+        "games": [
+            {
+                "name": "Creighton (N)",
+                "net": 0
+            },
+            {
+                "name": "Pacific (A)",
+                "net": -2
+            }
+        ]
+    },
+    "ATAL-GIGE-RISA-TATO-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "SAUNDERS,RICHIE",
+            "TOOLSON,TANNER",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 1.333333333333334,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "Utah",
+                "net": 0
+            }
+        ]
+    },
+    "GIGE-DAHA-JARO-RISA-NOWA": {
+        "names": [
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 0.1999999999999993,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "Utah",
+                "net": 0
+            }
+        ]
+    },
+    "GIGE-DAHA-RISA-NOWA-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "SAUNDERS,RICHIE",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 2.5833333333333357,
+        "totalNet": 4,
+        "games": [
+            {
+                "name": "Utah",
+                "net": 4
+            }
+        ]
+    },
+    "GIGE-DAHA-TRST-NOWA-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "STEWART,TREY",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 1.8000000000000007,
+        "totalNet": 3,
+        "games": [
+            {
+                "name": "Utah",
+                "net": 3
+            }
+        ]
+    },
+    "GIGE-DAHA-JARO-TRST-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "ROBINSON,JAXSON",
+            "STEWART,TREY",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 0,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "Utah",
+                "net": 0
+            }
+        ]
+    },
+    "GIGE-RISA-FOTR-NOWA-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "SAUNDERS,RICHIE",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 2.4666666666666615,
+        "totalNet": -4,
+        "games": [
+            {
+                "name": "Utah",
+                "net": -4
+            },
+            {
+                "name": "Weber State",
+                "net": 0
+            }
+        ]
+    },
+    "ATAL-RISA-TRST-TATO-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY",
+            "TOOLSON,TANNER",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 12.150000000000002,
+        "totalNet": 4,
+        "games": [
+            {
+                "name": "Lindenwood",
+                "net": 4
+            }
+        ]
+    },
+    "ATAL-GIGE-RISA-NOWA-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "SAUNDERS,RICHIE",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 2.083333333333334,
+        "totalNet": 4,
+        "games": [
+            {
+                "name": "Lindenwood",
+                "net": 4
+            },
+            {
+                "name": "Weber State",
+                "net": 0
+            }
+        ]
+    },
+    "TRCH-HADO-JAMC-TRST-TATO": {
+        "names": [
+            "CHRISTENSEN,TREDYN",
+            "DONG,HAO",
+            "MCGREGOR,JARED",
+            "STEWART,TREY",
+            "TOOLSON,TANNER"
+        ],
+        "totalMinutes": 1.5333333333333314,
+        "totalNet": 2,
+        "games": [
+            {
+                "name": "Lindenwood",
+                "net": 2
+            }
+        ]
+    },
+    "ATAL-DAHA-RISA-NOWA-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "HALL,DALLIN",
+            "SAUNDERS,RICHIE",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 2.75,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "Weber State",
+                "net": 0
+            }
+        ]
+    },
+    "GIGE-JARO-RISA-FOTR-NOWA": {
+        "names": [
+            "GEORGE,GIDEON",
+            "ROBINSON,JAXSON",
+            "SAUNDERS,RICHIE",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 0.36666666666666714,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "Weber State",
+                "net": 0
+            }
+        ]
+    },
+    "ATAL-SPJO-JARO-NOWA-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 10.616666666666664,
+        "totalNet": 1,
+        "games": [
+            {
+                "name": "Pacific (A)",
+                "net": 3
+            },
+            {
+                "name": "Loyola Marymount (A)",
+                "net": -4
+            },
+            {
+                "name": "Gonzaga",
+                "net": 2
+            }
+        ]
+    },
+    "DAHA-SPJO-JARO-FOTR-RUWI": {
+        "names": [
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "TRAORE,FOUSSEYNI",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 2.716666666666665,
+        "totalNet": -2,
+        "games": [
+            {
+                "name": "Pacific (A)",
+                "net": 2
+            },
+            {
+                "name": "Portland",
+                "net": -4
+            },
+            {
+                "name": "Gonzaga",
+                "net": 0
+            }
+        ]
+    },
+    "ATAL-DAHA-SPJO-JARO-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 1.7833333333333314,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "Pacific (A)",
+                "net": 0
+            }
+        ]
+    },
+    "ATAL-DAHA-SPJO-JARO-NOWA": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 1.6166666666666636,
+        "totalNet": 1,
+        "games": [
+            {
+                "name": "Pacific (A)",
+                "net": 0
+            },
+            {
+                "name": "Loyola Marymount (A)",
+                "net": 1
+            }
+        ]
+    },
+    "ATAL-DAHA-SPJO-NOWA-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 0.6166666666666742,
+        "totalNet": -2,
+        "games": [
+            {
+                "name": "Pacific (A)",
+                "net": -2
+            }
+        ]
+    },
+    "ATAL-SPJO-RISA-NOWA-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "JOHNSON,SPENCER",
+            "SAUNDERS,RICHIE",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 3.733333333333327,
+        "totalNet": 4,
+        "games": [
+            {
+                "name": "Pacific (A)",
+                "net": 0
+            },
+            {
+                "name": "San Diego (A)",
+                "net": 4
+            }
+        ]
+    },
+    "ATAL-GIGE-SPJO-RISA-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "JOHNSON,SPENCER",
+            "SAUNDERS,RICHIE",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 4.949999999999996,
+        "totalNet": 8,
+        "games": [
+            {
+                "name": "Pacific (A)",
+                "net": 6
+            },
+            {
+                "name": "Portland",
+                "net": 2
+            }
+        ]
+    },
+    "ATAL-GIGE-SPJO-RISA-TRST": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "JOHNSON,SPENCER",
+            "SAUNDERS,RICHIE",
+            "STEWART,TREY"
+        ],
+        "totalMinutes": 0.75,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "Pacific (A)",
+                "net": 0
+            }
+        ]
+    },
+    "ATAL-GIGE-DAHA-SPJO-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 2.450000000000001,
+        "totalNet": -9,
+        "games": [
+            {
+                "name": "Portland",
+                "net": -3
+            },
+            {
+                "name": "Gonzaga",
+                "net": -6
+            }
+        ]
+    },
+    "GIGE-DAHA-SPJO-JARO-RUWI": {
+        "names": [
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 1.0833333333333357,
+        "totalNet": 2,
+        "games": [
+            {
+                "name": "Portland",
+                "net": 2
+            },
+            {
+                "name": "Gonzaga",
+                "net": 0
+            }
+        ]
+    },
+    "ATAL-GIGE-DAHA-SPJO-RISA": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "SAUNDERS,RICHIE"
+        ],
+        "totalMinutes": 0.9499999999999993,
+        "totalNet": 2,
+        "games": [
+            {
+                "name": "Loyola Marymount (A)",
+                "net": 2
+            }
+        ]
+    },
+    "GIGE-DAHA-SPJO-RISA-FOTR": {
+        "names": [
+            "GEORGE,GIDEON",
+            "HALL,DALLIN",
+            "JOHNSON,SPENCER",
+            "SAUNDERS,RICHIE",
+            "TRAORE,FOUSSEYNI"
+        ],
+        "totalMinutes": 2.433333333333332,
+        "totalNet": 3,
+        "games": [
+            {
+                "name": "Loyola Marymount (A)",
+                "net": 3
+            }
+        ]
+    },
+    "ATAL-SPJO-JARO-FOTR-RUWI": {
+        "names": [
+            "ALLY ATIKI,ATIKI",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "TRAORE,FOUSSEYNI",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 1.8833333333333329,
+        "totalNet": -2,
+        "games": [
+            {
+                "name": "Gonzaga",
+                "net": -2
+            }
+        ]
+    },
+    "GIGE-SPJO-JARO-FOTR-NOWA": {
+        "names": [
+            "GEORGE,GIDEON",
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH"
+        ],
+        "totalMinutes": 0.01666666666666572,
+        "totalNet": 0,
+        "games": [
+            {
+                "name": "Gonzaga",
+                "net": 0
+            }
+        ]
+    },
+    "SPJO-JARO-FOTR-NOWA-RUWI": {
+        "names": [
+            "JOHNSON,SPENCER",
+            "ROBINSON,JAXSON",
+            "TRAORE,FOUSSEYNI",
+            "WATERMAN,NOAH",
+            "WILLIAMS,RUDI"
+        ],
+        "totalMinutes": 1.7000000000000028,
+        "totalNet": -1,
+        "games": [
+            {
+                "name": "Gonzaga",
+                "net": -1
+            }
+        ]
+    }
+}

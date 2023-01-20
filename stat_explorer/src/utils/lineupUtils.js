@@ -147,6 +147,21 @@ function formNewLineup(subs, oldLineup) {
   );
 }
 
+function getUpdatedScore(meta) {
+  const teamKey = meta.isVisitor ? 'vscore' : 'hscore';
+  const oppKey = teamKey === 'vscore' ? 'hscore' : 'vscore';
+  return {
+    teamScore: meta[teamKey],
+    oppScore: meta[oppKey],
+  };
+}
+
+function getNetForStint(stint) {
+  const startMargin = stint.startScore.teamScore - stint.startScore.oppScore;
+  const endMargin = stint.endScore.teamScore - stint.endScore.oppScore;
+  return endMargin - startMargin;
+}
+
 function parseHalf(plays, lineupData, halfIndex, numHalves) {
   let skipIndex = -1;
   // console.log("plays", plays);
@@ -154,6 +169,10 @@ function parseHalf(plays, lineupData, halfIndex, numHalves) {
     // console.log("skipIndex", skipIndex);
     if (index > skipIndex) {
       // console.log("not a skip play");
+      if (play.action === "GOOD") {
+        lineupData.gameScore.vscore = +play.vscore;
+        lineupData.gameScore.hscore = +play.hscore;
+      }
       if (play.action === "SUB" && play.team === "BYU") {
         // console.log("it was a sub for BYU");
         const subData = collectSubs(plays, index);
@@ -164,7 +183,10 @@ function parseHalf(plays, lineupData, halfIndex, numHalves) {
         // update old lineup end
         const oldHash = getLineupHash(lineupData.currentLineup);
         const oldStints = lineupData.lineups[oldHash].stints;
-        oldStints[oldStints.length - 1].end = timeToNumber(play.time, halfIndex);
+        const updateStint = oldStints[oldStints.length - 1];
+        updateStint.end = timeToNumber(play.time, halfIndex);
+        updateStint.endScore = getUpdatedScore(lineupData.gameScore);
+        updateStint.net = getNetForStint(updateStint);
         // console.log('their new hash is', newHash);
         lineupData.currentLineup = newLineup;
         if (!lineupData.lineups[newHash]) {
@@ -173,12 +195,13 @@ function parseHalf(plays, lineupData, halfIndex, numHalves) {
             stints: [
               {
                 start: timeToNumber(play.time, halfIndex),
+                startScore: getUpdatedScore(lineupData.gameScore),
               }
             ]
           };
         } else {
           // console.log('\nnew start of lineup, the play, ', play);
-          lineupData.lineups[newHash].stints.push({ start: timeToNumber(play.time, halfIndex) });
+          lineupData.lineups[newHash].stints.push({ start: timeToNumber(play.time, halfIndex), startScore: getUpdatedScore(lineupData.gameScore), });
         }
         skipIndex = subData.lastSubIndex;
       }
@@ -191,6 +214,8 @@ function parseHalf(plays, lineupData, halfIndex, numHalves) {
   let endTime = 40;
   endTime = endingTimes[halfIndex];
   lastStint.end = endTime;
+  lastStint.endScore = getUpdatedScore(lineupData.gameScore);
+  lastStint.net = getNetForStint(lastStint);
   lastStint.isEndPeriod = true;
   if (numHalves - 1 === halfIndex) {
     lineup.endGame = true;
@@ -200,12 +225,19 @@ function parseHalf(plays, lineupData, halfIndex, numHalves) {
 }
 
 const generateLineupData = (game) => {
-  // console.log("gen lineups", game);
+  console.log("gen lineups");
   const teamData = game.team.find((t) => t.id === "BYU");
+  const isVisitor = teamData.vh === "V";
   // console.log("teamData", teamData);
   const starters = getStarters(teamData.player);
   const starterNames = starters.map((s) => s.name.toUpperCase());
   const lineupData = {
+    gameScore: {
+      isVisitor,
+      teamKey: "BYU",
+      vscore: 0,
+      hscore: 0,
+    },
     currentLineup: starterNames,
     starterHash: getLineupHash(starterNames),
     lineups: {
@@ -214,6 +246,10 @@ const generateLineupData = (game) => {
         stints: [
           {
             start: 0,
+            startScore: {
+              teamScore: 0,
+              oppScore: 0,
+            }
           }
         ],
         isStartingLineup: true,
@@ -226,15 +262,19 @@ const generateLineupData = (game) => {
   });
   // parseHalf(game.plays.period[0].play, lineupData, 0, numHalves);
   // parseHalf(game.plays.period[1].play, lineupData, 1, numHalves);
+  console.log('halves parsed');
   Object.keys(lineupData.lineups).forEach(lKey => {
     const lineup = lineupData.lineups[lKey];
-    const total = lineup.stints.reduce((count, stint) => {
+    const { total, net } = lineup.stints.reduce((counts, stint) => {
       const duration = stint.end - stint.start;
-      return count + duration;
-    }, 0);
+      counts.total = counts.total + duration;
+      counts.net = counts.net + stint.net;
+      return counts;
+    }, { total: 0, net: 0 });
     lineup.totalTime = total;
+    lineup.totalNet = net;
   });
-  // console.log("lineupDatas", lineupData);
+  console.log("lineupDatas", lineupData);
   return lineupData;
 };
 

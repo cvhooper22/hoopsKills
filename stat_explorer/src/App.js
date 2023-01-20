@@ -1,42 +1,35 @@
-import { useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
 import Header from './components/Layout/Header';
 import Nav from "./components/Layout/Nav";
-import Lineups from "./views/Lineups/Lineups";
+// import Lineups from "./views/Lineups/Lineups";
+import LineupRouter from "./views/Lineups/LineupRouter";
+import GameLineups from './views/Lineups/components/GameLineups';
+import SeasonLineups from "./views/Lineups/components/SeasonLineups";
 import Home from "./views/Home/Home";
-import { HOME_VIEW, LINEUP_VIEW, KILLS_VIEW, CLUTCH_VIEW } from "./constants/views";
-
-const views = [
-  {
-    title: HOME_VIEW,
-  },
-  {
-    title: LINEUP_VIEW,
-  },
-  {
-    title: KILLS_VIEW,
-    disabled: true,
-  },
-  {
-    title: CLUTCH_VIEW,
-    disabled: true,
-  } 
-];
+import { views } from './constants/views';
 
 export default function App() {
-  const [currentView, setCurrentView] = useState(HOME_VIEW);
-  function handleViewClick (view) {
-    setCurrentView(view);
+  const navigate = useNavigate();
+  function handleNavClick (viewOpt) {
+    navigate(viewOpt.route);
   }
   return (
     <div className="flex-c App">
       <div className="top-bar">
         <Header />
-        <Nav options={views} onOptionClick={handleViewClick} currentOption={currentView}/>
+        <Nav options={views} onOptionClick={handleNavClick}/>
       </div>
       <div className="content">
-        { currentView === LINEUP_VIEW && <Lineups />}
-        { currentView === HOME_VIEW && <Home />}
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="lineups" element={<LineupRouter />}>
+            <Route index element={<GameLineups />} />
+            <Route path=":name" element={<GameLineups />} />
+            <Route path="season" element={<SeasonLineups /> } />
+          </Route>
+          <Route path="*" element={<Home />} />
+        </Routes>
       </div>
     </div>
   );

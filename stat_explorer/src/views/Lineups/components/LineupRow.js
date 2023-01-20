@@ -20,7 +20,6 @@ const indexToLabel = {
 
 export default function LineupRow ({lineup}) {
   const [showStints, setShowStints] = useState(false);
-  const avgStintTime = lineup.totalTime / (lineup.stints?.length ?? 1);
   const stintsByPeriod = lineup.stints.reduce((agg, stint) => {
     const startString = numberToGameTime(stint.start);
     const postFix = startString.split(' ')[1];
@@ -42,6 +41,14 @@ export default function LineupRow ({lineup}) {
   function handleTriggerClick () {
     setShowStints(!showStints);
   }
+  const netClass = ['lr--net', 'f1'];
+  if (lineup.totalNet !== 0) {
+    if (lineup.totalNet < 0) {
+      netClass.push('lr--net--neg');
+    } else {
+      netClass.push('lr--net--pos');
+    }
+  }
   return(
     <div className="lineup-row" key={getLineupHash(lineup.names)}>
       <div className='flex-aic pt-s'>
@@ -52,7 +59,7 @@ export default function LineupRow ({lineup}) {
           </div>
         <div className="lr--time f1">{lineup.totalTime.toFixed(2)}</div>
         <div className='lr--stint-count f1'>{lineup.stints.length}</div>
-        <div className='lr--avg-time f1'>{avgStintTime.toFixed(2)}</div>
+        <div className={netClass.join(' ')}>{lineup.totalNet}</div>
       </div>
       <div className="lineup-stints mt-s pb-s px-l">
         <div className='trigger-row flex-jce' role="button" onClick={handleTriggerClick}>
@@ -68,7 +75,23 @@ export default function LineupRow ({lineup}) {
               <div className='stint mx-l' key={`stint${idx}`}>
                 <div className="stint-title">{indexToLabel[idx]}</div>
                 <div className="stint-list">
-                  {s.stints.map((st, idx) => (<div className="lineup-stint" key={`stint${idx}`}>{`${numberToGameTime(st.start, false)} to ${numberToGameTime(st.end, false, st.isEndPeriod)}`}</div>))}
+                  {s.stints.map((st, idx) => {
+                    const stintNetClass = ['lr--net stint-net'];
+                    if (st.net !== 0) {
+                      if (st.net < 0) {
+                        stintNetClass.push('lr--net--neg');
+                      } else {
+                        stintNetClass.push('lr--net--pos');
+                      }
+                    }
+                    return (
+                      <div className="lineup-stint" key={`stint${idx}`}>
+                        {`${numberToGameTime(st.start, false)} to ${numberToGameTime(st.end, false, st.isEndPeriod)}`}
+                        <span className={stintNetClass.join(' ')}>({st.net})</span>
+                      </div>
+                    );
+                  }
+                  )}
                 </div>
               </div>
             );

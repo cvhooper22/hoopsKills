@@ -3,14 +3,18 @@
   flex-shrink: 0;
 }
 
+a.game-link {
+  color: unset;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
 .game-row {
   height: 40px;
   font-size: 0.85rem;
-  cursor: pointer;
   padding-left: var(--l);
   padding-right: var(--l);
   border-right: 4px solid transparent;
-  flex-shrink: 0;
 }
 
 .game-row.game-row--selected {

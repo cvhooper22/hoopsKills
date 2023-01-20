@@ -20,11 +20,13 @@ export default function LineupTable ({lineups, filterPlayers}) {
           <div className='lr--lineup lineup-header'>Lineup</div>
           <div className='lr--time lineup-header f1'>Total Time</div>
           <div className='lr--stint-count lineup-header f1'>Times Seen</div>
-          <div className='lr--avg-time lineup-header f1'>Avg Stint Time</div>
+          <div className='lr--net lineup-header f1'>+ / -</div>
         </div>
         <div className='lineup-table__body f1-scroll'>
           {
-            lineups.map((l) => <LineupRow lineup={l} key={getLineupHash(l.names)}/>)
+            lineups.map((l) => {
+            return (<LineupRow lineup={l} key={getLineupHash(l.names)}/>);
+            }) 
           }
         </div>
       </div>
