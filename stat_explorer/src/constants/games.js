@@ -117,7 +117,7 @@ const games = [
     name: "Santa Clara",
     imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/school_logo_detail_page_0.png?itok=rmpq8YAE",
     id: "1300216",
-    path: "santa-clara"
+    path: "santa-clara-a"
   }
 ];
 
