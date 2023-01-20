@@ -88,6 +88,18 @@ exports.default = [
     name: "Gonzaga",
     imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/Gonzaga_Primary.png?itok=LcpDQizp",
     id: "1300204",
+  },
+  {
+    name: "Pepperdine",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/pepp_0.png?itok=lc3Z2_eL",
+    id: "1300215",
+    path: "pepp"
+  },
+  {
+    name: "Santa Clara",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/school_logo_detail_page_0.png?itok=rmpq8YAE",
+    id: "1300216",
+    path: "santa-clara"
   }
 ];
 
