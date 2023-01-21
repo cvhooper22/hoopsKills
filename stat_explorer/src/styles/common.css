@@ -11,3 +11,13 @@
   text-align: center;
   flex-shrink: 0;
 }
+
+.net.net--pos {
+  color: var(--success-1);
+  font-weight: bold;
+}
+
+.net.net--neg {
+  color: var(--error-1);
+  font-weight: bold;
+}

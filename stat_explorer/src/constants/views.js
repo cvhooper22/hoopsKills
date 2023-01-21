@@ -9,7 +9,7 @@ const views = [
     },
     {
       title: LINEUP_VIEW,
-      route: '/lineups/pepp'
+      route: '/lineups/santa-clara-a'
     },
     {
       title: KILLS_VIEW,

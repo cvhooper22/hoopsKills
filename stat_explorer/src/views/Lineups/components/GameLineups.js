@@ -8,7 +8,6 @@ import YBallLoader from "../../../components/Loaders/YBballLoader";
 import { nameFromId, idFromPath } from '../../../constants/games';
 
 export default function Lineups() {
-  console.log('GameLineups::top');
   const {name} = useParams();
   const [lineupData, setLineupData] = useState({
     lineups: {},
@@ -16,7 +15,6 @@ export default function Lineups() {
   });
   const [loading, setLoading] = useState(true);
   const initialId = idFromPath(name);
-  console.log('\tinitial id is', initialId);
   const [currentGame, setCurrentGame] = useState(initialId ?? "1300215");
   const [players, setPlayers] = useState([]);
   const [filterPlayers, setFilterPlayers] = useState([]);
@@ -67,11 +65,20 @@ export default function Lineups() {
       include = filterPlayers.every((p) => lineup.names.includes(p));
     }
     if (include) {
-      agg.push(lineup);
+      agg.lineups.push(lineup);
+      if (filterPlayers.length) {
+        agg.summary.net = agg.summary.net + lineup.totalNet;
+        agg.summary.mins = agg.summary.mins + lineup.totalTime;
+        if (lineup.totalNet > agg.summary.maxNet) {
+            agg.summary.maxNet = lineup.totalNet;
+        } else if (lineup.totalNet < agg.summary.minNet) {
+            agg.summary.minNet = lineup.totalNet;
+        }
+      }
     }
     return agg;
-  }, []);
-  const currentLineups = filteredLineups.sort((lA, lB) => lB.totalTime - lA.totalTime);
+  }, { lineups: [], summary: { net: 0, mins: 0, maxNet: 0, minNet: 300}});
+  const currentLineups = filteredLineups.lineups.sort((lA, lB) => lB.totalTime - lA.totalTime);
   return (
     <>
         <h1 className="lineup-game-label">{nameFromId(currentGame)}</h1>
@@ -84,7 +91,7 @@ export default function Lineups() {
               onChange={onPlayerChange}
             />
             {filterPlayers.length < 1 && <h4 className="lineups__totals">{`Total Lineups: ${Object.keys(lineupData.lineups).length}`}</h4>}
-            <LineupTable lineups={currentLineups} filterPlayers={filterPlayers}/>
+            <LineupTable summary={filteredLineups.summary} lineups={currentLineups} filterPlayers={filterPlayers}/>
           </div>
         )}
     </>

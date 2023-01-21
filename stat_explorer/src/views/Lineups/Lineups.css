@@ -64,3 +64,44 @@
 .lineup-stints-container.lineup-stints-container--open {
   max-height: 10rem;
 }
+
+.lineup-summary > .stint-list {
+  display: flex;
+}
+
+.lineup-summary__stints-label {
+  font-size: 0.85rem;
+  color: var(--secondary-text);
+}
+
+.lineup-table__count__label {
+  visibility: hidden;
+  width: 0;
+  position: absolute;
+}
+
+.lineup-table__count__label.lineup-table__count__label--open {
+  visibility: visible;
+  width: auto;
+  position: unset;
+}
+
+.lineup-table__count__btn {
+  color: var(--secondary-text);
+  font-size: 0.6rem;
+  cursor: pointer;
+}
+
+.material-symbols-sharp.lineup-table__count__icon {
+  font-size: 16px;
+  padding-top: 2px;
+}
+
+.lineup-table__count__btn:hover > .lineup-table__count__label {
+  visibility: visible;
+  width: 96px;
+}
+
+.lineup-table__count__btn:hover > .lineup-table__count__label.lineup-table__count__label--open {
+  width: auto;
+}

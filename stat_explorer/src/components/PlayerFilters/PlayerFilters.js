@@ -6,7 +6,12 @@ import './PlayerFilters.css';
 export default function PlayerFilters({ players, filterPlayers, onChange, delimiter=','}) {
   function getCheckboxHandler(player) {
     return () => {
-      if (onChange) {
+      const playerIsFiltered = filterPlayers.includes(player);
+      if (onChange && playerIsFiltered) {
+        onChange(player);
+        return;
+      }
+      if (onChange && filterPlayers.length < 5) {
         onChange(player);
       }
     };

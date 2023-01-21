@@ -117,7 +117,7 @@ const games = [
     name: "Santa Clara (A)",
     imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/school_logo_detail_page_0.png?itok=rmpq8YAE",
     id: "1300216",
-    path: "santa-clara-a"
+    path: "santa-clara-a",
   }
 ];
 
@@ -143,6 +143,14 @@ export const gameNameToUrl = {
     "Pepperdine": "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/pepp_0.png?itok=lc3Z2_eL",
     "Santa Clara (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/school_logo_detail_page_0.png?itok=rmpq8YAE", 
 };
+
+export function gameFromId (gameId) {
+  const game = games.find(g => g.id === gameId);
+  if (game) {
+    return game;
+  }
+  return undefined;
+}
 
 export function nameFromId (gameId) {
   const game = games.find(g => g.id === gameId);

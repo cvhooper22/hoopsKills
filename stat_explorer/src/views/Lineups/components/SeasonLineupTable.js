@@ -1,10 +1,12 @@
 import React from 'react';
 import SeasonLineupRow from './SeasonLineupRow';
 import { getLineupHash } from '../../../utils/lineupUtils';
+import { namesToReadable } from '../../../utils/playerLineupUtils';
 
 export default function LineupTable ({lineups, filterPlayers}) {
   function renderFilterCount () {
-    const filteredPlayersString = filterPlayers.toString();
+    const names = namesToReadable(filterPlayers);
+    const filteredPlayersString = names.join(', ');
     return <h4 className='lineup-table__count'>{`${lineups.length} lineup(s) containing: ${filteredPlayersString}`}</h4>
   }
   return (

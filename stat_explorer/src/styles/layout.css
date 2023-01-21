@@ -85,6 +85,10 @@
   margin-right: 1.5rem;
 }
 
+.ml-xs {
+  margin-left: var(--xs);
+}
+
 .ml-s {
   margin-left: var(--s);
 }
