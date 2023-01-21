@@ -52,6 +52,8 @@ export default function SeasonLineupRow ({lineup}) {
                 gameClass.push('game--away')
               }
               const url = gameNameToUrl[s.name];
+              console.log('game name', `***${s.name}***`);
+              console.log('\turl', url);
               return (
                 <div className={gameClass.join(' ')} key={`${hash}${s.name}`}>
                   <div className="game__img-container mr-xs"><img src={url} className='game__logo' title={s.name} alt={`Logo for ${s.name}`}/></div>

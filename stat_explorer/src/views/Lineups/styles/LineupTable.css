@@ -54,3 +54,17 @@
   background-color: var(--error-3);
   font-weight: bold;
 }
+
+.lineup-summary {
+  font-size: 0.9rem;
+}
+
+.lineup-summary__stat {
+  margin-left: var(--s);
+  margin-right: var(--s);
+}
+
+.lineup-summary__stat__label {
+  font-weight: 600;
+  margin-right: var(--s);
+}

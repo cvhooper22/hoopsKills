@@ -119,7 +119,7 @@ function collectSubs(plays, startIndex) {
     currPlayIdx = currPlayIdx + 1;
   }
   return {
-    lastSubIndex: currPlayIdx,
+    lastSubIndex: currPlayIdx - 1,
     subs: {
       in: subIns,
       out: subOuts
@@ -190,6 +190,7 @@ function parseHalf(plays, lineupData, halfIndex, numHalves) {
         updateStint.end = timeToNumber(play.time, halfIndex);
         updateStint.endScore = getUpdatedScore(lineupData.gameScore);
         updateStint.net = getNetForStint(updateStint);
+        const nextStintIndex = updateStint.gameIndex + 1;
         // console.log('their new hash is', newHash);
         lineupData.currentLineup = newLineup;
         if (!lineupData.lineups[newHash]) {
@@ -197,6 +198,7 @@ function parseHalf(plays, lineupData, halfIndex, numHalves) {
             names: newLineup,
             stints: [
               {
+                gameIndex: nextStintIndex,
                 start: timeToNumber(play.time, halfIndex),
                 startScore: getUpdatedScore(lineupData.gameScore),
               }
@@ -204,7 +206,7 @@ function parseHalf(plays, lineupData, halfIndex, numHalves) {
           };
         } else {
           // console.log('\nnew start of lineup, the play, ', play);
-          lineupData.lineups[newHash].stints.push({ start: timeToNumber(play.time, halfIndex), startScore: getUpdatedScore(lineupData.gameScore), });
+          lineupData.lineups[newHash].stints.push({ gameIndex: nextStintIndex, start: timeToNumber(play.time, halfIndex), startScore: getUpdatedScore(lineupData.gameScore), });
         }
         skipIndex = subData.lastSubIndex;
       }
@@ -248,6 +250,7 @@ const generateLineupData = (game) => {
         names: starterNames,
         stints: [
           {
+            gameIndex: 0,
             start: 0,
             startScore: {
               teamScore: 0,

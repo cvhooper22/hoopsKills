@@ -6,13 +6,14 @@ import LineupTable from "./components/LineupTable";
 import YBallLoader from "../../components/Loaders/YBballLoader";
 import GameSelector from "../../components/GameSelector/GameSelector";
 import { nameFromId } from '../../constants/games';
+import { condenseStints } from "../../utils/playerLineupUtils";
 
 export default function Lineups() {
   const [lineupData, setLineupData] = useState({
     lineups: {},
     starterHash: ""
   });
-  const [currentGame, setCurrentGame] = useState("1300215");
+  const [currentGame, setCurrentGame] = useState("1300216");
   const [players, setPlayers] = useState([]);
   const [filterPlayers, setFilterPlayers] = useState([]);
   const [err, setErr] = useState("");
@@ -69,6 +70,8 @@ export default function Lineups() {
   }, []);
   const currentLineups = filteredLineups.sort((lA, lB) => lB.totalTime - lA.totalTime);
   const loading = Object.keys(lineupData.lineups).length === 0 && !err;
+  const condensedStints = currentLineups.length > 1 ? condenseStints(currentLineups) : [];
+  console.log('condensedStints: ', condensedStints);
   return (
     <div className="lineups flex">
       <GameSelector onGameClick={handleGameChange} currentGame={currentGame}/>
