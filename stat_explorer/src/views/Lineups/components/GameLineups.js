@@ -15,7 +15,7 @@ export default function Lineups() {
   });
   const [loading, setLoading] = useState(true);
   const initialId = idFromPath(name);
-  const [currentGame, setCurrentGame] = useState(initialId ?? "1300215");
+  const [currentGame, setCurrentGame] = useState(initialId ?? "1300217");
   const [players, setPlayers] = useState([]);
   const [filterPlayers, setFilterPlayers] = useState([]);
 
