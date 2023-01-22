@@ -100,6 +100,12 @@ exports.default = [
     imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/school_logo_detail_page_0.png?itok=rmpq8YAE",
     id: "1300216",
     path: "santa-clara"
+  },
+  {
+    name: "San Francisco (A)",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/usf_0.png?itok=eH1z_OPe",
+    id: "1300217",
+    path: "san-fran-a",
   }
 ];
 
