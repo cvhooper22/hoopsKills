@@ -121,8 +121,20 @@
   margin-top: 0.5rem;
 }
 
+.mb-xs {
+  margin-bottom: var(--xs);
+}
+
 .mb-s {
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--s);
+}
+
+.mb-m {
+  margin-bottom: var(--m);
+}
+
+.mb-l {
+  margin-bottom: var(--l);
 }
 
 .p-s {

@@ -1,67 +1,29 @@
-import generateLineupData from "../utils/lineupUtils";
-import games from "../constants/games";
-import urls from "../constants/assetUrls";
+import { makeSortAscByKey } from "./lineupSorters";
+import { gameFromName } from "../constants/games";
 
-/*
-Season Lineup Data
-{ [lineupHash]: { 
-    names: string[],
-    totalMinutes: int,
-    totalNet: int,
-    games: string[]
-  }
-}
-
-Game Data
-{
-  id: string,
-  name: string,
-  oppScore: int,
-  teamScore: int,
-}
-*/
-
-function updateSeasonData (seasonLineupData, gameData, gameName) {
-  const lineupHashes = Object.keys(gameData);
-  lineupHashes.forEach(hash => {
-    const gameLineup = gameLineups[hash];
-    let seasonLineup = seasonLineupData[hash];
-    if (!seasonLineup) {
-      seasonLineup[hash] = {
-        names: gameLineup.names,
-        totalMinutes: gameLineup.totalTime,
-        totalNet: gameLineup.totalNet,
-        games: [gameName],
-      };
-      return;
+export function aggregateGamesForLineups (lineups) {
+  const lineupGames = lineups.reduce((games, l) => {
+    const updatedGames = [...games];
+    l.games.forEach(g => {
+      const existingGameIndex = updatedGames.findIndex(existing => existing.name === g.name);
+      if (existingGameIndex < 0) {
+        updatedGames.push(g);
+      } else {
+        const updatedGame = {...updatedGames[existingGameIndex]};
+        updatedGame.net = updatedGame.net + g.net;
+        updatedGames[existingGameIndex] = updatedGame;
+      }
+    });
+    return updatedGames;
+  }, []);
+  const gamesWithOrder = lineupGames.map(g => {
+    const gameData = gameFromName(g.name);
+    return {
+      ...g,
+      order: gameData.order,
     }
-    const updatedSeasonLineup = {
-      ...seasonLineup,
-      totalMinutes: seasonLineup.totalMinutes + gameLineup.totalTime,
-      totalNet: seasonLineup.totalNet + gameLineup.totalNet,
-    };
-    updatedSeasonLineup.games.push(gameName);
   });
+  const sortByOrder = makeSortAscByKey('order');
+  const sortedGames = gamesWithOrder.sort(sortByOrder);
+  return sortedGames;
 }
-
-async function generateSeasonLineupData () {
-  const seasonLineupData = {};
-  const demoGames = games.slice(0,3);
-  for (let idx = 0; idx < demoGames.length; idx++) {
-    try {
-      const resp = await fetch(`${urls.gameBoxScore}${g.id}`);
-      const data = resp.json;
-      const lineups = generateLineupData(data[0].bbgame);
-      const opponent = data[0].bbgame.team.find(t => t.id !== 'BYU');
-      const location = opponent.vh === 'H' ? ' (A)' : '';
-      updateSeasonData(seasonLineupData, lineups, `${opponent.name}${location}`);
-    } catch(err) {
-        console.error(`Error fetching game info for ${g.name}: ${err.toString()}`);
-    };
-  };
-  return seasonLineupData;
-}
-
-const data = generateSeasonLineupData();
-console.log('Finished');
-console.log(data);

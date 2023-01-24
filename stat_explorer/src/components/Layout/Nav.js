@@ -18,7 +18,7 @@ export default function Nav ({ options = [], onOptionClick}) {
       <ul className='flex-aic'>
         {
           options.map((opt) => {
-            let isCurrent = pathname.includes(opt.route);
+            let isCurrent = pathname.includes(opt.routeRoot ?? opt.route);
             if (opt.route === '/') {
               isCurrent = pathname === opt.route;
             }

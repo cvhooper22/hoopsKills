@@ -1,5 +1,6 @@
 .game {
     filter: opacity(0.85);
+    padding-top: var(--s);
 }
 
 .game__net--neg {
