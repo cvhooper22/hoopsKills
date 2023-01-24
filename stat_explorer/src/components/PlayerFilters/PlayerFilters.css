@@ -8,7 +8,8 @@
   width: 50px;
   position: relative;
   cursor: pointer;
-  margin: 0 0.5rem;
+  margin: var(--s);
+  margin-bottom: 0;
 }
 
 .player > img {

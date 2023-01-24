@@ -1,10 +1,6 @@
 import React from 'react';
 
 export default function BlockFace ({width, height, lineColor, fillColor, className}) {
-  console.log('lineColor', lineColor);
-  console.log('fillColor', fillColor);
-  console.log('computed lineColor', lineColor ?? "white");
-  console.log('computed fillColor', fillColor ?? "003fa2");
   return (
     <svg
       id="block-cougar-face"

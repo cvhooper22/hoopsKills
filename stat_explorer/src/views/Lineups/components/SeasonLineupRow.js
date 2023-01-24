@@ -33,8 +33,8 @@ export default function SeasonLineupRow ({lineup}) {
           <span className="trigger-text mr-s">{`${showGgames ? 'Hide' : 'View'} Games`}</span>
           <div className={`trigger${showGgames ? ' trigger--open' : ''}`} />
         </div>
-        <div className={`flex-c lineup-stints-container${showGgames ? ' lineup-stints-container--open py-s mt-s' : ''}`}>
-          <div className="lineup-games flex-jce mt-s">
+        <div className={`flex-c lineup-stints-container${showGgames ? ' lineup-stints-container--open pb-s mt-s' : ''}`}>
+          <div className="lineup-games flex-jce">
             {lineup.games.map((s, idx) => {
               const gameNetClass = ['game__net'];
               if (s.net !== 0) {

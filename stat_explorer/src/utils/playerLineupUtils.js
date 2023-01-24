@@ -46,7 +46,7 @@ export function namesToReadable(names) {
     return readableNames;
 }
 
-export function getStintsLabel(playerArr) {
+export function getStintsLabel(playerArr, altLabel) {
     let label = ''
     const labelForCount = {
         2: 'both players',
@@ -64,5 +64,5 @@ export function getStintsLabel(playerArr) {
         const readable = namesToReadable(playerArr);
         playerString = readable[0];
     }
-    return `Stints with ${playerString} on the court`;
+    return `${altLabel ?? 'Stints'} with ${playerString} on the court`;
 }
