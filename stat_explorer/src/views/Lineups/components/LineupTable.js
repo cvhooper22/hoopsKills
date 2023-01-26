@@ -4,8 +4,10 @@ import { getLineupHash } from '../../../utils/lineupUtils';
 import { condenseStints, namesToReadable, getStintsLabel } from '../../../utils/playerLineupUtils';
 import LineupStints from './LineupStints';
 import Net from '../../../components/Net/Net';
+import SortableHeader from '../../../components/SortableHeader/SortableHeader';
+import { GAME_SORT_KEYS } from '../../../utils/gameLineupSorters';
 
-export default function LineupTable ({lineups, filterPlayers, summary}) {
+export default function LineupTable ({lineups, filterPlayers, summary, onSortClick, currSortKey, currSortDir}) {
   const [showSummary, setShowSummary] = useState(false);
   function handleToggleShow () {
     setShowSummary(!showSummary);
@@ -71,11 +73,39 @@ export default function LineupTable ({lineups, filterPlayers, summary}) {
           <div className='circle-badge ender-badge mr-xs'>E</div>
           <span className="lineup-table__legend__text">- End of game lineup</span>
         </div>
-        <div className='lineup-table__headers py-m flex-aic'>
-          <div className='lr--lineup lineup-header'>Lineup</div>
-          <div className='lr--time lineup-header f1'>Total Time</div>
-          <div className='lr--stint-count lineup-header f1'>Times Seen</div>
-          <div className='lr--net lineup-header f1'>+ / -</div>
+        <div className='lineup-table__headers flex-aic'>
+          <SortableHeader 
+            classes='lr--lineup lineup-header'
+            sortDirection={currSortKey === GAME_SORT_KEYS.NAME ? currSortDir : ''}
+            sortKey={GAME_SORT_KEYS.NAME}
+            onHeaderClick={onSortClick}
+          >
+              Lineup
+          </SortableHeader>
+          <SortableHeader 
+            classes='lr--time lineup-header f1'
+            sortDirection={currSortKey === GAME_SORT_KEYS.MINS ? currSortDir : ''}
+            sortKey={GAME_SORT_KEYS.MINS}
+            onHeaderClick={onSortClick}
+          >
+              Total Time
+          </SortableHeader>
+          <SortableHeader 
+            classes='lr--stint-count lineup-header f1'
+            sortDirection={currSortKey === GAME_SORT_KEYS.SEEN ? currSortDir : ''}
+            sortKey={GAME_SORT_KEYS.SEEN}
+            onHeaderClick={onSortClick}
+          >
+              Times Seen
+          </SortableHeader>
+          <SortableHeader 
+            classes='lr--net lineup-header f1'
+            sortDirection={currSortKey === GAME_SORT_KEYS.NET ? currSortDir : ''}
+            sortKey={GAME_SORT_KEYS.NET}
+            onHeaderClick={onSortClick}
+          >
+              + / -
+          </SortableHeader>
         </div>
         <div className='lineup-table__body f1-scroll'>
           {
