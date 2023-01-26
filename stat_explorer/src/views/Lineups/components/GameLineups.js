@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import genLineupData from "../../../utils/lineupUtils";
 import PlayerFilters from "../../../components/PlayerFilters/PlayerFilters";
@@ -6,6 +6,9 @@ import "../Lineups.css";
 import LineupTable from "./LineupTable";
 import YBallLoader from "../../../components/Loaders/YBballLoader";
 import { nameFromId, idFromPath } from '../../../constants/games';
+import { GAME_CUSTOM_SORTERS, GAME_SORT_KEYS } from "../../../utils/gameLineupSorters";
+import { SORT_KEYS } from "../../../constants/sorting";
+import { makeSortAscByKey, makeSortDescByKey } from "../../../utils/lineupSorters";
 
 export default function Lineups() {
   const {name} = useParams();
@@ -14,6 +17,7 @@ export default function Lineups() {
     starterHash: ""
   });
   const [loading, setLoading] = useState(true);
+  const [currSort, setCurrSort] = useState({key: GAME_SORT_KEYS.NET, direction: SORT_KEYS.DESC});
   const initialId = idFromPath(name);
   const [currentGame, setCurrentGame] = useState(initialId ?? "1300217");
   const [players, setPlayers] = useState([]);
@@ -29,6 +33,13 @@ export default function Lineups() {
     }
     setFilterPlayers(newFilters);
   }
+
+  function handleSortClick(newKey, newDir) {
+    setCurrSort({
+      key: newDir.length ? newKey : '',
+      direction: newDir
+    })
+  };
 
   useEffect(() => {
     const newGameId = idFromPath(name);
@@ -57,41 +68,64 @@ export default function Lineups() {
       });
   }, [currentGame]);
 
-  const currentLineupKeys = Object.keys(lineupData.lineups).sort();
-  const filteredLineups = currentLineupKeys.reduce((agg, key) => {
-    const lineup = lineupData.lineups[key];
-    let include = true;
-    if (filterPlayers.length) {
-      include = filterPlayers.every((p) => lineup.names.includes(p));
-    }
-    if (include) {
-      agg.lineups.push(lineup);
-      if (filterPlayers.length) {
-        agg.summary.net = agg.summary.net + lineup.totalNet;
-        agg.summary.mins = agg.summary.mins + lineup.totalTime;
-        if (lineup.totalNet > agg.summary.maxNet) {
-            agg.summary.maxNet = lineup.totalNet;
-        } else if (lineup.totalNet < agg.summary.minNet) {
-            agg.summary.minNet = lineup.totalNet;
+  const lineupCount = Object.keys(lineupData).length;
+  const currentLineupData = useMemo(() => {
+    const currentLineupKeys = Object.keys(lineupData.lineups).sort();
+    const filteredLineupData = currentLineupKeys.reduce((agg, key) => {
+        const lineup = lineupData.lineups[key];
+        let include = true;
+        if (filterPlayers.length) {
+          include = filterPlayers.every((p) => lineup.names.includes(p));
         }
+        if (include) {
+          agg.lineups.push(lineup);
+          if (filterPlayers.length) {
+            agg.summary.net = agg.summary.net + lineup.totalNet;
+            agg.summary.mins = agg.summary.mins + lineup.totalTime;
+            if (lineup.totalNet > agg.summary.maxNet) {
+                agg.summary.maxNet = lineup.totalNet;
+            } else if (lineup.totalNet < agg.summary.minNet) {
+                agg.summary.minNet = lineup.totalNet;
+            }
+          }
+        }
+        return agg;
+      }, { lineups: [], summary: { net: 0, mins: 0, maxNet: 0, minNet: 300}});
+    let sortedLineups = filteredLineupData.lineups;
+    if (currSort.key) {
+      const sortConfig = GAME_CUSTOM_SORTERS[currSort.key];
+      let sortLineups = [...sortedLineups];
+      if (sortConfig?.dataMapper) {
+        sortLineups = sortLineups.map(sortConfig.dataMapper);
       }
+      const sorter = currSort.direction === SORT_KEYS.ASC ? makeSortAscByKey(currSort.key) : makeSortDescByKey(currSort.key);
+      sortedLineups = sortLineups.sort(sorter);
     }
-    return agg;
-  }, { lineups: [], summary: { net: 0, mins: 0, maxNet: 0, minNet: 300}});
-  const currentLineups = filteredLineups.lineups.sort((lA, lB) => lB.totalTime - lA.totalTime);
+    return {
+      lineups: sortedLineups,
+      summary: filteredLineupData.summary,
+    };
+  }, [filterPlayers.length, lineupCount, currSort.key, currSort.direction]);
   return (
     <>
         <h1 className="lineup-game-label">{nameFromId(currentGame)}</h1>
         {loading && <YBallLoader />}
-        {!loading && !!Object.keys(lineupData.lineups).length && (
+        {!loading && (
           <div className="f1-hide flex-c">
             <PlayerFilters
               players={players}
               filterPlayers={filterPlayers}
               onChange={onPlayerChange}
             />
-            {filterPlayers.length < 1 && <h4 className="lineups__totals">{`Total Lineups: ${Object.keys(lineupData.lineups).length}`}</h4>}
-            <LineupTable summary={filteredLineups.summary} lineups={currentLineups} filterPlayers={filterPlayers}/>
+            {filterPlayers.length < 1 && <h4 className="lineups__totals">{`Total Lineups: ${currentLineupData.lineups.length}`}</h4>}
+            <LineupTable
+                summary={currentLineupData.summary}
+                lineups={currentLineupData.lineups}
+                filterPlayers={filterPlayers}
+                onSortClick={handleSortClick}
+                currSortKey={currSort.key}
+                currSortDir={currSort.direction}
+            />
           </div>
         )}
     </>

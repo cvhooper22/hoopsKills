@@ -6,8 +6,10 @@ import { aggregateGamesForLineups } from '../../../utils/seasonLineups';
 import { gameNameToUrl } from '../../../constants/games';
 import LineupSummary from './LineupSummary';
 import Net from '../../../components/Net/Net';
+import SortableHeader from '../../../components/SortableHeader/SortableHeader';
+import { SEASON_SORT_KEYS } from '../../../utils/seasonLineupSorters';
 
-export default function LineupTable ({lineups, filterPlayers,summary}) {
+export default function LineupTable ({lineups, filterPlayers,summary, onSortClick, currSortKey, currSortDir}) {
   const [showSummary, setShowSummary] = useState(false);
 
   function handleToggleShow () {
@@ -78,16 +80,44 @@ export default function LineupTable ({lineups, filterPlayers,summary}) {
       </div>
     );
   }
-
+  
   return (
     <div className='lineup-table f1-hide flex-c'>
         {!!filterPlayers?.length && renderFilterCount()}
         {!!filterPlayers?.length && renderFilteredSummary()}
-        <div className='lineup-table__headers py-m flex-aic'>
-          <div className='lr--lineup lineup-header'>Lineup</div>
-          <div className='lr--time lineup-header f1'>Total Time</div>
-          <div className='lr--stint-count lineup-header f1'>Min / g</div>
-          <div className='lr--net lineup-header f1'>+ / -</div>
+        <div className='lineup-table__headers flex-aic'>
+          <SortableHeader 
+            classes='lr--lineup lineup-header'
+            sortDirection={currSortKey === SEASON_SORT_KEYS.NAME ? currSortDir : ''}
+            sortKey={SEASON_SORT_KEYS.NAME}
+            onHeaderClick={onSortClick}
+          >
+              Lineup
+          </SortableHeader>
+          <SortableHeader 
+            classes='lr--time lineup-header f1'
+            sortDirection={currSortKey === SEASON_SORT_KEYS.MINS ? currSortDir : ''}
+            sortKey={SEASON_SORT_KEYS.MINS}
+            onHeaderClick={onSortClick}
+          >
+              Total Time
+          </SortableHeader>
+          <SortableHeader 
+            classes='lr--stint-count lineup-header f1'
+            sortDirection={currSortKey === SEASON_SORT_KEYS.AVG ? currSortDir : ''}
+            sortKey={SEASON_SORT_KEYS.AVG}
+            onHeaderClick={onSortClick}
+          >
+              Min / g
+          </SortableHeader>
+          <SortableHeader 
+            classes='lr--net lineup-header f1'
+            sortDirection={currSortKey === SEASON_SORT_KEYS.NET ? currSortDir : ''}
+            sortKey={SEASON_SORT_KEYS.NET}
+            onHeaderClick={onSortClick}
+          >
+              + / -
+          </SortableHeader>
         </div>
         <div className='lineup-table__body f1-scroll'>
           {

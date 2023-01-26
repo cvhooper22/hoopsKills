@@ -1,3 +1,11 @@
+.lineup-table__headers {
+    border: 1px solid var(--blue-stop-3);
+}
+
+.lineup-header {
+    padding: var(--m) 0 var(--m) 0;
+}
+
 .game {
     filter: opacity(0.85);
     padding-top: var(--s);

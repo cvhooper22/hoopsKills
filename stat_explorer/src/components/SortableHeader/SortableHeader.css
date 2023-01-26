@@ -1,0 +1,19 @@
+.sort-header {
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    cursor: pointer;
+}
+
+.sort-header:hover {
+    background-color: #004ead;
+}
+
+.sort-header.sort--asc {
+    border-bottom-color: white;
+    background-color: #004ead;
+}
+
+.sort-header.sort--desc {
+    border-top-color: white;
+    background-color: #004ead;
+}
