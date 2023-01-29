@@ -64,6 +64,8 @@ export default function Lineups() {
         setLoading(false);
       })
       .catch((err) => {
+        setLoading(false);
+        setLineupData({...lineupData, error: true});
         console.error(err);
       });
   }, [currentGame]);
@@ -110,7 +112,8 @@ export default function Lineups() {
     <>
         <h1 className="lineup-game-label">{nameFromId(currentGame)}</h1>
         {loading && <YBallLoader />}
-        {!loading && (
+        { !loading && lineupData.error && <div className="mt-l">There was an error fetching the play by play data</div>}
+        {!loading && !lineupData.error && (
           <div className="f1-hide flex-c">
             <PlayerFilters
               players={players}
