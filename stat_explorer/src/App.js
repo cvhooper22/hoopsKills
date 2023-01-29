@@ -4,8 +4,10 @@ import Header from './components/Layout/Header';
 import Nav from "./components/Layout/Nav";
 // import Lineups from "./views/Lineups/Lineups";
 import LineupRouter from "./views/Lineups/LineupRouter";
+import ClutchRouter from './views/Clutch/ClutchRouter';
 import GameLineups from './views/Lineups/components/GameLineups';
 import SeasonLineups from "./views/Lineups/components/SeasonLineups";
+import GameClutch from './views/Clutch/components/GameClutch';
 import Home from "./views/Home/Home";
 import { views } from './constants/views';
 
@@ -27,6 +29,10 @@ export default function App() {
             <Route index element={<GameLineups />} />
             <Route path=":name" element={<GameLineups />} />
             <Route path="season" element={<SeasonLineups /> } />
+          </Route>
+          <Route path="clutch" element={<ClutchRouter />}>
+            <Route index element={<GameClutch />} />
+            <Route path=":name" element={<GameClutch />} />
           </Route>
           <Route path="*" element={<Home />} />
         </Routes>
