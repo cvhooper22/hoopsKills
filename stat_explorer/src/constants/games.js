@@ -145,6 +145,13 @@ const games = [
     id: "1300217",
     path: "san-fran-a",
     order: 21,
+  },
+  {
+    name: "Saint Mary's",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/SaintMarys_Primary.png?itok=z_9PneIT",
+    id: "1300218",
+    path: "smc",
+    order: 22,
   }
 ];
 
@@ -170,6 +177,7 @@ export const gameNameToUrl = {
     "Pepperdine": "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/pepp_0.png?itok=lc3Z2_eL",
     "Santa Clara (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/school_logo_detail_page_0.png?itok=rmpq8YAE", 
     "San Francisco (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/usf_0.png?itok=eH1z_OPe",
+    "Saint Mary's": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/SaintMarys_Primary.png?itok=z_9PneIT",
 };
 
 export function gameFromId (gameId) {

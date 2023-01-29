@@ -106,6 +106,12 @@ exports.default = [
     imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/usf_0.png?itok=eH1z_OPe",
     id: "1300217",
     path: "san-fran-a",
+  },
+  {
+    name: "Saint Mary's",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/SaintMarys_Primary.png?itok=z_9PneIT",
+    id: "1300218",
+    path: "smc",
   }
 ];
 
