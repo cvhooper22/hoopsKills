@@ -36,6 +36,7 @@ function updateSeasonData (seasonLineupData, gameData, gameName) {
         games: [{
           name: gameName,
           net: gameLineup.totalNet,
+          mins: gameLineup.totalTime,
         }],
       };
       return;
@@ -45,7 +46,7 @@ function updateSeasonData (seasonLineupData, gameData, gameName) {
       totalMinutes: seasonLineup.totalMinutes + gameLineup.totalTime,
       totalNet: seasonLineup.totalNet + gameLineup.totalNet,
     };
-    updatedSeasonLineup.games.push({name: gameName, net: gameLineup.totalNet});
+    updatedSeasonLineup.games.push({name: gameName, net: gameLineup.totalNet, mins: gameLineup.totalTime});
     seasonLineupData[hash] = updatedSeasonLineup;
   });
   // console.log('end of updateSeasonData', Object.keys(seasonLineupData).length);
@@ -80,7 +81,7 @@ async function doTheThing () {
   const data = await generateSeasonLineupData();
   // console.log('data', data);
   const dataString = JSON.stringify(data);
-  fs.writeFile('./data/seasonLineups.json', dataString, 'utf8', (arg1) => {
+  fs.writeFile('./data/seasonLineupsFULL.json', dataString, 'utf8', (arg1) => {
     console.log('write done arg is', arg1);
   });
 }

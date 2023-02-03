@@ -43,6 +43,7 @@ function updateSeasonData (seasonLineupData, gameData, gameName) {
         games: [{
           name: gameName,
           net: gameLineup.totalNet,
+          mins: gameLineup.totalTime,
         }],
       };
       return;
@@ -52,7 +53,7 @@ function updateSeasonData (seasonLineupData, gameData, gameName) {
       totalMinutes: seasonLineup.totalMinutes + gameLineup.totalTime,
       totalNet: seasonLineup.totalNet + gameLineup.totalNet,
     };
-    updatedSeasonLineup.games.push({name: gameName, net: gameLineup.totalNet});
+    updatedSeasonLineup.games.push({name: gameName, net: gameLineup.totalNet, mins: gameLineup.totalTime});
     seasonLineupData[hash] = updatedSeasonLineup;
   });
   // console.log('end of updateSeasonData', Object.keys(seasonLineupData).length);

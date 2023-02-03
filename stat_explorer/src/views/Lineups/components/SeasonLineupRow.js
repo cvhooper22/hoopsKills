@@ -54,7 +54,7 @@ export default function SeasonLineupRow ({lineup}) {
               const url = gameNameToUrl[s.name];
               return (
                 <div className={gameClass.join(' ')} key={`${hash}${s.name}`}>
-                  <div className="game__img-container mr-xs"><img src={url} className='game__logo' title={s.name} alt={`Logo for ${s.name}`}/></div>
+                  <div className="game__img-container mr-xs"><img src={url} className='game__logo' title={`${s.name} - ${s.mins ? s.mins.toFixed(2) : ''}`} alt={`Logo for ${s.name}`}/></div>
                   <span className={gameNetClass.join(' ')}>{s.net}</span>
                 </div>
               );
