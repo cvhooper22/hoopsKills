@@ -112,7 +112,12 @@ exports.default = [
     imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/SaintMarys_Primary.png?itok=z_9PneIT",
     id: "1300218",
     path: "smc",
-  }
+  },
+  {
+    name: "Loyola Marymount",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/LMU_Primary.png?itok=qoTvDhkP",
+    id: "1300219",
+  },
 ];
 
 exports.nameFromId = function nameFromId (gameId) {
