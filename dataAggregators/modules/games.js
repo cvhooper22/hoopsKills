@@ -118,6 +118,11 @@ exports.default = [
     imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/LMU_Primary.png?itok=qoTvDhkP",
     id: "1300219",
   },
+  {
+    name: "Pacific",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/Pacific_Primary.png?itok=N0uI2x4p",
+    id: "1300220"
+  },
 ];
 
 exports.nameFromId = function nameFromId (gameId) {

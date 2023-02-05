@@ -9,7 +9,7 @@ const views = [
     },
     {
       title: LINEUP_VIEW,
-      route: '/lineups/lmu',
+      route: '/lineups/pacific',
       routeRoot: '/lineups',
     },
     {
