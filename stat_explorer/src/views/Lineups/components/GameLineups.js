@@ -46,6 +46,10 @@ export default function Lineups() {
     if (newGameId !== currentGame) {
         setLoading(true);
         setCurrentGame(newGameId);
+        setLineupData({
+          lineups: {},
+          starterHash: ""
+        });
     }
   }, [name, currentGame]);
 

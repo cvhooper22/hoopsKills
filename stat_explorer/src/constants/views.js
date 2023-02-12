@@ -9,7 +9,7 @@ const views = [
     },
     {
       title: LINEUP_VIEW,
-      route: '/lineups/pacific',
+      route: '/lineups/gonzaga-a',
       routeRoot: '/lineups',
     },
     {

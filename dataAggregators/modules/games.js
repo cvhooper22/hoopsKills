@@ -123,6 +123,16 @@ exports.default = [
     imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/Pacific_Primary.png?itok=N0uI2x4p",
     id: "1300220"
   },
+  {
+    name: "Pepperdine (A)",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/pepp_0.png?itok=lc3Z2_eL",
+    id: "1300221",
+  },
+  {
+    name: "Gonzaga (A)",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/pepp_0.png?itok=lc3Z2_eL",
+    id: "1300222",
+  },
 ];
 
 exports.nameFromId = function nameFromId (gameId) {
