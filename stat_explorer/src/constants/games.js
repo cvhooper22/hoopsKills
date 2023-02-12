@@ -167,6 +167,20 @@ const games = [
     path: "pacific",
     order: 24,
   },
+  {
+    name: "Pepperdine (A)",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/pepp_0.png?itok=lc3Z2_eL",
+    id: "1300221",
+    path: "pepp-a",
+    order: 25,
+  },
+  {
+    name: "Gonzaga (A)",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/Gonzaga_Primary.png?itok=LcpDQizp",
+    id: "1300222",
+    path: "gonzaga-a",
+    order: 26,
+  },
 ];
 
 export const gameNameToUrl = {
@@ -194,6 +208,8 @@ export const gameNameToUrl = {
     "Saint Mary's": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/SaintMarys_Primary.png?itok=z_9PneIT",
     "Loyola Marymount": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/LMU_Primary.png?itok=qoTvDhkP",
     "Pacific": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/Pacific_Primary.png?itok=N0uI2x4p",
+    "Pepperdine (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/pepp_0.png?itok=lc3Z2_eL",
+    "Gonzaga (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/Gonzaga_Primary.png?itok=LcpDQizp",
 };
 
 export function gameFromId (gameId) {
