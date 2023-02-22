@@ -5,11 +5,11 @@ const generateLineupData = lineupUtils.generateLineupData;
 const { default: urls } = require("./modules/assetUrls");
 
 const gameAddData = {
-  name: "Gonzaga (A)",
-  imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/Gonzaga_Primary.png?itok=LcpDQizp",
-  id: "1300222",
-  path: "gonzaga-a",
-  order: 26,
+  name: "Saint Mary's (A)",
+  imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/SaintMarys_Primary.png?itok=z_9PneIT",
+  id: "1300224",
+  path: "smc-a",
+  order: 28,
 };
 
 /*
