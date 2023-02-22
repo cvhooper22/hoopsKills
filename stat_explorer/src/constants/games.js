@@ -181,6 +181,20 @@ const games = [
     path: "gonzaga-a",
     order: 26,
   },
+  {
+    name: "Santa Clara",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/school_logo_detail_page_0.png?itok=rmpq8YAE",
+    id: "1300223",
+    path: "santa-clara",
+    order: 27,
+  },
+  {
+    name: "Saint Mary's (A)",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/SaintMarys_Primary.png?itok=z_9PneIT",
+    id: "1300224",
+    path: "smc-a",
+    order: 28,
+  },
 ];
 
 export const gameNameToUrl = {
@@ -203,9 +217,11 @@ export const gameNameToUrl = {
     "San Diego (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/USD_0.png?itok=fAaWm7y6",
     "Gonzaga": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/Gonzaga_Primary.png?itok=LcpDQizp",
     "Pepperdine": "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/pepp_0.png?itok=lc3Z2_eL",
-    "Santa Clara (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/school_logo_detail_page_0.png?itok=rmpq8YAE", 
+    "Santa Clara (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/school_logo_detail_page_0.png?itok=rmpq8YAE",
+    "Santa Clara": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/school_logo_detail_page_0.png?itok=rmpq8YAE",
     "San Francisco (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/usf_0.png?itok=eH1z_OPe",
     "Saint Mary's": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/SaintMarys_Primary.png?itok=z_9PneIT",
+    "Saint Mary's (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/SaintMarys_Primary.png?itok=z_9PneIT",
     "Loyola Marymount": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/LMU_Primary.png?itok=qoTvDhkP",
     "Pacific": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/Pacific_Primary.png?itok=N0uI2x4p",
     "Pepperdine (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/pepp_0.png?itok=lc3Z2_eL",

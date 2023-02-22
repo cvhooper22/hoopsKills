@@ -133,6 +133,16 @@ exports.default = [
     imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/pepp_0.png?itok=lc3Z2_eL",
     id: "1300222",
   },
+  {
+    name: "Santa Clara",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/school_logo_detail_page_0.png?itok=rmpq8YAE",
+    id: "1300223",
+  },
+  {
+    name: "Saint Mary's (A)",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/SaintMarys_Primary.png?itok=z_9PneIT",
+    path: "smc-a",
+  },
 ];
 
 exports.nameFromId = function nameFromId (gameId) {
