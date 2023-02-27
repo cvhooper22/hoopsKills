@@ -195,6 +195,13 @@ const games = [
     path: "smc-a",
     order: 28,
   },
+  {
+    name: "San Francisco",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/usf_0.png?itok=eH1z_OPe",
+    id: "1300225",
+    path: "san-fran",
+    order: 29,
+  },
 ];
 
 export const gameNameToUrl = {
@@ -220,6 +227,7 @@ export const gameNameToUrl = {
     "Santa Clara (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/school_logo_detail_page_0.png?itok=rmpq8YAE",
     "Santa Clara": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/school_logo_detail_page_0.png?itok=rmpq8YAE",
     "San Francisco (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/usf_0.png?itok=eH1z_OPe",
+    "San Francisco": "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/usf_0.png?itok=eH1z_OPe",
     "Saint Mary's": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/SaintMarys_Primary.png?itok=z_9PneIT",
     "Saint Mary's (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/SaintMarys_Primary.png?itok=z_9PneIT",
     "Loyola Marymount": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/LMU_Primary.png?itok=qoTvDhkP",
