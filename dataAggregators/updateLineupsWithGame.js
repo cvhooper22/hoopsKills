@@ -5,11 +5,11 @@ const generateLineupData = lineupUtils.generateLineupData;
 const { default: urls } = require("./modules/assetUrls");
 
 const gameAddData = {
-  name: "San Francisco",
-  imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/usf_0.png?itok=eH1z_OPe",
-  id: "1300225",
-  path: "san-fran",
-  order: 29,
+  name: "Loyola Marymount (WCC)",
+  imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/LMU_Primary.png?itok=qoTvDhkP",
+  id: "1303030",
+  path: "lmu-wcc",
+  order: 31,
 };
 
 /*
@@ -62,7 +62,7 @@ function updateSeasonData (seasonLineupData, gameData, gameName) {
 async function generateSeasonLineupData () {
   let seasonLineupData = {};
   try {
-    const rawData = fs.readFileSync('./data/seasonLineups.json');
+    const rawData = fs.readFileSync('./data/seasonLineupsRESULT.json');
     seasonLineupData = JSON.parse(rawData);
   } catch(err) {
     console.error('error reading the season lineups data: ', err.toString())
@@ -93,7 +93,7 @@ async function doTheThing () {
   const data = await generateSeasonLineupData();
   // console.log('data', data);
   const dataString = JSON.stringify(data);
-  fs.writeFile('./data/seasonLineupsRESULT.json', dataString, 'utf8', (arg1) => {
+  fs.writeFile('./data/seasonLineupsRESULT2.json', dataString, 'utf8', (arg1) => {
     console.log('write done arg is', arg1);
   });
 }

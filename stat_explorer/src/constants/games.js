@@ -202,6 +202,20 @@ const games = [
     path: "san-fran",
     order: 29,
   },
+  {
+    name: "Portland (WCC)",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/NauticalMrk_2Clr_w.png?itok=MNek5uQu",
+    id: "1302986",
+    path: "portland-wcc",
+    order: 30,
+  },
+  {
+    name: "Loyola Marymount (WCC)",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/LMU_Primary.png?itok=qoTvDhkP",
+    id: "1303030",
+    path: "lmu-wcc",
+    order: 31,
+  },
 ];
 
 export const gameNameToUrl = {
@@ -220,6 +234,7 @@ export const gameNameToUrl = {
     "Weber State": "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/weber_state_primary_logo_0.png?itok=yMn4qv_8",
     "Pacific (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/Pacific_Primary.png?itok=N0uI2x4p",
     "Portland": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/NauticalMrk_2Clr_w.png?itok=MNek5uQu",
+    "Portland (WCC)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/NauticalMrk_2Clr_w.png?itok=MNek5uQu",
     "Loyola Marymount (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/LMU_Primary.png?itok=qoTvDhkP",
     "San Diego (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/USD_0.png?itok=fAaWm7y6",
     "Gonzaga": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/Gonzaga_Primary.png?itok=LcpDQizp",
@@ -231,6 +246,7 @@ export const gameNameToUrl = {
     "Saint Mary's": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/SaintMarys_Primary.png?itok=z_9PneIT",
     "Saint Mary's (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/SaintMarys_Primary.png?itok=z_9PneIT",
     "Loyola Marymount": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/LMU_Primary.png?itok=qoTvDhkP",
+    "Loyola Marymount (WCC)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/LMU_Primary.png?itok=qoTvDhkP",
     "Pacific": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/Pacific_Primary.png?itok=N0uI2x4p",
     "Pepperdine (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/files/university_logos/pepp_0.png?itok=lc3Z2_eL",
     "Gonzaga (A)": "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/Gonzaga_Primary.png?itok=LcpDQizp",
