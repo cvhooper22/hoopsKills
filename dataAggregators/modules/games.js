@@ -150,6 +150,18 @@ exports.default = [
     id: "1300225",
     path: "san-fran",
   },
+  {
+    name: "Portland (WCC)",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/NauticalMrk_2Clr_w.png?itok=MNek5uQu",
+    id: "1302986",
+    path: "portland-wcc",
+  },
+  {
+    name: "Loyola Marymount (WCC)",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/LMU_Primary.png?itok=qoTvDhkP",
+    id: "1303030",
+    path: "lmu-wcc",
+  },
 ];
 
 exports.nameFromId = function nameFromId (gameId) {

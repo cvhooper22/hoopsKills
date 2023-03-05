@@ -45,7 +45,7 @@ export default function SeasonLineupRow ({lineup}) {
                 }
               }
               const gameClass = ['game flex-aic mr-m'];
-              if (s.name.includes('(N)')) {
+              if (s.name.includes('(N)') || s.name.includes('(WCC)')) {
                 gameClass.push('game--neutral')
               }
               if (s.name.includes('(A)')) {

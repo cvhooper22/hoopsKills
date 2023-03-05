@@ -62,7 +62,7 @@ export default function LineupTable ({lineups, filterPlayers,summary, onSortClic
         <div className="lineup-games flex-jcc mb-m">
             {allGames.map((g) => {
               const gameClass = ['game flex-aic mr-m pt-s'];
-              if (g.name.includes('(N)')) {
+              if (g.name.includes('(N)') || g.name.includes('(WCC)')) {
                 gameClass.push('game--neutral')
               }
               if (g.name.includes('(A)')) {
