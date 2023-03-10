@@ -5,11 +5,11 @@ const generateLineupData = lineupUtils.generateLineupData;
 const { default: urls } = require("./modules/assetUrls");
 
 const gameAddData = {
-  name: "Loyola Marymount (WCC)",
-  imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/LMU_Primary.png?itok=qoTvDhkP",
-  id: "1303030",
-  path: "lmu-wcc",
-  order: 31,
+  name: "Saint Mary's (WCC)",
+  imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/SaintMarys_Primary.png?itok=z_9PneIT",
+  id: "1303044",
+  path: "smc-wcc",
+  order: 32,
 };
 
 /*
@@ -62,7 +62,7 @@ function updateSeasonData (seasonLineupData, gameData, gameName) {
 async function generateSeasonLineupData () {
   let seasonLineupData = {};
   try {
-    const rawData = fs.readFileSync('./data/seasonLineupsRESULT.json');
+    const rawData = fs.readFileSync('./data/seasonLineups.json');
     seasonLineupData = JSON.parse(rawData);
   } catch(err) {
     console.error('error reading the season lineups data: ', err.toString())

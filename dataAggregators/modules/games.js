@@ -162,6 +162,12 @@ exports.default = [
     id: "1303030",
     path: "lmu-wcc",
   },
+  {
+    name: "Saint Mary's (WCC)",
+    imageSrc: "https://byucougars.com/sites/default/files/styles/thumbnail/public/Athletic_Logo/SaintMarys_Primary.png?itok=z_9PneIT",
+    id: "1303044",
+    path: "smc-wcc",
+  },
 ];
 
 exports.nameFromId = function nameFromId (gameId) {
