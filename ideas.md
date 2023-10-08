@@ -96,3 +96,5 @@ OK - score from 7 - 15
 DOESN'T MATTER - Score + 15
 
 So for makes this is kinda flipped as far as the sentiment goes
+
+Could use data from hoop-math.com to do some fun stuff like shooting profiles (rim/2pt/three frequency) and just give a better view of that data
