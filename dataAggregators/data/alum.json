@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Alex Barcello",
+    "country": "Spain",
+    "team": "Gipuzkoa Basket",
+    "league": "LEB Oro",
+    "division": "Middle",
+    "teamTwiitter": "@gipuzkoabasket",
+    "recentTweetsUrl": "https://twitter.com/search?q=from%3Agipuzkoabasket%20barcello&src=typed_query&f=live",
+    "teamWebsite": "https://gipuzkoabasket.com/la-liga/#calendario"
+  },
+  {
+    "name": "Yoeli Childs",
+    "country": "Japan",
+    "team": "Saga Ballooners",
+    "league": "Japan B League",
+    "division": "Highest",
+    "teamTwiitter": "@SagaBallooners",
+    "recentTweetsUrl": "https://twitter.com/search?q=from%3Asagaballooners%20%E3%83%81%E3%83%A3%E3%82%A4%E3%83%AB%E3%82%BA&src=typed_query&f=live",
+    "teamWebsite": "https://ballooners.jp/schedule/"
+  }
+]
