@@ -17,6 +17,51 @@
     "division": "Highest",
     "teamTwiitter": "@SagaBallooners",
     "recentTweetsUrl": "https://twitter.com/search?q=from%3Asagaballooners%20%E3%83%81%E3%83%A3%E3%82%A4%E3%83%AB%E3%82%BA&src=typed_query&f=live",
-    "teamWebsite": "https://ballooners.jp/schedule/"
+    "teamWebsite": "https://ballooners.jp/schedule/",
+    "playerUrl": "https://www.proballers.com/basketball/player/192409/yoeli-childs"
+  },
+  {
+    "name": "Te'jon Lucas",
+    "country": "England",
+    "team": "Bristol Flyers",
+    "league": "British Basketball League",
+    "division": "Highest",
+    "teamTwiitter": "@BristolFlyers",
+    "recentTweetsUrl": "https://twitter.com/search?q=from%3Abristolflyers%20lucas&src=typed_query&f=live",
+    "teamWebsite": "https://www.bristolflyers.co.uk/match-centre/games/",
+    "playerUrl": "https://www.proballers.com/basketball/player/190196/te-jon-lucas"
+  },
+  {
+    "name": "Brandon Davies",
+    "country": "Spain",
+    "team": "Valencia Basket",
+    "league": "Liga Endesa / EuroLeague",
+    "division": "Highest",
+    "teamTwiitter": "@valenciabasket",
+    "recentTweetsUrl": "https://twitter.com/search?q=from%3Avalenciabasket%20davies&src=typed_query&f=live",
+    "playerUrl": "https://www.proballers.com/basketball/player/56187/brandon-davies",
+    "teamWebsite": "https://www.valenciabasket.com/?p=calendario"
+  },
+  {
+    "name": "Eric Mika",
+    "country": "USA",
+    "team": "G League Ignite",
+    "league": "NBA G League",
+    "division": "Middle",
+    "teamTwiitter": "@gleagueignite",
+    "recentTweetsUrl": "https://twitter.com/search?q=from%3Agleagueignite%20mika&src=typed_query&f=live",
+    "teamWebsite": "https://ignite.gleague.nba.com/schedule",
+    "playerUrl": "https://stats.gleague.nba.com/player/1628450/"
+  }
+  {
+    "name": "Jimmer Fredette",
+    "country": "USA",
+    "team": "USA / Miami",
+    "league": "Fiba 3x3 World Tour",
+    "division": "Highest",
+    "teamTwiitter": "@usab3x3",
+    "recentTweetsUrl": "https://twitter.com/search?q=jimmer%20(from%3Afiba3x3%20OR%20usab3x3)&src=typed_query&f=live",
+    "teamWebsite": "https://play.fiba3x3.com/players/13845922-6dbd-4257-a072-a27b34c4fe2f/activity",
+    "playerUrl": "https://play.fiba3x3.com/players/13845922-6dbd-4257-a072-a27b34c4fe2f/activity"
   }
 ]
