@@ -5,7 +5,7 @@
     "team": "Gipuzkoa Basket",
     "league": "LEB Oro",
     "division": "Middle",
-    "teamTwiitter": "@gipuzkoabasket",
+    "teamSocial": "@gipuzkoabasket",
     "recentTweetsUrl": "https://twitter.com/search?q=from%3Agipuzkoabasket%20barcello&src=typed_query&f=live",
     "teamWebsite": "https://gipuzkoabasket.com/la-liga/#calendario"
   },
@@ -15,7 +15,7 @@
     "team": "Saga Ballooners",
     "league": "Japan B League",
     "division": "Highest",
-    "teamTwiitter": "@SagaBallooners",
+    "teamSocial": "@SagaBallooners",
     "recentTweetsUrl": "https://twitter.com/search?q=from%3Asagaballooners%20%E3%83%81%E3%83%A3%E3%82%A4%E3%83%AB%E3%82%BA&src=typed_query&f=live",
     "teamWebsite": "https://ballooners.jp/schedule/",
     "playerUrl": "https://www.proballers.com/basketball/player/192409/yoeli-childs"
@@ -26,7 +26,7 @@
     "team": "Bristol Flyers",
     "league": "British Basketball League",
     "division": "Highest",
-    "teamTwiitter": "@BristolFlyers",
+    "teamSocial": "@BristolFlyers",
     "recentTweetsUrl": "https://twitter.com/search?q=from%3Abristolflyers%20lucas&src=typed_query&f=live",
     "teamWebsite": "https://www.bristolflyers.co.uk/match-centre/games/",
     "playerUrl": "https://www.proballers.com/basketball/player/190196/te-jon-lucas"
@@ -37,7 +37,7 @@
     "team": "Valencia Basket",
     "league": "Liga Endesa / EuroLeague",
     "division": "Highest",
-    "teamTwiitter": "@valenciabasket",
+    "teamSocial": "@valenciabasket",
     "recentTweetsUrl": "https://twitter.com/search?q=from%3Avalenciabasket%20davies&src=typed_query&f=live",
     "playerUrl": "https://www.proballers.com/basketball/player/56187/brandon-davies",
     "teamWebsite": "https://www.valenciabasket.com/?p=calendario"
@@ -48,7 +48,7 @@
     "team": "G League Ignite",
     "league": "NBA G League",
     "division": "Middle",
-    "teamTwiitter": "@gleagueignite",
+    "teamSocial": "@gleagueignite",
     "recentTweetsUrl": "https://twitter.com/search?q=from%3Agleagueignite%20mika&src=typed_query&f=live",
     "teamWebsite": "https://ignite.gleague.nba.com/schedule",
     "playerUrl": "https://stats.gleague.nba.com/player/1628450/"
@@ -59,9 +59,20 @@
     "team": "USA / Miami",
     "league": "Fiba 3x3 World Tour",
     "division": "Highest",
-    "teamTwiitter": "@usab3x3",
+    "teamSocial": "@usab3x3",
     "recentTweetsUrl": "https://twitter.com/search?q=jimmer%20(from%3Afiba3x3%20OR%20usab3x3)&src=typed_query&f=live",
     "teamWebsite": "https://play.fiba3x3.com/players/13845922-6dbd-4257-a072-a27b34c4fe2f/activity",
     "playerUrl": "https://play.fiba3x3.com/players/13845922-6dbd-4257-a072-a27b34c4fe2f/activity"
+  },
+  {
+    "name": "Rudi Williams",
+    "country": "Austria",
+    "team": "OSC Capital Bulls",
+    "league": "WIN2DAY BASKETBALL SUPERLIGA",
+    "division": "Highest",
+    "teamSocial": "https://www.instagram.com/bulls.bball/",
+    "recentTweetsUrl": "",
+    "teamWebsite": "https://bulls-basketball.eu/win2day-basketball-superliga",
+    "playerUrl": "https://www.basketballaustria.at/spieler?player_id=6737790&season_id=126992"
   }
 ]
