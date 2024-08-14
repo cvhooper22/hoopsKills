@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import GameSelector from "../../components/GameSelector/GameSelector";
 
-export default function LineupRouter () {
+export default function ClutchRouter () {
     return (
         <div className="lineups flex">
             <GameSelector />

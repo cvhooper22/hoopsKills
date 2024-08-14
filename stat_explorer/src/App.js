@@ -10,6 +10,7 @@ import SeasonLineups from "./views/Lineups/components/SeasonLineups";
 import GameClutch from './views/Clutch/components/GameClutch';
 import Home from "./views/Home/Home";
 import { views } from './constants/views';
+import AlumniRouter from "./views/Alumni/AlmuniRouter";
 
 export default function App() {
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ export default function App() {
             <Route index element={<GameClutch />} />
             <Route path=":name" element={<GameClutch />} />
           </Route>
+          <Route path="alumni" element={<AlumniRouter />} ></Route>
           <Route path="*" element={<Home />} />
         </Routes>
       </div>

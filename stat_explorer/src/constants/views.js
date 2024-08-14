@@ -2,6 +2,7 @@ const LINEUP_VIEW = "Lineups";
 const CLUTCH_VIEW = "Clutch";
 const KILLS_VIEW = "Kills";
 const HOME_VIEW = "Home";
+const ALMUNI_VIEW = "Alumni";
 const views = [
     {
       title: HOME_VIEW,
@@ -23,6 +24,11 @@ const views = [
       disabled: true,
       route: '/clutch',
       routeRoot: '/clutch',
+    },
+    {
+      title: ALMUNI_VIEW,
+      route: '/alumni',
+      routeRoot: '/alumni',
     } 
   ];
-export { views, HOME_VIEW, LINEUP_VIEW, CLUTCH_VIEW, KILLS_VIEW };
+export { views, HOME_VIEW, LINEUP_VIEW, CLUTCH_VIEW, KILLS_VIEW, ALMUNI_VIEW };

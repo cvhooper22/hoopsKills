@@ -1,0 +1,15 @@
+.alumni-card {
+  width: 250px;
+  height: 350px;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+}
+
+.alumni-card__logo-image {
+  height: 60px;
+}
+
+.alumni-card__image {
+  height: 275px;
+  width: 175px;
+}
