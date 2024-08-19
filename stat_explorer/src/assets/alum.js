@@ -8,13 +8,16 @@ const alum = [
     "division": "Middle",
     "teamSocial": "@gipuzkoabasket",
     "recentTweetsUrl": "https://twitter.com/search?q=from%3Agipuzkoabasket%20barcello&src=typed_query&f=live",
-    "teamWebsite": "https://gipuzkoabasket.com/la-liga/#calendario"
+    "teamWebsite": "https://gipuzkoabasket.com/la-liga/#calendario",
+    "style": {
+      "object-position": "18% 0",
+    }
   },
   {
     "name": "Yoeli Childs",
     "country": "Japan",
     "team": "Saga Ballooners",
-    "teamLogo": "https://en.wikipedia.org/wiki/Saga_Ballooners#/media/File:Ballooners-logo.png",
+    "teamLogo": "https://upload.wikimedia.org/wikipedia/en/f/f8/Ballooners-logo.png",
     "league": "Japan B League",
     "division": "Highest",
     "teamSocial": "@SagaBallooners",
@@ -38,7 +41,7 @@ const alum = [
     "name": "Brandon Davies",
     "country": "Spain",
     "team": "Valencia Basket",
-    "teamLogo": "https://pbs.twimg.com/profile_images/1765019370357481472/40mvl5U0_400x400.jpg",
+    "teamLogo": "https://static.acb.com/img/23/2/25/1654748673.png",
     "league": "Liga Endesa / EuroLeague",
     "division": "Highest",
     "teamSocial": "@valenciabasket",

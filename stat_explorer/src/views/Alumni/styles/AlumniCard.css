@@ -1,15 +1,80 @@
 .alumni-card {
   width: 250px;
-  height: 350px;
+  height: 370px;
   border: 1px solid lightgray;
   border-radius: 3px;
+  padding: 1.25rem;
+  position: relative;
 }
 
 .alumni-card__logo-image {
   height: 60px;
+  position: absolute;
+  left: 0;
 }
 
 .alumni-card__image {
-  height: 275px;
-  width: 175px;
+  height: 290px;
+  width: 235px;
+  object-fit: cover;
+}
+
+.alumni-card__inner {
+  border: 3px solid blue;
+  position: relative;
+}
+
+.alumni-card__name {
+  text-transform: uppercase;
+  font-weight: bold;
+  position: absolute;
+  bottom: 12px;
+  left: calc(50% - 104px)
+}
+
+.alumni-card__firstname-container {
+  height: 2.25rem;
+  width: 5rem;
+  border-radius: 2.5rem 2.5rem 0 0;
+  background: var(--royal-blue);
+  color: whitesmoke;
+}
+
+.alumni-card__firstname {
+  font-size: 0.75rem;
+  margin-top: 12px;
+}
+
+.alumni-card__lastname-container {
+  border: 3px solid var(--royal-blue);
+  padding: 3px;
+  width: 200px; /* 80% of card width */
+}
+
+.alumni-card__lastname-inner {
+  border: 1px solid var(--almostBlack);
+  border-radius: 2px;
+}
+
+.alumni-card__lastname {
+  transform: scale(1,1.5);
+}
+
+.alumni-card__name-lower {
+  height: 1rem;
+  width: 5.25rem;
+  background: var(--royal-blue);
+  font-size: 0.5rem;
+  color: whitesmoke;
+}
+
+.alumni-card__label {
+  font-size: 0.6rem;
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+}
+
+.alumni-card__label__byu {
+  font-weight: 900;
 }
