@@ -5,12 +5,14 @@
   border-radius: 3px;
   padding: 1.25rem;
   position: relative;
+  box-shadow: "0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12)";
 }
 
 .alumni-card__logo-image {
   height: 60px;
   position: absolute;
   left: 0;
+  filter: drop-shadow(1px 1px 0px white);
 }
 
 .alumni-card__image {
@@ -22,6 +24,17 @@
 .alumni-card__inner {
   border: 3px solid blue;
   position: relative;
+  overflow: hidden;
+}
+
+.alumni-card__name-circle-spacer {
+  position: absolute;
+  height: 2.6875rem;
+  width: 5.75rem;
+  border-radius: 2.875rem 2.875rem 0 0;
+  background: white;
+  bottom: -1.5625rem;
+  right: calc(50% - 3rem);
 }
 
 .alumni-card__name {

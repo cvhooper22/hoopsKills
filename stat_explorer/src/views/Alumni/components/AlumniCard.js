@@ -12,8 +12,8 @@ export default function AlmuniCard({alum}) {
         <div className='alumni-card__photo'>
           <img className="alumni-card__image" src="https://s3.ppllstatics.com/diariovasco/www/multimedia/2023/12/09/89781268-kC0B--1200x840@Diario%20Vasco.jpg" style={{ ...imageStyle }}/>
         </div>
+        <div className='alumni-card__name-circle-spacer'></div>
       </div>
-      <div className='alumni-card__name-circle-spacer'></div>
       <div className='alumni-card__name flex-c aic'>
         <div className='alumni-card__firstname-container flex-aic jcc'>
           <div className='alumni-card__firstname'>
@@ -28,7 +28,7 @@ export default function AlmuniCard({alum}) {
           </div>
         </div>
         <div className='alumni-card__name-lower  flex-aic jcc'>
-          POSITION
+          {alum.years}
         </div>
       </div>
       <div className='alumni-card__label'>

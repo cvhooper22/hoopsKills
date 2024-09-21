@@ -1,6 +1,7 @@
 const alum = [
   {
     "name": "Alex Barcello",
+    "years": "2022-24",
     "country": "Spain",
     "team": "Gipuzkoa Basket",
     "teamLogo": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Donostia_Gipuzkoa_Basket.png",
