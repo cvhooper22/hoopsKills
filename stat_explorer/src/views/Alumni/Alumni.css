@@ -1,1 +1,15 @@
 @import "./styles/index.css";
+
+.alumni {
+    /* content div has 1rem of padding on the bottom */
+    --parent-padding-bottom: 1rem;
+    --alumni-padding: 2rem;
+    /* account for top and bottom padding */
+    --alumni-padding-y: calc(4rem - var(--parent-padding-bottom));
+}
+
+.alumni {
+    background-color: var(--lightest-blue);
+    padding: var(--alumni-padding);
+    height: calc(100% - var(--alumni-padding-y));
+}

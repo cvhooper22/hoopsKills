@@ -11,7 +11,7 @@ export default function GameSelector () {
       <div className="games__broad-selectors">
         <Link to="/lineups/season" className="game-link">
           <div className={`game-row flex-aic${pathname === '/lineups/season' ? ' game-row--selected' : ''}`} key="season-selector">
-            <span className='game-oponent ml-s'>Season</span>
+            <span className='game-oponent ml-s'>Season 2022-2023</span>
           </div>
         </Link>
       </div>

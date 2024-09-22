@@ -1,28 +1,53 @@
 .alumni-card {
+  --ball-lines-height: 6px;
+  --ball-lines-height-half: calc(var(var(--ball-lines-height) / 2));
+  --ball-lines-width: 6px;
+  --ball-lines-width-half: calc(var(--ball-lines-width) / 2);
+  --ball-stroke-width: 0.5px;
+}
+
+.alumni-card {
   width: 250px;
   height: 370px;
+  background-color: var(--app-bg);
   border: 1px solid lightgray;
   border-radius: 3px;
   padding: 1.25rem;
   position: relative;
-  box-shadow: "0px 3px 1px -2px rgba(0,0,0,0.2),0px 2px 2px 0px rgba(0,0,0,0.14),0px 1px 5px 0px rgba(0,0,0,0.12)";
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  transition: transform 122ms ease-in;
+}
+
+.alumni-card:hover {
+  transform: scale(1.15);
+  z-index: 4; 
 }
 
 .alumni-card__logo-image {
   height: 60px;
   position: absolute;
-  left: 0;
+  left: 5px;
   filter: drop-shadow(1px 1px 0px white);
 }
 
+.alumni-card__logo-image.alumni-card__logo-image--dropLeft {
+  height: 60px;
+  position: absolute;
+  left: 5px;
+  filter: drop-shadow(-1px -1px 0px white);
+}
+
 .alumni-card__image {
-  height: 290px;
+  height: 295px;
+  display: block;
   width: 235px;
   object-fit: cover;
 }
 
 .alumni-card__inner {
   border: 3px solid blue;
+  border-left-color: var(--baby-blue);
+  border-right-color: var(--baby-blue);
   position: relative;
   overflow: hidden;
 }
@@ -77,7 +102,7 @@
   height: 1rem;
   width: 5.25rem;
   background: var(--royal-blue);
-  font-size: 0.5rem;
+  font-size: 0.6rem;
   color: whitesmoke;
 }
 
@@ -86,8 +111,9 @@
   position: absolute;
   bottom: 5px;
   right: 10px;
+  color: var(--navy-blue);
 }
 
-.alumni-card__label__byu {
-  font-weight: 900;
+.alumni-card__label img {
+  height: 7px;
 }

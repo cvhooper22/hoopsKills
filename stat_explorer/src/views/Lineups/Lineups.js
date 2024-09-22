@@ -76,7 +76,7 @@ export default function Lineups() {
     <div className="lineups flex">
       <GameSelector onGameClick={handleGameChange} currentGame={currentGame}/>
       <div className="lineups-content f1 flex-c pr-l">
-        <h1 className="lineup-game-label">{nameFromId(currentGame)}</h1>
+        <h1 className="lineup-game-label">{`${nameFromId(currentGame)} [2022-2023]`}</h1>
         {loading && <YBallLoader />}
         {!loading && !!Object.keys(lineupData.lineups).length && (
           <div className="f1-hide flex-c">

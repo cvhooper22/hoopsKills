@@ -2,15 +2,17 @@ import React from 'react';
 
 export default function AlmuniCard({alum}) {
   const [firstname, lastname] = alum.name.split(' ');
-  const imageStyle = alum.style ?? {};
+  const imageStyle = alum.coverPhoto?.style ?? {};
+  const teamLogoStyle = alum.teamLogo?.style ?? {};
   return (
     <div className='alumni-card m-s'>
       <div className='alumni-card__inner p-xs'>
         <div className='alumni-card__logo'>
-          <img className='alumni-card__logo-image' src={alum.teamLogo}></img>
+          <img className='alumni-card__logo-image' src={alum.teamLogo?.url} style={{ ...teamLogoStyle }}></img>
+          <img className='alumni-card__logo-image alumni-card__logo-image--dropLeft' src={alum.teamLogo?.url} style={{ ...teamLogoStyle }}></img>
         </div>
         <div className='alumni-card__photo'>
-          <img className="alumni-card__image" src="https://s3.ppllstatics.com/diariovasco/www/multimedia/2023/12/09/89781268-kC0B--1200x840@Diario%20Vasco.jpg" style={{ ...imageStyle }}/>
+          <img className="alumni-card__image" src={alum.coverPhoto?.url} style={{ ...imageStyle }}/>
         </div>
         <div className='alumni-card__name-circle-spacer'></div>
       </div>
@@ -27,13 +29,12 @@ export default function AlmuniCard({alum}) {
             </div>
           </div>
         </div>
-        <div className='alumni-card__name-lower  flex-aic jcc'>
-          {alum.years}
+        <div className='alumni-card__name-lower flex jcc'>
+          {alum.position}
         </div>
       </div>
       <div className='alumni-card__label'>
-        <span className='alumni-card__label__byu'>BYU</span>
-        <span className='alumni-card__label__hoops'>HOOPS</span>
+        <img src="./byuHoops.png" />
       </div>
     </div>
   );
