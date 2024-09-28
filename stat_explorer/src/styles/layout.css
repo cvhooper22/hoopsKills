@@ -44,6 +44,14 @@
   align-items: center;
 }
 
+.ais {
+  align-items: start;
+}
+
+.aie {
+  align-items: end;
+}
+
 .jcc {
   justify-content: center;
 }

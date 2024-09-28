@@ -1,9 +1,36 @@
-.alumni-card {
+.alumni-card-root {
+  --card-padding: 1.25rem;
+  --card-padding-neg: -1.25rem;
   --ball-lines-height: 6px;
   --ball-lines-height-half: calc(var(var(--ball-lines-height) / 2));
   --ball-lines-width: 6px;
   --ball-lines-width-half: calc(var(--ball-lines-width) / 2);
   --ball-stroke-width: 0.5px;
+}
+
+.alumni-card-root {
+  transition: transform 122ms ease-in;
+  margin: 1rem;
+  perspective: 1000px;
+}
+
+.alumni-card-flipper {
+  position: relative;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.alumni-card-root:hover {
+  transform: scale(1.15);
+  z-index: 1;
+}
+
+.alumni-card-root:hover .alumni-card-flip-btn {
+  opacity: 1;
+}
+
+.alumni-card-flipper.alumni-card-flipper--flipped {
+  transform: rotateY(-180deg);
 }
 
 .alumni-card {
@@ -12,15 +39,11 @@
   background-color: var(--app-bg);
   border: 1px solid lightgray;
   border-radius: 3px;
-  padding: 1.25rem;
   position: relative;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-  transition: transform 122ms ease-in;
-}
-
-.alumni-card:hover {
-  transform: scale(1.15);
-  z-index: 4; 
+  padding: var(--card-padding);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .alumni-card__logo-image {
@@ -116,4 +139,142 @@
 
 .alumni-card__label img {
   height: 7px;
+}
+
+.alumni-card.alumni-card--back {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: rotateY(180deg);
+}
+
+.alumni-card-flip-btn {
+  position: absolute;
+  z-index: 2;
+  transition: opacity 400ms;
+  cursor: pointer;
+  top: 10px;
+  left: calc(100% - 29px);
+  opacity: 0;
+}
+
+button.flip-button {
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 50%;
+  background-color: var(--blue-stop-3);
+  box-shadow: 0 0 20px 2.5px var(--baby-blue);
+}
+
+.alumni-card-flipper.alumni-card-flipper--flipped button.flip-button {
+  box-shadow: 0 0 6px -1.5px var(--baby-blue);
+}
+
+.card-back-header {
+  background-color: var(--navy-blue);
+  color: var(--app-bg);
+  margin: 0 var(--card-padding-neg);
+  padding: 8px 2rem;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+}
+
+.card-back-header__first {
+  font-weight: 600;
+  transform: scaleY(1.1);
+}
+
+.card-back-header__last {
+  font-weight: 700;
+  transform: scaleY(1.4);
+}
+
+.card-back-team {
+  margin: 0 var(--card-padding-neg);
+  border-bottom: 1px solid black;
+  height: 25%;
+  background-color: var(--baby-blue);
+}
+
+.card-back__logo-image {
+  height: 55px;
+}
+
+.card-back-detail {
+  font-size: 0.75rem;
+}
+
+.card-back-flag {
+  border: 1px solid lightgray;
+  height: 18px;
+}
+
+.card-back-team__label {
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 3px;
+  text-wrap: nowrap;
+}
+
+.card-back-team__value {
+  display: inline-block;
+}
+
+.card-back-stats {
+  background-color: var(--lightest-blue);
+  padding: 0 var(--card-padding);
+  margin: 0 var(--card-padding-neg);
+  position: relative;
+}
+
+.stat-link-blur {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  z-index: 2;
+  right: 0;
+}
+
+.card-back-stat-link-blur {
+  height: 80%;
+  width: 80%;
+  border-radius: 6px;
+  background: radial-gradient(closest-side, var(--lightest-blue) 60%, var(--app-bg) 80%);
+  opacity: 0.75;
+  box-shadow: 0px 0px 20px 8px var(--app-bg);
+}
+
+.card-back-stat-link {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  right: 0;
+  z-index: 3;
+  font-size: 0.85rem;
+  color: var(--navy-blue);
+  text-decoration: none;
+  opacity: 0.8;
+  user-select: none;
+}
+
+.card-back-stat-link:visited {
+  color: var(--navy-blue);
+}
+
+.card-back-footer {
+  height: 25px;
+  background-color: var(--navy-blue);
+  margin: 0 var(--card-padding-neg);
+  font-size: 0.6rem;
+  color: white;
+}
+
+.card-back-footer a {
+  color: white;
+  text-decoration: none;
+}
+
+.card-back-footer a:visited {
+  color: white;
 }
