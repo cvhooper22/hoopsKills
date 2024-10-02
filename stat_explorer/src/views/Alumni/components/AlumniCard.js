@@ -3,20 +3,22 @@ import FlipOver from '../../../components/Icons/FlipOver';
 import OpenInNew from '../../../components/Icons/OpenInNew';
 import urls from '../../../constants/assetUrls';
 import FakeTable from './FakeTable';
+import SocialLink from './SocialLink';
 
 export default function AlmuniCard({alum}) {
-  console.log('alum: ', alum);
   const [isFlipped, setIsFlipped] = useState(false);
   const [firstname, lastname] = alum.name.split(' ');
   const imageStyle = alum.coverPhoto?.style ?? {};
   const teamLogoStyle = alum.teamLogo?.style ?? {};
+  
   function setFlipped () {
-    console.log('set flipped for : ', firstname);
     setIsFlipped(!isFlipped);
   }
+
   const flagUrl = `${urls.flagBasePath}/${alum.countryCode}.png`;
   const footerUrl = alum.recentTweetsUrl || alum.playerUrl;
   const footerText = alum.recentTweetsUrl ? `Recent team activity for ${firstname} on twitter` : `Player profile for ${firstname}`;
+  const socialAccounts = Object.keys(alum.teamSocial ?? {});
   return (
     <div className="alumni-card-root m-s">
       <div className={`alumni-card-flipper${ isFlipped ? ' alumni-card-flipper--flipped' : ''}`}>
@@ -99,8 +101,17 @@ export default function AlmuniCard({alum}) {
             </a>
             <FakeTable />
           </div>
-          <div className='card-back-links f1 mt-m'>
-            Links
+          <div className='card-back-links'>
+            <div className='card-back-links-header'>TEAM SOCIAL</div>
+            <div className='card-back-links-container flex-aic jcc'>
+              { socialAccounts.map(socialType => <SocialLink type={socialType} link={alum.teamSocial[socialType]} key={`${alum.team}_${socialType}`}/>)}
+            </div>
+          </div>
+          <div className={`card-back-notes f1 flex-aic`}>
+            { alum.notes && (
+              alum.notes.map(n => <div className='card-back-note' key={`${alum.name}_note`}>{n}</div>)
+            )}
+            { !alum.notes && <img className='card-back-byuhoops' src="./byuHoops.png" />}
           </div>
           <div className='card-back-footer flex-aic jcc'>
               <a href={footerUrl} target='_blank' className='mr-xs'>

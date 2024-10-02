@@ -11,6 +11,7 @@ import GameClutch from './views/Clutch/components/GameClutch';
 import Home from "./views/Home/Home";
 import { views } from './constants/views';
 import AlumniRouter from "./views/Alumni/AlmuniRouter";
+import { TouchPointsContextProvider } from "./contexts/TouchpointsContext";
 
 export default function App() {
   const navigate = useNavigate();
@@ -18,27 +19,29 @@ export default function App() {
     navigate(viewOpt.route);
   }
   return (
-    <div className="flex-c App">
-      <div className="top-bar">
-        <Header />
-        <Nav options={views} onOptionClick={handleNavClick}/>
+    <TouchPointsContextProvider>
+      <div className="flex-c App">
+        <div className="top-bar">
+          <Header />
+          <Nav options={views} onOptionClick={handleNavClick}/>
+        </div>
+        <div className="content">
+          <Routes>
+            <Route index element={<Home />} />
+            <Route path="lineups" element={<LineupRouter />}>
+              <Route index element={<GameLineups />} />
+              <Route path=":name" element={<GameLineups />} />
+              <Route path="season" element={<SeasonLineups /> } />
+            </Route>
+            <Route path="clutch" element={<ClutchRouter />}>
+              <Route index element={<GameClutch />} />
+              <Route path=":name" element={<GameClutch />} />
+            </Route>
+            <Route path="alumni" element={<AlumniRouter />} ></Route>
+            <Route path="*" element={<Home />} />
+          </Routes>
+        </div>
       </div>
-      <div className="content">
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="lineups" element={<LineupRouter />}>
-            <Route index element={<GameLineups />} />
-            <Route path=":name" element={<GameLineups />} />
-            <Route path="season" element={<SeasonLineups /> } />
-          </Route>
-          <Route path="clutch" element={<ClutchRouter />}>
-            <Route index element={<GameClutch />} />
-            <Route path=":name" element={<GameClutch />} />
-          </Route>
-          <Route path="alumni" element={<AlumniRouter />} ></Route>
-          <Route path="*" element={<Home />} />
-        </Routes>
-      </div>
-    </div>
+    </TouchPointsContextProvider>
   );
 }

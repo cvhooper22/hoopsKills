@@ -6,9 +6,14 @@
     --alumni-padding: 2rem;
     /* account for top and bottom padding */
     --alumni-padding-y: calc(4rem - var(--parent-padding-bottom));
+    --alumni-help-width: 125px;
+    --alumni-help-padding-x: calc(var(--l) + var(--l));
+    --alumni-help-total-width: calc(var(--alumni-help-width) + var(--alumni-help-padding-x));
+    --alumni-info-width: 45px;
 }
 
 .alumni {
+    position: relative;
     background-image: linear-gradient(
         110deg,
         hsl(60deg 100% 100%) 0%,
@@ -20,4 +25,112 @@
     );
     padding: var(--alumni-padding);
     height: calc(100% - var(--alumni-padding-y));
+}
+
+.alumni-info-positioner {
+    position: fixed;
+    top: calc(var(--top-bar-height) + 25px);
+    right: 0px;
+    z-index: 5;
+    transition: right 200ms ease-in;
+}
+
+.alumni-info {
+    background-color: var(--royal-blue);
+    height: 50px;
+    width: var(--alumni-info-width);
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    cursor: pointer;
+}
+
+.alumni-info-positioner.alumni-info--open {
+    right: calc(-1 * var(--alumni-info-width));
+    z-index: 4;
+}
+
+.alumni__help {
+    background-color: var(--royal-blue);
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    font-size: 0.8rem;
+    width: var(--alumni-help-width);
+    color: white;
+    position: fixed;
+    top: calc(var(--top-bar-height) + 25px);
+    right: calc(-1 * var(--alumni-help-total-width));
+    z-index: 5;
+    transition: right 200ms ease-in;
+}
+
+.alumni__help--open {
+    right: 0px;
+}
+
+.alumni__help-content {
+    position: relative;
+}
+
+.alumni__help-close {
+    cursor: pointer;
+    position: absolute;
+    top: -18px;
+    left: -18px;
+}
+
+@media screen and (max-width: 712px) {
+    .alumni-card-root:hover {
+        transform: scale(1.05);
+    }
+}
+
+/* card width is 324px */
+/* max-width on media query is cards plus the 2rem of padding on each side
+/* one card */
+@media screen and (min-width: 1px) {
+    div.alumni-cards {
+        max-width: 324px;
+    }
+}
+
+/* two cards */
+@media screen and (min-width: 712px) {
+    div.alumni-cards {
+        max-width: 648px;
+    }
+}
+
+/* three cards */
+@media screen and (min-width: 1036px) {
+    div.alumni-cards {
+        max-width: 972px;
+    }
+}
+
+/* four cards */
+@media screen and (min-width: 1360px) {
+    div.alumni-cards {
+        max-width: 1296px;
+    }
+}
+
+/* five cards */
+@media screen and (min-width: 1684px) {
+    div.alumni-cards {
+        max-width: 1620px;
+    }
+}
+
+/* six cards */
+@media screen and (min-width: 2008px) {
+    div.alumni-cards {
+        max-width: 1944px;
+    }
+}
+
+/* seven cards is max */
+@media screen and (min-width: 2333px) {
+    div.alumni-cards {
+        max-width: 2268px;
+    }
 }

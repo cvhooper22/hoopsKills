@@ -10,7 +10,12 @@ const alum = [
     },
     "league": "ABA League / EuroLeague",
     "division": "Highest",
-    "teamSocial": "https://x.com/partizanbc",
+    "teamSocial": {
+      "twitter": "https://x.com/partizanbc",
+      "instagram": "https://instagram.com/partizanbc/",
+      "youtube": "https://www.youtube.com/channel/UCin-zbw5U0ctNtJCZ96XmFQ",
+      "facebook": "https://www.facebook.com/bcpartizan",
+    },
     "recentTweetsUrl": "https://twitter.com/search?q=from%3Apartizanbc%20davies&src=typed_query&f=live",
     "playerUrl": "https://www.proballers.com/basketball/player/56187/brandon-davies",
     "teamWebsite": "https://partizan.basketball/",
@@ -35,7 +40,12 @@ const alum = [
     },
     "league": "Basketball Bundesliga (BBL)",
     "division": "Highest",
-    "teamSocial": "https://www.instagram.com/wuerzburgbaskets",
+    "teamSocial": {
+      "twitter": "https://www.instagram.com/wuerzburgbaskets",
+      "instagram": "https://www.instagram.com/wuerzburgbaskets",
+      "youtube": "https://www.youtube.com/channel/UC5fCw7Nlrj0GzrUE8scuFuw",
+      "facebook": "https://www.facebook.com/WuerzburgBaskets",
+    },
     "recentTweetsUrl": "",
     "teamWebsite": "https://www.wuerzburg-baskets.de/",
     "playerUrl": "https://basketball.eurobasket.com/player/Zac-Seljaas/366912",
@@ -57,7 +67,12 @@ const alum = [
     },
     "league": "Basketbol Süper Ligi (BSL) / Euroleague",
     "division": "Highest",
-    "teamSocial": "https://x.com/AnadoluEfesSK",
+    "teamSocial": {
+      "twitter": "https://x.com/AnadoluEfesSK",
+      "instagram": "https://www.instagram.com/anadoluefessk",
+      "youtube": "https://www.youtube.com/user/AnadoluEfesSK/",
+      "facebook": "https://www.facebook.com/AnadoluEfesSK",
+    },
     "recentTweetsUrl": "https://x.com/search?q=from%3AAnadoluEfesSK%20bryant&src=typed_query&f=live",
     "teamWebsite": "https://www.anadoluefessk.org/",
     "playerUrl": "https://basketball.eurobasket.com/player/Elijah-Bryant/336386",
@@ -66,7 +81,10 @@ const alum = [
       "style": {
         "objectPosition": "54% 0",
       }
-    }
+    },
+    "notes": [
+      "Elijah just claimed game MVP of the Turkish Basketball Presidential Cup game"
+    ],
   },
   {
     "name": "Yoeli Childs",
@@ -80,7 +98,12 @@ const alum = [
     },
     "league": "Japan B League",
     "division": "Highest",
-    "teamSocial": "https://x.com/SagaBallooners",
+    "teamSocial": {
+      "twitter": "https://x.com/SagaBallooners",
+      "instagram": "https://www.instagram.com/ballooners_official/",
+      "youtube": "https://www.youtube.com/channel/UChYMhscMvp9FEZ9uZ64GfOA",
+      "facebook": "https://www.facebook.com/sagaballooners/",
+    },
     "recentTweetsUrl": "https://twitter.com/search?q=from%3Asagaballooners%20%E3%83%81%E3%83%A3%E3%82%A4%E3%83%AB%E3%82%BA&src=typed_query&f=live",
     "teamWebsite": "https://ballooners.jp/schedule/",
     "playerUrl": "https://www.proballers.com/basketball/player/192409/yoeli-childs",
@@ -100,9 +123,15 @@ const alum = [
     },
     "league": "Basketball Bundesliga (BBL)",
     "division": "Highest",
-    "teamSocial": "https://x.com/gipuzkoabasket",
+    "teamSocial": {
+      "twitter": "https://x.com/gipuzkoabasket",
+      "instagram": "https://www.instagram.com/mlpacademics/",
+      "youtube": "https://www.youtube.com/user/MLPAcademicsHD",
+      "facebook": "https://www.facebook.com/MLPAcademicsHeidelberg",
+    },
     "recentTweetsUrl": "https://x.com/search?q=from%3AMLP_Academics%20barcello&src=typed_query&f=live",
-    "teamWebsite": "https://gipuzkoabasket.com/la-liga/#calendario",
+    "teamWebsite": "https://www.mlp-academics.de/",
+    "playerUrl": "https://basketball.eurobasket.com/player/Alex-Barcello/420734",
     "coverPhoto": {
       "url": "https://s3.ppllstatics.com/diariovasco/www/multimedia/2023/12/09/89781268-kC0B--1200x840@Diario%20Vasco.jpg",
       "style": {
@@ -110,7 +139,7 @@ const alum = [
       }
     },
     "notes": [
-      "Alex led his league (Primera FEB in Spain) in scoring last year putting up"
+      "Alex led the Primera FEB league of Spain in scoring last year putting up 19.6 ppg on 44% 3pt"
     ],
   },
   {
@@ -128,7 +157,12 @@ const alum = [
     },
     "league": "B2 League",
     "division": "Middle",
-    "teamSocial": "https://x.com/kg_rebnise",
+    "teamSocial": {
+      "twitter": "https://x.com/kg_rebnise",
+      "instagram": "https://www.instagram.com/kagoshima_rebnise_official/",
+      "youtube": "https://www.youtube.com/channel/UCiKuxlAGlOeVEkoitTmbVVw",
+      "facebook": "https://www.facebook.com/rebnise/",
+    },
     "recentTweetsUrl": "https://x.com/search?q=from%3Akg_rebnise%20%E3%83%9E%E3%83%83%E3%83%88%E3%83%BB%E3%83%8F%E3%83%BC%E3%83%A0%E3%82%B9&src=typed_query&f=live",
     "teamWebsite": "https://www.rebnise.jp/",
     "playerUrl": "https://basketball.eurobasket.com/player/Matt-Haarms/353966",
@@ -137,7 +171,10 @@ const alum = [
       "style": {
         "objectPosition": "-80px 0",
       }
-    }
+    },
+    "notes": [
+      "While Matt was still in Spain last season, his current team earned a promotion and will play in the middle division this year"
+    ],
   },
   {
     "name": "Rudi Williams",
@@ -150,16 +187,23 @@ const alum = [
     },
     "league": "Nemzeti Bajnokság I/A",
     "division": "Highest",
-    "teamSocial": "https://www.instagram.com/egiskormendhivatalos",
+    "teamSocial": {
+      "instagram": "https://www.instagram.com/egiskormendhivatalos",
+      "youtube": "https://www.youtube.com/channel/UCXLaEi0_Ee1QJ8uTsQT7s1Q",
+      "facebook": "https://www.facebook.com/EgisKormendOfficial/",
+    },
     "recentTweetsUrl": "",
-    "teamWebsite": "https://bulls-basketball.eu/win2day-basketball-superliga",
+    "teamWebsite": "https://www.egiskormend.hu/Hirek/Kiss_Benedekkel_beszelgettunk.html",
     "playerUrl": "https://www.basketballaustria.at/spieler?player_id=6737790&season_id=126992",
     "coverPhoto": {
       "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/461184337_450667134668652_5941890249778405167_n.jpg",
       "style": {
         "objectPosition": "41% 0",
       }
-    }
+    },
+    "notes": [
+      "Rudi led the Austrian BSL league in scoring last year putting up 19.9p / 4.6a per game"
+    ],
   },
   {
     "name": "Spencer Johnson",
@@ -172,12 +216,17 @@ const alum = [
     },
     "league": "Super League Basketball",
     "division": "Highest",
-    "teamSocial": "https://x.com/RidersBball",
+    "teamSocial": {
+      "twitter": "https://x.com/RidersBball",
+      "instagram": "https://www.instagram.com/ridersbball",
+      "youtube": "https://www.youtube.com/channel/UCXuGRL3cYwBxbCmAsu-H-_A",
+      "facebook": "https://www.facebook.com/ridersbball/",
+    },
     "recentTweetsUrl": "https://x.com/search?q=from%3ARidersBball%20johnson&src=typed_query&f=live",
     "teamWebsite": "https://riders.basketball/bbl-games/",
     "playerUrl": "https://basketball.eurobasket.com/player/Spencer-Johnson/487981",
     "coverPhoto": {
-      "url": "https://instagram.fmli1-1.fna.fbcdn.net/v/t39.30808-6/461573615_18463791457020290_3783137805186464427_n.jpg?stp=dst-jpg_e35_p1080x1080&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xNDQweDE3OTUuc2RyLmYzMDgwOC5kZWZhdWx0X2ltYWdlIn0&_nc_ht=instagram.fmli1-1.fna.fbcdn.net&_nc_cat=102&_nc_ohc=fU0jPbhtLgEQ7kNvgEdkddE&_nc_gid=07426d5a360b4934a207a5e9a3219591&edm=AP4sbd4AAAAA&ccb=7-5&ig_cache_key=MzQ2NjUwMTc5ODk1MDQwMDg1OQ%3D%3D.3-ccb7-5&oh=00_AYCZNMV6ar71jCrslHbrR8NJzN743dDTakCp-m40WEmLgA&oe=66FD52EC&_nc_sid=7a9f4b",
+      "url": "https://scontent.fmli1-1.fna.fbcdn.net/v/t39.30808-6/461495575_18463976230020290_1401119312615072209_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_ohc=GBjUQhLbvR8Q7kNvgF8Qlyd&_nc_ht=scontent.fmli1-1.fna&_nc_gid=AGMgZ7j1yZOMvpVcsQd5KaC&oh=00_AYBom6t7E_A_UD2CasrOM67vgqa4PdocXQSCwW-Y3kjDEw&oe=670095A7",
     }
   },
   {
@@ -191,7 +240,9 @@ const alum = [
     },
     "league": "Super League Basketball",
     "division": "Highest",
-    "teamSocial": "https://x.com/BristolFlyers",
+    "teamSocial": {
+      "twitter": "https://x.com/BristolFlyers",
+    },
     "recentTweetsUrl": "https://twitter.com/search?q=from%3Abristolflyers%20lucas&src=typed_query&f=live",
     "teamWebsite": "https://www.bristolflyers.co.uk/match-centre/games/",
     "playerUrl": "https://www.proballers.com/basketball/player/190196/te-jon-lucas",
@@ -213,7 +264,9 @@ const alum = [
     },
     "league": "Fiba 3x3 World Tour",
     "division": "Highest",
-    "teamSocial": "https://x.com/usab3x3",
+    "teamSocial": {
+      "twitter": "https://x.com/usab3x3",
+    },
     "recentTweetsUrl": "https://twitter.com/search?q=jimmer%20(from%3Afiba3x3%20OR%20usab3x3)&src=typed_query&f=live",
     "teamWebsite": "https://play.fiba3x3.com/players/13845922-6dbd-4257-a072-a27b34c4fe2f/activity",
     "playerUrl": "https://play.fiba3x3.com/players/13845922-6dbd-4257-a072-a27b34c4fe2f/activity",
@@ -238,7 +291,9 @@ const alum = [
     },
     "league": "LNB Pro B",
     "division": "Middle",
-    "teamSocial": "https://x.com/EABasket49",
+    "teamSocial": {
+      "twitter": "https://x.com/EABasket49",
+    },
     "recentTweetsUrl": "https://x.com/search?q=from%3AEABasket49%20averette&src=typed_query&f=live",
     "teamWebsite": "https://www.etoile-angers-basket.com/billetterie/",
     "playerUrl": "https://basketball.eurobasket.com/player/Brandon-Averette/402159",
@@ -260,7 +315,9 @@ const alum = [
     },
     "league": "NBA G League",
     "division": "Middle",
-    "teamSocial": "https://x.com/gleagueignite",
+    "teamSocial": {
+      "twitter": "https://x.com/gleagueignite",
+    },
     "recentTweetsUrl": "https://twitter.com/search?q=from%3Agleagueignite%20mika&src=typed_query&f=live",
     "teamWebsite": "https://ignite.gleague.nba.com/schedule",
     "playerUrl": "https://stats.gleague.nba.com/player/1628450/",

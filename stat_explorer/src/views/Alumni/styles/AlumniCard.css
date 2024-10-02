@@ -262,6 +262,37 @@ button.flip-button {
   color: var(--navy-blue);
 }
 
+.card-back-links {
+  background-color: var(--navy-blue);
+  margin-left: var(--card-padding-neg);
+  margin-right: var(--card-padding-neg);
+  padding-bottom: 2px;
+}
+
+.card-back-links-header {
+  font-weight: 900;
+  font-size: 0.75rem;
+  color: white;
+}
+
+.card-back-links-container {
+  background-color: var(--app-bg);
+  margin: 0 auto;
+  width: 90%;
+  padding: 2px 0;
+}
+
+.card-back-note {
+  font-size: 0.6rem;
+  text-align: left;
+}
+
+.card-back-byuhoops {
+  height: 20px;
+  opacity: 0.5;
+  margin: 0 auto;
+}
+
 .card-back-footer {
   height: 25px;
   background-color: var(--navy-blue);
@@ -277,4 +308,12 @@ button.flip-button {
 
 .card-back-footer a:visited {
   color: white;
+}
+
+.social-link:not(:first-child) {
+  margin-left: var(--s);
+}
+
+.social-link:not(:first-child).social-link--facebook {
+  margin-left: var(--xs);
 }
