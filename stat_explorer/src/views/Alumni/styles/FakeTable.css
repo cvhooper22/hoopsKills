@@ -1,0 +1,71 @@
+.fake-table {
+    background-color: var(--lightest-blue);
+    font-size: 0.5rem;
+}
+
+.fake-table-row {
+    height: 12px;
+    display: inline-flex;
+}
+
+.fake-table-header {
+    border-bottom: 1px solid black;
+}
+
+.fake-table-header .fake-table-col {
+    font-weight: bold;
+}
+
+.fake-table-col {
+    width: 18px;
+}
+
+.col-1 {
+    width: 40px;
+    text-align: left;
+}
+
+.col-2 {
+    width: 48px;
+}
+
+.col-3 {
+    background-color: var(--app-bg);
+}
+
+.col-4 {
+    background-color: var(--app-bg);
+}
+
+.col-5 {
+    
+}
+
+.col-6 {
+    
+}
+
+.col-7 {
+    
+}
+
+.col-8 {
+    background-color: var(--app-bg);
+}
+
+.col-9 {
+    background-color: var(--app-bg);
+    width: 14px;
+}
+
+.col-10 {
+    width: 22px;
+}
+
+.col-11 {
+    text-align: right;
+}
+
+.fake-table-footer {
+    border-top: 1px solid black;
+}

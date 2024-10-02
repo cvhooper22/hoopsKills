@@ -2,6 +2,10 @@
   display: flex;
 }
 
+.f-wrap {
+  flex-wrap: wrap;
+}
+
 .scroll {
   height: 100%;
   overflow: auto;
@@ -36,6 +40,22 @@
   justify-content: center;
 }
 
+.aic {
+  align-items: center;
+}
+
+.ais {
+  align-items: start;
+}
+
+.aie {
+  align-items: end;
+}
+
+.jcc {
+  justify-content: center;
+}
+
 .flex-jce {
   display: flex;
   justify-content: flex-end;
@@ -45,6 +65,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.m-s {
+  margin: 0.5rem;
 }
 
 .mt-m {
@@ -135,6 +159,10 @@
 
 .mb-l {
   margin-bottom: var(--l);
+}
+
+.p-xs {
+  padding: var(--xs);
 }
 
 .p-s {

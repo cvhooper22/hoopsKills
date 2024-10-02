@@ -114,7 +114,7 @@ export default function Lineups() {
   }, [filterPlayers.length, lineupCount, currSort.key, currSort.direction]);
   return (
     <>
-        <h1 className="lineup-game-label">{nameFromId(currentGame)}</h1>
+        <h1 className="lineup-game-label">{`${nameFromId(currentGame)} [2022-2023]`}</h1>
         {loading && <YBallLoader />}
         { !loading && lineupData.error && <div className="mt-l">There was an error fetching the play by play data</div>}
         {!loading && !lineupData.error && (

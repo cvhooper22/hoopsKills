@@ -11,14 +11,28 @@
     flex-shrink: 0;
   }
 
-  .feature-area {
-    flex-direction: column-reverse;
+  div.home {
+    padding-top: 9rem;
+    height: calc(100% - 9.5rem);
   }
 
-  div.home-lineups {
+  div.home-content {
+    padding-bottom: 2rem;
+  }
+
+  .feature-area {
+    flex-direction: column;
+  }
+
+  div.home-description, div.feature-area.feature-area--description-left .home-description {
     margin-left: auto;
     margin-right:auto;
     margin-bottom: 3rem;
+  }
+
+  div.feature-area.feature-area--description-left {
+    flex-direction: column;
+    margin-top: 12rem;
   }
 
   .home-image {

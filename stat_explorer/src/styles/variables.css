@@ -6,6 +6,7 @@
   --blue-stop-4: #00346D;
   --blue-stop-5: #003C95;
   --navy-blue: #002e52;
+  --baby-blue: #BDD6E6;
   --app-bg: #fffffd;
   --lightest-blue: #edf4ff;
   --success-1: #006141;
@@ -26,4 +27,5 @@
   --l: 1.5rem;
   --xl: 2rem;
   --border-indicator-width: 4px;
+  --top-bar-height: 105px;
 }

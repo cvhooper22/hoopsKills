@@ -4,7 +4,8 @@ const urls = {
   gameBoxScore: 'https://gamestats.byucougars.com/boxscore/',
   seasonLineups: 'https://dd0v7fgd2sjsh.cloudfront.net/seasonLineups.json',
   assetBase: 'https://dd0v7fgd2sjsh.cloudfront.net',
-  logosPath: 'assets/logos', 
+  logosPath: 'assets/logos',
+  flagBasePath: `https://flagcdn.com/w40`, 
 };
 
 export default urls;
