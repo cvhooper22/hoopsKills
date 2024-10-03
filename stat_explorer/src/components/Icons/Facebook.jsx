@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function YouTube ({
+export default function Facebook ({
     height = 24,
     width = 24,
     className,

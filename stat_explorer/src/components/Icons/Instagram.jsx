@@ -9,7 +9,7 @@ export default function Instagram ({
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      id="facebookLogo"
+      id="InstagramLogo"
       x="0px"
       y="0px"
       height={`${height}px`}

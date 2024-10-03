@@ -230,6 +230,30 @@ const alum = [
     }
   },
   {
+    "name": "Seneca Knight",
+    "position": "Guard",
+    "country": "England",
+    "countryCode": "gb",
+    "team": "Newcastle Eagles",
+    "teamLogo": {
+      "url": "https://images.statsengine.playbyplay.api.geniussports.com/ad099872926240668f9ace9eba57f9c5T1.png",
+    },
+    "league": "Super League Basketball",
+    "division": "Highest",
+    "teamSocial": {
+      "twitter": "https://twitter.com/NewcastleEagle",
+      "instagram": "https://instagram.com/NewcastleEagles",
+      "youtube": "https://youtube.com/NewcastleEagles",
+      "facebook": "https://www.facebook.com/NewcastleEagles",
+    },
+    "recentTweetsUrl": "https://x.com/search?q=from%3Anewcastleeagle%20knight&src=typed_query&f=live",
+    "teamWebsite": "https://newcastle-eagles.com/fixtures-and-results/",
+    "playerUrl": "https://basketball.eurobasket.com/player/Seneca-Knight/492367",
+    "coverPhoto": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/senecaCard.jpg",
+    }
+  },
+  {
     "name": "Te'jon Lucas",
     "position": "Guard",
     "country": "England",
