@@ -87,29 +87,33 @@ const alum = [
     ],
   },
   {
-    "name": "Yoeli Childs",
-    "years": "2016-2020",
-    "country": "Japan",
-    "countryCode": "jp",
-    "position": "Forward",
-    "team": "Saga Ballooners",
+    "name": "Rudi Williams",
+    "country": "Hungary",
+    "countryCode": "hu",
+    "position": "Guard",
+    "team": "Egis Körmend",
     "teamLogo": {
-      "url": "https://upload.wikimedia.org/wikipedia/en/f/f8/Ballooners-logo.png",
+      "url": "https://www.egiskormend.hu/templ/gfx/header/img_bckormend_logo.png",
     },
-    "league": "Japan B League",
+    "league": "Nemzeti Bajnokság I/A",
     "division": "Highest",
     "teamSocial": {
-      "twitter": "https://x.com/SagaBallooners",
-      "instagram": "https://www.instagram.com/ballooners_official/",
-      "youtube": "https://www.youtube.com/channel/UChYMhscMvp9FEZ9uZ64GfOA",
-      "facebook": "https://www.facebook.com/sagaballooners/",
+      "instagram": "https://www.instagram.com/egiskormendhivatalos",
+      "youtube": "https://www.youtube.com/channel/UCXLaEi0_Ee1QJ8uTsQT7s1Q",
+      "facebook": "https://www.facebook.com/EgisKormendOfficial/",
     },
-    "recentTweetsUrl": "https://twitter.com/search?q=from%3Asagaballooners%20%E3%83%81%E3%83%A3%E3%82%A4%E3%83%AB%E3%82%BA&src=typed_query&f=live",
-    "teamWebsite": "https://ballooners.jp/schedule/",
-    "playerUrl": "https://www.proballers.com/basketball/player/192409/yoeli-childs",
+    "recentTweetsUrl": "",
+    "teamWebsite": "https://www.egiskormend.hu/Hirek/Kiss_Benedekkel_beszelgettunk.html",
+    "playerUrl": "https://basketball.eurobasket.com/player/Rudi-Williams/504177",
     "coverPhoto": {
-      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/yoeliCard.jpg",
-    }
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/461184337_450667134668652_5941890249778405167_n.jpg",
+      "style": {
+        "objectPosition": "41% 0",
+      }
+    },
+    "notes": [
+      "Rudi led the Austrian BSL league in scoring last year putting up 19.9p / 4.6a per game"
+    ],
   },
   {
     "name": "Alex Barcello",
@@ -143,6 +147,31 @@ const alum = [
     ],
   },
   {
+    "name": "Yoeli Childs",
+    "years": "2016-2020",
+    "country": "Japan",
+    "countryCode": "jp",
+    "position": "Forward",
+    "team": "Saga Ballooners",
+    "teamLogo": {
+      "url": "https://upload.wikimedia.org/wikipedia/en/f/f8/Ballooners-logo.png",
+    },
+    "league": "Japan B League",
+    "division": "Highest",
+    "teamSocial": {
+      "twitter": "https://x.com/SagaBallooners",
+      "instagram": "https://www.instagram.com/ballooners_official/",
+      "youtube": "https://www.youtube.com/channel/UChYMhscMvp9FEZ9uZ64GfOA",
+      "facebook": "https://www.facebook.com/sagaballooners/",
+    },
+    "recentTweetsUrl": "https://twitter.com/search?q=from%3Asagaballooners%20%E3%83%81%E3%83%A3%E3%82%A4%E3%83%AB%E3%82%BA&src=typed_query&f=live",
+    "teamWebsite": "https://ballooners.jp/schedule/",
+    "playerUrl": "https://www.proballers.com/basketball/player/192409/yoeli-childs",
+    "coverPhoto": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/yoeliCard.jpg",
+    }
+  },
+  {
     "name": "Matt Haarms",
     "years": "2022-24",
     "country": "Japan",
@@ -174,35 +203,6 @@ const alum = [
     },
     "notes": [
       "While Matt was still in Spain last season, his current team earned a promotion and will play in the middle division this year"
-    ],
-  },
-  {
-    "name": "Rudi Williams",
-    "country": "Hungary",
-    "countryCode": "hu",
-    "position": "Guard",
-    "team": "Egis Körmend",
-    "teamLogo": {
-      "url": "https://www.egiskormend.hu/templ/gfx/header/img_bckormend_logo.png",
-    },
-    "league": "Nemzeti Bajnokság I/A",
-    "division": "Highest",
-    "teamSocial": {
-      "instagram": "https://www.instagram.com/egiskormendhivatalos",
-      "youtube": "https://www.youtube.com/channel/UCXLaEi0_Ee1QJ8uTsQT7s1Q",
-      "facebook": "https://www.facebook.com/EgisKormendOfficial/",
-    },
-    "recentTweetsUrl": "",
-    "teamWebsite": "https://www.egiskormend.hu/Hirek/Kiss_Benedekkel_beszelgettunk.html",
-    "playerUrl": "https://basketball.eurobasket.com/player/Rudi-Williams/504177",
-    "coverPhoto": {
-      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/461184337_450667134668652_5941890249778405167_n.jpg",
-      "style": {
-        "objectPosition": "41% 0",
-      }
-    },
-    "notes": [
-      "Rudi led the Austrian BSL league in scoring last year putting up 19.9p / 4.6a per game"
     ],
   },
   {
