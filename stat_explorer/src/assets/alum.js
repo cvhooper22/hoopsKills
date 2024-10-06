@@ -167,7 +167,7 @@ const alum = [
     "teamWebsite": "https://www.rebnise.jp/",
     "playerUrl": "https://basketball.eurobasket.com/player/Matt-Haarms/353966",
     "coverPhoto": {
-      "url": "https://www.palenciaenlared.es/wp-content/uploads/2023/12/matt-haarms.jpg",
+      "url": "https://www.rebnise.jp/files/user/202410061708_6.jpg",
       "style": {
         "objectPosition": "-80px 0",
       }
@@ -194,7 +194,7 @@ const alum = [
     },
     "recentTweetsUrl": "",
     "teamWebsite": "https://www.egiskormend.hu/Hirek/Kiss_Benedekkel_beszelgettunk.html",
-    "playerUrl": "https://www.basketballaustria.at/spieler?player_id=6737790&season_id=126992",
+    "playerUrl": "https://basketball.eurobasket.com/player/Rudi-Williams/504177",
     "coverPhoto": {
       "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/461184337_450667134668652_5941890249778405167_n.jpg",
       "style": {
@@ -226,7 +226,7 @@ const alum = [
     "teamWebsite": "https://riders.basketball/bbl-games/",
     "playerUrl": "https://basketball.eurobasket.com/player/Spencer-Johnson/487981",
     "coverPhoto": {
-      "url": "https://scontent.fmli1-1.fna.fbcdn.net/v/t39.30808-6/461495575_18463976230020290_1401119312615072209_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_ohc=GBjUQhLbvR8Q7kNvgF8Qlyd&_nc_ht=scontent.fmli1-1.fna&_nc_gid=AGMgZ7j1yZOMvpVcsQd5KaC&oh=00_AYBom6t7E_A_UD2CasrOM67vgqa4PdocXQSCwW-Y3kjDEw&oe=670095A7",
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/spencerCard.jpg",
     }
   },
   {
