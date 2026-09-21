@@ -323,7 +323,7 @@ const alum = [
     "team": "Cairns Taipans",
     "position": "Forward",
     "teamLogo": {
-      "url": "https://riders.basketball/wp-content/uploads/2025/02/leicester-riders-crest_logo.svg"
+      "url": "https://thumb.wikimedia.org/wikipedia/en/thumb/f/f9/Cairns_Taipans_logo.svg/500px-Cairns_Taipans_logo.svg.png"
     },
     "league": "NBL",
     "division": "Highest",
@@ -336,7 +336,7 @@ const alum = [
     "playerUrl": "https://basketball.eurobasket.com/player/Mawot-Mag/500718",
     "teamWebsite": "https://www.taipans.com/",
     "coverPhoto": {
-      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/spencerCard.jpg"
+      "url": "https://cdn.prod.website-files.com/689da8fb55abaf74fc521cc2/697c0015a552e407b31d4405_Untitled%20-%202026-01-29T160247.723.avif"
     }
   },
   {
