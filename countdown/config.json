@@ -1,0 +1,146 @@
+{
+  "sample_size_minimums": {
+    "default": {
+      "min_attempts": 15
+    },
+    "3P%": {
+      "min_attempts": 20,
+      "attempt_col": "3PA"
+    },
+    "2P%": {
+      "min_attempts": 30,
+      "attempt_col": "2PA"
+    },
+    "FG%": {
+      "min_attempts": 50,
+      "attempt_col": "FGA"
+    },
+    "FT%": {
+      "min_attempts": 15,
+      "attempt_col": "FTA"
+    },
+    "eFG%": {
+      "min_attempts": 50,
+      "attempt_col": "FGA"
+    }
+  },
+  "threshold_game_levels": {
+    "STL": [
+      2,
+      3,
+      4
+    ],
+    "BLK": [
+      2,
+      3
+    ],
+    "3P": [
+      3,
+      4,
+      5
+    ]
+  },
+  "streak_conditions": [
+    {
+      "stat": "STL",
+      "op": ">=",
+      "value": 1
+    },
+    {
+      "stat": "3P",
+      "op": ">=",
+      "value": 1
+    },
+    {
+      "stat": "PTS",
+      "op": ">=",
+      "value": 10
+    }
+  ],
+  "windows": [
+    "current_season",
+    "last_2_seasons",
+    "career"
+  ],
+  "streak_min_length": 2,
+  "derived_split_stats": {
+    "counting": [
+      "PTS",
+      "TRB",
+      "AST",
+      "STL",
+      "BLK",
+      "3P"
+    ],
+    "pct": [
+      "FG%",
+      "3P%",
+      "FT%"
+    ]
+  },
+  "ranking_weights": {
+    "active_roster_bonus": 10,
+    "career_total_bonus": 5,
+    "single_game_bonus": 4,
+    "has_opponent_context_bonus": 2,
+    "pct_below_min_sample_penalty": -100,
+    "low_number_cutoff": 30,
+    "low_number_bonus": 3,
+    "high_number_bonus": 3
+  },
+  "scoring": {
+    "pct_match_tolerance": 0.5,
+    "career_total_stat_types": [
+      "career_total",
+      "window_total"
+    ],
+    "single_game_stat_types": [
+      "single_game"
+    ],
+    "low_number_stat_types": [
+      "single_game",
+      "streak",
+      "threshold_count"
+    ],
+    "high_number_stat_types": [
+      "career_total",
+      "season_total",
+      "window_total"
+    ],
+    "opponent_context_split_prefixes": [
+      "vs_team"
+    ]
+  },
+  "max_suggestions_per_number": 5,
+  "manual_refresh_only": true,
+  "draft": {
+    "lead": "{n} days to #BYUHoops \u2014 ",
+    "team_name": "BYU"
+  },
+  "first_day_game": "2026-11-02",
+  "splits": {
+    "min_games": 2,
+    "note": "drop split rows below this game count (e.g. one-off opponents in vs. Team)"
+  },
+  "fetch": {
+    "min_interval_seconds": 3.5,
+    "user_agent": "byu-hoops-countdown/0.1 (personal project; contact matt@lagunacreek.io)",
+    "base_url": "https://www.sports-reference.com",
+    "current_season": 2026
+  },
+  "counting_stats": [
+    "PTS",
+    "TRB",
+    "AST",
+    "STL",
+    "BLK",
+    "3P",
+    "3PA",
+    "FG",
+    "FGA",
+    "FT",
+    "FTA",
+    "TOV",
+    "PF"
+  ]
+}

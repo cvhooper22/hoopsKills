@@ -7,7 +7,7 @@ import SocialLink from './SocialLink';
 
 export default function AlmuniCard({alum}) {
   const [isFlipped, setIsFlipped] = useState(false);
-  const [firstname, lastname] = alum.name.split(' ');
+  const [firstname, lastname, postfix] = alum.name.split(' ');
   const imageStyle = alum.coverPhoto?.style ?? {};
   const teamLogoStyle = alum.teamLogo?.style ?? {};
   
@@ -30,11 +30,11 @@ export default function AlmuniCard({alum}) {
         <div className='alumni-card'>
           <div className='alumni-card__inner p-xs'>
             <div className='alumni-card__logo'>
-              <img className='alumni-card__logo-image' src={alum.teamLogo?.url} style={{ ...teamLogoStyle }}></img>
-              <img className='alumni-card__logo-image alumni-card__logo-image--dropLeft' src={alum.teamLogo?.url} style={{ ...teamLogoStyle }}></img>
+              <img className='alumni-card__logo-image' src={alum.teamLogo?.url} referrerPolicy="no-referrer" style={{ ...teamLogoStyle }}></img>
+              <img className='alumni-card__logo-image alumni-card__logo-image--dropLeft' src={alum.teamLogo?.url} referrerPolicy="no-referrer" style={{ ...teamLogoStyle }}></img>
             </div>
             <div className='alumni-card__photo'>
-              <img className="alumni-card__image" src={alum.coverPhoto?.url} style={{ ...imageStyle }}/>
+              <img className="alumni-card__image" src={alum.coverPhoto?.url} referrerPolicy="no-referrer" style={{ ...imageStyle }}/>
             </div>
             <div className='alumni-card__name-circle-spacer'></div>
           </div>
@@ -46,8 +46,8 @@ export default function AlmuniCard({alum}) {
             </div>
             <div className='alumni-card__lastname-container'>
               <div className='alumni-card__lastname-inner'>
-                <div className='alumni-card__lastname'>
-                  {lastname}
+                <div className={`alumni-card__lastname${alum.nameAccent ? " alumni-card__lastname--accent" : ""}`}>
+                  {`${lastname}${postfix ? ` ${postfix}` : ""}`}
                 </div>
               </div>
             </div>
@@ -56,7 +56,7 @@ export default function AlmuniCard({alum}) {
             </div>
           </div>
           <div className='alumni-card__label'>
-            <img src="./byuHoops.png" />
+            <img src="/byuHoops.png" />
           </div>
           <div>
 
@@ -65,11 +65,11 @@ export default function AlmuniCard({alum}) {
         <div className='alumni-card alumni-card--back flex-c'>
           <div className='card-back-header flex-aic jcc'>
             <div className='card-back-header__first'>{firstname}</div>
-            <div className='card-back-header__last ml-s'>{lastname}</div>
+            <div className='card-back-header__last ml-s'>{`${lastname}${postfix ? ` ${postfix}` : ""}`}</div>
           </div>
           <div className='card-back-team flex-aic jcc p-s'>
             <div className='card-back-team__logo mr-m'>
-              <img className='card-back__logo-image' src={alum.teamLogo?.url}></img>
+              <img className='card-back__logo-image' src={alum.teamLogo?.url} referrerPolicy="no-referrer"></img>
             </div>
             <div className='card-back-team__details flex-c ais'>
               <div className='card-back-detail flex-aic'>
@@ -111,7 +111,7 @@ export default function AlmuniCard({alum}) {
             { alum.notes && (
               alum.notes.map(n => <div className='card-back-note' key={`${alum.name}_note`}>{n}</div>)
             )}
-            { !alum.notes && <img className='card-back-byuhoops' src="./byuHoops.png" />}
+            { !alum.notes && <img className='card-back-byuhoops' src="/byuHoops.png" />}
           </div>
           <div className='card-back-footer flex-aic jcc'>
               <a href={footerUrl} target='_blank' className='mr-xs'>

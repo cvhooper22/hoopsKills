@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Raw scraped HTML — durable local cache, not source-controlled
+cache/

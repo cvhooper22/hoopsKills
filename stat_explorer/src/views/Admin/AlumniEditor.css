@@ -1,0 +1,476 @@
+.alumni-editor {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  font-family: sans-serif;
+  color: #002e52;
+  box-sizing: border-box;
+}
+
+/* Not applied to the preview: the card's own CSS expects the app defaults. */
+.alumni-editor__list,
+.alumni-editor__list *,
+.alumni-editor__main,
+.alumni-editor__main * {
+  box-sizing: border-box;
+}
+
+.alumni-editor__list,
+.alumni-editor__main {
+  text-align: left;
+}
+
+/* ---------- Left: alum list ---------- */
+
+.alumni-editor__list {
+  flex: none;
+  width: 270px;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-right: 1px solid #dde3ea;
+}
+
+.alumni-editor__list-top {
+  flex: none;
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.alumni-editor__list-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px 20px;
+}
+
+.alumni-editor__list-note {
+  margin: 8px 0 0;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #9a5b00;
+}
+
+.alumni-editor__list-note--ok {
+  color: #1a7a3c;
+}
+
+.alumni-editor__list-note--error {
+  color: #b00020;
+}
+
+.alumni-editor__list-save-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 9px 10px;
+  background: white;
+  color: #1a7a3c;
+  border: 1.5px solid #1a7a3c;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.alumni-editor__list-save-btn:hover:not(:disabled) {
+  background: #eef8f1;
+}
+
+.alumni-editor__list-save-btn:disabled {
+  color: #9aa5b1;
+  border-color: #c9d2dc;
+  cursor: default;
+}
+
+.alumni-editor__dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-right: 2px;
+  border-radius: 50%;
+  background: #d98a00;
+}
+
+.alumni-editor__add-btn {
+  width: 100%;
+  padding: 10px;
+  background: #002e52;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.alumni-editor__list-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 10px;
+  margin-bottom: 2px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.alumni-editor__list-item:hover {
+  background: #f0f4f8;
+}
+
+.alumni-editor__list-item--selected,
+.alumni-editor__list-item--selected:hover {
+  background: #dceaf5;
+}
+
+.alumni-editor__list-item--inactive {
+  opacity: 0.5;
+}
+
+.alumni-editor__list-item-name {
+  flex: 1;
+  margin: 0 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.alumni-editor__list-item button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 3px 5px;
+  border-radius: 4px;
+}
+
+.alumni-editor__list-item button:hover:not(:disabled) {
+  background: rgba(0, 46, 82, 0.12);
+}
+
+.alumni-editor__list-item button:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+/* ---------- Center: form ---------- */
+
+.alumni-editor__main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: #f5f7fa;
+}
+
+.alumni-editor__save-bar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 16px 32px;
+  background: white;
+  border-bottom: 1px solid #dde3ea;
+}
+
+.alumni-editor__title {
+  margin: 0;
+  font-size: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.alumni-editor__save-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.alumni-editor__save-btn {
+  flex: none;
+  padding: 10px 24px;
+  background: #1a7a3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.alumni-editor__save-btn:disabled {
+  background: #999;
+  cursor: default;
+}
+
+.alumni-editor__status {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.alumni-editor__status--error {
+  color: #b00020;
+}
+
+.alumni-editor__status--ok {
+  color: #1a7a3c;
+}
+
+.alumni-editor__status--dirty {
+  color: #9a5b00;
+  font-weight: 600;
+}
+
+.alumni-editor__scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 32px;
+}
+
+.alumni-editor__form {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.alumni-editor__section {
+  margin-bottom: 28px;
+  padding: 24px 28px 28px;
+  background: white;
+  border: 1px solid #dde3ea;
+  border-radius: 8px;
+}
+
+.alumni-editor__section h3 {
+  margin: 0 0 24px;
+  padding-bottom: 12px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #5b6b7b;
+  border-bottom: 1px solid #edf0f4;
+}
+
+.alumni-editor__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.alumni-editor__row + .alumni-editor__row,
+.alumni-editor__checks + .alumni-editor__row {
+  margin-top: 24px;
+}
+
+.alumni-editor__row--2 {
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 28px;
+}
+
+.alumni-editor__row--player {
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 24px 28px;
+}
+
+.alumni-editor__checks {
+  display: flex;
+  gap: 32px;
+  margin-top: 24px;
+}
+
+.alumni-editor__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.alumni-editor__label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: #40526a;
+}
+
+.alumni-editor__hint {
+  font-size: 12px;
+  color: #8592a0;
+}
+
+.alumni-editor__field input[type="text"],
+.alumni-editor__field input[type="url"],
+.alumni-editor__field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #c9d2dc;
+  border-radius: 6px;
+  background: white;
+  font-size: 14px;
+  font-family: inherit;
+  color: #1d2b3a;
+}
+
+.alumni-editor__field input:focus,
+.alumni-editor__field textarea:focus,
+.alumni-editor__importer input:focus {
+  outline: none;
+  border-color: #2a6fb0;
+  box-shadow: 0 0 0 3px rgba(42, 111, 176, 0.18);
+}
+
+.alumni-editor__field textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.alumni-editor__checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.alumni-editor__checkbox input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+/* ---------- Apply-to-preview (style JSON) ---------- */
+
+.alumni-editor__apply {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.alumni-editor__apply-btn {
+  flex: none;
+  padding: 8px 14px;
+  background: #002e52;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.alumni-editor__apply-btn:disabled {
+  background: #c9d2dc;
+  cursor: default;
+}
+
+.alumni-editor__apply-msg {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.alumni-editor__apply-msg--pending {
+  color: #9a5b00;
+}
+
+.alumni-editor__apply-msg--error {
+  color: #b00020;
+}
+
+/* ---------- Image importer ---------- */
+
+.alumni-editor__importer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 16px;
+  background: #f5f7fa;
+  border: 1px dashed #c9d2dc;
+  border-radius: 6px;
+}
+
+.alumni-editor__importer input[type="url"] {
+  flex: 2;
+  min-width: 220px;
+  padding: 9px 12px;
+  border: 1px solid #c9d2dc;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.alumni-editor__importer-filename {
+  flex: 1;
+  min-width: 120px;
+  padding: 9px 12px;
+  border: 1px solid #c9d2dc;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.alumni-editor__importer button {
+  padding: 9px 16px;
+  background: #002e52;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.alumni-editor__importer button:disabled {
+  background: #999;
+  cursor: default;
+}
+
+.alumni-editor__importer .alumni-editor__status {
+  flex-basis: 100%;
+  font-size: 12px;
+  word-break: break-all;
+}
+
+/* ---------- Right: card preview ---------- */
+
+.alumni-editor__preview {
+  flex: none;
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 28px 24px;
+  overflow-y: auto;
+  background: linear-gradient(110deg, #fff 0%, #f1f6fc 60%, #e8f0fb 100%);
+  border-left: 1px solid #dde3ea;
+}
+
+.alumni-editor__preview-heading {
+  align-self: stretch;
+  padding-bottom: 12px;
+  margin-bottom: 32px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #5b6b7b;
+  border-bottom: 1px solid rgba(0, 46, 82, 0.1);
+}
+
+.alumni-editor__preview-hint {
+  margin: 0;
+  padding-top: 16px;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  color: #6b7a8a;
+}
+
+.alumni-editor__empty {
+  padding: 40px;
+  color: #888;
+}
+
+@media (max-width: 1280px) {
+  .alumni-editor__preview {
+    width: 320px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+}

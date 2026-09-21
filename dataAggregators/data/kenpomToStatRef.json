@@ -1,0 +1,1094 @@
+{
+  "Duke": {
+      "SportsRef": "Duke"
+  },
+  "Houston": {
+      "SportsRef": "Houston"
+  },
+  "Florida": {
+      "SportsRef": "Florida"
+  },
+  "Auburn": {
+      "SportsRef": "Auburn"
+  },
+  "Tennessee": {
+      "SportsRef": "Tennessee"
+  },
+  "Alabama": {
+      "SportsRef": "Alabama"
+  },
+  "Michigan St.": {
+      "SportsRef": "Michigan St."
+  },
+  "Gonzaga": {
+      "SportsRef": "Gonzaga"
+  },
+  "Texas Tech": {
+      "SportsRef": "Texas Tech"
+  },
+  "Maryland": {
+      "SportsRef": "Maryland"
+  },
+  "Iowa St.": {
+      "SportsRef": "Iowa St."
+  },
+  "Arizona": {
+      "SportsRef": "Arizona"
+  },
+  "Wisconsin": {
+      "SportsRef": "Wisconsin"
+  },
+  "St. John's": {
+      "SportsRef": "St. John's"
+  },
+  "Purdue": {
+      "SportsRef": "Purdue"
+  },
+  "Kentucky": {
+      "SportsRef": "Kentucky"
+  },
+  "Illinois": {
+      "SportsRef": "Illinois"
+  },
+  "Texas A&M": {
+      "SportsRef": "Texas A&M"
+  },
+  "Missouri": {
+      "SportsRef": "Missouri"
+  },
+  "Mississippi": {
+      "SportsRef": "Mississippi"
+  },
+  "Clemson": {
+      "SportsRef": "Clemson"
+  },
+  "Michigan": {
+      "SportsRef": "Michigan"
+  },
+  "UCLA": {
+      "SportsRef": "UCLA"
+  },
+  "Kansas": {
+      "SportsRef": "Kansas"
+  },
+  "Saint Mary's": {
+      "SportsRef": "Saint Mary's"
+  },
+  "BYU": {
+      "SportsRef": "BYU"
+  },
+  "Louisville": {
+      "SportsRef": "Louisville"
+  },
+  "Oregon": {
+      "SportsRef": "Oregon"
+  },
+  "Marquette": {
+      "SportsRef": "Marquette"
+  },
+  "Baylor": {
+      "SportsRef": "Baylor"
+  },
+  "North Carolina": {
+      "SportsRef": "North Carolina"
+  },
+  "Connecticut": {
+      "SportsRef": "Connecticut"
+  },
+  "Mississippi St.": {
+      "SportsRef": "Mississippi St."
+  },
+  "VCU": {
+      "SportsRef": "VCU"
+  },
+  "Creighton": {
+      "SportsRef": "Creighton"
+  },
+  "Arkansas": {
+      "SportsRef": "Arkansas"
+  },
+  "Ohio St.": {
+      "SportsRef": "Ohio St."
+  },
+  "Georgia": {
+      "SportsRef": "Georgia"
+  },
+  "UC San Diego": {
+      "SportsRef": "UC San Diego"
+  },
+  "Oklahoma": {
+      "SportsRef": "Oklahoma"
+  },
+  "New Mexico": {
+      "SportsRef": "New Mexico"
+  },
+  "Colorado St.": {
+      "SportsRef": "Colorado St."
+  },
+  "Xavier": {
+      "SportsRef": "Xavier"
+  },
+  "Texas": {
+      "SportsRef": "Texas"
+  },
+  "Northwestern": {
+      "SportsRef": "Northwestern"
+  },
+  "Indiana": {
+      "SportsRef": "Indiana"
+  },
+  "Boise St.": {
+      "SportsRef": "Boise St."
+  },
+  "Vanderbilt": {
+      "SportsRef": "Vanderbilt"
+  },
+  "Nebraska": {
+      "SportsRef": "Nebraska"
+  },
+  "SMU": {
+      "SportsRef": "SMU"
+  },
+  "Memphis": {
+      "SportsRef": "Memphis"
+  },
+  "San Diego St.": {
+      "SportsRef": "San Diego St."
+  },
+  "West Virginia": {
+      "SportsRef": "West Virginia"
+  },
+  "Drake": {
+      "SportsRef": "Drake"
+  },
+  "Cincinnati": {
+      "SportsRef": "Cincinnati"
+  },
+  "Villanova": {
+      "SportsRef": "Villanova"
+  },
+  "Santa Clara": {
+      "SportsRef": "Santa Clara"
+  },
+  "McNeese": {
+      "SportsRef": "McNeese"
+  },
+  "Penn St.": {
+      "SportsRef": "Penn St."
+  },
+  "Utah St.": {
+      "SportsRef": "Utah St."
+  },
+  "Pittsburgh": {
+      "SportsRef": "Pittsburgh"
+  },
+  "USC": {
+      "SportsRef": "USC"
+  },
+  "Iowa": {
+      "SportsRef": "Iowa"
+  },
+  "Liberty": {
+      "SportsRef": "Liberty"
+  },
+  "Kansas St.": {
+      "SportsRef": "Kansas St."
+  },
+  "San Francisco": {
+      "SportsRef": "San Francisco"
+  },
+  "UC Irvine": {
+      "SportsRef": "UC Irvine"
+  },
+  "UCF": {
+      "SportsRef": "UCF"
+  },
+  "North Texas": {
+      "SportsRef": "North Texas"
+  },
+  "South Carolina": {
+      "SportsRef": "South Carolina"
+  },
+  "Rutgers": {
+      "SportsRef": "Rutgers"
+  },
+  "Wake Forest": {
+      "SportsRef": "Wake Forest"
+  },
+  "Arizona St.": {
+      "SportsRef": "Arizona St."
+  },
+  "Yale": {
+      "SportsRef": "Yale"
+  },
+  "Butler": {
+      "SportsRef": "Butler"
+  },
+  "Utah": {
+      "SportsRef": "Utah"
+  },
+  "Dayton": {
+      "SportsRef": "Dayton"
+  },
+  "Nevada": {
+      "SportsRef": "Nevada"
+  },
+  "Colorado": {
+      "SportsRef": "Colorado"
+  },
+  "George Mason": {
+      "SportsRef": "George Mason"
+  },
+  "Stanford": {
+      "SportsRef": "Stanford"
+  },
+  "Oregon St.": {
+      "SportsRef": "Oregon St."
+  },
+  "Arkansas St.": {
+      "SportsRef": "Arkansas St."
+  },
+  "High Point": {
+      "SportsRef": "High Point"
+  },
+  "Saint Joseph's": {
+      "SportsRef": "Saint Joseph's"
+  },
+  "Georgetown": {
+      "SportsRef": "Georgetown"
+  },
+  "Minnesota": {
+      "SportsRef": "Minnesota"
+  },
+  "TCU": {
+      "SportsRef": "TCU"
+  },
+  "LSU": {
+      "SportsRef": "LSU"
+  },
+  "Lipscomb": {
+      "SportsRef": "Lipscomb"
+  },
+  "Florida St.": {
+      "SportsRef": "Florida St."
+  },
+  "Bradley": {
+      "SportsRef": "Bradley"
+  },
+  "UNLV": {
+      "SportsRef": "UNLV"
+  },
+  "Providence": {
+      "SportsRef": "Providence"
+  },
+  "Troy": {
+      "SportsRef": "Troy"
+  },
+  "Oklahoma St.": {
+      "SportsRef": "Oklahoma St."
+  },
+  "Notre Dame": {
+      "SportsRef": "Notre Dame"
+  },
+  "UAB": {
+      "SportsRef": "UAB"
+  },
+  "Chattanooga": {
+      "SportsRef": "Chattanooga"
+  },
+  "Akron": {
+      "SportsRef": "Akron"
+  },
+  "Grand Canyon": {
+      "SportsRef": "Grand Canyon"
+  },
+  "Northern Iowa": {
+      "SportsRef": "Northern Iowa"
+  },
+  "Georgia Tech": {
+      "SportsRef": "Georgia Tech"
+  },
+  "Washington": {
+      "SportsRef": "Washington"
+  },
+  "UNC Wilmington": {
+      "SportsRef": "UNC Wilmington"
+  },
+  "Loyola Chicago": {
+      "SportsRef": "Loyola Chicago"
+  },
+  "Virginia": {
+      "SportsRef": "Virginia"
+  },
+  "Jacksonville St.": {
+      "SportsRef": "Jacksonville St."
+  },
+  "South Alabama": {
+      "SportsRef": "South Alabama"
+  },
+  "DePaul": {
+      "SportsRef": "DePaul"
+  },
+  "California": {
+      "SportsRef": "California"
+  },
+  "Kent St.": {
+      "SportsRef": "Kent St."
+  },
+  "Florida Atlantic": {
+      "SportsRef": "Florida Atlantic"
+  },
+  "Utah Valley": {
+      "SportsRef": "Utah Valley"
+  },
+  "Syracuse": {
+      "SportsRef": "Syracuse"
+  },
+  "North Alabama": {
+      "SportsRef": "North Alabama"
+  },
+  "Wofford": {
+      "SportsRef": "Wofford"
+  },
+  "CSUN": {
+      "SportsRef": "CSUN"
+  },
+  "Middle Tennessee": {
+      "SportsRef": "Middle Tennessee"
+  },
+  "Saint Louis": {
+      "SportsRef": "Saint Louis"
+  },
+  "Samford": {
+      "SportsRef": "Samford"
+  },
+  "St. Bonaventure": {
+      "SportsRef": "St. Bonaventure"
+  },
+  "Washington St.": {
+      "SportsRef": "Washington St."
+  },
+  "Belmont": {
+      "SportsRef": "Belmont"
+  },
+  "Northern Colorado": {
+      "SportsRef": "Northern Colorado"
+  },
+  "N.C. State": {
+      "SportsRef": "N.C. State"
+  },
+  "Louisiana Tech": {
+      "SportsRef": "Louisiana Tech"
+  },
+  "George Washington": {
+      "SportsRef": "George Washington"
+  },
+  "Cornell": {
+      "SportsRef": "Cornell"
+  },
+  "St. Thomas": {
+      "SportsRef": "St. Thomas"
+  },
+  "Kennesaw St.": {
+      "SportsRef": "Kennesaw St."
+  },
+  "Illinois St.": {
+      "SportsRef": "Illinois St."
+  },
+  "Robert Morris": {
+      "SportsRef": "Robert Morris"
+  },
+  "New Mexico St.": {
+      "SportsRef": "New Mexico St."
+  },
+  "Wichita St.": {
+      "SportsRef": "Wichita St."
+  },
+  "North Dakota St.": {
+      "SportsRef": "North Dakota St."
+  },
+  "South Dakota St.": {
+      "SportsRef": "South Dakota St."
+  },
+  "Tulane": {
+      "SportsRef": "Tulane"
+  },
+  "Murray St.": {
+      "SportsRef": "Murray St."
+  },
+  "Duquesne": {
+      "SportsRef": "Duquesne"
+  },
+  "Furman": {
+      "SportsRef": "Furman"
+  },
+  "Milwaukee": {
+      "SportsRef": "Milwaukee"
+  },
+  "East Tennessee St.": {
+      "SportsRef": "East Tennessee St."
+  },
+  "UNC Greensboro": {
+      "SportsRef": "UNC Greensboro"
+  },
+  "Seattle": {
+      "SportsRef": "Seattle"
+  },
+  "Davidson": {
+      "SportsRef": "Davidson"
+  },
+  "UC Santa Barbara": {
+      "SportsRef": "UC Santa Barbara"
+  },
+  "Miami OH": {
+      "SportsRef": "Miami OH"
+  },
+  "Bryant": {
+      "SportsRef": "Bryant"
+  },
+  "Texas A&M Corpus Chris": {
+      "SportsRef": "Texas A&M Corpus Chris"
+  },
+  "Radford": {
+      "SportsRef": "Radford"
+  },
+  "Towson": {
+      "SportsRef": "Towson"
+  },
+  "Charleston": {
+      "SportsRef": "Charleston"
+  },
+  "Cleveland St.": {
+      "SportsRef": "Cleveland St."
+  },
+  "Rhode Island": {
+      "SportsRef": "Rhode Island"
+  },
+  "Loyola Marymount": {
+      "SportsRef": "Loyola Marymount"
+  },
+  "Purdue Fort Wayne": {
+      "SportsRef": "Purdue Fort Wayne"
+  },
+  "Lamar": {
+      "SportsRef": "Lamar"
+  },
+  "UC Riverside": {
+      "SportsRef": "UC Riverside"
+  },
+  "James Madison": {
+      "SportsRef": "James Madison"
+  },
+  "Western Kentucky": {
+      "SportsRef": "Western Kentucky"
+  },
+  "UTEP": {
+      "SportsRef": "UTEP"
+  },
+  "Montana": {
+      "SportsRef": "Montana"
+  },
+  "Virginia Tech": {
+      "SportsRef": "Virginia Tech"
+  },
+  "Nebraska Omaha": {
+      "SportsRef": "Nebraska Omaha"
+  },
+  "Winthrop": {
+      "SportsRef": "Winthrop"
+  },
+  "Nicholls": {
+      "SportsRef": "Nicholls"
+  },
+  "Marshall": {
+      "SportsRef": "Marshall"
+  },
+  "San Jose St.": {
+      "SportsRef": "San Jose St."
+  },
+  "Appalachian St.": {
+      "SportsRef": "Appalachian St."
+  },
+  "Illinois Chicago": {
+      "SportsRef": "Illinois Chicago"
+  },
+  "Temple": {
+      "SportsRef": "Temple"
+  },
+  "Cal Baptist": {
+      "SportsRef": "Cal Baptist"
+  },
+  "Oakland": {
+      "SportsRef": "Oakland"
+  },
+  "East Carolina": {
+      "SportsRef": "East Carolina"
+  },
+  "Sam Houston St.": {
+      "SportsRef": "Sam Houston St."
+  },
+  "Princeton": {
+      "SportsRef": "Princeton"
+  },
+  "Norfolk St.": {
+      "SportsRef": "Norfolk St."
+  },
+  "Florida Gulf Coast": {
+      "SportsRef": "Florida Gulf Coast"
+  },
+  "Central Connecticut": {
+      "SportsRef": "Central Connecticut"
+  },
+  "Boston College": {
+      "SportsRef": "Boston College"
+  },
+  "Rice": {
+      "SportsRef": "Rice"
+  },
+  "Cal Poly": {
+      "SportsRef": "Cal Poly"
+  },
+  "Wyoming": {
+      "SportsRef": "Wyoming"
+  },
+  "Drexel": {
+      "SportsRef": "Drexel"
+  },
+  "Merrimack": {
+      "SportsRef": "Merrimack"
+  },
+  "Southeastern Louisiana": {
+      "SportsRef": "Southeastern Louisiana"
+  },
+  "UTSA": {
+      "SportsRef": "UTSA"
+  },
+  "Eastern Kentucky": {
+      "SportsRef": "Eastern Kentucky"
+  },
+  "Montana St.": {
+      "SportsRef": "Montana St."
+  },
+  "Southern Illinois": {
+      "SportsRef": "Southern Illinois"
+  },
+  "South Carolina St.": {
+      "SportsRef": "South Carolina St."
+  },
+  "Miami FL": {
+      "SportsRef": "Miami FL"
+  },
+  "South Florida": {
+      "SportsRef": "South Florida"
+  },
+  "Texas St.": {
+      "SportsRef": "Texas St."
+  },
+  "Ohio": {
+      "SportsRef": "Ohio"
+  },
+  "Indiana St.": {
+      "SportsRef": "Indiana St."
+  },
+  "Central Michigan": {
+      "SportsRef": "Central Michigan"
+  },
+  "Youngstown St.": {
+      "SportsRef": "Youngstown St."
+  },
+  "Jacksonville": {
+      "SportsRef": "Jacksonville"
+  },
+  "UNC Asheville": {
+      "SportsRef": "UNC Asheville"
+  },
+  "Southeast Missouri": {
+      "SportsRef": "Southeast Missouri"
+  },
+  "Seton Hall": {
+      "SportsRef": "Seton Hall"
+  },
+  "Dartmouth": {
+      "SportsRef": "Dartmouth"
+  },
+  "Valparaiso": {
+      "SportsRef": "Valparaiso"
+  },
+  "Elon": {
+      "SportsRef": "Elon"
+  },
+  "Portland St.": {
+      "SportsRef": "Portland St."
+  },
+  "Brown": {
+      "SportsRef": "Brown"
+  },
+  "Northeastern": {
+      "SportsRef": "Northeastern"
+  },
+  "Longwood": {
+      "SportsRef": "Longwood"
+  },
+  "Idaho St.": {
+      "SportsRef": "Idaho St."
+  },
+  "Quinnipiac": {
+      "SportsRef": "Quinnipiac"
+  },
+  "Queens": {
+      "SportsRef": "Queens"
+  },
+  "Wright St.": {
+      "SportsRef": "Wright St."
+  },
+  "Hampton": {
+      "SportsRef": "Hampton"
+  },
+  "Pepperdine": {
+      "SportsRef": "Pepperdine"
+  },
+  "SIUE": {
+      "SportsRef": "SIUE"
+  },
+  "Hofstra": {
+      "SportsRef": "Hofstra"
+  },
+  "Maine": {
+      "SportsRef": "Maine"
+  },
+  "Campbell": {
+      "SportsRef": "Campbell"
+  },
+  "Abilene Christian": {
+      "SportsRef": "Abilene Christian"
+  },
+  "Massachusetts": {
+      "SportsRef": "Massachusetts"
+  },
+  "Northwestern St.": {
+      "SportsRef": "Northwestern St."
+  },
+  "Incarnate Word": {
+      "SportsRef": "Incarnate Word"
+  },
+  "Little Rock": {
+      "SportsRef": "Little Rock"
+  },
+  "Bucknell": {
+      "SportsRef": "Bucknell"
+  },
+  "Hawaii": {
+      "SportsRef": "Hawaii"
+  },
+  "La Salle": {
+      "SportsRef": "La Salle"
+  },
+  "UT Arlington": {
+      "SportsRef": "UT Arlington"
+  },
+  "Northern Kentucky": {
+      "SportsRef": "Northern Kentucky"
+  },
+  "William & Mary": {
+      "SportsRef": "William & Mary"
+  },
+  "Southern": {
+      "SportsRef": "Southern"
+  },
+  "Presbyterian": {
+      "SportsRef": "Presbyterian"
+  },
+  "Delaware": {
+      "SportsRef": "Delaware"
+  },
+  "UT Rio Grande Valley": {
+      "SportsRef": "UT Rio Grande Valley"
+  },
+  "Toledo": {
+      "SportsRef": "Toledo"
+  },
+  "Fordham": {
+      "SportsRef": "Fordham"
+  },
+  "Missouri St.": {
+      "SportsRef": "Missouri St."
+  },
+  "Kansas City": {
+      "SportsRef": "Kansas City"
+  },
+  "Manhattan": {
+      "SportsRef": "Manhattan"
+  },
+  "South Dakota": {
+      "SportsRef": "South Dakota"
+  },
+  "Vermont": {
+      "SportsRef": "Vermont"
+  },
+  "Mount St. Mary's": {
+      "SportsRef": "Mount St. Mary's"
+  },
+  "UMass Lowell": {
+      "SportsRef": "UMass Lowell"
+  },
+  "Cal St. Bakersfield": {
+      "SportsRef": "Cal St. Bakersfield"
+  },
+  "Richmond": {
+      "SportsRef": "Richmond"
+  },
+  "Jackson St.": {
+      "SportsRef": "Jackson St."
+  },
+  "American": {
+      "SportsRef": "American"
+  },
+  "Georgia Southern": {
+      "SportsRef": "Georgia Southern"
+  },
+  "UC Davis": {
+      "SportsRef": "UC Davis"
+  },
+  "Northern Arizona": {
+      "SportsRef": "Northern Arizona"
+  },
+  "Tennessee St.": {
+      "SportsRef": "Tennessee St."
+  },
+  "Siena": {
+      "SportsRef": "Siena"
+  },
+  "Evansville": {
+      "SportsRef": "Evansville"
+  },
+  "FIU": {
+      "SportsRef": "FIU"
+  },
+  "Charlotte": {
+      "SportsRef": "Charlotte"
+  },
+  "Harvard": {
+      "SportsRef": "Harvard"
+  },
+  "Fresno St.": {
+      "SportsRef": "Fresno St."
+  },
+  "Iona": {
+      "SportsRef": "Iona"
+  },
+  "Colgate": {
+      "SportsRef": "Colgate"
+  },
+  "Mercer": {
+      "SportsRef": "Mercer"
+  },
+  "Georgia St.": {
+      "SportsRef": "Georgia St."
+  },
+  "Sacred Heart": {
+      "SportsRef": "Sacred Heart"
+  },
+  "Gardner Webb": {
+      "SportsRef": "Gardner Webb"
+  },
+  "North Dakota": {
+      "SportsRef": "North Dakota"
+  },
+  "Tulsa": {
+      "SportsRef": "Tulsa"
+  },
+  "North Florida": {
+      "SportsRef": "North Florida"
+  },
+  "Monmouth": {
+      "SportsRef": "Monmouth"
+  },
+  "Alabama St.": {
+      "SportsRef": "Alabama St."
+  },
+  "Portland": {
+      "SportsRef": "Portland"
+  },
+  "Stephen F. Austin": {
+      "SportsRef": "Stephen F. Austin"
+  },
+  "Houston Christian": {
+      "SportsRef": "Houston Christian"
+  },
+  "Marist": {
+      "SportsRef": "Marist"
+  },
+  "Ball St.": {
+      "SportsRef": "Ball St."
+  },
+  "Albany": {
+      "SportsRef": "Albany"
+  },
+  "Navy": {
+      "SportsRef": "Navy"
+  },
+  "Eastern Michigan": {
+      "SportsRef": "Eastern Michigan"
+  },
+  "Texas Southern": {
+      "SportsRef": "Texas Southern"
+  },
+  "Columbia": {
+      "SportsRef": "Columbia"
+  },
+  "Austin Peay": {
+      "SportsRef": "Austin Peay"
+  },
+  "Idaho": {
+      "SportsRef": "Idaho"
+  },
+  "Old Dominion": {
+      "SportsRef": "Old Dominion"
+  },
+  "Lehigh": {
+      "SportsRef": "Lehigh"
+  },
+  "Pacific": {
+      "SportsRef": "Pacific"
+  },
+  "LIU": {
+      "SportsRef": "LIU"
+  },
+  "Bethune Cookman": {
+      "SportsRef": "Bethune Cookman"
+  },
+  "Tarleton St.": {
+      "SportsRef": "Tarleton St."
+  },
+  "VMI": {
+      "SportsRef": "VMI"
+  },
+  "Bowling Green": {
+      "SportsRef": "Bowling Green"
+  },
+  "Western Michigan": {
+      "SportsRef": "Western Michigan"
+  },
+  "Lafayette": {
+      "SportsRef": "Lafayette"
+  },
+  "Tennessee Martin": {
+      "SportsRef": "Tennessee Martin"
+  },
+  "Southern Miss": {
+      "SportsRef": "Southern Miss"
+  },
+  "Penn": {
+      "SportsRef": "Penn"
+  },
+  "Eastern Washington": {
+      "SportsRef": "Eastern Washington"
+  },
+  "Southern Utah": {
+      "SportsRef": "Southern Utah"
+  },
+  "Saint Peter's": {
+      "SportsRef": "Saint Peter's"
+  },
+  "San Diego": {
+      "SportsRef": "San Diego"
+  },
+  "UMBC": {
+      "SportsRef": "UMBC"
+  },
+  "Weber St.": {
+      "SportsRef": "Weber St."
+  },
+  "Utah Tech": {
+      "SportsRef": "Utah Tech"
+  },
+  "Charleston Southern": {
+      "SportsRef": "Charleston Southern"
+  },
+  "Tennessee Tech": {
+      "SportsRef": "Tennessee Tech"
+  },
+  "Boston University": {
+      "SportsRef": "Boston University"
+  },
+  "Loyola MD": {
+      "SportsRef": "Loyola MD"
+  },
+  "Fairleigh Dickinson": {
+      "SportsRef": "Fairleigh Dickinson"
+  },
+  "Delaware St.": {
+      "SportsRef": "Delaware St."
+  },
+  "Long Beach St.": {
+      "SportsRef": "Long Beach St."
+  },
+  "Air Force": {
+      "SportsRef": "Air Force"
+  },
+  "Saint Francis": {
+      "SportsRef": "Saint Francis"
+  },
+  "Denver": {
+      "SportsRef": "Denver"
+  },
+  "IU Indy": {
+      "SportsRef": "IU Indy"
+  },
+  "Louisiana": {
+      "SportsRef": "Louisiana"
+  },
+  "Howard": {
+      "SportsRef": "Howard"
+  },
+  "Rider": {
+      "SportsRef": "Rider"
+  },
+  "Eastern Illinois": {
+      "SportsRef": "Eastern Illinois"
+  },
+  "Florida A&M": {
+      "SportsRef": "Florida A&M"
+  },
+  "Army": {
+      "SportsRef": "Army"
+  },
+  "Grambling St.": {
+      "SportsRef": "Grambling St."
+  },
+  "Binghamton": {
+      "SportsRef": "Binghamton"
+  },
+  "Holy Cross": {
+      "SportsRef": "Holy Cross"
+  },
+  "Niagara": {
+      "SportsRef": "Niagara"
+  },
+  "Stonehill": {
+      "SportsRef": "Stonehill"
+  },
+  "North Carolina Central": {
+      "SportsRef": "North Carolina Central"
+  },
+  "Alcorn St.": {
+      "SportsRef": "Alcorn St."
+  },
+  "East Texas A&M": {
+      "SportsRef": "East Texas A&M"
+  },
+  "Lindenwood": {
+      "SportsRef": "Lindenwood"
+  },
+  "Morehead St.": {
+      "SportsRef": "Morehead St."
+  },
+  "Coastal Carolina": {
+      "SportsRef": "Coastal Carolina"
+  },
+  "Oral Roberts": {
+      "SportsRef": "Oral Roberts"
+  },
+  "Morgan St.": {
+      "SportsRef": "Morgan St."
+  },
+  "Green Bay": {
+      "SportsRef": "Green Bay"
+  },
+  "Stony Brook": {
+      "SportsRef": "Stony Brook"
+  },
+  "Fairfield": {
+      "SportsRef": "Fairfield"
+  },
+  "Southern Indiana": {
+      "SportsRef": "Southern Indiana"
+  },
+  "North Carolina A&T": {
+      "SportsRef": "North Carolina A&T"
+  },
+  "Detroit Mercy": {
+      "SportsRef": "Detroit Mercy"
+  },
+  "Western Carolina": {
+      "SportsRef": "Western Carolina"
+  },
+  "Buffalo": {
+      "SportsRef": "Buffalo"
+  },
+  "USC Upstate": {
+      "SportsRef": "USC Upstate"
+  },
+  "New Orleans": {
+      "SportsRef": "New Orleans"
+  },
+  "Northern Illinois": {
+      "SportsRef": "Northern Illinois"
+  },
+  "Mercyhurst": {
+      "SportsRef": "Mercyhurst"
+  },
+  "Louisiana Monroe": {
+      "SportsRef": "Louisiana Monroe"
+  },
+  "Wagner": {
+      "SportsRef": "Wagner"
+  },
+  "Western Illinois": {
+      "SportsRef": "Western Illinois"
+  },
+  "Bellarmine": {
+      "SportsRef": "Bellarmine"
+  },
+  "Sacramento St.": {
+      "SportsRef": "Sacramento St."
+  },
+  "Central Arkansas": {
+      "SportsRef": "Central Arkansas"
+  },
+  "West Georgia": {
+      "SportsRef": "West Georgia"
+  },
+  "Cal St. Fullerton": {
+      "SportsRef": "Cal St. Fullerton"
+  },
+  "Stetson": {
+      "SportsRef": "Stetson"
+  },
+  "NJIT": {
+      "SportsRef": "NJIT"
+  },
+  "Le Moyne": {
+      "SportsRef": "Le Moyne"
+  },
+  "New Hampshire": {
+      "SportsRef": "New Hampshire"
+  },
+  "The Citadel": {
+      "SportsRef": "The Citadel"
+  },
+  "Prairie View A&M": {
+      "SportsRef": "Prairie View A&M"
+  },
+  "Maryland Eastern Shore": {
+      "SportsRef": "Maryland Eastern Shore"
+  },
+  "Canisius": {
+      "SportsRef": "Canisius"
+  },
+  "Alabama A&M": {
+      "SportsRef": "Alabama A&M"
+  },
+  "Coppin St.": {
+      "SportsRef": "Coppin St."
+  },
+  "Chicago St.": {
+      "SportsRef": "Chicago St."
+  },
+  "Arkansas Pine Bluff": {
+      "SportsRef": "Arkansas Pine Bluff"
+  },
+  "Mississippi Valley St.": {
+      "SportsRef": "Mississippi Valley St."
+  }
+}
