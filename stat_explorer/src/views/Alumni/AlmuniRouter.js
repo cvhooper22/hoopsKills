@@ -8,7 +8,14 @@ import XClose from '../../components/Icons/XClose';
 
 export default function AlumniRouter () {
     const [helpOpen, setHelpOpen] = useState(false);
+    const [tab, setTab] = useState("ACTIVE");
     const hasTouchEnabled = useContext(TouchPointsContext);
+    const displayAlum = alum.filter(a => {
+        if (tab === "ACTIVE") {
+            return !a.inactive;
+        }
+        return true;
+    });
 
     function onHelpClick () {
         setHelpOpen(!helpOpen);
@@ -30,7 +37,7 @@ export default function AlumniRouter () {
                 </div>
             </div>
             <div className='alumni-cards flex f-wrap'>
-                {alum.map((alumnus) => <AlmuniCard alum={alumnus} key={alumnus.name} />)}
+                {displayAlum.map((alumnus) => <AlmuniCard alum={alumnus} key={alumnus.name} />)}
             </div>
         </div>
     );

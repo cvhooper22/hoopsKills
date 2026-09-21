@@ -1,0 +1,1822 @@
+{
+  "Duke": {
+      "overall": 1,
+      "off": 1,
+      "def": 4
+  },
+  "Houston": {
+      "overall": 2,
+      "off": 10,
+      "def": 1
+  },
+  "Florida": {
+      "overall": 3,
+      "off": 2,
+      "def": 10
+  },
+  "Auburn": {
+      "overall": 4,
+      "off": 3,
+      "def": 8
+  },
+  "Tennessee": {
+      "overall": 5,
+      "off": 17,
+      "def": 3
+  },
+  "Alabama": {
+      "overall": 6,
+      "off": 4,
+      "def": 26
+  },
+  "Michigan St.": {
+      "overall": 7,
+      "off": 25,
+      "def": 5
+  },
+  "Gonzaga": {
+      "overall": 8,
+      "off": 6,
+      "def": 29
+  },
+  "Texas Tech": {
+      "overall": 9,
+      "off": 5,
+      "def": 38
+  },
+  "Maryland": {
+      "overall": 10,
+      "off": 24,
+      "def": 6
+  },
+  "Iowa St.": {
+      "overall": 11,
+      "off": 20,
+      "def": 12
+  },
+  "Arizona": {
+      "overall": 12,
+      "off": 12,
+      "def": 36
+  },
+  "Wisconsin": {
+      "overall": 13,
+      "off": 13,
+      "def": 28
+  },
+  "St. John's": {
+      "overall": 14,
+      "off": 65,
+      "def": 2
+  },
+  "Purdue": {
+      "overall": 15,
+      "off": 7,
+      "def": 53
+  },
+  "Kentucky": {
+      "overall": 16,
+      "off": 11,
+      "def": 50
+  },
+  "Illinois": {
+      "overall": 17,
+      "off": 14,
+      "def": 40
+  },
+  "Texas A&M": {
+      "overall": 18,
+      "off": 40,
+      "def": 9
+  },
+  "Missouri": {
+      "overall": 19,
+      "off": 8,
+      "def": 69
+  },
+  "Mississippi": {
+      "overall": 20,
+      "off": 22,
+      "def": 22
+  },
+  "Clemson": {
+      "overall": 21,
+      "off": 28,
+      "def": 17
+  },
+  "Michigan": {
+      "overall": 22,
+      "off": 42,
+      "def": 13
+  },
+  "UCLA": {
+      "overall": 23,
+      "off": 37,
+      "def": 15
+  },
+  "Kansas": {
+      "overall": 24,
+      "off": 51,
+      "def": 11
+  },
+  "Saint Mary's": {
+      "overall": 25,
+      "off": 62,
+      "def": 7
+  },
+  "BYU": {
+      "overall": 26,
+      "off": 9,
+      "def": 82
+  },
+  "Louisville": {
+      "overall": 27,
+      "off": 30,
+      "def": 25
+  },
+  "Oregon": {
+      "overall": 28,
+      "off": 35,
+      "def": 23
+  },
+  "Marquette": {
+      "overall": 29,
+      "off": 34,
+      "def": 24
+  },
+  "Baylor": {
+      "overall": 30,
+      "off": 16,
+      "def": 62
+  },
+  "North Carolina": {
+      "overall": 31,
+      "off": 21,
+      "def": 46
+  },
+  "Connecticut": {
+      "overall": 32,
+      "off": 15,
+      "def": 74
+  },
+  "Mississippi St.": {
+      "overall": 33,
+      "off": 23,
+      "def": 47
+  },
+  "VCU": {
+      "overall": 34,
+      "off": 48,
+      "def": 27
+  },
+  "Creighton": {
+      "overall": 35,
+      "off": 32,
+      "def": 45
+  },
+  "Arkansas": {
+      "overall": 36,
+      "off": 63,
+      "def": 18
+  },
+  "Ohio St.": {
+      "overall": 37,
+      "off": 31,
+      "def": 51
+  },
+  "Georgia": {
+      "overall": 38,
+      "off": 57,
+      "def": 32
+  },
+  "UC San Diego": {
+      "overall": 39,
+      "off": 61,
+      "def": 31
+  },
+  "Oklahoma": {
+      "overall": 40,
+      "off": 29,
+      "def": 61
+  },
+  "New Mexico": {
+      "overall": 41,
+      "off": 74,
+      "def": 20
+  },
+  "Colorado St.": {
+      "overall": 42,
+      "off": 39,
+      "def": 52
+  },
+  "Xavier": {
+      "overall": 43,
+      "off": 46,
+      "def": 48
+  },
+  "Texas": {
+      "overall": 44,
+      "off": 36,
+      "def": 63
+  },
+  "Northwestern": {
+      "overall": 45,
+      "off": 64,
+      "def": 39
+  },
+  "Indiana": {
+      "overall": 46,
+      "off": 67,
+      "def": 37
+  },
+  "Boise St.": {
+      "overall": 47,
+      "off": 49,
+      "def": 56
+  },
+  "Vanderbilt": {
+      "overall": 48,
+      "off": 33,
+      "def": 79
+  },
+  "Nebraska": {
+      "overall": 49,
+      "off": 69,
+      "def": 43
+  },
+  "SMU": {
+      "overall": 50,
+      "off": 47,
+      "def": 68
+  },
+  "Memphis": {
+      "overall": 51,
+      "off": 73,
+      "def": 44
+  },
+  "San Diego St.": {
+      "overall": 52,
+      "off": 109,
+      "def": 16
+  },
+  "West Virginia": {
+      "overall": 53,
+      "off": 134,
+      "def": 14
+  },
+  "Drake": {
+      "overall": 54,
+      "off": 75,
+      "def": 41
+  },
+  "Cincinnati": {
+      "overall": 55,
+      "off": 101,
+      "def": 21
+  },
+  "Villanova": {
+      "overall": 56,
+      "off": 26,
+      "def": 113
+  },
+  "Santa Clara": {
+      "overall": 57,
+      "off": 45,
+      "def": 84
+  },
+  "McNeese": {
+      "overall": 58,
+      "off": 66,
+      "def": 59
+  },
+  "Penn St.": {
+      "overall": 59,
+      "off": 59,
+      "def": 70
+  },
+  "Utah St.": {
+      "overall": 60,
+      "off": 19,
+      "def": 151
+  },
+  "Pittsburgh": {
+      "overall": 61,
+      "off": 52,
+      "def": 89
+  },
+  "USC": {
+      "overall": 62,
+      "off": 38,
+      "def": 104
+  },
+  "Iowa": {
+      "overall": 63,
+      "off": 18,
+      "def": 169
+  },
+  "Liberty": {
+      "overall": 64,
+      "off": 91,
+      "def": 55
+  },
+  "Kansas St.": {
+      "overall": 65,
+      "off": 125,
+      "def": 35
+  },
+  "San Francisco": {
+      "overall": 66,
+      "off": 90,
+      "def": 57
+  },
+  "UC Irvine": {
+      "overall": 67,
+      "off": 175,
+      "def": 19
+  },
+  "UCF": {
+      "overall": 68,
+      "off": 55,
+      "def": 109
+  },
+  "North Texas": {
+      "overall": 69,
+      "off": 118,
+      "def": 42
+  },
+  "South Carolina": {
+      "overall": 70,
+      "off": 102,
+      "def": 49
+  },
+  "Rutgers": {
+      "overall": 71,
+      "off": 54,
+      "def": 118
+  },
+  "Wake Forest": {
+      "overall": 72,
+      "off": 145,
+      "def": 34
+  },
+  "Arizona St.": {
+      "overall": 73,
+      "off": 83,
+      "def": 75
+  },
+  "Yale": {
+      "overall": 74,
+      "off": 58,
+      "def": 115
+  },
+  "Butler": {
+      "overall": 75,
+      "off": 41,
+      "def": 148
+  },
+  "Utah": {
+      "overall": 76,
+      "off": 81,
+      "def": 85
+  },
+  "Dayton": {
+      "overall": 77,
+      "off": 53,
+      "def": 149
+  },
+  "Nevada": {
+      "overall": 78,
+      "off": 76,
+      "def": 96
+  },
+  "Colorado": {
+      "overall": 79,
+      "off": 139,
+      "def": 54
+  },
+  "George Mason": {
+      "overall": 80,
+      "off": 193,
+      "def": 30
+  },
+  "Stanford": {
+      "overall": 81,
+      "off": 82,
+      "def": 98
+  },
+  "Oregon St.": {
+      "overall": 82,
+      "off": 43,
+      "def": 182
+  },
+  "Arkansas St.": {
+      "overall": 83,
+      "off": 93,
+      "def": 90
+  },
+  "High Point": {
+      "overall": 84,
+      "off": 27,
+      "def": 226
+  },
+  "Saint Joseph's": {
+      "overall": 85,
+      "off": 116,
+      "def": 67
+  },
+  "Georgetown": {
+      "overall": 86,
+      "off": 141,
+      "def": 58
+  },
+  "Minnesota": {
+      "overall": 87,
+      "off": 103,
+      "def": 78
+  },
+  "TCU": {
+      "overall": 88,
+      "off": 202,
+      "def": 33
+  },
+  "LSU": {
+      "overall": 89,
+      "off": 132,
+      "def": 65
+  },
+  "Lipscomb": {
+      "overall": 90,
+      "off": 88,
+      "def": 101
+  },
+  "Florida St.": {
+      "overall": 91,
+      "off": 140,
+      "def": 66
+  },
+  "Bradley": {
+      "overall": 92,
+      "off": 92,
+      "def": 102
+  },
+  "UNLV": {
+      "overall": 93,
+      "off": 155,
+      "def": 60
+  },
+  "Providence": {
+      "overall": 94,
+      "off": 86,
+      "def": 134
+  },
+  "Troy": {
+      "overall": 95,
+      "off": 161,
+      "def": 64
+  },
+  "Oklahoma St.": {
+      "overall": 96,
+      "off": 147,
+      "def": 72
+  },
+  "Notre Dame": {
+      "overall": 97,
+      "off": 94,
+      "def": 121
+  },
+  "UAB": {
+      "overall": 98,
+      "off": 44,
+      "def": 230
+  },
+  "Chattanooga": {
+      "overall": 99,
+      "off": 50,
+      "def": 228
+  },
+  "Akron": {
+      "overall": 100,
+      "off": 71,
+      "def": 181
+  },
+  "Grand Canyon": {
+      "overall": 101,
+      "off": 163,
+      "def": 71
+  },
+  "Northern Iowa": {
+      "overall": 102,
+      "off": 119,
+      "def": 100
+  },
+  "Georgia Tech": {
+      "overall": 103,
+      "off": 168,
+      "def": 73
+  },
+  "Washington": {
+      "overall": 104,
+      "off": 122,
+      "def": 111
+  },
+  "UNC Wilmington": {
+      "overall": 105,
+      "off": 85,
+      "def": 176
+  },
+  "Loyola Chicago": {
+      "overall": 106,
+      "off": 149,
+      "def": 95
+  },
+  "Virginia": {
+      "overall": 107,
+      "off": 100,
+      "def": 144
+  },
+  "Jacksonville St.": {
+      "overall": 108,
+      "off": 110,
+      "def": 130
+  },
+  "South Alabama": {
+      "overall": 109,
+      "off": 151,
+      "def": 97
+  },
+  "DePaul": {
+      "overall": 110,
+      "off": 113,
+      "def": 139
+  },
+  "California": {
+      "overall": 111,
+      "off": 95,
+      "def": 174
+  },
+  "Kent St.": {
+      "overall": 112,
+      "off": 191,
+      "def": 83
+  },
+  "Florida Atlantic": {
+      "overall": 113,
+      "off": 79,
+      "def": 208
+  },
+  "Utah Valley": {
+      "overall": 114,
+      "off": 181,
+      "def": 92
+  },
+  "Syracuse": {
+      "overall": 115,
+      "off": 106,
+      "def": 153
+  },
+  "North Alabama": {
+      "overall": 116,
+      "off": 96,
+      "def": 175
+  },
+  "Wofford": {
+      "overall": 117,
+      "off": 68,
+      "def": 236
+  },
+  "CSUN": {
+      "overall": 118,
+      "off": 137,
+      "def": 129
+  },
+  "Middle Tennessee": {
+      "overall": 119,
+      "off": 131,
+      "def": 135
+  },
+  "Saint Louis": {
+      "overall": 120,
+      "off": 130,
+      "def": 137
+  },
+  "Samford": {
+      "overall": 121,
+      "off": 78,
+      "def": 213
+  },
+  "St. Bonaventure": {
+      "overall": 122,
+      "off": 209,
+      "def": 76
+  },
+  "Washington St.": {
+      "overall": 123,
+      "off": 89,
+      "def": 198
+  },
+  "Belmont": {
+      "overall": 124,
+      "off": 80,
+      "def": 218
+  },
+  "Northern Colorado": {
+      "overall": 125,
+      "off": 87,
+      "def": 210
+  },
+  "N.C. State": {
+      "overall": 126,
+      "off": 153,
+      "def": 110
+  },
+  "Louisiana Tech": {
+      "overall": 127,
+      "off": 138,
+      "def": 140
+  },
+  "George Washington": {
+      "overall": 128,
+      "off": 172,
+      "def": 106
+  },
+  "Cornell": {
+      "overall": 129,
+      "off": 60,
+      "def": 271
+  },
+  "St. Thomas": {
+      "overall": 130,
+      "off": 70,
+      "def": 246
+  },
+  "Kennesaw St.": {
+      "overall": 131,
+      "off": 173,
+      "def": 114
+  },
+  "Illinois St.": {
+      "overall": 132,
+      "off": 77,
+      "def": 237
+  },
+  "Robert Morris": {
+      "overall": 133,
+      "off": 156,
+      "def": 126
+  },
+  "New Mexico St.": {
+      "overall": 134,
+      "off": 220,
+      "def": 77
+  },
+  "Wichita St.": {
+      "overall": 135,
+      "off": 169,
+      "def": 125
+  },
+  "North Dakota St.": {
+      "overall": 136,
+      "off": 56,
+      "def": 296
+  },
+  "South Dakota St.": {
+      "overall": 137,
+      "off": 115,
+      "def": 184
+  },
+  "Tulane": {
+      "overall": 138,
+      "off": 135,
+      "def": 170
+  },
+  "Murray St.": {
+      "overall": 139,
+      "off": 178,
+      "def": 124
+  },
+  "Duquesne": {
+      "overall": 140,
+      "off": 200,
+      "def": 107
+  },
+  "Furman": {
+      "overall": 141,
+      "off": 107,
+      "def": 201
+  },
+  "Milwaukee": {
+      "overall": 142,
+      "off": 154,
+      "def": 142
+  },
+  "East Tennessee St.": {
+      "overall": 143,
+      "off": 180,
+      "def": 131
+  },
+  "UNC Greensboro": {
+      "overall": 144,
+      "off": 167,
+      "def": 143
+  },
+  "Seattle": {
+      "overall": 145,
+      "off": 223,
+      "def": 94
+  },
+  "Davidson": {
+      "overall": 146,
+      "off": 120,
+      "def": 207
+  },
+  "UC Santa Barbara": {
+      "overall": 147,
+      "off": 143,
+      "def": 191
+  },
+  "Miami OH": {
+      "overall": 148,
+      "off": 146,
+      "def": 180
+  },
+  "Bryant": {
+      "overall": 149,
+      "off": 179,
+      "def": 152
+  },
+  "Texas A&M Corpus Chris": {
+      "overall": 150,
+      "off": 189,
+      "def": 145
+  },
+  "Radford": {
+      "overall": 151,
+      "off": 104,
+      "def": 239
+  },
+  "Towson": {
+      "overall": 152,
+      "off": 177,
+      "def": 162
+  },
+  "Charleston": {
+      "overall": 153,
+      "off": 197,
+      "def": 146
+  },
+  "Cleveland St.": {
+      "overall": 154,
+      "off": 213,
+      "def": 123
+  },
+  "Rhode Island": {
+      "overall": 155,
+      "off": 148,
+      "def": 192
+  },
+  "Loyola Marymount": {
+      "overall": 156,
+      "off": 221,
+      "def": 108
+  },
+  "Purdue Fort Wayne": {
+      "overall": 157,
+      "off": 128,
+      "def": 219
+  },
+  "Lamar": {
+      "overall": 158,
+      "off": 250,
+      "def": 86
+  },
+  "UC Riverside": {
+      "overall": 159,
+      "off": 112,
+      "def": 231
+  },
+  "James Madison": {
+      "overall": 160,
+      "off": 98,
+      "def": 249
+  },
+  "Western Kentucky": {
+      "overall": 161,
+      "off": 234,
+      "def": 99
+  },
+  "UTEP": {
+      "overall": 162,
+      "off": 208,
+      "def": 133
+  },
+  "Montana": {
+      "overall": 163,
+      "off": 99,
+      "def": 251
+  },
+  "Virginia Tech": {
+      "overall": 164,
+      "off": 186,
+      "def": 167
+  },
+  "Nebraska Omaha": {
+      "overall": 165,
+      "off": 97,
+      "def": 259
+  },
+  "Winthrop": {
+      "overall": 166,
+      "off": 144,
+      "def": 209
+  },
+  "Nicholls": {
+      "overall": 167,
+      "off": 198,
+      "def": 157
+  },
+  "Marshall": {
+      "overall": 168,
+      "off": 184,
+      "def": 171
+  },
+  "San Jose St.": {
+      "overall": 169,
+      "off": 166,
+      "def": 193
+  },
+  "Appalachian St.": {
+      "overall": 170,
+      "off": 277,
+      "def": 80
+  },
+  "Illinois Chicago": {
+      "overall": 171,
+      "off": 165,
+      "def": 196
+  },
+  "Temple": {
+      "overall": 172,
+      "off": 108,
+      "def": 252
+  },
+  "Cal Baptist": {
+      "overall": 173,
+      "off": 204,
+      "def": 163
+  },
+  "Oakland": {
+      "overall": 174,
+      "off": 160,
+      "def": 204
+  },
+  "East Carolina": {
+      "overall": 175,
+      "off": 174,
+      "def": 199
+  },
+  "Sam Houston St.": {
+      "overall": 176,
+      "off": 105,
+      "def": 266
+  },
+  "Princeton": {
+      "overall": 177,
+      "off": 207,
+      "def": 173
+  },
+  "Norfolk St.": {
+      "overall": 178,
+      "off": 157,
+      "def": 222
+  },
+  "Florida Gulf Coast": {
+      "overall": 179,
+      "off": 171,
+      "def": 220
+  },
+  "Central Connecticut": {
+      "overall": 180,
+      "off": 298,
+      "def": 81
+  },
+  "Boston College": {
+      "overall": 181,
+      "off": 206,
+      "def": 188
+  },
+  "Rice": {
+      "overall": 182,
+      "off": 185,
+      "def": 211
+  },
+  "Cal Poly": {
+      "overall": 183,
+      "off": 126,
+      "def": 269
+  },
+  "Wyoming": {
+      "overall": 184,
+      "off": 233,
+      "def": 150
+  },
+  "Drexel": {
+      "overall": 185,
+      "off": 224,
+      "def": 154
+  },
+  "Merrimack": {
+      "overall": 186,
+      "off": 297,
+      "def": 87
+  },
+  "Southeastern Louisiana": {
+      "overall": 187,
+      "off": 212,
+      "def": 183
+  },
+  "UTSA": {
+      "overall": 188,
+      "off": 159,
+      "def": 234
+  },
+  "Eastern Kentucky": {
+      "overall": 189,
+      "off": 121,
+      "def": 274
+  },
+  "Montana St.": {
+      "overall": 190,
+      "off": 210,
+      "def": 189
+  },
+  "Southern Illinois": {
+      "overall": 191,
+      "off": 199,
+      "def": 205
+  },
+  "South Carolina St.": {
+      "overall": 192,
+      "off": 247,
+      "def": 132
+  },
+  "Miami FL": {
+      "overall": 193,
+      "off": 72,
+      "def": 339
+  },
+  "South Florida": {
+      "overall": 194,
+      "off": 229,
+      "def": 164
+  },
+  "Texas St.": {
+      "overall": 195,
+      "off": 117,
+      "def": 287
+  },
+  "Ohio": {
+      "overall": 196,
+      "off": 190,
+      "def": 224
+  },
+  "Indiana St.": {
+      "overall": 197,
+      "off": 127,
+      "def": 280
+  },
+  "Central Michigan": {
+      "overall": 198,
+      "off": 205,
+      "def": 206
+  },
+  "Youngstown St.": {
+      "overall": 199,
+      "off": 249,
+      "def": 136
+  },
+  "Jacksonville": {
+      "overall": 200,
+      "off": 273,
+      "def": 120
+  },
+  "UNC Asheville": {
+      "overall": 201,
+      "off": 133,
+      "def": 281
+  },
+  "Southeast Missouri": {
+      "overall": 202,
+      "off": 255,
+      "def": 138
+  },
+  "Seton Hall": {
+      "overall": 203,
+      "off": 314,
+      "def": 88
+  },
+  "Dartmouth": {
+      "overall": 204,
+      "off": 294,
+      "def": 103
+  },
+  "Valparaiso": {
+      "overall": 205,
+      "off": 195,
+      "def": 233
+  },
+  "Elon": {
+      "overall": 206,
+      "off": 158,
+      "def": 261
+  },
+  "Portland St.": {
+      "overall": 207,
+      "off": 289,
+      "def": 116
+  },
+  "Brown": {
+      "overall": 208,
+      "off": 236,
+      "def": 177
+  },
+  "Northeastern": {
+      "overall": 209,
+      "off": 228,
+      "def": 190
+  },
+  "Longwood": {
+      "overall": 210,
+      "off": 196,
+      "def": 242
+  },
+  "Idaho St.": {
+      "overall": 211,
+      "off": 203,
+      "def": 241
+  },
+  "Quinnipiac": {
+      "overall": 212,
+      "off": 254,
+      "def": 155
+  },
+  "Queens": {
+      "overall": 213,
+      "off": 176,
+      "def": 260
+  },
+  "Wright St.": {
+      "overall": 214,
+      "off": 111,
+      "def": 314
+  },
+  "Hampton": {
+      "overall": 215,
+      "off": 226,
+      "def": 200
+  },
+  "Pepperdine": {
+      "overall": 216,
+      "off": 188,
+      "def": 254
+  },
+  "SIUE": {
+      "overall": 217,
+      "off": 261,
+      "def": 158
+  },
+  "Hofstra": {
+      "overall": 218,
+      "off": 326,
+      "def": 93
+  },
+  "Maine": {
+      "overall": 219,
+      "off": 296,
+      "def": 128
+  },
+  "Campbell": {
+      "overall": 220,
+      "off": 265,
+      "def": 160
+  },
+  "Abilene Christian": {
+      "overall": 221,
+      "off": 330,
+      "def": 91
+  },
+  "Massachusetts": {
+      "overall": 222,
+      "off": 253,
+      "def": 172
+  },
+  "Northwestern St.": {
+      "overall": 223,
+      "off": 239,
+      "def": 194
+  },
+  "Incarnate Word": {
+      "overall": 224,
+      "off": 152,
+      "def": 285
+  },
+  "Little Rock": {
+      "overall": 225,
+      "off": 305,
+      "def": 117
+  },
+  "Bucknell": {
+      "overall": 226,
+      "off": 245,
+      "def": 195
+  },
+  "Hawaii": {
+      "overall": 227,
+      "off": 237,
+      "def": 203
+  },
+  "La Salle": {
+      "overall": 228,
+      "off": 230,
+      "def": 214
+  },
+  "UT Arlington": {
+      "overall": 229,
+      "off": 162,
+      "def": 292
+  },
+  "Northern Kentucky": {
+      "overall": 230,
+      "off": 242,
+      "def": 202
+  },
+  "William & Mary": {
+      "overall": 231,
+      "off": 164,
+      "def": 298
+  },
+  "Southern": {
+      "overall": 232,
+      "off": 309,
+      "def": 127
+  },
+  "Presbyterian": {
+      "overall": 233,
+      "off": 219,
+      "def": 243
+  },
+  "Delaware": {
+      "overall": 234,
+      "off": 123,
+      "def": 323
+  },
+  "UT Rio Grande Valley": {
+      "overall": 235,
+      "off": 211,
+      "def": 253
+  },
+  "Toledo": {
+      "overall": 236,
+      "off": 84,
+      "def": 356
+  },
+  "Fordham": {
+      "overall": 237,
+      "off": 194,
+      "def": 279
+  },
+  "Missouri St.": {
+      "overall": 238,
+      "off": 274,
+      "def": 187
+  },
+  "Kansas City": {
+      "overall": 239,
+      "off": 291,
+      "def": 166
+  },
+  "Manhattan": {
+      "overall": 240,
+      "off": 136,
+      "def": 327
+  },
+  "South Dakota": {
+      "overall": 241,
+      "off": 129,
+      "def": 332
+  },
+  "Vermont": {
+      "overall": 242,
+      "off": 303,
+      "def": 147
+  },
+  "Mount St. Mary's": {
+      "overall": 243,
+      "off": 282,
+      "def": 185
+  },
+  "UMass Lowell": {
+      "overall": 244,
+      "off": 142,
+      "def": 322
+  },
+  "Cal St. Bakersfield": {
+      "overall": 245,
+      "off": 192,
+      "def": 297
+  },
+  "Richmond": {
+      "overall": 246,
+      "off": 240,
+      "def": 227
+  },
+  "Jackson St.": {
+      "overall": 247,
+      "off": 290,
+      "def": 179
+  },
+  "American": {
+      "overall": 248,
+      "off": 248,
+      "def": 225
+  },
+  "Georgia Southern": {
+      "overall": 249,
+      "off": 243,
+      "def": 235
+  },
+  "UC Davis": {
+      "overall": 250,
+      "off": 335,
+      "def": 112
+  },
+  "Northern Arizona": {
+      "overall": 251,
+      "off": 216,
+      "def": 273
+  },
+  "Tennessee St.": {
+      "overall": 252,
+      "off": 251,
+      "def": 232
+  },
+  "Siena": {
+      "overall": 253,
+      "off": 246,
+      "def": 245
+  },
+  "Evansville": {
+      "overall": 254,
+      "off": 318,
+      "def": 156
+  },
+  "FIU": {
+      "overall": 255,
+      "off": 339,
+      "def": 119
+  },
+  "Charlotte": {
+      "overall": 256,
+      "off": 217,
+      "def": 284
+  },
+  "Harvard": {
+      "overall": 257,
+      "off": 276,
+      "def": 221
+  },
+  "Fresno St.": {
+      "overall": 258,
+      "off": 284,
+      "def": 212
+  },
+  "Iona": {
+      "overall": 259,
+      "off": 316,
+      "def": 168
+  },
+  "Colgate": {
+      "overall": 260,
+      "off": 215,
+      "def": 295
+  },
+  "Mercer": {
+      "overall": 261,
+      "off": 304,
+      "def": 186
+  },
+  "Georgia St.": {
+      "overall": 262,
+      "off": 182,
+      "def": 319
+  },
+  "Sacred Heart": {
+      "overall": 263,
+      "off": 214,
+      "def": 303
+  },
+  "Gardner Webb": {
+      "overall": 264,
+      "off": 238,
+      "def": 262
+  },
+  "North Dakota": {
+      "overall": 265,
+      "off": 150,
+      "def": 336
+  },
+  "Tulsa": {
+      "overall": 266,
+      "off": 268,
+      "def": 244
+  },
+  "North Florida": {
+      "overall": 267,
+      "off": 124,
+      "def": 353
+  },
+  "Monmouth": {
+      "overall": 268,
+      "off": 225,
+      "def": 293
+  },
+  "Alabama St.": {
+      "overall": 269,
+      "off": 271,
+      "def": 247
+  },
+  "Portland": {
+      "overall": 270,
+      "off": 201,
+      "def": 320
+  },
+  "Stephen F. Austin": {
+      "overall": 271,
+      "off": 344,
+      "def": 122
+  },
+  "Houston Christian": {
+      "overall": 272,
+      "off": 285,
+      "def": 240
+  },
+  "Marist": {
+      "overall": 273,
+      "off": 333,
+      "def": 161
+  },
+  "Ball St.": {
+      "overall": 274,
+      "off": 231,
+      "def": 299
+  },
+  "Albany": {
+      "overall": 275,
+      "off": 235,
+      "def": 289
+  },
+  "Navy": {
+      "overall": 276,
+      "off": 252,
+      "def": 270
+  },
+  "Eastern Michigan": {
+      "overall": 277,
+      "off": 218,
+      "def": 313
+  },
+  "Texas Southern": {
+      "overall": 278,
+      "off": 337,
+      "def": 159
+  },
+  "Columbia": {
+      "overall": 279,
+      "off": 187,
+      "def": 337
+  },
+  "Austin Peay": {
+      "overall": 280,
+      "off": 263,
+      "def": 264
+  },
+  "Idaho": {
+      "overall": 281,
+      "off": 170,
+      "def": 345
+  },
+  "Old Dominion": {
+      "overall": 282,
+      "off": 292,
+      "def": 250
+  },
+  "Lehigh": {
+      "overall": 283,
+      "off": 286,
+      "def": 258
+  },
+  "Pacific": {
+      "overall": 284,
+      "off": 272,
+      "def": 275
+  },
+  "LIU": {
+      "overall": 285,
+      "off": 351,
+      "def": 141
+  },
+  "Bethune Cookman": {
+      "overall": 286,
+      "off": 331,
+      "def": 197
+  },
+  "Tarleton St.": {
+      "overall": 287,
+      "off": 359,
+      "def": 105
+  },
+  "VMI": {
+      "overall": 288,
+      "off": 293,
+      "def": 256
+  },
+  "Bowling Green": {
+      "overall": 289,
+      "off": 307,
+      "def": 238
+  },
+  "Western Michigan": {
+      "overall": 290,
+      "off": 269,
+      "def": 283
+  },
+  "Lafayette": {
+      "overall": 291,
+      "off": 324,
+      "def": 216
+  },
+  "Tennessee Martin": {
+      "overall": 292,
+      "off": 257,
+      "def": 300
+  },
+  "Southern Miss": {
+      "overall": 293,
+      "off": 327,
+      "def": 215
+  },
+  "Penn": {
+      "overall": 294,
+      "off": 222,
+      "def": 324
+  },
+  "Eastern Washington": {
+      "overall": 295,
+      "off": 266,
+      "def": 305
+  },
+  "Southern Utah": {
+      "overall": 296,
+      "off": 323,
+      "def": 229
+  },
+  "Saint Peter's": {
+      "overall": 297,
+      "off": 352,
+      "def": 165
+  },
+  "San Diego": {
+      "overall": 298,
+      "off": 302,
+      "def": 255
+  },
+  "UMBC": {
+      "overall": 299,
+      "off": 183,
+      "def": 355
+  },
+  "Weber St.": {
+      "overall": 300,
+      "off": 279,
+      "def": 301
+  },
+  "Utah Tech": {
+      "overall": 301,
+      "off": 262,
+      "def": 310
+  },
+  "Charleston Southern": {
+      "overall": 302,
+      "off": 300,
+      "def": 277
+  },
+  "Tennessee Tech": {
+      "overall": 303,
+      "off": 281,
+      "def": 306
+  },
+  "Boston University": {
+      "overall": 304,
+      "off": 310,
+      "def": 265
+  },
+  "Loyola MD": {
+      "overall": 305,
+      "off": 288,
+      "def": 304
+  },
+  "Fairleigh Dickinson": {
+      "overall": 306,
+      "off": 320,
+      "def": 257
+  },
+  "Delaware St.": {
+      "overall": 307,
+      "off": 260,
+      "def": 317
+  },
+  "Long Beach St.": {
+      "overall": 308,
+      "off": 264,
+      "def": 316
+  },
+  "Air Force": {
+      "overall": 309,
+      "off": 312,
+      "def": 272
+  },
+  "Saint Francis": {
+      "overall": 310,
+      "off": 299,
+      "def": 290
+  },
+  "Denver": {
+      "overall": 311,
+      "off": 317,
+      "def": 267
+  },
+  "IU Indy": {
+      "overall": 312,
+      "off": 114,
+      "def": 363
+  },
+  "Louisiana": {
+      "overall": 313,
+      "off": 325,
+      "def": 263
+  },
+  "Howard": {
+      "overall": 314,
+      "off": 227,
+      "def": 346
+  },
+  "Rider": {
+      "overall": 315,
+      "off": 259,
+      "def": 325
+  },
+  "Eastern Illinois": {
+      "overall": 316,
+      "off": 357,
+      "def": 178
+  },
+  "Florida A&M": {
+      "overall": 317,
+      "off": 267,
+      "def": 328
+  },
+  "Army": {
+      "overall": 318,
+      "off": 295,
+      "def": 311
+  },
+  "Grambling St.": {
+      "overall": 319,
+      "off": 345,
+      "def": 223
+  },
+  "Binghamton": {
+      "overall": 320,
+      "off": 313,
+      "def": 302
+  },
+  "Holy Cross": {
+      "overall": 321,
+      "off": 258,
+      "def": 335
+  },
+  "Niagara": {
+      "overall": 322,
+      "off": 278,
+      "def": 329
+  },
+  "Stonehill": {
+      "overall": 323,
+      "off": 283,
+      "def": 326
+  },
+  "North Carolina Central": {
+      "overall": 324,
+      "off": 244,
+      "def": 348
+  },
+  "Alcorn St.": {
+      "overall": 325,
+      "off": 328,
+      "def": 282
+  },
+  "East Texas A&M": {
+      "overall": 326,
+      "off": 336,
+      "def": 268
+  },
+  "Lindenwood": {
+      "overall": 327,
+      "off": 354,
+      "def": 217
+  },
+  "Morehead St.": {
+      "overall": 328,
+      "off": 329,
+      "def": 291
+  },
+  "Coastal Carolina": {
+      "overall": 329,
+      "off": 287,
+      "def": 330
+  },
+  "Oral Roberts": {
+      "overall": 330,
+      "off": 241,
+      "def": 354
+  },
+  "Morgan St.": {
+      "overall": 331,
+      "off": 270,
+      "def": 347
+  },
+  "Green Bay": {
+      "overall": 332,
+      "off": 280,
+      "def": 342
+  },
+  "Stony Brook": {
+      "overall": 333,
+      "off": 256,
+      "def": 352
+  },
+  "Fairfield": {
+      "overall": 334,
+      "off": 322,
+      "def": 315
+  },
+  "Southern Indiana": {
+      "overall": 335,
+      "off": 321,
+      "def": 321
+  },
+  "North Carolina A&T": {
+      "overall": 336,
+      "off": 334,
+      "def": 308
+  },
+  "Detroit Mercy": {
+      "overall": 337,
+      "off": 346,
+      "def": 278
+  },
+  "Western Carolina": {
+      "overall": 338,
+      "off": 347,
+      "def": 286
+  },
+  "Buffalo": {
+      "overall": 339,
+      "off": 340,
+      "def": 312
+  },
+  "USC Upstate": {
+      "overall": 340,
+      "off": 319,
+      "def": 338
+  },
+  "New Orleans": {
+      "overall": 341,
+      "off": 301,
+      "def": 350
+  },
+  "Northern Illinois": {
+      "overall": 342,
+      "off": 353,
+      "def": 288
+  },
+  "Mercyhurst": {
+      "overall": 343,
+      "off": 315,
+      "def": 343
+  },
+  "Louisiana Monroe": {
+      "overall": 344,
+      "off": 341,
+      "def": 318
+  },
+  "Wagner": {
+      "overall": 345,
+      "off": 360,
+      "def": 248
+  },
+  "Western Illinois": {
+      "overall": 346,
+      "off": 308,
+      "def": 349
+  },
+  "Bellarmine": {
+      "overall": 347,
+      "off": 232,
+      "def": 360
+  },
+  "Sacramento St.": {
+      "overall": 348,
+      "off": 348,
+      "def": 307
+  },
+  "Central Arkansas": {
+      "overall": 349,
+      "off": 332,
+      "def": 340
+  },
+  "West Georgia": {
+      "overall": 350,
+      "off": 338,
+      "def": 331
+  },
+  "Cal St. Fullerton": {
+      "overall": 351,
+      "off": 356,
+      "def": 294
+  },
+  "Stetson": {
+      "overall": 352,
+      "off": 306,
+      "def": 358
+  },
+  "NJIT": {
+      "overall": 353,
+      "off": 358,
+      "def": 309
+  },
+  "Le Moyne": {
+      "overall": 354,
+      "off": 275,
+      "def": 361
+  },
+  "New Hampshire": {
+      "overall": 355,
+      "off": 355,
+      "def": 333
+  },
+  "The Citadel": {
+      "overall": 356,
+      "off": 350,
+      "def": 344
+  },
+  "Prairie View A&M": {
+      "overall": 357,
+      "off": 343,
+      "def": 351
+  },
+  "Maryland Eastern Shore": {
+      "overall": 358,
+      "off": 342,
+      "def": 357
+  },
+  "Canisius": {
+      "overall": 359,
+      "off": 311,
+      "def": 362
+  },
+  "Alabama A&M": {
+      "overall": 360,
+      "off": 361,
+      "def": 334
+  },
+  "Coppin St.": {
+      "overall": 361,
+      "off": 363,
+      "def": 276
+  },
+  "Chicago St.": {
+      "overall": 362,
+      "off": 362,
+      "def": 341
+  },
+  "Arkansas Pine Bluff": {
+      "overall": 363,
+      "off": 349,
+      "def": 359
+  },
+  "Mississippi Valley St.": {
+      "overall": 364,
+      "off": 364,
+      "def": 364
+  }
+}

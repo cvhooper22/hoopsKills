@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "stat_explorer",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start", "--prefix", "stat_explorer"],
+      "port": 4444
+    },
+    {
+      "name": "countdown-ui",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["countdown/server.py"],
+      "port": 8765
+    }
+  ]
+}

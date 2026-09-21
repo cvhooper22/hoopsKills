@@ -11,6 +11,7 @@ import GameClutch from './views/Clutch/components/GameClutch';
 import Home from "./views/Home/Home";
 import { views } from './constants/views';
 import AlumniRouter from "./views/Alumni/AlmuniRouter";
+import AlumniEditor from "./views/Admin/AlumniEditor";
 import { TouchPointsContextProvider } from "./contexts/TouchpointsContext";
 
 export default function App() {
@@ -38,6 +39,8 @@ export default function App() {
               <Route path=":name" element={<GameClutch />} />
             </Route>
             <Route path="alumni" element={<AlumniRouter />} ></Route>
+            {/* Hidden — not in nav, only reachable by navigating directly here */}
+            <Route path="admin/alumni" element={<AlumniEditor />} ></Route>
             <Route path="*" element={<Home />} />
           </Routes>
         </div>
