@@ -43,9 +43,14 @@ Then set:
 
 - **Configuration -> Environment variables**
   - `BUCKET_NAME` = `YOUR_BUCKET_NAME`
+  - `KEY_PREFIX` = e.g. `hoopstats` (optional — folder inside the bucket
+    everything is written under. `BUCKET_NAME` must be the bare bucket name
+    with no `/`; a folder goes here instead. Drop `YOUR_KEY_PREFIX/` from the
+    IAM policy resource if you leave this unset)
   - `ASSET_BASE_URL` = `https://dd0v7fgd2sjsh.cloudfront.net` (optional — if
     set, the response `url` is built through your CloudFront domain instead
-    of the raw S3 URL)
+    of the raw S3 URL. The `KEY_PREFIX` is left out of that URL, so the
+    CloudFront origin path should be set to `/<KEY_PREFIX>`)
 - **Configuration -> General configuration**
   - Timeout: 15 sec (default 3s is too short for a download + upload)
   - Memory: 256 MB is plenty
@@ -62,38 +67,48 @@ is what supports API-key/usage-plan auth natively).
 
 ### Resource + method
 
-- Actions -> Create Resource -> name `images`, path `/images`
-- Select `/images` -> Actions -> Create Method -> `POST`
-  - Integration type: Lambda Function
-  - Use Lambda Proxy integration: **checked**
-  - Lambda Function: `image-uploader`
-  - Save (accept the "add permission" prompt so API Gateway can invoke it)
-- On the `POST` method -> **Method Request** -> set **API Key Required** to
-  `true`
+(The console no longer has a per-resource "Actions" menu; everything below
+uses the current buttons. The **API actions** dropdown only has import/delete.)
 
-### CORS (needed since the admin UI calls this from the browser)
+- On the Resources page, click **Create resource** (left panel)
+  - Resource path: `/`, Resource name: `images`
+  - Leave **CORS** unchecked (see the CORS note below)
+  - Create resource
+- Select `/images` in the left tree -> **Create method** (in the Methods box)
+  - Method type: `POST`
+  - Integration type: **Lambda function**
+  - **Lambda proxy integration**: toggle on
+  - Lambda function: pick your region, then `image-uploader`
+  - Expand **Method settings** -> check **API key required**
+  - Create method (the console adds the invoke permission on the Lambda for you)
 
-- Select `/images` -> Actions -> Enable CORS
-  - Access-Control-Allow-Headers: add `x-api-key` to the default list
-    (`Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token`)
-  - Access-Control-Allow-Origin: `*` for now, or lock to your site's origin
-    later
-- Confirm and replace existing values when prompted, then re-deploy (below)
+### CORS (optional)
+
+The admin UI reaches this API through the `setupProxy.js` server-side proxy,
+not directly from the browser, so CORS isn't needed for the editor. Only set
+it up if you later call the API straight from browser code: select `/images`
+-> **Enable CORS** (in Resource details), tick `POST`, and add `x-api-key` to
+the allowed headers. Then redeploy.
 
 ### Deploy
 
-- Actions -> Deploy API -> New stage -> name it `prod`
-- Note the **Invoke URL**, e.g.
-  `https://abc123xyz.execute-api.YOUR_REGION.amazonaws.com/prod`
+- Click **Deploy API** (orange button, top right) -> Stage: **New stage** ->
+  name it `prod` -> Deploy. Redeploy after any later change to methods.
+- The **Invoke URL** is shown on the stage page, e.g.
+  `https://abc123xyz.execute-api.YOUR_REGION.amazonaws.com/prod`. The full
+  endpoint is that URL plus `/images`.
 
 ### API key + usage plan
 
-- API Gateway -> API Keys -> Create API key -> name it, save the generated
-  key value somewhere safe (you won't see it again in full)
-- API Gateway -> Usage Plans -> Create -> name it, set whatever throttle/quota
-  you're comfortable with (this is just for you, so generous limits are fine)
-  - Add API stage: your API -> `prod`
-  - Add the API key you just created to this usage plan
+These live in the API Gateway left-hand nav (outside your API), not inside
+the API's Resources page.
+
+- **API keys** -> Create API key -> name it, Auto generate. Open the key and
+  click **Show** to copy the value.
+- **Usage plans** -> Create usage plan -> name it, set throttle/quota (a low
+  daily quota like 100 requests limits the damage if the key leaks)
+  - **Add API stage**: your API -> `prod`
+  - **Add API key**: the key you just created
 
 ## 4. Test it
 
@@ -123,7 +138,11 @@ API Gateway (the Lambda never runs).
   re-derived from the real content-type; unsafe characters become `-`), so
   it can't be used for a path-traversal write outside the two prefixes.
 - Only `image/jpeg`, `image/png`, `image/webp`, `image/gif`, and
-  `image/svg+xml` are accepted; anything else 400s.
+  `image/svg+xml` are accepted; anything else 400s. If the source serves
+  the file with a missing or generic type (`application/octet-stream`), the
+  Lambda checks the file's first bytes instead and accepts real
+  jpg/png/gif/webp files (SVG has no signature, so it still needs a proper
+  `image/svg+xml` header).
 - Downloads are capped at 20MB and a 10s fetch timeout.
 - Wired into [AlumniEditor.js](../stat_explorer/src/views/Admin/AlumniEditor.js):
   the Team Logo and Cover Photo sections each have a "Fetch & Host" row where

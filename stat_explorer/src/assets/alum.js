@@ -6,7 +6,7 @@ const alum = [
     "team": "Washington Wizards",
     "position": "Forward",
     "teamLogo": {
-      "url": "https://cdn.nba.com/teams/uploads/sites/1610612764/2022/06/wiz-primary.svg"
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/wizards.svg"
     },
     "league": "NBA",
     "division": "Highest",
@@ -16,7 +16,7 @@ const alum = [
     "playerUrl": "https://www.basketball-reference.com/players/d/dybanaj01.html",
     "teamWebsite": "https://www.nba.com/wizards/schedule",
     "coverPhoto": {
-      "url": "https://wjla.com/resources/media/71c92e49-88bc-4ccb-af8e-7dc27cae5ffa-WizardsJazzSummerGettyImages2285436297.jpg",
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/ajWizardsSummer.jpg",
       "style": {
         "objectPosition": "0 0"
       }
@@ -127,8 +127,8 @@ const alum = [
         "left": "-6px"
       }
     },
-    "league": "B2 League",
-    "division": "Middle",
+    "league": "B League",
+    "division": "Highest",
     "teamSocial": {
       "twitter": "https://x.com/STORKS_OFFICIAL",
       "instagram": "https://www.instagram.com/kobe_storks_official/",
@@ -142,7 +142,10 @@ const alum = [
       "style": {
         "objectPosition": "center 0"
       }
-    }
+    },
+    "notes": [
+      "The Storks earned promotion to Japan's top league last year. Yoeli brought home the regular season MVP and Finals MVP honors."
+    ]
   },
   {
     "name": "Alex Barcello",
@@ -154,8 +157,8 @@ const alum = [
     "teamLogo": {
       "url": "https://api.clupik.com/clubs/89/images/navbar.png"
     },
-    "league": "Primara FEB",
-    "division": "Middle",
+    "league": "Liga ACB",
+    "division": "Highest",
     "teamSocial": {
       "twitter": "https://x.com/OBRADOIROCAB",
       "instagram": "https://www.instagram.com/obradoiro.cab",
@@ -169,7 +172,7 @@ const alum = [
       "url": "https://api.clupik.com/publication_images/1205d6db-9855-4432-b581-9c51359351ed.large.jpg"
     },
     "notes": [
-      "Alex led the Primera FEB league of Spain in scoring last year putting up 19.6 ppg on 44% 3pt"
+      "Alex's team earned promotion last year and will be playing in Spain's top league this season."
     ]
   },
   {
@@ -228,7 +231,7 @@ const alum = [
     "team": "SBB Baskets Wolmirstedt",
     "position": "Guard",
     "teamLogo": {
-      "url": "https://www.sbb-baskets.de/wp-content/themes/yootheme/cache/86/SBB-Baskets-Logo_RGB-86f4a744.webp"
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/sbb-baskets.svg"
     },
     "league": "2. Basketball Bundesliga",
     "division": "Middle",
@@ -245,24 +248,29 @@ const alum = [
   },
   {
     "name": "Fousseyni Traore",
-    "country": "France",
-    "countryCode": "fr",
-    "team": "Sig Strasbourg",
+    "country": "Romania",
+    "countryCode": "ro",
+    "team": "CSU Sibiu",
     "position": "Guard",
     "teamLogo": {
-      "url": "https://assets.altrstat.xyz/images/Basketball/Team/1796/logoBlack/sm.png"
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/csuCibu.png",
+      "style": {
+        "z-index": 45
+      }
     },
-    "league": "LNB Élite",
+    "league": "Liga Națională",
     "division": "Highest",
     "teamSocial": {
-      "twitter": "https://twitter.com/sigstrasbourg",
-      "instagram": "https://www.instagram.com/sigstrasbourg",
-      "facebook": "https://www.facebook.com/SIG.Strasbourg"
+      "instagram": "https://www.instagram.com/csusibiu.ro/",
+      "facebook": "https://www.facebook.com/BCCSUSibiu/"
     },
     "playerUrl": "https://basketball.eurobasket.com/player/Fousseyni-Traore/443736",
-    "teamWebsite": "https://sigstrasbourg.fr/",
+    "teamWebsite": "https://csusibiu.ro/home",
     "coverPhoto": {
-      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/foussStrousUse.jpg"
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/foussCibu.jpg",
+      "style": {
+        "transform": "scale(1.4)"
+      }
     }
   },
   {
@@ -346,7 +354,7 @@ const alum = [
     "team": "Njarðvík",
     "position": "Guard",
     "teamLogo": {
-      "url": "https://upload.wikimedia.org/wikipedia/en/thumb/b/bb/Njar%C3%B0v%C3%ADkur_logo.png/340px-Njar%C3%B0v%C3%ADkur_logo.png"
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/njardvik.png"
     },
     "league": "Iceland Subway League",
     "division": "Highest",
@@ -491,6 +499,30 @@ const alum = [
       "url": "https://static.sky.it/editorialimages/f1423c505cb29a75fd88980d4010ce66da1e8ccb/skysport/it/nba/2023/07/21/mondiali-select-team-usa-convocati/Eric_Mika_Ignite.jpg",
       "style": {
         "objectPosition": "54% 0"
+      }
+    }
+  },
+  {
+    "name": "Noah Waterman",
+    "country": "Japan",
+    "countryCode": "jp",
+    "team": "Yamagata Wyverns",
+    "position": "Forward",
+    "teamLogo": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/wyverns.png"
+    },
+    "league": "B2 League",
+    "division": "Middle",
+    "teamSocial": {
+      "instagram": "https://www.instagram.com/wyverns_official/",
+      "facebook": "https://www.facebook.com/passlab.yamagata/"
+    },
+    "playerUrl": "https://basketball.asia-basket.com/player/Noah-Waterman/536303",
+    "teamWebsite": "https://www.wyverns.jp/news/detail/id=20636?st_source=ai_overview",
+    "coverPhoto": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/noahWyverns.jpg",
+      "style": {
+        "objectPosition": "30% 0"
       }
     }
   }
