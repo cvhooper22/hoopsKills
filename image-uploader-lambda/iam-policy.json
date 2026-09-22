@@ -5,7 +5,7 @@
       "Sid": "PutAlumImages",
       "Effect": "Allow",
       "Action": "s3:PutObject",
-      "Resource": "arn:aws:s3:::YOUR_BUCKET_NAME/assets/alum/*"
+      "Resource": "arn:aws:s3:::YOUR_BUCKET_NAME/YOUR_KEY_PREFIX/assets/alum/*"
     }
   ]
 }

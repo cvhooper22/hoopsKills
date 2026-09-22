@@ -4,6 +4,10 @@ const s3 = new S3Client({});
 
 const BUCKET_NAME = process.env.BUCKET_NAME;
 const ASSET_BASE_URL = process.env.ASSET_BASE_URL; // optional, e.g. https://dd0v7fgd2sjsh.cloudfront.net
+// Optional folder inside the bucket that everything is written under, e.g. "hoopstats".
+// Not part of the returned URL when ASSET_BASE_URL is set: the CloudFront origin path is
+// expected to already point at this folder.
+const KEY_PREFIX = (process.env.KEY_PREFIX || '').replace(/^\/+|\/+$/g, '');
 const MAX_BYTES = 20 * 1024 * 1024; // 20MB
 const FETCH_TIMEOUT_MS = 10_000;
 
@@ -20,6 +24,19 @@ const EXT_BY_CONTENT_TYPE = {
   'image/gif': 'gif',
   'image/svg+xml': 'svg',
 };
+
+// Some hosts serve images with a generic (or no) Content-Type. For those we fall
+// back to the file's magic bytes; any other declared type is still rejected.
+const GENERIC_CONTENT_TYPES = new Set(['', 'application/octet-stream', 'binary/octet-stream']);
+
+function sniffImageType(buf) {
+  if (buf.length >= 3 && buf[0] === 0xff && buf[1] === 0xd8 && buf[2] === 0xff) return 'image/jpeg';
+  if (buf.length >= 8 && buf.subarray(0, 8).equals(Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]))) return 'image/png';
+  const gifHeader = buf.toString('latin1', 0, 6);
+  if (gifHeader === 'GIF87a' || gifHeader === 'GIF89a') return 'image/gif';
+  if (buf.length >= 12 && buf.toString('latin1', 0, 4) === 'RIFF' && buf.toString('latin1', 8, 12) === 'WEBP') return 'image/webp';
+  return null;
+}
 
 function jsonResponse(statusCode, body) {
   return {
@@ -66,10 +83,11 @@ async function downloadImage(imageUrl) {
     throw new HttpError(502, `imageUrl returned HTTP ${res.status}`);
   }
 
-  const contentType = (res.headers.get('content-type') || '').split(';')[0].trim();
-  const ext = EXT_BY_CONTENT_TYPE[contentType];
-  if (!ext) {
-    throw new HttpError(400, `Unsupported or missing image content-type: ${contentType || '(none)'}`);
+  const declaredType = (res.headers.get('content-type') || '').split(';')[0].trim().toLowerCase();
+  let contentType = declaredType;
+  let ext = EXT_BY_CONTENT_TYPE[declaredType];
+  if (!ext && !GENERIC_CONTENT_TYPES.has(declaredType)) {
+    throw new HttpError(400, `Unsupported or missing image content-type: ${declaredType}`);
   }
 
   const contentLength = Number(res.headers.get('content-length') || 0);
@@ -80,6 +98,14 @@ async function downloadImage(imageUrl) {
   const buffer = Buffer.from(await res.arrayBuffer());
   if (buffer.byteLength > MAX_BYTES) {
     throw new HttpError(400, `Image is too large (${buffer.byteLength} bytes, max ${MAX_BYTES})`);
+  }
+
+  if (!ext) {
+    contentType = sniffImageType(buffer);
+    if (!contentType) {
+      throw new HttpError(400, `Unsupported or missing image content-type: ${declaredType || '(none)'}, and the file contents are not a recognized image (jpg/png/webp/gif)`);
+    }
+    ext = EXT_BY_CONTENT_TYPE[contentType];
   }
 
   return { buffer, contentType, ext };
@@ -123,7 +149,8 @@ export const handler = async (event) => {
 
   try {
     const { buffer, contentType, ext } = await downloadImage(imageUrl);
-    const key = `${prefix}${safeName}.${ext}`;
+    const relativeKey = `${prefix}${safeName}.${ext}`;
+    const key = KEY_PREFIX ? `${KEY_PREFIX}/${relativeKey}` : relativeKey;
 
     await s3.send(
       new PutObjectCommand({
@@ -134,7 +161,7 @@ export const handler = async (event) => {
       })
     );
 
-    const url = ASSET_BASE_URL ? `${ASSET_BASE_URL.replace(/\/$/, '')}/${key}` : `https://${BUCKET_NAME}.s3.amazonaws.com/${key}`;
+    const url = ASSET_BASE_URL ? `${ASSET_BASE_URL.replace(/\/$/, '')}/${relativeKey}` : `https://${BUCKET_NAME}.s3.amazonaws.com/${key}`;
 
     return jsonResponse(200, { key, url });
   } catch (err) {
