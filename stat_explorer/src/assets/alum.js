@@ -57,6 +57,29 @@ const alum = [
     ]
   },
   {
+    "name": "Richie Saunders",
+    "country": "USA",
+    "countryCode": "us",
+    "team": "Memphis Grizzlies",
+    "position": "Forward",
+    "teamLogo": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/memphis-grizzlies.svg"
+    },
+    "league": "NBA",
+    "division": "Highest",
+    "teamSocial": {
+      "twitter": "https://x.com/memgrizz"
+    },
+    "playerUrl": "https://www.basketball-reference.com/players/s/saundri01.html",
+    "teamWebsite": "https://www.nba.com/grizzlies/schedule",
+    "coverPhoto": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/richieGrizzMedia.jpg"
+    },
+    "notes": [
+      "Richie was drafted 32nd overall by the Grizzlies and continues to rehab an ACL tear."
+    ]
+  },
+  {
     "name": "Elijah Bryant",
     "country": "Israel",
     "countryCode": "il",
@@ -115,39 +138,6 @@ const alum = [
     ]
   },
   {
-    "name": "Yoeli Childs",
-    "years": "2016-2020",
-    "country": "Japan",
-    "countryCode": "jp",
-    "team": "Kobe Storks",
-    "position": "Forward",
-    "teamLogo": {
-      "url": "https://www.bleague.jp/files/user/common/img/logo/s/ns.png",
-      "style": {
-        "left": "-6px"
-      }
-    },
-    "league": "B League",
-    "division": "Highest",
-    "teamSocial": {
-      "twitter": "https://x.com/STORKS_OFFICIAL",
-      "instagram": "https://www.instagram.com/kobe_storks_official/",
-      "youtube": "https://youtube.com/@youtubestorkschannel4969?si=xb88bTVHpxqNDNxn",
-      "facebook": "https://www.facebook.com/kobestorks0716/"
-    },
-    "playerUrl": "https://basketball.asia-basket.com/player/Yoeli-Childs/402255",
-    "teamWebsite": "https://www.storks.jp/",
-    "coverPhoto": {
-      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/yoeliStorks.jpg",
-      "style": {
-        "objectPosition": "center 0"
-      }
-    },
-    "notes": [
-      "The Storks earned promotion to Japan's top league last year. Yoeli brought home the regular season MVP and Finals MVP honors."
-    ]
-  },
-  {
     "name": "Alex Barcello",
     "years": "2022-24",
     "country": "Spain",
@@ -202,6 +192,122 @@ const alum = [
     }
   },
   {
+    "name": "Yoeli Childs",
+    "years": "2016-2020",
+    "country": "Japan",
+    "countryCode": "jp",
+    "team": "Kobe Storks",
+    "position": "Forward",
+    "teamLogo": {
+      "url": "https://www.bleague.jp/files/user/common/img/logo/s/ns.png",
+      "style": {
+        "left": "-6px"
+      }
+    },
+    "league": "B League",
+    "division": "Highest",
+    "teamSocial": {
+      "twitter": "https://x.com/STORKS_OFFICIAL",
+      "instagram": "https://www.instagram.com/kobe_storks_official/",
+      "youtube": "https://youtube.com/@youtubestorkschannel4969?si=xb88bTVHpxqNDNxn",
+      "facebook": "https://www.facebook.com/kobestorks0716/"
+    },
+    "playerUrl": "https://basketball.asia-basket.com/player/Yoeli-Childs/402255",
+    "teamWebsite": "https://www.storks.jp/",
+    "coverPhoto": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/yoeliStorks.jpg",
+      "style": {
+        "objectPosition": "center 0"
+      }
+    },
+    "notes": [
+      "The Storks earned promotion to Japan's top league last year. Yoeli brought home the regular season MVP and Finals MVP honors."
+    ]
+  },
+  {
+    "name": "Fousseyni Traore",
+    "country": "Romania",
+    "countryCode": "ro",
+    "team": "CSU Sibiu",
+    "position": "Guard",
+    "teamLogo": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/csuCibu.png"
+    },
+    "league": "Liga Națională",
+    "division": "Highest",
+    "teamSocial": {
+      "instagram": "https://www.instagram.com/csusibiu.ro/",
+      "facebook": "https://www.facebook.com/BCCSUSibiu/"
+    },
+    "playerUrl": "https://basketball.eurobasket.com/player/Fousseyni-Traore/443736",
+    "teamWebsite": "https://csusibiu.ro/home",
+    "coverPhoto": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/foussCibu.jpg",
+      "style": {
+        "transform": "scale(1.4)"
+      }
+    }
+  },
+  {
+    "name": "Jaxson Robinson",
+    "country": "USA",
+    "countryCode": "us",
+    "team": "Cleveland Charge",
+    "position": "Guard",
+    "teamLogo": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/gleagueCharge.svg"
+    },
+    "league": "G-League",
+    "division": "Middle",
+    "teamSocial": {
+      "twitter": "https://twitter.com/nbagleague",
+      "instagram": "https://www.instagram.com/nbagleague/",
+      "youtube": "https://www.youtube.com/c/nbagleague/featured",
+      "facebook": "https://www.facebook.com/nbagleague/"
+    },
+    "playerUrl": "https://basketball.realgm.com/player/Jax-Robinson/D-League/151236/Career/By_Split",
+    "teamWebsite": "",
+    "coverPhoto": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/jaxCharge.jpg",
+      "style": {
+        "transform": "scale(1.2)",
+        "objectPosition": "0px 18px"
+      }
+    },
+    "notes": [
+      "Jaxson dropped 42 points in a G-League game last year, going 8-12 from downtown."
+    ]
+  },
+  {
+    "name": "Keba Keita",
+    "country": "USA",
+    "countryCode": "us",
+    "team": "Noblesville Boom",
+    "position": "Center",
+    "teamLogo": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/gleagueBoom.svg"
+    },
+    "league": "G-League",
+    "division": "Middle",
+    "teamSocial": {
+      "twitter": "https://twitter.com/nbagleague",
+      "instagram": "https://www.instagram.com/nbagleague/",
+      "youtube": "https://www.youtube.com/c/nbagleague/featured",
+      "facebook": "https://www.facebook.com/nbagleague/"
+    },
+    "playerUrl": "https://basketball.realgm.com/player/Keba-Keita/NBA/176341/Career/By_Split/Per_Game/Recent_Games/Summer_League",
+    "teamWebsite": "https://noblesville.gleague.nba.com/schedule?month=11",
+    "coverPhoto": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/keitaSummerLeague.jpg",
+      "style": {
+        "objectPosition": "0 0"
+      }
+    },
+    "notes": [
+      "Keita recently signed an Exhibit 10 contract with the Pacers after playing Summer League for them. Will most likely start the season on their G-League affiliate."
+    ]
+  },
+  {
     "name": "Rudi Williams",
     "country": "Romania",
     "countryCode": "ro",
@@ -247,33 +353,6 @@ const alum = [
     }
   },
   {
-    "name": "Fousseyni Traore",
-    "country": "Romania",
-    "countryCode": "ro",
-    "team": "CSU Sibiu",
-    "position": "Guard",
-    "teamLogo": {
-      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/csuCibu.png",
-      "style": {
-        "z-index": 45
-      }
-    },
-    "league": "Liga Națională",
-    "division": "Highest",
-    "teamSocial": {
-      "instagram": "https://www.instagram.com/csusibiu.ro/",
-      "facebook": "https://www.facebook.com/BCCSUSibiu/"
-    },
-    "playerUrl": "https://basketball.eurobasket.com/player/Fousseyni-Traore/443736",
-    "teamWebsite": "https://csusibiu.ro/home",
-    "coverPhoto": {
-      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/foussCibu.jpg",
-      "style": {
-        "transform": "scale(1.4)"
-      }
-    }
-  },
-  {
     "name": "Matt Haarms",
     "years": "2022-24",
     "country": "Japan",
@@ -298,6 +377,30 @@ const alum = [
     "teamWebsite": "https://orangevikings.jp/",
     "coverPhoto": {
       "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/mattVikingsUse.jpg"
+    }
+  },
+  {
+    "name": "Noah Waterman",
+    "country": "Japan",
+    "countryCode": "jp",
+    "team": "Yamagata Wyverns",
+    "position": "Forward",
+    "teamLogo": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/wyverns.png"
+    },
+    "league": "B2 League",
+    "division": "Middle",
+    "teamSocial": {
+      "instagram": "https://www.instagram.com/wyverns_official/",
+      "facebook": "https://www.facebook.com/passlab.yamagata/"
+    },
+    "playerUrl": "https://basketball.asia-basket.com/player/Noah-Waterman/536303",
+    "teamWebsite": "https://www.wyverns.jp/news/detail/id=20636?st_source=ai_overview",
+    "coverPhoto": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/noahWyverns.jpg",
+      "style": {
+        "objectPosition": "30% 0"
+      }
     }
   },
   {
@@ -485,7 +588,7 @@ const alum = [
     "team": "G League Ignite",
     "position": "Center",
     "teamLogo": {
-      "url": "https://upload.wikimedia.org/wikipedia/en/thumb/8/88/NBA_G_League_Ignite_logo_%282022%29.svg/1200px-NBA_G_League_Ignite_logo_%282022%29.svg.png"
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/g-league-ignite.svg"
     },
     "league": "NBA G League",
     "division": "Middle",
@@ -496,33 +599,9 @@ const alum = [
     "playerUrl": "https://stats.gleague.nba.com/player/1628450/",
     "teamWebsite": "https://ignite.gleague.nba.com/schedule",
     "coverPhoto": {
-      "url": "https://static.sky.it/editorialimages/f1423c505cb29a75fd88980d4010ce66da1e8ccb/skysport/it/nba/2023/07/21/mondiali-select-team-usa-convocati/Eric_Mika_Ignite.jpg",
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/eric-mika.jpg",
       "style": {
         "objectPosition": "54% 0"
-      }
-    }
-  },
-  {
-    "name": "Noah Waterman",
-    "country": "Japan",
-    "countryCode": "jp",
-    "team": "Yamagata Wyverns",
-    "position": "Forward",
-    "teamLogo": {
-      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/wyverns.png"
-    },
-    "league": "B2 League",
-    "division": "Middle",
-    "teamSocial": {
-      "instagram": "https://www.instagram.com/wyverns_official/",
-      "facebook": "https://www.facebook.com/passlab.yamagata/"
-    },
-    "playerUrl": "https://basketball.asia-basket.com/player/Noah-Waterman/536303",
-    "teamWebsite": "https://www.wyverns.jp/news/detail/id=20636?st_source=ai_overview",
-    "coverPhoto": {
-      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/noahWyverns.jpg",
-      "style": {
-        "objectPosition": "30% 0"
       }
     }
   }

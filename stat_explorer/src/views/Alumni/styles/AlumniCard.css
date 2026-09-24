@@ -51,6 +51,7 @@
   position: absolute;
   left: 5px;
   filter: drop-shadow(1px 1px 0px white);
+  z-index: 1;
 }
 
 .alumni-card__logo-image.alumni-card__logo-image--dropLeft {
