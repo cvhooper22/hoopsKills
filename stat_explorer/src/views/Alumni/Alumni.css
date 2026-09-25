@@ -88,49 +88,56 @@
 /* max-width on media query is cards plus the 2rem of padding on each side
 /* one card */
 @media screen and (min-width: 1px) {
-    div.alumni-cards {
+    div.alumni-cards,
+    div.badge-filters {
         max-width: 324px;
     }
 }
 
 /* two cards */
 @media screen and (min-width: 712px) {
-    div.alumni-cards {
+    div.alumni-cards,
+    div.badge-filters {
         max-width: 648px;
     }
 }
 
 /* three cards */
 @media screen and (min-width: 1036px) {
-    div.alumni-cards {
+    div.alumni-cards,
+    div.badge-filters {
         max-width: 972px;
     }
 }
 
 /* four cards */
 @media screen and (min-width: 1360px) {
-    div.alumni-cards {
+    div.alumni-cards,
+    div.badge-filters {
         max-width: 1296px;
     }
 }
 
 /* five cards */
 @media screen and (min-width: 1684px) {
-    div.alumni-cards {
+    div.alumni-cards,
+    div.badge-filters {
         max-width: 1620px;
     }
 }
 
 /* six cards */
 @media screen and (min-width: 2008px) {
-    div.alumni-cards {
+    div.alumni-cards,
+    div.badge-filters {
         max-width: 1944px;
     }
 }
 
 /* seven cards is max */
 @media screen and (min-width: 2333px) {
-    div.alumni-cards {
+    div.alumni-cards,
+    div.badge-filters {
         max-width: 2268px;
     }
 }

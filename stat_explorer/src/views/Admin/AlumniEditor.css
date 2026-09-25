@@ -272,7 +272,8 @@
 
 .alumni-editor__checks {
   display: flex;
-  gap: 32px;
+  flex-wrap: wrap;
+  gap: 16px 32px;
   margin-top: 24px;
 }
 
@@ -326,6 +327,7 @@
   align-items: center;
   gap: 10px;
   font-size: 14px;
+  white-space: nowrap;
   cursor: pointer;
 }
 

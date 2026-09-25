@@ -1,0 +1,12 @@
+/* StatusBadge — E2 flat sticker. Parent card must be position: relative. */
+.status-badge{--sb-fill:var(--royal-600,#003FA2);--sb-light:var(--royal-300,#4A8BE0);--sb-deep:var(--royal-900,#00377A);position:absolute;top:50px;right:-3px;z-index:4;transform:rotate(7deg);filter:drop-shadow(0 1px 1.5px rgb(0 0 0/25%));pointer-events:none}
+.status-badge--inline{position:relative;top:auto;right:auto;display:inline-block}
+.status-badge__edge{display:block;background:var(--white,#fff);padding:2px;border-radius:var(--radius-md,4px);clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%)}
+.status-badge__body{display:flex;align-items:center;gap:4px;padding:5px 12px 5px 8px;border-radius:2px;color:var(--white,#fff);background:linear-gradient(180deg,color-mix(in oklch,var(--sb-fill) 82%,var(--sb-light)) 0%,var(--sb-fill) 50%,color-mix(in oklch,var(--sb-fill) 85%,var(--sb-deep)) 100%)}
+.status-badge__icon{font-family:'Material Symbols Sharp';font-weight:normal;font-style:normal;font-size:13px;line-height:1;font-variation-settings:'FILL' 1,'wght' 600,'opsz' 20;-webkit-font-smoothing:antialiased}
+.status-badge__label{font-family:var(--font-display,'Archivo Narrow',sans-serif);font-size:11px;font-weight:700;line-height:1;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.status-badge__curl{position:absolute;top:0;right:0;width:10px;height:10px;clip-path:polygon(0 0,0 100%,100% 100%);background:linear-gradient(45deg,var(--gray-100,#E6E6E6) 0%,var(--white,#fff) 70%);filter:drop-shadow(-1px 1px 1px rgb(0 0 0/30%))}
+.status-badge--royal{--sb-fill:var(--royal-600,#003FA2);--sb-light:var(--royal-300,#4A8BE0);--sb-deep:var(--royal-900,#00377A)}
+.status-badge--navy{--sb-fill:var(--navy-700,#002E5D);--sb-light:var(--sky-400,#7FB0D4);--sb-deep:var(--navy-900,#001B38)}
+.status-badge--red{--sb-fill:var(--neg-700,#A3082A);--sb-light:var(--neg-500,#E61744);--sb-deep:#5E0418}
+.status-badge--gray{--sb-fill:var(--gray-500,#4A4A4A);--sb-light:var(--gray-300,#8F8F8F);--sb-deep:var(--gray-900,#141414)}

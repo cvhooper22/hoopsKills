@@ -2,20 +2,16 @@ import React, { useContext, useState } from 'react';
 import "./Alumni.css";
 import alum from '../../assets/alum';
 import AlmuniCard from './components/AlumniCard';
+import BadgeFilters, { matchesFilters } from './components/BadgeFilters';
 import { TouchPointsContext } from '../../contexts/TouchpointsContext';
 import QuestionMark from '../../components/Icons/QuestionMark';
 import XClose from '../../components/Icons/XClose';
 
 export default function AlumniRouter () {
     const [helpOpen, setHelpOpen] = useState(false);
-    const [tab, setTab] = useState("ACTIVE");
+    const [filters, setFilters] = useState([]);
     const hasTouchEnabled = useContext(TouchPointsContext);
-    const displayAlum = alum.filter(a => {
-        if (tab === "ACTIVE") {
-            return !a.inactive;
-        }
-        return true;
-    });
+    const displayAlum = alum.filter(a => matchesFilters(a, filters));
 
     function onHelpClick () {
         setHelpOpen(!helpOpen);
@@ -36,6 +32,7 @@ export default function AlumniRouter () {
                     <QuestionMark height={20} width={20} />
                 </div>
             </div>
+            <BadgeFilters selected={filters} onChange={setFilters} />
             <div className='alumni-cards flex f-wrap'>
                 {displayAlum.map((alumnus) => <AlmuniCard alum={alumnus} key={alumnus.name} />)}
             </div>
