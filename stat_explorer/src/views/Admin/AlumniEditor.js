@@ -1,6 +1,7 @@
 import React, { useEffect, useId, useMemo, useState } from 'react';
 import alumSeed from '../../assets/alum';
 import AlumniCard from '../Alumni/components/AlumniCard';
+import { STATUSES } from '../../components/StatusBadge/StatusBadge';
 import '../Alumni/Alumni.css';
 import './AlumniEditor.css';
 
@@ -21,7 +22,7 @@ function emptyAlum() {
     nameAccent: false,
     years: '',
     inactive: false,
-    inactiveReason: '',
+    statuses: [],
     country: '',
     countryCode: '',
     team: '',
@@ -45,7 +46,7 @@ function toEditable(a) {
     nameAccent: !!a.nameAccent,
     years: a.years || '',
     inactive: !!a.inactive,
-    inactiveReason: a.inactiveReason || '',
+    statuses: a.statuses || [],
     country: a.country || '',
     countryCode: a.countryCode || '',
     team: a.team || '',
@@ -163,7 +164,8 @@ function toStored(editable, errors) {
   if (editable.nameAccent) out.nameAccent = true;
   if (editable.years.trim()) out.years = editable.years.trim();
   if (editable.inactive) out.inactive = true;
-  if (editable.inactiveReason.trim()) out.inactiveReason = editable.inactiveReason.trim();
+  const statuses = Object.keys(STATUSES).filter((key) => editable.statuses.includes(key));
+  if (statuses.length) out.statuses = statuses;
   out.country = editable.country.trim();
   out.countryCode = editable.countryCode.trim();
   out.team = editable.team.trim();
@@ -514,13 +516,16 @@ export default function AlumniEditor() {
                 <Checkbox label="Accent last name" checked={current.nameAccent} onChange={(nameAccent) => updateCurrent({ nameAccent })} />
                 <Checkbox label="Inactive" checked={current.inactive} onChange={(inactive) => updateCurrent({ inactive })} />
               </div>
-              {current.inactive && (
-                <div className="alumni-editor__row">
-                  <Field label="Inactive reason">
-                    <input type="text" value={current.inactiveReason} onChange={(e) => updateCurrent({ inactiveReason: e.target.value })} placeholder="Retired / Unsigned / etc." />
-                  </Field>
-                </div>
-              )}
+              <div className="alumni-editor__checks">
+                {Object.entries(STATUSES).map(([key, { label }]) => (
+                  <Checkbox
+                    key={key}
+                    label={label}
+                    checked={current.statuses.includes(key)}
+                    onChange={(on) => updateCurrent({ statuses: on ? [...current.statuses, key] : current.statuses.filter((st) => st !== key) })}
+                  />
+                ))}
+              </div>
             </section>
 
             <section className="alumni-editor__section">

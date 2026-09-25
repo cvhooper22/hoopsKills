@@ -58,6 +58,9 @@ const alum = [
   },
   {
     "name": "Richie Saunders",
+    "statuses": [
+      "injured"
+    ],
     "country": "USA",
     "countryCode": "us",
     "team": "Memphis Grizzlies",
@@ -111,7 +114,6 @@ const alum = [
   },
   {
     "name": "Jimmer Fredette",
-    "inactiveReason": "Retired",
     "country": "USA",
     "countryCode": "us",
     "team": "USA / Miami",
@@ -167,6 +169,9 @@ const alum = [
   },
   {
     "name": "Zac Seljaas",
+    "statuses": [
+      "updateSoon"
+    ],
     "country": "France",
     "countryCode": "fr",
     "team": "LDLC Asvel",
@@ -308,169 +313,6 @@ const alum = [
     ]
   },
   {
-    "name": "Rudi Williams",
-    "country": "Romania",
-    "countryCode": "ro",
-    "team": "Dinamo Bucharest",
-    "position": "Guard",
-    "teamLogo": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/LOGO_DINAMO_%C8%98TIIN%C8%9AA.png/250px-LOGO_DINAMO_%C8%98TIIN%C8%9AA.png"
-    },
-    "league": "Liga Națională / ENBL",
-    "division": "Highest",
-    "teamSocial": {
-      "instagram": "https://www.instagram.com/dinamobucurestibaschet/"
-    },
-    "playerUrl": "https://basketball.eurobasket.com/player/Rudi-Williams/504177",
-    "teamWebsite": "http://www.csdinamo.eu/en/sectia-jocuri-sportive/baschet-masculin/",
-    "coverPhoto": {
-      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/rudiDinamoZoom.png",
-      "style": {
-        "objectPosition": "41% 0"
-      }
-    }
-  },
-  {
-    "name": "Trey Stewart",
-    "country": "Germany",
-    "countryCode": "de",
-    "team": "SBB Baskets Wolmirstedt",
-    "position": "Guard",
-    "teamLogo": {
-      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/sbb-baskets.svg"
-    },
-    "league": "2. Basketball Bundesliga",
-    "division": "Middle",
-    "teamSocial": {
-      "instagram": "https://www.instagram.com/sbbbaskets/",
-      "youtube": "https://www.youtube.com/@sbbbasketsgmbh2807",
-      "facebook": "https://www.facebook.com/sbbbaskets"
-    },
-    "playerUrl": "https://basketball.eurobasket.com/player/Trey-Stewart/499966",
-    "teamWebsite": "https://www.sbb-baskets.de/",
-    "coverPhoto": {
-      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/treySBBUse.jpg"
-    }
-  },
-  {
-    "name": "Matt Haarms",
-    "years": "2022-24",
-    "country": "Japan",
-    "countryCode": "jp",
-    "team": "Ehime Orange Vikings",
-    "position": "Center",
-    "teamLogo": {
-      "url": "https://www.bleague.jp/files/user/common/img/logo/bg-black/s/eo.png",
-      "style": {
-        "filter": "none"
-      }
-    },
-    "league": "B2 League",
-    "division": "Middle",
-    "teamSocial": {
-      "twitter": "https://x.com/orangevikings",
-      "instagram": "https://www.instagram.com/orangevikings/",
-      "youtube": "https://www.youtube.com/channel/UCClORekqAa5gEdbHkEgPH2g"
-    },
-    "recentTweetsUrl": "https://x.com/search?q=from%3Akg_rebnise%20%E3%83%9E%E3%83%83%E3%83%88%E3%83%BB%E3%83%8F%E3%83%BC%E3%83%A0%E3%82%B9&src=typed_query&f=live",
-    "playerUrl": "https://basketball.eurobasket.com/player/Matt-Haarms/353966",
-    "teamWebsite": "https://orangevikings.jp/",
-    "coverPhoto": {
-      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/mattVikingsUse.jpg"
-    }
-  },
-  {
-    "name": "Noah Waterman",
-    "country": "Japan",
-    "countryCode": "jp",
-    "team": "Yamagata Wyverns",
-    "position": "Forward",
-    "teamLogo": {
-      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/wyverns.png"
-    },
-    "league": "B2 League",
-    "division": "Middle",
-    "teamSocial": {
-      "instagram": "https://www.instagram.com/wyverns_official/",
-      "facebook": "https://www.facebook.com/passlab.yamagata/"
-    },
-    "playerUrl": "https://basketball.asia-basket.com/player/Noah-Waterman/536303",
-    "teamWebsite": "https://www.wyverns.jp/news/detail/id=20636?st_source=ai_overview",
-    "coverPhoto": {
-      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/noahWyverns.jpg",
-      "style": {
-        "objectPosition": "30% 0"
-      }
-    }
-  },
-  {
-    "name": "Spencer Johnson",
-    "country": "England",
-    "countryCode": "gb",
-    "team": "Leicester Riders",
-    "position": "Guard",
-    "teamLogo": {
-      "url": "https://riders.basketball/wp-content/uploads/2025/02/leicester-riders-crest_logo.svg"
-    },
-    "league": "Super League Basketball",
-    "division": "Highest",
-    "teamSocial": {
-      "twitter": "https://x.com/RidersBball",
-      "instagram": "https://www.instagram.com/ridersbball",
-      "youtube": "https://www.youtube.com/channel/UCXuGRL3cYwBxbCmAsu-H-_A",
-      "facebook": "https://www.facebook.com/ridersbball/"
-    },
-    "recentTweetsUrl": "https://x.com/search?q=from%3ARidersBball%20johnson&src=typed_query&f=live",
-    "playerUrl": "https://basketball.eurobasket.com/player/Spencer-Johnson/487981",
-    "teamWebsite": "https://riders.basketball/bbl-games/",
-    "coverPhoto": {
-      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/spencerCard.jpg"
-    }
-  },
-  {
-    "name": "Mawot Mag",
-    "country": "Australia",
-    "countryCode": "au",
-    "team": "Cairns Taipans",
-    "position": "Forward",
-    "teamLogo": {
-      "url": "https://thumb.wikimedia.org/wikipedia/en/thumb/f/f9/Cairns_Taipans_logo.svg/500px-Cairns_Taipans_logo.svg.png"
-    },
-    "league": "NBL",
-    "division": "Highest",
-    "teamSocial": {
-      "twitter": "https://x.com/CairnsTaipans",
-      "instagram": "https://www.instagram.com/cairnstaipans/",
-      "youtube": "https://www.youtube.com/user/OfficialTaipansTV",
-      "facebook": "https://www.facebook.com/cairnstaipans/"
-    },
-    "playerUrl": "https://basketball.eurobasket.com/player/Mawot-Mag/500718",
-    "teamWebsite": "https://www.taipans.com/",
-    "coverPhoto": {
-      "url": "https://cdn.prod.website-files.com/689da8fb55abaf74fc521cc2/697c0015a552e407b31d4405_Untitled%20-%202026-01-29T160247.723.avif"
-    }
-  },
-  {
-    "name": "Brandon Averette",
-    "country": "Iceland",
-    "countryCode": "is",
-    "team": "Njarðvík",
-    "position": "Guard",
-    "teamLogo": {
-      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/njardvik.png"
-    },
-    "league": "Iceland Subway League",
-    "division": "Highest",
-    "teamSocial": {
-      "instagram": "https://www.instagram.com/umfnofficial/"
-    },
-    "playerUrl": "https://basketball.eurobasket.com/player/Brandon-Averette/402159",
-    "teamWebsite": "https://www.etoile-angers-basket.com/billetterie/",
-    "coverPhoto": {
-      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/barndonIceland.jpg"
-    }
-  },
-  {
     "name": "Frank Bartley IV",
     "country": "Greece",
     "countryCode": "gr",
@@ -498,7 +340,191 @@ const alum = [
     }
   },
   {
+    "name": "Noah Waterman",
+    "country": "Japan",
+    "countryCode": "jp",
+    "team": "Yamagata Wyverns",
+    "position": "Forward",
+    "teamLogo": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/wyverns.png"
+    },
+    "league": "B2 League",
+    "division": "Middle",
+    "teamSocial": {
+      "instagram": "https://www.instagram.com/wyverns_official/",
+      "facebook": "https://www.facebook.com/passlab.yamagata/"
+    },
+    "playerUrl": "https://basketball.asia-basket.com/player/Noah-Waterman/536303",
+    "teamWebsite": "https://www.wyverns.jp/news/detail/id=20636?st_source=ai_overview",
+    "coverPhoto": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/noahWyverns.jpg",
+      "style": {
+        "objectPosition": "30% 0"
+      }
+    }
+  },
+  {
+    "name": "Trey Stewart",
+    "statuses": [
+      "updateSoon"
+    ],
+    "country": "Germany",
+    "countryCode": "de",
+    "team": "SBB Baskets Wolmirstedt",
+    "position": "Guard",
+    "teamLogo": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/sbb-baskets.svg"
+    },
+    "league": "2. Basketball Bundesliga",
+    "division": "Middle",
+    "teamSocial": {
+      "instagram": "https://www.instagram.com/sbbbaskets/",
+      "youtube": "https://www.youtube.com/@sbbbasketsgmbh2807",
+      "facebook": "https://www.facebook.com/sbbbaskets"
+    },
+    "playerUrl": "https://basketball.eurobasket.com/player/Trey-Stewart/499966",
+    "teamWebsite": "https://www.sbb-baskets.de/",
+    "coverPhoto": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/treySBBUse.jpg"
+    }
+  },
+  {
+    "name": "Matt Haarms",
+    "years": "2022-24",
+    "statuses": [
+      "updateSoon"
+    ],
+    "country": "Japan",
+    "countryCode": "jp",
+    "team": "Ehime Orange Vikings",
+    "position": "Center",
+    "teamLogo": {
+      "url": "https://www.bleague.jp/files/user/common/img/logo/bg-black/s/eo.png",
+      "style": {
+        "filter": "none"
+      }
+    },
+    "league": "B2 League",
+    "division": "Middle",
+    "teamSocial": {
+      "twitter": "https://x.com/orangevikings",
+      "instagram": "https://www.instagram.com/orangevikings/",
+      "youtube": "https://www.youtube.com/channel/UCClORekqAa5gEdbHkEgPH2g"
+    },
+    "recentTweetsUrl": "https://x.com/search?q=from%3Akg_rebnise%20%E3%83%9E%E3%83%83%E3%83%88%E3%83%BB%E3%83%8F%E3%83%BC%E3%83%A0%E3%82%B9&src=typed_query&f=live",
+    "playerUrl": "https://basketball.eurobasket.com/player/Matt-Haarms/353966",
+    "teamWebsite": "https://orangevikings.jp/",
+    "coverPhoto": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/mattVikingsUse.jpg"
+    }
+  },
+  {
+    "name": "Rudi Williams",
+    "statuses": [
+      "updateSoon"
+    ],
+    "country": "Romania",
+    "countryCode": "ro",
+    "team": "Dinamo Bucharest",
+    "position": "Guard",
+    "teamLogo": {
+      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/LOGO_DINAMO_%C8%98TIIN%C8%9AA.png/250px-LOGO_DINAMO_%C8%98TIIN%C8%9AA.png"
+    },
+    "league": "Liga Națională / ENBL",
+    "division": "Highest",
+    "teamSocial": {
+      "instagram": "https://www.instagram.com/dinamobucurestibaschet/"
+    },
+    "playerUrl": "https://basketball.eurobasket.com/player/Rudi-Williams/504177",
+    "teamWebsite": "http://www.csdinamo.eu/en/sectia-jocuri-sportive/baschet-masculin/",
+    "coverPhoto": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/rudiDinamoZoom.png",
+      "style": {
+        "objectPosition": "41% 0"
+      }
+    }
+  },
+  {
+    "name": "Spencer Johnson",
+    "statuses": [
+      "updateSoon"
+    ],
+    "country": "England",
+    "countryCode": "gb",
+    "team": "Leicester Riders",
+    "position": "Guard",
+    "teamLogo": {
+      "url": "https://riders.basketball/wp-content/uploads/2025/02/leicester-riders-crest_logo.svg"
+    },
+    "league": "Super League Basketball",
+    "division": "Highest",
+    "teamSocial": {
+      "twitter": "https://x.com/RidersBball",
+      "instagram": "https://www.instagram.com/ridersbball",
+      "youtube": "https://www.youtube.com/channel/UCXuGRL3cYwBxbCmAsu-H-_A",
+      "facebook": "https://www.facebook.com/ridersbball/"
+    },
+    "recentTweetsUrl": "https://x.com/search?q=from%3ARidersBball%20johnson&src=typed_query&f=live",
+    "playerUrl": "https://basketball.eurobasket.com/player/Spencer-Johnson/487981",
+    "teamWebsite": "https://riders.basketball/bbl-games/",
+    "coverPhoto": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/spencerCard.jpg"
+    }
+  },
+  {
+    "name": "Mawot Mag",
+    "statuses": [
+      "updateSoon"
+    ],
+    "country": "Australia",
+    "countryCode": "au",
+    "team": "Cairns Taipans",
+    "position": "Forward",
+    "teamLogo": {
+      "url": "https://thumb.wikimedia.org/wikipedia/en/thumb/f/f9/Cairns_Taipans_logo.svg/500px-Cairns_Taipans_logo.svg.png"
+    },
+    "league": "NBL",
+    "division": "Highest",
+    "teamSocial": {
+      "twitter": "https://x.com/CairnsTaipans",
+      "instagram": "https://www.instagram.com/cairnstaipans/",
+      "youtube": "https://www.youtube.com/user/OfficialTaipansTV",
+      "facebook": "https://www.facebook.com/cairnstaipans/"
+    },
+    "playerUrl": "https://basketball.eurobasket.com/player/Mawot-Mag/500718",
+    "teamWebsite": "https://www.taipans.com/",
+    "coverPhoto": {
+      "url": "https://cdn.prod.website-files.com/689da8fb55abaf74fc521cc2/697c0015a552e407b31d4405_Untitled%20-%202026-01-29T160247.723.avif"
+    }
+  },
+  {
+    "name": "Brandon Averette",
+    "statuses": [
+      "updateSoon"
+    ],
+    "country": "Iceland",
+    "countryCode": "is",
+    "team": "Njarðvík",
+    "position": "Guard",
+    "teamLogo": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/njardvik.png"
+    },
+    "league": "Iceland Subway League",
+    "division": "Highest",
+    "teamSocial": {
+      "instagram": "https://www.instagram.com/umfnofficial/"
+    },
+    "playerUrl": "https://basketball.eurobasket.com/player/Brandon-Averette/402159",
+    "teamWebsite": "https://www.etoile-angers-basket.com/billetterie/",
+    "coverPhoto": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/barndonIceland.jpg"
+    }
+  },
+  {
     "name": "Seneca Knight",
+    "statuses": [
+      "updateSoon"
+    ],
     "country": "Italy",
     "countryCode": "it",
     "team": "Pistoia",
@@ -530,7 +556,9 @@ const alum = [
   {
     "name": "Brandon Davies",
     "inactive": true,
-    "inactiveReason": "Retired",
+    "statuses": [
+      "retired"
+    ],
     "country": "Japan",
     "countryCode": "jp",
     "team": "Alvark Tokyo",
@@ -556,7 +584,9 @@ const alum = [
   {
     "name": "Te'jon Lucas",
     "inactive": true,
-    "inactiveReason": "Unsigned",
+    "statuses": [
+      "unsigned"
+    ],
     "country": "England",
     "countryCode": "gb",
     "team": "Bristol Flyers",
@@ -582,7 +612,9 @@ const alum = [
   {
     "name": "Eric Mika",
     "inactive": true,
-    "inactiveReason": "Retired",
+    "statuses": [
+      "retired"
+    ],
     "country": "USA",
     "countryCode": "us",
     "team": "G League Ignite",

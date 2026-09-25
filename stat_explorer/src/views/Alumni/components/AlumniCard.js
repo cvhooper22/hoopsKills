@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import FlipOver from '../../../components/Icons/FlipOver';
 import OpenInNew from '../../../components/Icons/OpenInNew';
+import StatusBadge, { STATUSES } from '../../../components/StatusBadge/StatusBadge';
 import urls from '../../../constants/assetUrls';
 import FakeTable from './FakeTable';
 import SocialLink from './SocialLink';
@@ -19,6 +20,7 @@ export default function AlmuniCard({alum}) {
   const footerUrl = alum.recentTweetsUrl || alum.playerUrl;
   const footerText = alum.recentTweetsUrl ? `Recent team activity for ${firstname} on twitter` : `Player profile for ${firstname}`;
   const socialAccounts = Object.keys(alum.teamSocial ?? {});
+  const statuses = Object.keys(STATUSES).filter((key) => alum.statuses?.includes(key));
   return (
     <div className="alumni-card-root m-s">
       <div className={`alumni-card-flipper${ isFlipped ? ' alumni-card-flipper--flipped' : ''}`}>
@@ -58,6 +60,11 @@ export default function AlmuniCard({alum}) {
           <div className='alumni-card__label'>
             <img src="/byuHoops.png" />
           </div>
+          { statuses.length > 0 && (
+            <div className='alumni-card__badges'>
+              { statuses.map(key => <StatusBadge status={key} inline key={key} />)}
+            </div>
+          )}
           <div>
 
           </div>

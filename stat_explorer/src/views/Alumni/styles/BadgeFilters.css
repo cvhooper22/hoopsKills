@@ -1,0 +1,96 @@
+.badge-filters {
+  --filter-stagger: 40ms;
+  position: relative;
+  z-index: 2; /* above hover-scaled cards */
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: 44px;
+  flex-shrink: 0;
+  margin-bottom: 20px; /* clearance for hover-scaled cards in the top row */
+  padding: 0 calc(1rem + var(--s));
+  box-sizing: border-box;
+}
+
+.badge-filters__trigger {
+  position: relative;
+  z-index: 1;
+  gap: 4px;
+  padding: 6px 12px 6px 10px;
+  border: none;
+  border-radius: 999px;
+  background-color: var(--royal-blue);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 3px;
+}
+
+.badge-filters__trigger-icon {
+  font-family: 'Material Symbols Sharp';
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* Each filter tucks behind the trigger (collapsed, shrunk, shifted left) until
+   shown. Opening staggers left-to-right; closing staggers right-to-left so the
+   filters fold back into the trigger. */
+.badge-filter {
+  max-width: 0;
+  margin-left: 0;
+  padding: 8px 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(-32px) scale(0.4);
+  border: none;
+  background: none;
+  cursor: pointer;
+  pointer-events: none;
+  transition-property: max-width, margin-left, opacity, transform;
+  transition-duration: 260ms;
+  transition-timing-function: ease-out;
+  transition-delay: calc((var(--count) - var(--i)) * var(--filter-stagger));
+}
+
+.badge-filters--open .badge-filter {
+  transition-delay: calc(var(--i) * var(--filter-stagger));
+}
+
+.badge-filter.badge-filter--shown {
+  max-width: 200px;
+  margin-left: 4px;
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+/* Room for the badge's tilt and shadow inside the clipping box. */
+.badge-filter .status-badge {
+  margin: 0 4px;
+  transform: rotate(2deg); /* flatter than the 7deg card badge */
+  transition: filter 200ms;
+}
+
+.badge-filter:not(.badge-filter--selected) .status-badge {
+  filter: grayscale(1) opacity(0.5) drop-shadow(0 1px 1.5px rgb(0 0 0/25%));
+}
+
+.badge-filter:not(.badge-filter--selected):hover .status-badge {
+  filter: grayscale(0.6) opacity(0.8) drop-shadow(0 1px 1.5px rgb(0 0 0/25%));
+}
+
+.badge-filter.badge-filters__close {
+  height: 28px;
+  width: 28px;
+  flex-shrink: 0;
+  padding: 0;
+  border-radius: 50%;
+  background-color: var(--navy-blue);
+}
+
+.badge-filter.badge-filters__close.badge-filter--shown {
+  max-width: 28px;
+  margin-left: 8px;
+}
