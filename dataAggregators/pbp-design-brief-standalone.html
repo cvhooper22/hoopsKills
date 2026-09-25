@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Play-by-Play Design Brief</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#EEF1F6; --surface:#FFFFFF; --surface2:#F6F8FB; --ink:#0F1723; --ink2:#48546A; --line:#D5DBE5;
+  --accent:#0B3A82;
+  --dec:#0F7B5F; --dec-bg:#DDF3EA;
+  --opt:#5B3FC4; --opt-bg:#E9E4FA;
+  --open:#A44A06; --open-bg:#FCEBD3;
+  --gap:#B42342; --gap-bg:#FBE1E7;
+  --code-bg:#0F1723; --code-ink:#DCE4F2; --code-dim:#7F8DA6; --code-key:#8FB4FF;
+  --display:'Barlow Condensed','Arial Narrow',sans-serif;
+  --body:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0B111B; --surface:#131B29; --surface2:#182233; --ink:#E7ECF4; --ink2:#9BA8BC; --line:#263247;
+    --accent:#7FA8F0;
+    --dec:#4FD1A5; --dec-bg:#12332B; --opt:#B6A5FF; --opt-bg:#2A2350;
+    --open:#F5B25A; --open-bg:#3A2A10; --gap:#FF8AA3; --gap-bg:#3C1622;
+    --code-bg:#0A0F18;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0B111B; --surface:#131B29; --surface2:#182233; --ink:#E7ECF4; --ink2:#9BA8BC; --line:#263247;
+  --accent:#7FA8F0;
+  --dec:#4FD1A5; --dec-bg:#12332B; --opt:#B6A5FF; --opt-bg:#2A2350;
+  --open:#F5B25A; --open-bg:#3A2A10; --gap:#FF8AA3; --gap-bg:#3C1622;
+  --code-bg:#0A0F18;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55;padding-inline:16px;padding-block:0 64px}
+.wrap{max-width:1040px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:700;text-wrap:balance;margin:0;line-height:1.05}
+p{margin:0}
+code,.mono{font-family:var(--mono);font-size:.86em}
+code{background:var(--surface2);border:1px solid var(--line);border-radius:4px;padding:1px 5px;overflow-wrap:anywhere}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* nav */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-16px;padding:8px 16px}
+nav .wrap{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+nav a{white-space:nowrap;text-decoration:none;color:var(--ink2);font-size:13px;font-weight:500;padding:5px 11px;border-radius:999px;border:1px solid transparent}
+nav a:hover{border-color:var(--line);color:var(--ink)}
+
+/* hero */
+header{padding-block:40px 28px;display:grid;gap:22px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
+h1{font-size:clamp(40px,7vw,68px);letter-spacing:.005em}
+.lede{max-width:66ch;color:var(--ink2);font-size:16px}
+.board{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line);border:2px solid var(--line);border-radius:6px;overflow:hidden}
+.board div{background:var(--surface);padding:12px 14px;display:grid;gap:2px}
+.board b{font-family:var(--display);font-size:46px;line-height:1;font-variant-numeric:tabular-nums}
+.board span{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink2)}
+.board .d b{color:var(--dec)} .board .o b{color:var(--opt)} .board .q b{color:var(--open)} .board .g b{color:var(--gap)}
+@media (max-width:560px){.board{grid-template-columns:repeat(2,1fr)}}
+
+/* sections */
+section{padding-top:44px;scroll-margin-top:52px}
+.sh{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.sh h2{font-size:34px}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:4px;font-weight:500}
+.t-dec{background:var(--dec-bg);color:var(--dec)} .t-opt{background:var(--opt-bg);color:var(--opt)}
+.t-open{background:var(--open-bg);color:var(--open)} .t-gap{background:var(--gap-bg);color:var(--gap)}
+.sub{color:var(--ink2);max-width:68ch;margin-bottom:18px}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:8px}
+.start{padding:20px 22px;display:grid;gap:14px;border-left:4px solid var(--accent)}
+.start h3{font-size:24px}
+.start ul{margin:0;padding-left:20px;display:grid;gap:6px}
+
+/* decided list */
+.grp{margin-top:20px}
+.grp>h3{font-size:19px;letter-spacing:.03em;text-transform:uppercase;color:var(--ink2);margin-bottom:8px}
+.rows{display:grid;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.row{display:grid;grid-template-columns:44px 1fr auto;gap:12px;padding:12px 16px;border-top:1px solid var(--line);align-items:start}
+.row:first-child{border-top:0}
+.row .id{font-family:var(--mono);font-size:12px;color:var(--ink2);padding-top:2px}
+.row strong{font-weight:600}
+.row p{color:var(--ink2);margin-top:2px;font-size:14px}
+.src{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.src i{font-style:normal;font-family:var(--mono);font-size:10.5px;border:1px solid var(--line);color:var(--ink2);border-radius:3px;padding:0 5px;line-height:18px}
+@media (max-width:620px){.row{grid-template-columns:36px 1fr}.src{grid-column:2;justify-content:flex-start}}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--ink2);margin-bottom:6px}
+
+/* option cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:14px}
+.card{padding:18px 18px 16px;display:grid;gap:12px;align-content:start}
+.card h3{font-size:23px}
+.card .why{color:var(--ink2);font-size:14px}
+.opts{display:grid;gap:8px}
+.opt{border:1px solid var(--line);border-radius:6px;padding:9px 12px;background:var(--surface2);font-size:14px}
+.opt b{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--opt);display:block;margin-bottom:1px}
+.rec{background:var(--opt-bg);border-radius:6px;padding:10px 12px;font-size:14px}
+.rec b{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--opt);display:block;margin-bottom:1px}
+
+/* open questions */
+.qs{display:grid;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.q{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;padding:13px 16px;border-top:1px solid var(--line)}
+.q:first-child{border-top:0}
+.pill{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;padding:2px 8px;border-radius:999px;white-space:nowrap;height:fit-content;font-weight:500}
+.p-block{background:var(--open-bg);color:var(--open)} .p-later{background:var(--surface2);color:var(--ink2);border:1px solid var(--line)}
+.q p{color:var(--ink2);font-size:14px;margin-top:2px}
+.q .lean{color:var(--ink);font-size:14px;margin-top:4px}
+.q .lean b{color:var(--accent);font-weight:600}
+@media (max-width:560px){.q{grid-template-columns:1fr}}
+
+/* tables & code */
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;padding:8px 12px;border-top:1px solid var(--line);vertical-align:top}
+thead th{border-top:0;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);background:var(--surface2);white-space:nowrap}
+td.k{font-weight:600}
+.y{color:var(--dec);font-weight:600}.n{color:var(--ink2)}
+.codebox{position:relative;background:var(--code-bg);border-radius:8px;border:1px solid var(--line)}
+.codebar{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;border-bottom:1px solid #26314a;font-family:var(--mono);font-size:11.5px;color:var(--code-dim)}
+.codebar button{font:inherit;color:var(--code-ink);background:#1d283f;border:1px solid #33415f;border-radius:5px;padding:3px 10px;cursor:pointer}
+.codebar button:hover{background:#26344f}
+pre{margin:0;padding:14px 16px;overflow-x:auto;color:var(--code-ink);font-family:var(--mono);font-size:12.5px;line-height:1.6;tab-size:2}
+pre .c{color:var(--code-dim)} pre .k{color:var(--code-key)}
+
+/* layers diagram */
+.layers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}
+.layer{padding:14px 16px;display:grid;gap:8px;align-content:start}
+.layer h3{font-size:20px}
+.layer .lab{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.layer ul{margin:0;padding:0;list-style:none;display:grid;gap:4px;font-family:var(--mono);font-size:12.5px}
+.layer li.later{color:var(--ink2)}
+.layer li.later::after{content:" · later";font-family:var(--body);font-size:11px}
+@media (max-width:760px){.layers{grid-template-columns:1fr}}
+
+/* build order */
+ol.steps{margin:0;padding:0;list-style:none;display:grid;gap:0;counter-reset:s;background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:12px;padding:13px 16px;border-top:1px solid var(--line)}
+ol.steps li:first-child{border-top:0}
+ol.steps li::before{content:counter(s);font-family:var(--display);font-size:26px;line-height:1;color:var(--accent)}
+ol.steps b{font-weight:600}
+ol.steps span{display:block;color:var(--ink2);font-size:14px}
+
+
+/* interactive */
+.opt,.rec{display:grid;grid-template-columns:20px 1fr;gap:10px;cursor:pointer;align-items:start}
+.opt input,.rec input{margin:3px 0 0;width:16px;height:16px;accent-color:var(--accent)}
+.opt:has(input:checked){border-color:var(--accent);background:var(--surface)}
+.rec:has(input:checked){outline:2px solid var(--opt)}
+textarea{width:100%;font:inherit;font-size:14px;color:var(--ink);background:var(--surface2);border:1px solid var(--line);border-radius:6px;padding:8px 10px;resize:vertical;min-height:44px;margin-top:8px}
+.card textarea{margin-top:0}
+textarea::placeholder{color:var(--ink2);opacity:.75}
+.savebar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:13px;color:var(--ink2)}
+.savebar button{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:5px 12px;cursor:pointer}
+.savebar button:hover{border-color:var(--accent)}
+#saved{font-family:var(--mono);font-size:11.5px}
+footer{margin-top:48px;color:var(--ink2);font-size:13px;border-top:1px solid var(--line);padding-top:16px;max-width:76ch}
+</style>
+</head>
+<body>
+
+
+<nav><div class="wrap">
+  <a href="#start">Start here</a><a href="#decided">Decided</a><a href="#options">Unsettled options</a>
+  <a href="#open">Open questions</a><a href="#gaps">Gaps found</a><a href="#schema">First-pass schema</a><a href="#order">Build order</a><a href="#sources">Sources</a>
+</div></nav>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">hoopsKills / dataAggregators / dataDiscussions</div>
+  <h1>Play-by-Play Database<br>Design Brief</h1>
+  <p class="lede">Four earlier discussions merged into one view. The normalization thread is treated as the shape of the play data itself. The other three supply the ingestion, storage and live-feed decisions around it. Where they disagree, that is called out instead of picked silently.</p>
+  <div class="savebar"><span>Ticks and notes save in this browser as you type.</span><button type="button" id="summary">Copy my choices</button><button type="button" id="clear">Clear all</button><span id="saved" aria-live="polite"></span></div>
+  <div class="board" aria-label="Counts">
+    <div class="d"><b>24</b><span>Decided</span></div>
+    <div class="o"><b>9</b><span>Options, unsettled</span></div>
+    <div class="q"><b>14</b><span>Open questions</span></div>
+    <div class="g"><b>7</b><span>Gaps no doc covers</span></div>
+  </div>
+</header>
+
+<section id="start" style="padding-top:12px">
+  <div class="panel start">
+    <h3>What you can start building today</h3>
+    <p>Most of the hard design is already decided. The parts that are still open mostly affect later layers (possessions, live, rankings), so none of them stop a first build of raw storage, a play table and one working source adapter.</p>
+    <ul>
+      <li><b>Store raw JSON per game first</b>, untouched. Every later stat re-derives from it.</li>
+      <li><b>One <code>plays</code> table</b> using the canonical fields from the normalization thread, plus a <code>play_participants</code> table. The docs never say where the acting player goes, and that is the biggest hole (see Gaps).</li>
+      <li><b>Build the WMT adapter first</b> (explicit make/miss, lineups inline, assist links). Add ESPN second to prove the schema is not shaped only around WMT. Skip NCAA for now.</li>
+      <li><b>Defer</b> possessions, lineup stints, metric DSL, batch jobs, coverage tables, rankings, rivalries and the live poller. Their ingredients are already in the first-pass columns.</li>
+    </ul>
+    <p>Five choices to make before writing code: storage engine, where raw lives, single source per game vs merge, the participants table, and team scope. Recommendations are in the sections below.</p>
+  </div>
+</section>
+
+<!-- ============ DECIDED ============ -->
+<section id="decided">
+  <div class="sh"><h2>What's decided</h2><span class="tag t-dec">Settled</span></div>
+  <p class="sub">Stated as a conclusion in at least one thread and not contradicted by another. Source tags: <b>N</b> normalization, <b>S</b> scraping and storage, <b>L</b> live dashboard, <b>D</b> data sources summary.</p>
+
+  <div class="grp"><h3>Sources</h3>
+  <div class="rows">
+    <div class="row"><span class="id">D1</span><div><strong>Source priority: WMT, then ESPN, then NCAA as cross-check.</strong><p>WMT for BYU games (first-party, least inference). ESPN for any other D-I game. NCAA <code>sdataprod</code> only for cross-checking scores and NCAA-only fields like seeding and team colors.</p></div><div class="src"><i>N</i><i>S</i><i>L</i><i>D</i></div></div>
+    <div class="row"><span class="id">D2</span><div><strong>StatBroadcast is never scraped.</strong><p>Its terms explicitly bar bots and scripts. Alternatives are asking the school, <code>stats.ncaa.org</code>, or the WMT feed.</p></div><div class="src"><i>L</i></div></div>
+    <div class="row"><span class="id">D3</span><div><strong>The three sources share no IDs, so teams, players and games need crosswalks.</strong><p>ESPN BYU=252, NCAA BYU=1874, WMT has its own. Canonical id maps to <code>espn_id</code>, <code>ncaa_id</code>, <code>wmt_id</code>.</p></div><div class="src"><i>N</i><i>S</i></div></div>
+    <div class="row"><span class="id">D4</span><div><strong>Fetch with a plain HTTP client from an open network.</strong><p>A summarizing fetch tool dropped 25 of 462 ESPN plays. Real clients get the full payload, no auth, no rate limit seen.</p></div><div class="src"><i>S</i><i>D</i></div></div>
+  </div></div>
+
+  <div class="grp"><h3>Pipeline shape</h3>
+  <div class="rows">
+    <div class="row"><span class="id">D5</span><div><strong>Ingest once per game. Save raw JSON untouched.</strong><p>Do not flatten or resolve <code>$ref</code>s at ingest. A bug in a derived stat means re-deriving from raw, not re-scraping.</p></div><div class="src"><i>S</i></div></div>
+    <div class="row"><span class="id">D6</span><div><strong>Three layers: raw, normalized, derived.</strong><p>Kills, clutch, timing and substitution patterns are all queries over the same play stream. Not one scraper per stat.</p></div><div class="src"><i>S</i><i>N</i></div></div>
+    <div class="row"><span class="id">D7</span><div><strong>Normalize early into one canonical play schema.</strong><p>Every source maps into it; nothing downstream sees source quirks.</p></div><div class="src"><i>N</i><i>L</i></div></div>
+    <div class="row"><span class="id">D8</span><div><strong>Every play carries provenance and an <code>extra</code> bag.</strong><p><code>sources</code> records which feed(s) and native ids. <code>extra</code> holds anything not yet promoted to a column, so new fields need no migration. (Where the raw payload itself lives is unsettled, see O2.)</p></div><div class="src"><i>N</i></div></div>
+    <div class="row"><span class="id">D9</span><div><strong>"Season" or "last 10 games" is never in the schema.</strong><p>It is a <code>WHERE</code> on <code>games</code>. Everything sits at the finest grain with foreign keys.</p></div><div class="src"><i>S</i></div></div>
+  </div></div>
+
+  <div class="grp"><h3>The play record</h3>
+  <div class="rows">
+    <div class="row"><span class="id">D10</span><div><strong>One row per event, keyed by game and <code>sequence_number</code>.</strong><p>Native on ESPN. Assigned at ingest for NCAA and WMT from period and clock order.</p></div><div class="src"><i>N</i><i>S</i></div></div>
+    <div class="row"><span class="id">D11</span><div><strong>Canonical <code>play_category</code> enum with per-source crosswalks.</strong><p><code>shot_attempt, free_throw, rebound, turnover, steal, block, foul, assist, substitution, timeout, jumpball, challenge, period_admin, other</code>. Build ESPN mapping on numeric <code>type.id</code>, not the text label.</p></div><div class="src"><i>N</i><i>D</i></div></div>
+    <div class="row"><span class="id">D12</span><div><strong>Type detail in <code>play_type</code> and <code>play_subtype</code>.</strong><p>Subtype (driving layup, pull-up jumper) is WMT-only and stays null elsewhere.</p></div><div class="src"><i>N</i></div></div>
+    <div class="row"><span class="id">D13</span><div><strong>Score is <code>home_score_after</code> / <code>away_score_after</code>.</strong><p>Renamed off each source's away/home and visitor/home naming.</p></div><div class="src"><i>N</i></div></div>
+    <div class="row"><span class="id">D14</span><div><strong><code>is_made</code> is explicit from WMT and inferred elsewhere, flagged by <code>made_is_inferred</code>.</strong><p>ESPN and NCAA make/miss comes from text or score delta. Assists link by WMT back-reference, or by row adjacency for the others.</p></div><div class="src"><i>N</i></div></div>
+    <div class="row"><span class="id">D15</span><div><strong>Shot location is normalized to ESPN's one-basket 0 to 50 grid.</strong><p>WMT full-court coordinates convert using <code>side_of_teams_goal</code>. <code>has_valid_location</code> is false for the dummy <code>{25,0}</code> on non-shots.</p></div><div class="src"><i>N</i></div></div>
+    <div class="row"><span class="id">D16</span><div><strong>Source-only fields stay nullable columns.</strong><p>WMT: <code>play_qualifiers</code>, <code>shot_clock_seconds</code>, <code>area_of_action</code>. ESPN: win probability. No fabricating values for other sources.</p></div><div class="src"><i>N</i></div></div>
+    <div class="row"><span class="id">D17</span><div><strong>Description text prefers WMT, then ESPN, then NCAA.</strong></div><div class="src"><i>N</i></div></div>
+  </div></div>
+
+  <div class="grp"><h3>Derived data and context</h3>
+  <div class="rows">
+    <div class="row"><span class="id">D18</span><div><strong>Store ingredients, not flags. Clutch is a rule evaluated at query time.</strong><p>Metric definitions are small JSON filters over <code>score_margin</code>, <code>game_seconds_remaining</code>, <code>period_type</code>, <code>play_category</code>, etc. One evaluator, compiled to SQL or pandas. "Final 5:00, margin ≤ 5" is a preset only.</p></div><div class="src"><i>N</i><i>S</i></div></div>
+    <div class="row"><span class="id">D19</span><div><strong>Lineups are stints, not a table of combinations.</strong><p><code>lineup_id</code> is a hash of the 5 sorted player ids, created only when first observed. Stints record start and end sequence plus start and end margin.</p></div><div class="src"><i>N</i><i>S</i></div></div>
+    <div class="row"><span class="id">D20</span><div><strong>Possessions and stints are reusable derived tables. Kills come from them.</strong><p>A possession ends on a made shot, defensive rebound, turnover or period end. A kill is 3 or more consecutive stops by the same defense.</p></div><div class="src"><i>S</i></div></div>
+    <div class="row"><span class="id">D21</span><div><strong>Ball brand is a plain field on the game. Last value wins, no audit trail.</strong><p>If that changes, add a <code>game_context_overrides</code> table later without touching the rest.</p></div><div class="src"><i>N</i></div></div>
+    <div class="row"><span class="id">D22</span><div><strong>Rankings and rivalries attach to the game by a scheduled join.</strong><p>Rank needs an as-of-date range join. Rivalry is a hand-kept list. Re-run only for affected games.</p></div><div class="src"><i>N</i></div></div>
+  </div></div>
+
+  <div class="grp"><h3>Serving and live (later phases, but decided)</h3>
+  <div class="rows">
+    <div class="row"><span class="id">D23</span><div><strong>Batch queries resolve scope first, then map-reduce per game.</strong><p>Small scopes run inline, seasons run as a job with progress. Cache on <code>hash(definition) + scope_id</code>, invalidate only touched games. Results are rollup, then per-game, then raw plays on drill-down. Coverage checks ride along in the same pass, and "excluded for missing data" is reported separately from "did not match".</p></div><div class="src"><i>N</i></div></div>
+    <div class="row"><span class="id">D24</span><div><strong>Live path: poller, diff and normalize, append-only event store, incremental reducer, broadcaster.</strong><p>One poller per game, 3 to 5 seconds while live. The stat engine is a pure <code>state = reduce(state, event)</code>. The normalizer must handle edits to an existing play id, not only appends.</p></div><div class="src"><i>L</i></div></div>
+  </div></div>
+</section>
+
+<!-- ============ OPTIONS ============ -->
+<section id="options">
+  <div class="sh"><h2>Discussed, never settled</h2><span class="tag t-opt">Multiple options</span></div>
+  <p class="sub">Each has been described from more than one angle without a decision. The recommendation is mine, chosen to keep the first pass small and reversible.</p>
+  <div class="cards">
+
+    <div class="panel card"><h3>O1 · Storage engine</h3>
+      <p class="why">The scraping thread says Postgres for growth, SQLite to start. The normalization thread says relational vs document is undecided.</p>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" data-k="O1-A"><span><b>A · SQLite, upgrade later</b>Single file, zero setup, fits a Python scraper. JSON columns hold <code>extra</code>.</span></label>
+        <label class="opt"><input type="checkbox" data-k="O1-B"><span><b>B · Postgres from day one</b>Real JSONB, arrays for lineups, better for the batch jobs and live path.</span></label>
+        <label class="opt"><input type="checkbox" data-k="O1-C"><span><b>C · Document store</b>Natural for <code>raw</code> and <code>extra</code>, awkward for the crosswalks and stint joins.</span></label>
+      </div>
+      <label class="rec"><input type="checkbox" data-k="O1-rec"><span><b>Lean: A</b>SQLite with portable DDL (no arrays, JSON as TEXT). Everything the docs want is relational, so option C has no case.</span></label>
+      <textarea data-k="O1-other" rows="2" placeholder="Your own option, or notes on this decision" aria-label="Other option for O1"></textarea>
+    </div>
+
+    <div class="panel card"><h3>O2 · Where the raw payload lives</h3>
+      <p class="why">Normalization says each play row carries <code>raw</code>. Scraping says a separate immutable <code>raw_payloads</code> table keyed by game and page.</p>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" data-k="O2-A"><span><b>A · Per-play <code>raw</code> column</b>Easy to inspect one play. Duplicates the payload if a play is re-derived, and bloats the hot table.</span></label>
+        <label class="opt"><input type="checkbox" data-k="O2-B"><span><b>B · Per-game <code>raw_payloads</code></b>One immutable source of truth. Plays keep only a pointer.</span></label>
+      </div>
+      <label class="rec"><input type="checkbox" data-k="O2-rec"><span><b>Lean: B</b>Add <code>source_play_ref</code> (native id or array index) on each play. It matches D5 and keeps <code>plays</code> narrow.</span></label>
+      <textarea data-k="O2-other" rows="2" placeholder="Your own option, or notes on this decision" aria-label="Other option for O2"></textarea>
+    </div>
+
+    <div class="panel card"><h3>O3 · One source per game, or merge sources per play</h3>
+      <p class="why">Scraping picks a primary source per game with fallback. Normalization's <code>sources</code> field and "prefer WMT over ESPN when overlapping" imply fusing plays across feeds.</p>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" data-k="O3-A"><span><b>A · One primary source per game</b>Simple, no cross-feed play matching. Loses ESPN win probability on WMT games.</span></label>
+        <label class="opt"><input type="checkbox" data-k="O3-B"><span><b>B · Merge per play</b>Richest rows. Needs a reliable play-matching rule across feeds that no thread has worked out.</span></label>
+      </div>
+      <label class="rec"><input type="checkbox" data-k="O3-rec"><span><b>Lean: A</b>Store the source used on the game and the play. Keep <code>sources</code> as a JSON field so B stays possible. Pull ESPN win probability as a separate side table if wanted.</span></label>
+      <textarea data-k="O3-other" rows="2" placeholder="Your own option, or notes on this decision" aria-label="Other option for O3"></textarea>
+    </div>
+
+    <div class="panel card"><h3>O4 · Substitutions</h3>
+      <p class="why">Every source emits out and in as two separate rows. Scraping wants a paired <code>substitution_events</code> table. Normalization only has lineup stints.</p>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" data-k="O4-A"><span><b>A · Keep the two rows as they arrive</b>Faithful to the source. Pairing left to queries.</span></label>
+        <label class="opt"><input type="checkbox" data-k="O4-B"><span><b>B · Derive <code>substitution_events</code></b>One row per swap, for substitution-pattern stats.</span></label>
+        <label class="opt"><input type="checkbox" data-k="O4-C"><span><b>C · Skip, rely on stints</b>Works for WMT (lineups inline). ESPN must resolve <code>personnel</code> per sub.</span></label>
+      </div>
+      <label class="rec"><input type="checkbox" data-k="O4-rec"><span><b>Lean: A now, B later</b>Store both rows with a <code>sub_in</code> / <code>sub_out</code> participant role. Derive events and stints together in the derive phase.</span></label>
+      <textarea data-k="O4-other" rows="2" placeholder="Your own option, or notes on this decision" aria-label="Other option for O4"></textarea>
+    </div>
+
+    <div class="panel card"><h3>O5 · Players on a play</h3>
+      <p class="why">Normalization has <code>assisted_by_player_id</code> inline and no shooter field at all. Scraping has a <code>participants(play_id, athlete_id, role)</code> table.</p>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" data-k="O5-A"><span><b>A · Inline columns</b>Fast, but a play can have shooter, assister, blocker, rebounder, fouler and fouled.</span></label>
+        <label class="opt"><input type="checkbox" data-k="O5-B"><span><b>B · Participants table with roles</b>One shape for every play type. One join to read.</span></label>
+      </div>
+      <label class="rec"><input type="checkbox" data-k="O5-rec"><span><b>Lean: B</b>Keep <code>is_assisted</code> and <code>linked_play_id</code> on <code>plays</code> as cheap denormalized helpers.</span></label>
+      <textarea data-k="O5-other" rows="2" placeholder="Your own option, or notes on this decision" aria-label="Other option for O5"></textarea>
+    </div>
+
+    <div class="panel card"><h3>O6 · Where context lives</h3>
+      <p class="why">Normalization splits <code>game_context</code> (once per game) from <code>play_context</code> (per play, "denormalizable"). Neither says whether to store it.</p>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" data-k="O6-A"><span><b>A · Separate <code>game_context</code> table, columns on <code>plays</code></b>Matches the doc. Fast filters. Must rebuild if plays change.</span></label>
+        <label class="opt"><input type="checkbox" data-k="O6-B"><span><b>B · Fold game context into <code>games</code>, expose play context as a view</b>Fewer tables. Slower on big scans.</span></label>
+      </div>
+      <label class="rec"><input type="checkbox" data-k="O6-rec"><span><b>Lean: B</b>The relationship is 1:1, so fold it. Materialize play context only if a query is slow.</span></label>
+      <textarea data-k="O6-other" rows="2" placeholder="Your own option, or notes on this decision" aria-label="Other option for O6"></textarea>
+    </div>
+
+    <div class="panel card"><h3>O7 · Shot coordinates</h3>
+      <p class="why">Normalization decided on the one-basket 0 to 50 grid. That throws away which end of the court a shot came from.</p>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" data-k="O7-A"><span><b>A · Normalized only</b>What the decision literally says.</span></label>
+        <label class="opt"><input type="checkbox" data-k="O7-B"><span><b>B · Normalized plus raw and goal side</b>Three extra nullable columns. WMT is the only source that has them.</span></label>
+      </div>
+      <label class="rec"><input type="checkbox" data-k="O7-rec"><span><b>Lean: B</b>Cheap now, impossible to add after the fact for anything not saved as raw.</span></label>
+      <textarea data-k="O7-other" rows="2" placeholder="Your own option, or notes on this decision" aria-label="Other option for O7"></textarea>
+    </div>
+
+    <div class="panel card"><h3>O8 · Play id stability</h3>
+      <p class="why">Proposed <code>{game_id}-{sequence_number}</code>. The live thread warns feeds renumber and edit plays after challenges and corrections. NCAA and WMT sequences are assigned by this pipeline.</p>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" data-k="O8-A"><span><b>A · Position-based id</b>Simple. Any insert mid-game shifts everything after it.</span></label>
+        <label class="opt"><input type="checkbox" data-k="O8-B"><span><b>B · Source's own id plus a positional sequence</b>Corrections update the same row.</span></label>
+      </div>
+      <label class="rec"><input type="checkbox" data-k="O8-rec"><span><b>Lean: B for the key, A for ordering</b>Unique on <code>(game_id, source, source_play_id)</code>. Keep <code>sequence_number</code> for sort. On re-ingest, replace the game's plays in one transaction.</span></label>
+      <textarea data-k="O8-other" rows="2" placeholder="Your own option, or notes on this decision" aria-label="Other option for O8"></textarea>
+    </div>
+
+    <div class="panel card"><h3>O9 · Live transport and event store</h3>
+      <p class="why">Only listed as a next step. WebSocket vs SSE, and Redis pub/sub vs an app-level broadcaster, were named and never compared.</p>
+      <div class="opts">
+        <label class="opt"><input type="checkbox" data-k="O9-A"><span><b>A · SSE from a small server</b>One-way is all a dashboard needs. Simpler through proxies.</span></label>
+        <label class="opt"><input type="checkbox" data-k="O9-B"><span><b>B · WebSocket</b>Only needed if clients send messages back.</span></label>
+      </div>
+      <label class="rec"><input type="checkbox" data-k="O9-rec"><span><b>Lean: A, and not yet</b>The batch schema does not change either way. The append-only event store can be the same <code>plays</code> table.</span></label>
+      <textarea data-k="O9-other" rows="2" placeholder="Your own option, or notes on this decision" aria-label="Other option for O9"></textarea>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ OPEN ============ -->
+<section id="open">
+  <div class="sh"><h2>Still open</h2><span class="tag t-open">Unanswered</span></div>
+  <p class="sub">No option has even been laid out for these. <span class="pill p-block">Blocks first pass</span> means you need an answer before writing the code that touches it.</p>
+  <div class="qs">
+    <div class="q"><span class="pill p-block">Blocks first pass</span><div><strong>Q1 · Which teams and leagues?</strong><p>The threads say "BYU Hoops" but the schema is team-neutral, and WMT also serves women's basketball. Nothing states men's only.</p><div class="lean"><b>Lean:</b> BYU men's games first, with nothing BYU-specific in the tables. Only a config list of team ids.</div><textarea data-k="Q1-note" rows="2" placeholder="Notes" aria-label="Notes for Q1"></textarea></div></div>
+    <div class="q"><span class="pill p-block">Blocks first pass</span><div><strong>Q2 · How do you get WMT game ids, and how far back?</strong><p>No schedule endpoint was found. Ids have to be captured from byucougars.com. No thread says which seasons to backfill.</p><div class="lean"><b>Lean:</b> a hand-fed <code>source_games</code> table for WMT. Use ESPN's scoreboard to list the season, then paste WMT ids next to them.</div><textarea data-k="Q2-note" rows="2" placeholder="Notes" aria-label="Notes for Q2"></textarea></div></div>
+    <div class="q"><span class="pill p-block">Blocks first pass</span><div><strong>Q3 · How do you match the same game across sources?</strong><p>There is no shared key. Date plus the two team crosswalk ids is the obvious rule, but neutral sites and late tip-offs (UTC date) can break it.</p><div class="lean"><b>Lean:</b> match on local game date plus team pair, and store the match as a row you can override.</div><textarea data-k="Q3-note" rows="2" placeholder="Notes" aria-label="Notes for Q3"></textarea></div></div>
+    <div class="q"><span class="pill p-block">Blocks first pass</span><div><strong>Q4 · What is the exact WMT-to-0-50 coordinate conversion?</strong><p>WMT x runs about 0 to 94 and y about 0 to 81. A court is 94 by 50 feet, so the y range is not feet. ESPN's grid is "about 0 to 50". Units and origin need checking against real shots.</p><div class="lean"><b>Lean:</b> plot both feeds' makes for the same game and fit the mapping. Store raw (O7) until this is proven.</div><textarea data-k="Q4-note" rows="2" placeholder="Notes" aria-label="Notes for Q4"></textarea></div></div>
+    <div class="q"><span class="pill p-later">Before possessions</span><div><strong>Q5 · What exactly counts as a possession end and a stop?</strong><p>Listed as made shot, defensive rebound, turnover, period end. Not covered: offensive rebounds, and-ones, two-shot free-throw trips, team rebounds, jump balls, technical free throws, a turnover that is also a steal.</p><textarea data-k="Q5-note" rows="2" placeholder="Notes" aria-label="Notes for Q5"></textarea></div></div>
+    <div class="q"><span class="pill p-later">Before derive phase</span><div><strong>Q6 · Which proprietary stats are you actually building?</strong><p>Kills, clutch, timing and substitutions are named. The live thread lists "define the specific stats" as an open step. This decides what the derive layer must produce.</p><textarea data-k="Q6-note" rows="2" placeholder="Notes" aria-label="Notes for Q6"></textarea></div></div>
+    <div class="q"><span class="pill p-later">Later</span><div><strong>Q7 · Rankings source.</strong><p>AP, Coaches, NET or KenPom. No feed carries it.</p><textarea data-k="Q7-note" rows="2" placeholder="Notes" aria-label="Notes for Q7"></textarea></div></div>
+    <div class="q"><span class="pill p-later">Later</span><div><strong>Q8 · Rivalry list.</strong><p>Needs manual upkeep. Who maintains it, and does it cover only BYU?</p><textarea data-k="Q8-note" rows="2" placeholder="Notes" aria-label="Notes for Q8"></textarea></div></div>
+    <div class="q"><span class="pill p-later">Later</span><div><strong>Q9 · WMT block value.</strong><p>No block appeared in the sampled game. Presumed <code>play_action_type: "block"</code>. Confirm on a game that has one.</p><textarea data-k="Q9-note" rows="2" placeholder="Notes" aria-label="Notes for Q9"></textarea></div></div>
+    <div class="q"><span class="pill p-later">Later</span><div><strong>Q10 · Does WMT cover opponents' full history?</strong><p>Unknown whether it has the same depth for the other team on non-BYU games, or only BYU's own side.</p><textarea data-k="Q10-note" rows="2" placeholder="Notes" aria-label="Notes for Q10"></textarea></div></div>
+    <div class="q"><span class="pill p-later">Later</span><div><strong>Q11 · Opponent lineup pairing.</strong><p><code>lineup_stints</code> is single-team. Matchup analysis needs a same-time pairing key. Deferred, but affects whether stints get a pairing column.</p><textarea data-k="Q11-note" rows="2" placeholder="Notes" aria-label="Notes for Q11"></textarea></div></div>
+    <div class="q"><span class="pill p-later">Later</span><div><strong>Q12 · Scoring-run detection.</strong><p>Flagged as a good v2. Not designed.</p><textarea data-k="Q12-note" rows="2" placeholder="Notes" aria-label="Notes for Q12"></textarea></div></div>
+    <div class="q"><span class="pill p-later">Later</span><div><strong>Q13 · Role of <code>stats.ncaa.org</code>.</strong><p>Described as the real courtside source of truth, as HTML to scrape. Never ranked against the other three.</p><textarea data-k="Q13-note" rows="2" placeholder="Notes" aria-label="Notes for Q13"></textarea></div></div>
+    <div class="q"><span class="pill p-later">Later</span><div><strong>Q14 · Possession hint.</strong><p>No feed tracks possession. Any per-play hint is inferred and low-confidence. Decide whether to compute it at all once possessions exist.</p><textarea data-k="Q14-note" rows="2" placeholder="Notes" aria-label="Notes for Q14"></textarea></div></div>
+  </div>
+</section>
+
+<!-- ============ GAPS ============ -->
+<section id="gaps">
+  <div class="sh"><h2>Gaps none of the threads cover</h2><span class="tag t-gap">Found while merging</span></div>
+  <p class="sub">Things that will bite when you write the first adapter. Each one is small to fix now.</p>
+  <div class="qs">
+    <div class="q"><span class="pill p-block">Fix in schema</span><div><strong>G1 · The canonical play has no player.</strong><p>It has <code>team_id</code>, <code>assisted_by_player_id</code> and lineups, but no shooter, rebounder, fouler or turnover committer. Nothing can be aggregated per player without it. This is what O5 solves.</p></div></div>
+    <div class="q"><span class="pill p-block">Fix in schema</span><div><strong>G2 · <code>players.team_id</code> breaks on transfers.</strong><p>The scraping schema puts one team on each player. A transfer, or a player who appears for two teams across seasons, needs a roster-by-season link or no team on the player at all.</p><div class="lean"><b>Lean:</b> drop <code>team_id</code> from <code>players</code>. Team for a given game comes from lineups and plays.</div></div></div>
+    <div class="q"><span class="pill p-block">Fix in code</span><div><strong>G3 · Period length differs by league.</strong><p><code>game_seconds_elapsed</code> and <code>game_seconds_remaining</code> need it. Men's college is two 20-minute halves, women's is four 10-minute quarters, overtime is 5. ESPN <code>clock.value</code> and WMT's HH:MM:SS <code>play_time</code> also need their meaning confirmed as time left in the period.</p></div></div>
+    <div class="q"><span class="pill p-block">Fix in code</span><div><strong>G4 · Ordering ties.</strong><p>Assigned sequence for NCAA and WMT comes from clock and period, but makes and assists, sub pairs and free-throw runs share the same clock. Use source row order as the tiebreaker and record it.</p></div></div>
+    <div class="q"><span class="pill p-block">Fix in code</span><div><strong>G5 · Placeholder actors and dirty text.</strong><p>WMT uses a synthetic <code>"TEAM"</code> player and <code>school_id: null</code> on timeouts. NCAA repeats the team name as the player and mangles non-ASCII names. ESPN sometimes omits <code>team</code>. Map these to null player and known team at normalize time.</p></div></div>
+    <div class="q"><span class="pill p-block">Fix in code</span><div><strong>G6 · Re-ingest rules.</strong><p>Nothing says what happens when a game is fetched again (late correction, live game finalizing). Delete-and-insert that game's plays inside one transaction, and keep older raw payloads.</p></div></div>
+    <div class="q"><span class="pill p-block">Test plan</span><div><strong>G7 · No test game has all three sources.</strong><p>Known samples: Texas 79, BYU 71 on 3/19/2026 (ESPN <code>401856484</code>, NCAA <code>6534616</code>) and BYU 71, Villanova 66 (WMT <code>6422769</code>). Cross-source checks need one game with all three ids.</p></div></div>
+  </div>
+</section>
+
+<!-- ============ SCHEMA ============ -->
+<section id="schema">
+  <div class="sh"><h2>Proposed first-pass schema</h2><span class="tag t-dec">Starting point</span></div>
+  <p class="sub">Follows the normalization thread's fields, with the leans above applied. Portable SQL: works in SQLite as written and moves to Postgres by swapping <code>TEXT</code> JSON for <code>JSONB</code>.</p>
+
+  <div class="layers">
+    <div class="panel layer"><span class="lab">Layer 1 · raw</span><h3>Immutable</h3>
+      <ul><li>raw_payloads</li></ul></div>
+    <div class="panel layer"><span class="lab">Layer 2 · normalized</span><h3>Build now</h3>
+      <ul><li>teams</li><li>players</li><li>games</li><li>source_games</li><li>plays</li><li>play_participants</li></ul></div>
+    <div class="panel layer"><span class="lab">Layer 3 · derived</span><h3>After plays are trusted</h3>
+      <ul><li class="later">possessions</li><li class="later">lineup_stints</li><li class="later">substitution_events</li><li class="later">metric_definitions</li><li class="later">context_coverage</li><li class="later">metric_run_jobs</li></ul></div>
+  </div>
+
+  <div class="codebox">
+    <div class="codebar"><span>schema.sql</span><button type="button" id="copy">Copy</button></div>
+<pre id="ddl"><span class="c">-- LAYER 1: raw, never edited</span>
+<span class="k">CREATE TABLE</span> raw_payloads (
+  raw_id          INTEGER PRIMARY KEY,
+  source          TEXT NOT NULL,             <span class="c">-- 'wmt' | 'espn' | 'ncaa'</span>
+  source_game_id  TEXT NOT NULL,
+  kind            TEXT NOT NULL,             <span class="c">-- 'plays' | 'boxscore' | 'scoreboard'</span>
+  page            INTEGER NOT NULL DEFAULT 0,
+  fetched_at      TEXT NOT NULL,
+  payload         TEXT NOT NULL              <span class="c">-- untouched JSON</span>
+);
+
+<span class="c">-- LAYER 2: crosswalks (D3)</span>
+<span class="k">CREATE TABLE</span> teams (
+  team_id  TEXT PRIMARY KEY,                 <span class="c">-- canonical slug, e.g. 'byu'</span>
+  name     TEXT NOT NULL,
+  abbrev   TEXT,
+  espn_id  TEXT, ncaa_id TEXT, wmt_id TEXT
+);
+<span class="k">CREATE TABLE</span> players (
+  player_id  TEXT PRIMARY KEY,
+  name       TEXT NOT NULL,
+  espn_id    TEXT, ncaa_id TEXT, wmt_id TEXT <span class="c">-- no team_id: transfers (G2)</span>
+);
+
+<span class="c">-- games = games + game_context folded together (O6)</span>
+<span class="k">CREATE TABLE</span> games (
+  game_id          TEXT PRIMARY KEY,
+  game_date        TEXT NOT NULL,            <span class="c">-- local date</span>
+  season_year      INTEGER NOT NULL,         <span class="c">-- year the season started</span>
+  season_type      TEXT,                     <span class="c">-- regular | conf_tourney | postseason</span>
+  tournament_round TEXT,
+  home_team_id     TEXT NOT NULL REFERENCES teams(team_id),
+  away_team_id     TEXT NOT NULL REFERENCES teams(team_id),
+  is_neutral_site  INTEGER, is_conference_game INTEGER, is_postseason INTEGER,
+  venue TEXT, attendance INTEGER,
+  home_record_entering TEXT, away_record_entering TEXT,
+  final_score_home INTEGER, final_score_away INTEGER, winner_team_id TEXT,
+  ball_brand       TEXT,                     <span class="c">-- manual, last value wins (D21)</span>
+  primary_source   TEXT NOT NULL,            <span class="c">-- O3: one source per game</span>
+  home_rank_ap INTEGER, away_rank_ap INTEGER, is_rivalry_game INTEGER, <span class="c">-- null until Q7/Q8</span>
+  context_extra    TEXT                      <span class="c">-- JSON</span>
+);
+<span class="k">CREATE TABLE</span> source_games (                   <span class="c">-- Q2, Q3: hand-fed or matched</span>
+  source TEXT NOT NULL, source_game_id TEXT NOT NULL,
+  game_id TEXT NOT NULL REFERENCES games(game_id),
+  PRIMARY KEY (source, source_game_id)
+);
+
+<span class="c">-- LAYER 2: the normalized play (D10 to D17)</span>
+<span class="k">CREATE TABLE</span> plays (
+  play_id           TEXT PRIMARY KEY,        <span class="c">-- '{game_id}-{sequence_number}'</span>
+  game_id           TEXT NOT NULL REFERENCES games(game_id),
+  sequence_number   INTEGER NOT NULL,        <span class="c">-- sort key (G4 tiebreak)</span>
+  source            TEXT NOT NULL,
+  source_play_id    TEXT,                    <span class="c">-- native id, for corrections (O8)</span>
+  source_play_ref   TEXT,                    <span class="c">-- pointer into raw_payloads (O2)</span>
+
+  period_number     INTEGER NOT NULL,
+  period_type       TEXT NOT NULL,           <span class="c">-- regulation | ot</span>
+  clock_seconds_remaining REAL,
+  clock_display     TEXT,
+  game_seconds_elapsed    REAL,
+  wallclock_utc     TEXT,
+
+  team_id           TEXT REFERENCES teams(team_id),   <span class="c">-- null when neutral</span>
+  team_side         TEXT,                    <span class="c">-- home | away</span>
+  is_neutral_event  INTEGER NOT NULL DEFAULT 0,
+
+  play_category     TEXT NOT NULL,           <span class="c">-- D11 enum</span>
+  play_type         TEXT,
+  play_subtype      TEXT,                    <span class="c">-- WMT only</span>
+  play_description  TEXT,
+
+  home_score_after  INTEGER NOT NULL,
+  away_score_after  INTEGER NOT NULL,
+  shot_value        INTEGER,                 <span class="c">-- 1 | 2 | 3</span>
+  is_shot_attempt   INTEGER NOT NULL DEFAULT 0,
+  is_made           INTEGER,
+  made_is_inferred  INTEGER NOT NULL DEFAULT 0,
+  is_assisted       INTEGER,
+  linked_play_id    TEXT,                    <span class="c">-- assist to shot (WMT play_by_play_id)</span>
+
+  court_x REAL, court_y REAL,                <span class="c">-- normalized 0-50 grid (D15)</span>
+  raw_x REAL, raw_y REAL, goal_side TEXT,    <span class="c">-- O7, WMT only</span>
+  area_of_action    TEXT,                    <span class="c">-- WMT only</span>
+  has_valid_location INTEGER NOT NULL DEFAULT 0,
+
+  play_qualifiers   TEXT,                    <span class="c">-- WMT: 'fastbreak;2ndchance'</span>
+  shot_clock_seconds REAL,                   <span class="c">-- WMT only</span>
+  lineup_home       TEXT, lineup_away TEXT,  <span class="c">-- JSON arrays of player_id</span>
+  win_probability_home REAL,                 <span class="c">-- ESPN only</span>
+
+  sources           TEXT,                    <span class="c">-- JSON, D8</span>
+  extra             TEXT,                    <span class="c">-- JSON bag, D8</span>
+  UNIQUE (game_id, source, source_play_id)
+);
+<span class="k">CREATE INDEX</span> plays_game_seq ON plays (game_id, sequence_number);
+<span class="k">CREATE INDEX</span> plays_game_cat ON plays (game_id, play_category);
+
+<span class="c">-- O5: who was involved, and how</span>
+<span class="k">CREATE TABLE</span> play_participants (
+  play_id    TEXT NOT NULL REFERENCES plays(play_id),
+  player_id  TEXT REFERENCES players(player_id),   <span class="c">-- null for team-credited</span>
+  role       TEXT NOT NULL,   <span class="c">-- actor | assister | rebounder | blocker | stealer |
+                                 --   fouler | fouled | sub_in | sub_out</span>
+  PRIMARY KEY (play_id, role, player_id)
+);
+
+<span class="c">-- Not stored: score_margin, is_leading, game_seconds_remaining, clutch (D18).
+-- Expose them as a VIEW over plays so metric rules run at query time.</span></pre>
+  </div>
+
+  <div class="grp"><h3>Which canonical fields each source can fill</h3>
+  <div class="scroll"><table>
+    <thead><tr><th>Field</th><th>WMT</th><th>ESPN</th><th>NCAA</th><th>Handling</th></tr></thead>
+    <tbody>
+      <tr><td class="k">play_category, play_type</td><td class="y">direct</td><td class="y">direct (type.id)</td><td class="n">text match</td><td>Crosswalk table from D11</td></tr>
+      <tr><td class="k">play_subtype</td><td class="y">direct</td><td class="n">null</td><td class="n">null</td><td>Nullable</td></tr>
+      <tr><td class="k">is_made</td><td class="y">explicit</td><td class="n">inferred</td><td class="n">inferred</td><td>Set <code>made_is_inferred</code></td></tr>
+      <tr><td class="k">is_assisted, linked_play_id</td><td class="y">back-reference</td><td class="n">parse text</td><td class="n">adjacent row</td><td>Adjacency rule needs G4 tiebreak</td></tr>
+      <tr><td class="k">court_x, court_y</td><td class="n">convert (Q4)</td><td class="y">direct</td><td class="n">none</td><td>Gate on <code>has_valid_location</code></td></tr>
+      <tr><td class="k">lineup_home / away</td><td class="y">inline</td><td class="n">follow <code>$ref</code></td><td class="n">none</td><td>NCAA cannot feed lineup stints</td></tr>
+      <tr><td class="k">play_qualifiers, shot_clock</td><td class="y">direct</td><td class="n">null</td><td class="n">null</td><td>Nullable</td></tr>
+      <tr><td class="k">win_probability</td><td class="n">null</td><td class="y">via <code>$ref</code></td><td class="n">null</td><td>Nullable</td></tr>
+      <tr><td class="k">sequence_number</td><td class="n">assign</td><td class="y">native</td><td class="n">assign</td><td>Order by period, clock desc, row order</td></tr>
+    </tbody>
+  </table></div></div>
+</section>
+
+<!-- ============ ORDER ============ -->
+<section id="order">
+  <div class="sh"><h2>Suggested build order</h2></div>
+  <p class="sub">Each step ends with something checkable, so you find schema mistakes before adding the next source or layer.</p>
+  <ol class="steps">
+    <li><div><b>Save fixtures from the known games.</b><span>Raw JSON for the three sample games (G7). These become your tests.</span></div></li>
+    <li><div><b>Create Layer 1 and the crosswalks.</b><span><code>raw_payloads</code>, <code>teams</code>, <code>players</code>, <code>games</code>, <code>source_games</code>. Seed BYU and opponents by hand.</span></div></li>
+    <li><div><b>WMT adapter into <code>plays</code> and <code>play_participants</code>.</b><span>Least inference, so any bug is in your code and not the data. Handle placeholders (G5) and the coordinate mapping (Q4) here.</span></div></li>
+    <li><div><b>Check it against the box score.</b><span>Final <code>home_score_after</code> equals the box score, made shots sum to points, plays per period look sane, every assist links to a make.</span></div></li>
+    <li><div><b>ESPN adapter.</b><span>Forces the inferred-make path, <code>$ref</code> resolution and cross-source ids. If the schema fits both feeds, it is safe to build on.</span></div></li>
+    <li><div><b>Add the context view and one metric rule.</b><span>Score margin, seconds remaining and the clutch preset as a query. Proves D18 without any new tables.</span></div></li>
+    <li><div><b>Derive lineup stints, then possessions.</b><span>Stints are trivial from WMT. Possessions need the Q5 rules written down first. Then kills.</span></div></li>
+    <li><div><b>Everything else, in the order you need it.</b><span>NCAA cross-check, rankings and rivalries, coverage reporting, batch jobs, the live poller.</span></div></li>
+  </ol>
+</section>
+
+<!-- ============ SOURCES ============ -->
+<section id="sources">
+  <div class="sh"><h2>Source snapshot</h2></div>
+  <p class="sub">Condensed from the sources summary, with endpoints for reference.</p>
+  <div class="scroll"><table>
+    <thead><tr><th></th><th>WMT Digital</th><th>ESPN core API</th><th>NCAA sdataprod</th></tr></thead>
+    <tbody>
+      <tr><td class="k">Role</td><td>Primary for BYU</td><td>Fallback, any D-I game</td><td>Cross-check only</td></tr>
+      <tr><td class="k">Access</td><td>Open REST, one call</td><td>Open REST, paginated</td><td>GraphQL, persisted-query hashes from <code>henrygd/ncaa-api</code></td></tr>
+      <tr><td class="k">Find game ids</td><td>None. Capture from byucougars.com</td><td>Public scoreboard, <code>groups=50</code></td><td>Public scoreboard. <code>seasonYear</code> is the start year</td></tr>
+      <tr><td class="k">Event typing</td><td>Two-level type and subtype</td><td>Flat <code>type.id</code></td><td>None, text only</td></tr>
+      <tr><td class="k">Make / miss</td><td>Explicit</td><td>Inferred</td><td>Inferred</td></tr>
+      <tr><td class="k">Shot location</td><td>Full court, raw, plus zone</td><td>One basket, normalized</td><td>None</td></tr>
+      <tr><td class="k">Lineups</td><td>All 10 inline every row</td><td><code>$ref</code> per play</td><td>None</td></tr>
+      <tr><td class="k">Extras</td><td>Qualifiers, shot clock, box score by period</td><td>Win probability</td><td>Seeding, team colors</td></tr>
+      <tr><td class="k">Known quirks</td><td>Synthetic TEAM player, null school on timeouts, no block seen</td><td>Make types fire on misses, missing <code>team</code>, text style changes mid-game</td><td>Mojibake names, make and assist on separate rows, <code>eventId</code> always -99</td></tr>
+      <tr><td class="k">Sample game</td><td>BYU 71, Villanova 66 · <code>6422769</code></td><td>Texas 79, BYU 71 · <code>401856484</code> · 462 plays</td><td>Texas 79, BYU 71 · <code>6534616</code> · 482 events</td></tr>
+    </tbody>
+  </table></div>
+  <footer>Built from the four Markdown files in <code>dataAggregators/dataDiscussions</code>. Lean recommendations and the gaps in the Gaps section are added analysis; everything in Decided comes from the discussions.</footer>
+</section>
+</div>
+
+<script>
+(function(){
+  var b=document.getElementById('copy'),p=document.getElementById('ddl');
+  if(!b||!p)return;
+  b.addEventListener('click',function(){
+    var t=p.innerText;
+    function ok(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)}
+    function sel(){var r=document.createRange();r.selectNodeContents(p);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected'}
+    try{navigator.clipboard.writeText(t).then(ok,sel)}catch(e){sel()}
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var KEY='pbp-design-brief-v1', els=[].slice.call(document.querySelectorAll('[data-k]')), st={}, note=document.getElementById('saved'), t;
+  try{st=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch(e){st={}}
+  els.forEach(function(el){var v=st[el.dataset.k]; if(v==null)return; if(el.type==='checkbox')el.checked=!!v; else el.value=v;});
+  function save(){
+    els.forEach(function(el){var v=el.type==='checkbox'?el.checked:el.value; if(v)st[el.dataset.k]=v; else delete st[el.dataset.k];});
+    try{localStorage.setItem(KEY,JSON.stringify(st));note.textContent='saved'}catch(e){note.textContent='not saved (storage blocked)'}
+    clearTimeout(t);t=setTimeout(function(){note.textContent=''},1500);
+  }
+  els.forEach(function(el){el.addEventListener(el.type==='checkbox'?'change':'input',save)});
+  function flash(b,m){var o=b.textContent;b.textContent=m;setTimeout(function(){b.textContent=o},1500)}
+  document.getElementById('summary').addEventListener('click',function(){
+    var b=this,out=['PBP design brief: my choices',''];
+    document.querySelectorAll('.card').forEach(function(c){
+      var h=c.querySelector('h3').textContent, picks=[].slice.call(c.querySelectorAll('input:checked')).map(function(i){return i.closest('label').querySelector('b').textContent.trim()});
+      var o=c.querySelector('textarea').value.trim();
+      if(picks.length||o){out.push(h);picks.forEach(function(p){out.push('  [x] '+p)});if(o)out.push('  other: '+o);out.push('')}
+    });
+    out.push('Open question notes','');
+    document.querySelectorAll('.q textarea').forEach(function(a){if(a.value.trim()){out.push(a.closest('.q').querySelector('strong').textContent+'\n  '+a.value.trim());out.push('')}});
+    var txt=out.join('\n'),ta=document.createElement('textarea');
+    function fb(){ta.value=txt;ta.style.cssText='position:fixed;opacity:0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');flash(b,'Copied')}catch(e){flash(b,'Copy failed')}ta.remove()}
+    try{navigator.clipboard.writeText(txt).then(function(){flash(b,'Copied')},fb)}catch(e){fb()}
+  });
+  var clr=document.getElementById('clear'),armed=false;
+  clr.addEventListener('click',function(){
+    if(!armed){armed=true;clr.textContent='Click again to clear';setTimeout(function(){armed=false;clr.textContent='Clear all'},2500);return}
+    els.forEach(function(el){if(el.type==='checkbox')el.checked=false;else el.value=''});st={};save();armed=false;clr.textContent='Clear all';
+  });
+})();
+</script>
+
+</body>
+</html>

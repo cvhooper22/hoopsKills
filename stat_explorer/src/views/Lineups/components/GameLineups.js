@@ -1,6 +1,8 @@
 import { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import genLineupData from "../../../utils/lineupUtils";
+import { LINEUPS_DEMO, LINEUPS_DEMO_TITLE } from "../../../constants/demo";
+import playsToBbgame from "../../../utils/playsToBbgame";
 import PlayerFilters from "../../../components/PlayerFilters/PlayerFilters";
 import "../Lineups.css";
 import LineupTable from "./LineupTable";
@@ -54,13 +56,14 @@ export default function Lineups() {
   }, [name, currentGame]);
 
   useEffect(() => {
-    fetch(`https://gamestats.byucougars.com/boxscore/${currentGame}`)
+    fetch(`${process.env.PUBLIC_URL}/data/2025-11-03-villanova-at-byu.json`)
       .then((resp) => {
         return resp.json();
       })
       .then((data) => {
-        const lineups = genLineupData(data[0].bbgame);
-        const team = data[0].bbgame.team.find((t) => t.name === "BYU");
+        const bbgame = playsToBbgame(data);
+        const lineups = genLineupData(bbgame);
+        const team = bbgame.team.find((t) => t.name === "BYU");
         const teamPlayers = team.player.filter(p => p.checkname !== 'TEAM' && p.gp !== "0");
         const players = teamPlayers.map((p) => p.checkname);
         setPlayers(players);
@@ -114,7 +117,7 @@ export default function Lineups() {
   }, [filterPlayers.length, lineupCount, currSort.key, currSort.direction]);
   return (
     <>
-        <h1 className="lineup-game-label">{`${nameFromId(currentGame)} [2022-2023]`}</h1>
+        <h1 className="lineup-game-label">{LINEUPS_DEMO ? LINEUPS_DEMO_TITLE : `${nameFromId(currentGame)} [2022-2023]`}</h1>
         {loading && <YBallLoader />}
         { !loading && lineupData.error && <div className="mt-l">There was an error fetching the play by play data</div>}
         {!loading && !lineupData.error && (

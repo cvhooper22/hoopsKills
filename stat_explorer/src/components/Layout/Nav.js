@@ -33,6 +33,7 @@ export default function Nav ({ options = [], onOptionClick}) {
               <li className={classes.join(' ')} role="button" onClick={handleClick(opt)} key={opt.title}>
                 {opt.title}
                 {opt.disabled && <sub>Coming Soon</sub>}
+                {!opt.disabled && opt.subtitle && <sub>{opt.subtitle}</sub>}
               </li>
             );
           })
