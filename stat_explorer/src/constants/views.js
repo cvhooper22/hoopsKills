@@ -18,15 +18,15 @@ const views = [
     },
     {
       title: KILLS_VIEW,
-      disabled: true,
       route: '/kills',
       routeRoot: '/kills',
+      subtitle: 'Preview',
     },
     {
       title: CLUTCH_VIEW,
-      disabled: true,
       route: '/clutch',
       routeRoot: '/clutch',
+      subtitle: 'Preview',
     },
     {
       title: ALMUNI_VIEW,

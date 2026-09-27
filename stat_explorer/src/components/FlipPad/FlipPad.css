@@ -1,0 +1,211 @@
+/* Tokens fall back to hex where the design-system token is not defined in this app yet. */
+.flip-pad {
+  --fp-sky: var(--sky-100, #EDF4FF);
+  --fp-paper: var(--paper, #FFFFFD);
+  --fp-navy-700: var(--navy-700, #002E5D);
+  --fp-navy-900: var(--navy-900, #001B38);
+  --fp-royal-400: var(--royal-400, #4A8BE0);
+  --fp-royal-600: var(--royal-600, #003FA2);
+  --fp-pos: var(--pos-700, #006141);
+  --fp-neg: var(--neg-700, #A3082A);
+  --fp-pos-light: var(--pos-400, #10A170);
+  --fp-neg-light: var(--neg-400, #E61744);
+  --fp-muted: var(--text-muted, lightslategray);
+  --fp-shadow: var(--shadow-card, 0 1px 3px rgba(0,0,0,.15));
+  --fp-display: var(--font-display, 'Archivo Narrow', sans-serif);
+  --fp-mono: var(--font-mono, 'IBM Plex Mono', ui-monospace, Menlo, monospace);
+}
+
+/* ---------- Tile ---------- */
+.flip-pad {
+  min-height: 212px;
+  padding: 1rem;
+  background: var(--fp-sky);
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 3px;
+  box-shadow: var(--fp-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+.flip-pad__plate {
+  align-self: center;
+  padding: .2rem .8rem;
+  background: var(--fp-paper);
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 2px;
+  font-family: var(--fp-display);
+  font-weight: 700;
+  font-size: .64rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--fp-navy-700);
+}
+
+/* ---------- Stand + board ---------- */
+.flip-pad__stand {
+  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 14px;           /* headroom for rings */
+}
+.flip-pad__pages {
+  position: relative;
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  padding: 0 10px 10px;        /* board margin around pages */
+}
+.flip-pad__board {
+  position: absolute;
+  inset: -1px 0 0 0;           /* top sits 1px above pages: the ring's back leg ends here */
+  background: var(--fp-navy-700);
+  border-radius: 3px;
+  box-shadow: var(--fp-shadow);
+}
+
+/* ---------- Pages ---------- */
+.flip-pad__page {
+  position: relative;
+  z-index: 1;
+  width: 44px;
+  height: 74px;
+}
+.flip-pad__page--narrow { width: 30px; }
+
+.flip-pad__sheet {
+  position: absolute;
+  inset: 0;
+  background: var(--fp-paper);
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* stack of spare pages under the front page */
+  box-shadow: 0 1px 0 #DDE3EA, 0 2px 0 #C9D1DB, 0 3px 0 #DDE3EA, 0 4px 0 rgba(0,0,0,.18);
+}
+.flip-pad__sheet span {
+  font-family: var(--fp-display);
+  font-weight: 700;
+  font-size: 3rem;
+  line-height: 1;
+  padding-top: 10px;           /* optical: clears the punched holes */
+  color: var(--fp-royal-600);
+  font-variant-numeric: tabular-nums;
+}
+.flip-pad__page--narrow .flip-pad__sheet span { font-size: 1.9rem; }
+
+.flip-pad__dot {
+  position: relative;
+  z-index: 1;
+  align-self: flex-end;
+  width: 8px;
+  height: 8px;
+  margin-bottom: 14px;
+  border-radius: 50%;
+  background: var(--fp-paper);
+}
+
+/* colon: two dots stacked at the page's thirds, no page of its own */
+.flip-pad__colon {
+  position: relative;
+  z-index: 1;
+  width: 8px;
+  height: 74px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  gap: 18px;
+  padding-top: 8px;            /* optical: matches the digit offset */
+}
+.flip-pad__colon i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--fp-paper);
+}
+
+/* ---------- Rings ---------- */
+.flip-pad__ring {
+  position: absolute;
+  top: -14px;                  /* svg y=14 == page top edge */
+  overflow: visible;           /* tilt can rotate outside the viewBox */
+  z-index: 2;
+}
+.flip-pad__hole { fill: var(--fp-navy-900); stroke: rgba(0,0,0,.08); stroke-width: .6; }
+.flip-pad__ring path { fill: none; stroke-linecap: round; }
+.flip-pad__ring-shadow { stroke: #5E6874; stroke-width: 2.8; }
+.flip-pad__ring-metal  { stroke: #D5DBE2; stroke-width: 1.6; }
+.flip-pad__ring-hi     { stroke: #fff; stroke-width: .7; opacity: .9; }
+
+/* ---------- Footer ---------- */
+.flip-pad__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-top: 1px solid rgba(0,0,0,.12);
+  padding-top: .5rem;
+  font-family: var(--fp-mono);
+  font-size: .6rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--fp-muted);
+}
+.flip-pad__foot b {
+  font-family: var(--fp-display);
+  font-size: .8rem;
+  letter-spacing: .03em;
+}
+.flip-pad__foot b.is-up   { color: var(--fp-pos); }
+.flip-pad__foot b.is-down { color: var(--fp-neg); }
+
+/* ---------- Variants ---------- */
+.flip-pad--no-board .flip-pad__dot,
+.flip-pad--no-board .flip-pad__colon i { background: var(--fp-royal-600); }
+
+.flip-pad--box-white { background: var(--fp-paper); }
+.flip-pad--box-white .flip-pad__plate { background: var(--fp-sky); }
+
+.flip-pad--cards-royal .flip-pad__sheet {
+  background: var(--fp-royal-600);
+  box-shadow: 0 1px 0 var(--fp-royal-400), 0 2px 0 var(--fp-navy-700), 0 3px 0 var(--fp-royal-400), 0 4px 0 rgba(0,0,0,.25);
+}
+.flip-pad--cards-navy .flip-pad__sheet {
+  background: var(--fp-navy-700);
+  box-shadow: 0 1px 0 var(--fp-navy-900), 0 2px 0 #3A5476, 0 3px 0 var(--fp-navy-900), 0 4px 0 rgba(0,0,0,.25);
+}
+.flip-pad--cards-royal .flip-pad__sheet span,
+.flip-pad--cards-navy  .flip-pad__sheet span { color: #fff; }
+.flip-pad--cards-navy  .flip-pad__hole  { fill: #0A1628; }
+.flip-pad--cards-navy  .flip-pad__board { background: var(--fp-royal-600); }  /* keep contrast vs navy pages */
+.flip-pad--cards-navy.flip-pad--no-board .flip-pad__dot,
+.flip-pad--cards-navy.flip-pad--no-board .flip-pad__colon i { background: var(--fp-navy-700); }
+
+/* ---------- Digit tone (optional) ---------- */
+.flip-pad--tone-pos .flip-pad__sheet span { color: var(--fp-pos); }
+.flip-pad--tone-neg .flip-pad__sheet span { color: var(--fp-neg); }
+/* lighter tints keep contrast on royal / navy pages */
+.flip-pad--cards-royal.flip-pad--tone-pos .flip-pad__sheet span,
+.flip-pad--cards-navy.flip-pad--tone-pos .flip-pad__sheet span { color: var(--fp-pos-light); }
+.flip-pad--cards-royal.flip-pad--tone-neg .flip-pad__sheet span,
+.flip-pad--cards-navy.flip-pad--tone-neg .flip-pad__sheet span { color: var(--fp-neg-light); }
+
+/* ---------- Condensed (many tiles in one row; about 157px wide) ---------- */
+.flip-pad--condensed { min-height: 118px; padding: .6rem; gap: .5rem; }
+.flip-pad--condensed .flip-pad__plate { padding: .15rem .6rem; font-size: .56rem; }
+.flip-pad--condensed .flip-pad__stand { padding-top: 11px; }
+.flip-pad--condensed .flip-pad__pages { gap: 4px; padding: 0 7px 7px; }
+.flip-pad--condensed .flip-pad__page { width: 34px; height: 57px; }
+.flip-pad--condensed .flip-pad__page--narrow { width: 23px; }
+.flip-pad--condensed .flip-pad__sheet span { font-size: 2.3rem; padding-top: 8px; }
+.flip-pad--condensed .flip-pad__page--narrow .flip-pad__sheet span { font-size: 1.45rem; }
+.flip-pad--condensed .flip-pad__ring { top: -11px; }
+.flip-pad--condensed .flip-pad__dot { width: 6px; height: 6px; margin-bottom: 11px; }
+.flip-pad--condensed .flip-pad__colon { width: 6px; height: 57px; gap: 13px; padding-top: 6px; }
+.flip-pad--condensed .flip-pad__colon i { width: 6px; height: 6px; }
+.flip-pad--condensed .flip-pad__foot { padding-top: .35rem; }

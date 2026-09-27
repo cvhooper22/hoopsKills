@@ -1,0 +1,40 @@
+.stops-editor {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 16px 24px;
+  box-sizing: border-box;
+  text-align: left;
+  font-family: sans-serif;
+  color: #002e52;
+}
+
+.stops-editor__bar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 8px 0 12px;
+  background: white;
+}
+
+.stops-editor__bar h2 { margin: 0 16px 0 0; font-size: 18px; }
+.stops-editor__count { font-weight: bold; }
+.stops-editor__status--ok { color: #1a7f37; }
+.stops-editor__status--error { color: #c62828; }
+
+.stops-editor__table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.stops-editor__table th { text-align: left; padding: 6px 8px; border-bottom: 2px solid #dde3ea; }
+.stops-editor__table td { padding: 4px 8px; border-bottom: 1px solid #edf0f4; }
+.stops-editor__table tbody tr { cursor: pointer; }
+.stops-editor__table tbody tr:hover { background: #f4f7fa; }
+.stops-editor__table tr.is-stop { background: #e3f4e6; }
+.stops-editor__table tr.is-defense td:nth-child(5) { font-weight: bold; }
+.stops-editor__period td { background: #002e52; color: white; font-weight: bold; cursor: default; }
+.stops-editor__table input[type="text"] { width: 100%; box-sizing: border-box; }
+.stops-editor__table tr.is-left-off td { box-shadow: inset 0 2px 0 #f0a500, inset 0 -2px 0 #f0a500; }
+.stops-editor__table tr.is-left-off td:first-child { box-shadow: inset 4px 0 0 #f0a500, inset 0 2px 0 #f0a500, inset 0 -2px 0 #f0a500; }
+.stops-editor__seq { color: #6b7c8d; font-variant-numeric: tabular-nums; }

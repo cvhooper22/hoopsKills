@@ -1,0 +1,74 @@
+.kills {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-align: left;
+}
+
+.kills-title { margin-top: 0; }
+
+.kills-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.kills-summary__stat {
+  flex: 1 1 12rem;
+  padding: 0.75rem 1rem;
+  border-radius: 2px;
+  background-color: var(--lightest-blue);
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.kills-summary__stat small { font-size: 0.8rem; font-weight: normal; }
+
+.kills-summary__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: normal;
+  color: var(--secondary-text);
+  text-transform: uppercase;
+}
+
+.kills-check { color: var(--secondary-text); font-size: 0.85rem; }
+
+.kills-streak {
+  margin-bottom: 1rem;
+  padding: 0.5rem 0.75rem;
+  border-left: 4px solid var(--blue-stop-3);
+  background: white;
+}
+
+.kills-streak__breaker { color: var(--secondary-text); font-size: 0.85rem; }
+
+.kills-kill { margin: 0.5rem 0; }
+.kills-kill--potential { opacity: 0.75; }
+.kills-kill__meta { color: var(--secondary-text); font-size: 0.85rem; }
+
+.kills-stops { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.25rem; }
+
+.kills-stop {
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  background: #e3f4e6;
+  font-size: 0.8rem;
+}
+
+.kills-stop--dirty { background: #fff0cc; }
+.kills-stop--unmarked { outline: 2px dashed #c62828; }
+
+.kills-tag {
+  display: inline-block;
+  margin-right: 0.25rem;
+  padding: 0 0.4rem;
+  border-radius: 2px;
+  background: var(--lightest-blue);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.kills-tag--pure { background: #e3f4e6; }
+.kills-tag--dirty { background: #fff0cc; }
+.kills-tag--clutch { background: #d6e4ff; }
