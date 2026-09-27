@@ -8,10 +8,12 @@ import ClutchRouter from './views/Clutch/ClutchRouter';
 import GameLineups from './views/Lineups/components/GameLineups';
 import SeasonLineups from "./views/Lineups/components/SeasonLineups";
 import GameClutch from './views/Clutch/components/GameClutch';
+import Kills from "./views/Kills/Kills";
 import Home from "./views/Home/Home";
 import { views } from './constants/views';
 import AlumniRouter from "./views/Alumni/AlmuniRouter";
 import AlumniEditor from "./views/Admin/AlumniEditor";
+import StopsEditor from "./views/Admin/StopsEditor";
 import { TouchPointsContextProvider } from "./contexts/TouchpointsContext";
 
 export default function App() {
@@ -38,9 +40,12 @@ export default function App() {
               <Route index element={<GameClutch />} />
               <Route path=":name" element={<GameClutch />} />
             </Route>
+            <Route path="kills" element={<Kills />} ></Route>
             <Route path="alumni" element={<AlumniRouter />} ></Route>
             {/* Hidden — not in nav, only reachable by navigating directly here */}
             <Route path="admin/alumni" element={<AlumniEditor />} ></Route>
+            <Route path="admin/stops" element={<StopsEditor />} ></Route>
+            <Route path="admin/stops/:gameId" element={<StopsEditor />} ></Route>
             <Route path="*" element={<Home />} />
           </Routes>
         </div>

@@ -1,0 +1,207 @@
+{
+  "leftOff": 542,
+  "plays": [
+    {
+      "sequence_number": 9,
+      "stop": true
+    },
+    {
+      "sequence_number": 13,
+      "stop": true,
+      "note": "2 stops in a row"
+    },
+    {
+      "sequence_number": 16,
+      "stop": false,
+      "note": "make a note of this one for possible future enhancement. I kind of want to know which stop streaks were ended by fast break, especially those like this where it came from a turnover"
+    },
+    {
+      "sequence_number": 22,
+      "stop": true
+    },
+    {
+      "sequence_number": 34,
+      "stop": true
+    },
+    {
+      "sequence_number": 72,
+      "stop": true
+    },
+    {
+      "sequence_number": 86,
+      "stop": true,
+      "note": "this is an odd case, there is no defensive rebound to verify the stop but since the next play is a BYU offensive play it is a stop attributed to Davis as a block"
+    },
+    {
+      "sequence_number": 97,
+      "stop": false,
+      "note": "looks like the play by play got really mixed up here and they finally logged the defensive rebound here for the block above. Not sure if there's anything we can do about that but making a note that this might mess things up a little"
+    },
+    {
+      "sequence_number": 99,
+      "stop": true,
+      "note": "2 stops in a row"
+    },
+    {
+      "sequence_number": 106,
+      "stop": true,
+      "note": "kill"
+    },
+    {
+      "sequence_number": 112,
+      "stop": true,
+      "note": "4 stops in a row"
+    },
+    {
+      "sequence_number": 117,
+      "stop": true,
+      "note": "5 stops in a row"
+    },
+    {
+      "sequence_number": 139,
+      "stop": true
+    },
+    {
+      "sequence_number": 153,
+      "stop": true
+    },
+    {
+      "sequence_number": 157,
+      "stop": true,
+      "note": "2 stops in a row"
+    },
+    {
+      "sequence_number": 168,
+      "stop": true,
+      "note": "kill"
+    },
+    {
+      "sequence_number": 171,
+      "stop": true,
+      "note": "4 stops in a row"
+    },
+    {
+      "sequence_number": 176,
+      "stop": true,
+      "note": "5 stops in a row"
+    },
+    {
+      "sequence_number": 180,
+      "stop": true,
+      "note": "kill, 6 stops in a row"
+    },
+    {
+      "sequence_number": 194,
+      "stop": true,
+      "note": "7 stops in a row"
+    },
+    {
+      "sequence_number": 208,
+      "stop": true
+    },
+    {
+      "sequence_number": 219,
+      "stop": true
+    },
+    {
+      "sequence_number": 224,
+      "stop": true,
+      "note": "2 stops in a row"
+    },
+    {
+      "sequence_number": 235,
+      "stop": true,
+      "note": "kill"
+    },
+    {
+      "sequence_number": 254,
+      "stop": true
+    },
+    {
+      "sequence_number": 265,
+      "stop": true
+    },
+    {
+      "sequence_number": 292,
+      "stop": true
+    },
+    {
+      "sequence_number": 294,
+      "stop": false,
+      "note": "might be an example of the end of period rule. I'm not sure how this will be logged in the parser but it should not count as a stop because it was just a steal right at the end of the half"
+    },
+    {
+      "sequence_number": 303,
+      "stop": true
+    },
+    {
+      "sequence_number": 311,
+      "stop": true,
+      "note": "2 stops in a row"
+    },
+    {
+      "sequence_number": 318,
+      "stop": true
+    },
+    {
+      "sequence_number": 327,
+      "stop": true,
+      "note": "2 stops in a row"
+    },
+    {
+      "sequence_number": 340,
+      "stop": true,
+      "note": "somone took a charge here"
+    },
+    {
+      "sequence_number": 351,
+      "stop": true,
+      "note": "2 stops in a row"
+    },
+    {
+      "sequence_number": 357,
+      "stop": true,
+      "note": "kill"
+    },
+    {
+      "sequence_number": 376,
+      "stop": true,
+      "note": "ahmed credited with block for this stop"
+    },
+    {
+      "sequence_number": 419,
+      "stop": true,
+      "note": "this possession spanned a timeout, make sure it's counted as a dirty stop (offensive rebound at 407)"
+    },
+    {
+      "sequence_number": 447,
+      "stop": true
+    },
+    {
+      "sequence_number": 453,
+      "stop": true,
+      "note": "2 stops in a row. I think this one might be different from heldballs before but this is an attributable stop to Davis"
+    },
+    {
+      "sequence_number": 471,
+      "stop": true
+    },
+    {
+      "sequence_number": 519,
+      "stop": true
+    },
+    {
+      "sequence_number": 539,
+      "stop": true
+    },
+    {
+      "sequence_number": 542,
+      "stop": true,
+      "note": "2 stop sin a row"
+    },
+    {
+      "sequence_number": 564,
+      "stop": true
+    }
+  ]
+}

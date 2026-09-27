@@ -1,0 +1,134 @@
+/* Base look for the chart primitives. Everything is class-driven so a consumer restyles it from its
+   own stylesheet (for example `.margin-chart .chart-line { stroke: var(--royal-blue) }`). */
+.chart {
+  position: relative;
+  width: 100%;
+}
+
+.chart svg {
+  display: block;
+  overflow: visible;
+}
+
+.chart-axis__domain {
+  stroke: var(--gray2, #c5c5c5);
+}
+
+.chart-axis__tick line {
+  stroke: var(--gray2, #c5c5c5);
+}
+
+.chart-axis__tick text {
+  fill: var(--gray4, #666);
+  font-size: 0.75rem;
+}
+
+.chart-axis__grid line {
+  stroke: var(--gray1, #e6e6e6);
+  stroke-dasharray: 3 3;
+}
+
+.chart-line {
+  fill: none;
+  stroke: var(--royal-blue, #003fa2);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.chart-band {
+  fill: var(--lightest-blue, #edf4ff);
+}
+
+.chart-refline line {
+  stroke: var(--gray3, #8f8f8f);
+}
+
+.chart-refline__label {
+  fill: var(--royal-blue, #003fa2);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.chart-marker__dot--solid {
+  fill: var(--navy-blue, #002e52);
+  stroke: white;
+  stroke-width: 1.5;
+}
+
+.chart-marker__dot--hollow {
+  fill: white;
+  stroke: var(--navy-blue, #002e52);
+  stroke-width: 2;
+}
+
+.chart-annotation__text {
+  fill: var(--royal-blue, #003fa2);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.chart-annotation__connector {
+  stroke: var(--gray3, #8f8f8f);
+}
+
+/* ---------- Hover layer + tooltip ---------- */
+.chart-hover {
+  outline: none;
+}
+
+.chart-hover__frame {
+  fill: none;
+  pointer-events: none;
+}
+
+.chart-hover:focus-visible .chart-hover__frame {
+  stroke: var(--royal-blue, #003fa2);
+  stroke-dasharray: 4 3;
+}
+
+.chart-hover__surface {
+  fill: transparent;
+  touch-action: pan-y; /* vertical swipes still scroll the page; horizontal drags scrub */
+  cursor: crosshair;
+}
+
+.chart-hover__cursor {
+  pointer-events: none;
+}
+
+.chart-hover__cursor line {
+  stroke: var(--gray3, #8f8f8f);
+  stroke-dasharray: 3 3;
+}
+
+.chart-hover__cursor circle {
+  fill: white;
+  stroke: var(--navy-blue, #002e52);
+  stroke-width: 2;
+}
+
+.chart-tooltip {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  background: white;
+  box-shadow: 0 2px 12px rgb(0 0 0 / 18%);
+  width: max-content;
+  max-width: min(18rem, 70vw);
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+/* announced by screen readers, not shown */
+.chart-tooltip--sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  box-shadow: none;
+  background: none;
+}

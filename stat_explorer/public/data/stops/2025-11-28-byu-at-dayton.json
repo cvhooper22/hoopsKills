@@ -1,0 +1,199 @@
+{
+  "leftOff": 461,
+  "plays": [
+    {
+      "sequence_number": 15,
+      "stop": true
+    },
+    {
+      "sequence_number": 25,
+      "stop": true
+    },
+    {
+      "sequence_number": 29,
+      "stop": true,
+      "note": "2 stops in a row"
+    },
+    {
+      "sequence_number": 44,
+      "stop": true
+    },
+    {
+      "sequence_number": 66,
+      "stop": true
+    },
+    {
+      "sequence_number": 69,
+      "stop": true,
+      "note": "2 stops in a row"
+    },
+    {
+      "sequence_number": 73,
+      "stop": true,
+      "note": "kill"
+    },
+    {
+      "sequence_number": 77,
+      "stop": true,
+      "note": "4 stop streak"
+    },
+    {
+      "sequence_number": 80,
+      "stop": true,
+      "note": "5 stop streak"
+    },
+    {
+      "sequence_number": 97,
+      "stop": true
+    },
+    {
+      "sequence_number": 99,
+      "stop": true,
+      "note": "2 stops in a row"
+    },
+    {
+      "sequence_number": 112,
+      "stop": true
+    },
+    {
+      "sequence_number": 117,
+      "stop": true,
+      "note": "2 stops in a row"
+    },
+    {
+      "sequence_number": 145,
+      "stop": true,
+      "note": "kill but this last step is dirty"
+    },
+    {
+      "sequence_number": 158,
+      "stop": false,
+      "note": "diomande is credited for breaking this streak (streak ended at 3 stops)"
+    },
+    {
+      "sequence_number": 167,
+      "stop": true
+    },
+    {
+      "sequence_number": 173,
+      "stop": true
+    },
+    {
+      "sequence_number": 194,
+      "stop": true
+    },
+    {
+      "sequence_number": 202,
+      "stop": true
+    },
+    {
+      "sequence_number": 206,
+      "stop": true,
+      "note": "2 stops in a row"
+    },
+    {
+      "sequence_number": 209,
+      "stop": true,
+      "note": "kill"
+    },
+    {
+      "sequence_number": 226,
+      "stop": true
+    },
+    {
+      "sequence_number": 234,
+      "stop": true,
+      "note": "2 stops in a row"
+    },
+    {
+      "sequence_number": 243,
+      "stop": true,
+      "note": "kill"
+    },
+    {
+      "sequence_number": 250,
+      "stop": true,
+      "note": "4 stops in a row"
+    },
+    {
+      "sequence_number": 268,
+      "stop": true
+    },
+    {
+      "sequence_number": 271,
+      "stop": true,
+      "note": "2 stops in a row"
+    },
+    {
+      "sequence_number": 275,
+      "stop": true,
+      "note": "kill"
+    },
+    {
+      "sequence_number": 279,
+      "stop": true,
+      "note": "4 stops in a row"
+    },
+    {
+      "sequence_number": 284,
+      "stop": true,
+      "note": "5 stops in a row, Richie Saunders stop"
+    },
+    {
+      "sequence_number": 294,
+      "stop": true,
+      "note": "6 stops in a row, kill, Keita credit for stop"
+    },
+    {
+      "sequence_number": 299,
+      "stop": true,
+      "note": "7 stops in a row"
+    },
+    {
+      "sequence_number": 311,
+      "stop": true
+    },
+    {
+      "sequence_number": 317,
+      "stop": true,
+      "note": "2 stops in a row, Davis stop credit"
+    },
+    {
+      "sequence_number": 321,
+      "stop": true,
+      "note": "kill"
+    },
+    {
+      "sequence_number": 327,
+      "stop": true
+    },
+    {
+      "sequence_number": 341,
+      "stop": true,
+      "note": "2 stops in a row, wright credit"
+    },
+    {
+      "sequence_number": 404,
+      "stop": true,
+      "note": "davis stop credit but stop was dirty from offensive rebound"
+    },
+    {
+      "sequence_number": 411,
+      "stop": true,
+      "note": "this is weird, the sequence was he got the rebound then immediately threw it out of bounds. Not sure what happened here but the time on this one was logged behind. Not sure if we can really do much about it but this was second stop"
+    },
+    {
+      "sequence_number": 415,
+      "stop": true
+    },
+    {
+      "sequence_number": 446,
+      "stop": true
+    },
+    {
+      "sequence_number": 461,
+      "stop": true,
+      "note": "mboup eventually got the rebound but it was after a different shot, since it wasn't immediately following the block at 458 (Dayton offensive rebound) just be sure this case logs correctly as not being attributed to anyone"
+    }
+  ]
+}

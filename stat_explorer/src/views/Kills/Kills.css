@@ -1,0 +1,9 @@
+.kills {
+  height: 100%;
+  overflow: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  text-align: left;
+}
+
+.kills-check { color: var(--secondary-text); font-size: 0.85rem; }

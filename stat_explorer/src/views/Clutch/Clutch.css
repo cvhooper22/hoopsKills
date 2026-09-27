@@ -1,1 +1,760 @@
-@import "./styles/index.css";
+.game-clutch {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+  box-sizing: border-box;
+}
+
+/* ---------- Header ---------- */
+.clutch-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.clutch-header__eyebrow {
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--secondary-text);
+}
+
+.clutch-header__score {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0 1rem;
+  margin: 0.25rem 0 0.5rem;
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--almostBlack);
+}
+
+.clutch-header__team--focus {
+  color: var(--royal-blue);
+}
+
+.clutch-header__dash {
+  color: var(--gray2);
+}
+
+.clutch-header__summary {
+  margin: 0 0 1rem;
+  max-width: 44rem;
+  color: var(--gray4);
+}
+
+.clutch-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background-color: var(--lightest-blue);
+  color: var(--royal-blue);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.clutch-pill__icon.material-symbols-sharp {
+  font-size: 18px;
+}
+
+.clutch-pill__chevron {
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid currentColor;
+  transition: transform 150ms linear;
+}
+
+.clutch-pill__chevron--open {
+  transform: rotate(180deg);
+}
+
+.clutch-popover {
+  position: relative;
+  display: inline-block;
+}
+
+.clutch-pill[aria-expanded="true"] {
+  background-color: #dfe8f6;
+  box-shadow: 0 0 0 3px #b3c6e6;
+}
+
+.clutch-controls {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  left: 50%;
+  z-index: 10;
+  width: max-content;
+  max-width: calc(100vw - 2rem);
+  transform: translateX(-50%);
+  padding: 1rem 1.25rem;
+  border-radius: 16px;
+  background-color: white;
+  box-shadow: 0 4px 24px rgb(0 0 0 / 16%);
+  text-align: left;
+}
+
+.clutch-controls__hint {
+  margin: 0 0 0.75rem;
+  color: var(--gray4);
+}
+
+.clutch-stepper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
+}
+
+.clutch-stepper__label {
+  width: 4.25rem;
+  font-weight: 600;
+  color: var(--gray4);
+}
+
+.clutch-stepper__unit {
+  color: var(--gray4);
+}
+
+.clutch-stepper__field {
+  display: inline-flex;
+  overflow: hidden;
+  border: 1px solid var(--gray1);
+  border-radius: 12px;
+}
+
+.clutch-stepper__field button {
+  width: 2.5rem;
+  color: var(--gray4);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.clutch-stepper__field button:disabled {
+  color: var(--gray2);
+  cursor: default;
+}
+
+.clutch-stepper__field input {
+  width: 3.5rem;
+  border: 0;
+  border-left: 1px solid var(--gray1);
+  border-right: 1px solid var(--gray1);
+  padding: 0.5rem 0;
+  text-align: center;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--royal-blue);
+  -moz-appearance: textfield;
+}
+
+.clutch-stepper__field input::-webkit-outer-spin-button,
+.clutch-stepper__field input::-webkit-inner-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+.clutch-controls__presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+}
+
+.clutch-controls__preset {
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--baby-blue);
+  border-radius: 999px;
+  background: white;
+  color: var(--royal-blue);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.clutch-controls__preset small {
+  margin-left: 0.3rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.clutch-controls__preset--on {
+  border-color: var(--royal-blue);
+  background: var(--royal-blue);
+  color: white;
+}
+
+.clutch-kpis {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 1.5rem 0 0;
+}
+
+.clutch-kpis .flip-pad {
+  flex: 0 0 157px;
+}
+
+/* ---------- Tabs ---------- */
+.clutch-tabs {
+  display: flex;
+  justify-content: center;
+  width: fit-content;
+  margin: 1.75rem auto 1rem;
+  padding: 0.25rem;
+  border-radius: 999px;
+  background-color: var(--lightest-blue);
+}
+
+.clutch-tabs__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 999px;
+  color: var(--secondary-text);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.clutch-tabs__tab--on {
+  background-color: white;
+  color: var(--royal-blue);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 12%);
+}
+
+.clutch-tabs__count {
+  min-width: 1.25rem;
+  padding: 0 0.3rem;
+  border-radius: 999px;
+  background-color: var(--lightest-blue);
+  font-size: 0.7rem;
+  line-height: 1.25rem;
+  color: var(--royal-blue);
+}
+
+/* ---------- Sections ---------- */
+.clutch-section {
+  margin-top: 2.5rem;
+  text-align: left;
+}
+
+.clutch-section__title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 800;
+}
+
+.clutch-section__sub {
+  margin: 0.15rem 0 1rem;
+  color: var(--gray4);
+}
+
+/* ---------- Top performers ---------- */
+.clutch-leaders {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1rem;
+}
+
+.clutch-leaders__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 1px 8px rgb(0 0 0 / 8%);
+  text-align: center;
+}
+
+.clutch-leaders__head {
+  display: flex;
+  justify-content: space-between;
+  align-self: stretch;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--gray4);
+  text-align: left;
+}
+
+.clutch-leaders__note {
+  font-size: 0.7rem;
+  color: var(--gray3);
+  text-align: right;
+}
+
+.clutch-avatar {
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 4.25rem;
+  height: 4.25rem;
+  overflow: hidden;
+  border: 2px solid var(--baby-blue);
+  border-radius: 50%;
+  background-color: var(--lightest-blue);
+}
+
+.clutch-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.clutch-avatar__initials {
+  align-self: center;
+  font-weight: 700;
+  color: var(--royal-blue);
+}
+
+.clutch-leaders__value {
+  margin-top: 0.4rem;
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--royal-blue);
+}
+
+.clutch-leaders__name {
+  font-weight: 600;
+}
+
+.clutch-leaders__detail {
+  font-size: 0.8rem;
+  color: var(--secondary-text);
+}
+
+.clutch-leaders__list {
+  align-self: stretch;
+  margin: 0.75rem 0 0;
+  padding: 0.5rem 0 0 1.25rem;
+  border-top: 1px solid var(--gray1);
+  font-size: 0.85rem;
+  text-align: left;
+  color: var(--gray3);
+}
+
+.clutch-leaders__row {
+  padding: 0.2rem 0;
+}
+
+.clutch-leaders__row > span {
+  color: var(--almostBlack);
+}
+
+.clutch-leaders__row {
+  /* the list marker is the rank number; name and value share the line */
+  padding-right: 0;
+}
+
+.clutch-leaders__row b {
+  float: right;
+  color: var(--almostBlack);
+}
+
+.clutch-leaders__empty {
+  margin: auto 0;
+  font-size: 0.85rem;
+  color: var(--secondary-text);
+}
+
+/* ---------- Box score (matches the Lineups table look) ---------- */
+.clutch-team__title {
+  margin: 1.25rem 0 0.5rem;
+}
+
+.clutch-table-scroll {
+  overflow-x: auto;
+  border-radius: 2px;
+  box-shadow: 0 0.125rem 0.5rem rgb(0 0 0 / 12%);
+}
+
+.clutch-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.clutch-table th {
+  background-color: var(--blue-stop-3);
+  color: white;
+  padding: 0.5rem;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.clutch-table th.clutch-table__th {
+  padding: 0;
+}
+
+.clutch-table div.clutch-sort {
+  display: block;
+  height: auto;
+  padding: 0.35rem 0.5rem;
+  text-align: right;
+  user-select: none;
+}
+
+.clutch-table div.clutch-sort--left {
+  text-align: left;
+}
+
+.clutch-table td {
+  padding: 0.4rem 0.5rem;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.clutch-table tbody tr {
+  background-color: white;
+}
+
+/* Player column stays put while the stat columns scroll under it. Sticky cells need an opaque
+   background, so they take their row's color (zebra, totals). */
+.clutch-table th.clutch-table__name,
+.clutch-table td.clutch-table__name {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+}
+
+.clutch-table td.clutch-table__name {
+  background-color: inherit;
+}
+
+.clutch-table-scroll--scrolled .clutch-table__name {
+  box-shadow: 2px 0 4px -2px rgb(0 0 0 / 25%);
+}
+
+.clutch-table tbody tr:nth-child(2n) {
+  background-color: var(--lightest-blue);
+}
+
+.clutch-table .clutch-table__name {
+  text-align: left;
+}
+
+.clutch-table .net {
+  display: inline-block;
+  min-width: 1.75rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 2px;
+  text-align: center;
+}
+
+.clutch-table .net.net--pos {
+  background-color: var(--success-3);
+}
+
+.clutch-table .net.net--neg {
+  background-color: var(--error-3);
+}
+
+.clutch-table__pts {
+  font-weight: bold;
+}
+
+.clutch-table tbody tr.clutch-table__totals {
+  background-color: white;
+  border-top: 2px solid var(--blue-stop-3);
+  font-weight: bold;
+}
+
+.clutch-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  color: var(--gray4);
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+/* ---------- Stretches ---------- */
+.stretches-card {
+  overflow: hidden;
+  text-align: left;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 1px 8px rgb(0 0 0 / 8%);
+}
+
+.stretch {
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+}
+
+.stretch__rail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 1.25rem 1rem;
+  font-size: 0.8rem;
+  color: var(--gray4);
+}
+
+.stretch__eyebrow {
+  font-size: 0.85rem;
+  color: var(--secondary-text);
+}
+
+.stretch__number {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--royal-blue);
+}
+
+.stretch__meta b {
+  color: var(--almostBlack);
+}
+
+.stretch__net {
+  display: inline-block;
+  min-width: 2.75rem;
+  margin-left: 0.4rem;
+  padding: 0.1rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.stretch__net--pos {
+  background-color: var(--success-3);
+  color: var(--success-1);
+}
+
+.stretch__net--neg {
+  background-color: var(--error-3);
+  color: var(--error-1);
+}
+
+.stretch__body {
+  padding: 0.75rem 0.75rem 0.75rem 1rem;
+  border-left: 3px solid var(--gray1);
+  min-width: 0;
+}
+
+.stretch__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  padding: 0.25rem 0.25rem;
+  color: var(--gray4);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.stretch__toggle-count {
+  color: var(--secondary-text);
+}
+
+/* the shared chevron points down; rotate it to point right while collapsed */
+.stretch__chevron {
+  transform: rotate(-90deg);
+}
+
+.stretch__chevron.clutch-pill__chevron--open {
+  transform: none;
+}
+
+.stretch-callout {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background-color: #f3f5f8;
+}
+
+.stretch-callout--in,
+.stretch-callout--out {
+  background-color: var(--lightest-blue);
+}
+
+.stretch-callout__label {
+  font-size: 0.8rem;
+  color: var(--gray4);
+}
+
+.stretch-callout--in .stretch-callout__label,
+.stretch-callout--out .stretch-callout__label {
+  color: var(--royal-blue);
+}
+
+.stretch-callout__headline {
+  margin: 0.1rem 0;
+  font-size: 1.4rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.stretch-callout__details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1rem;
+  font-size: 0.9rem;
+  color: var(--gray4);
+}
+
+.stretches-gap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 1rem 0.6rem 3.5rem;
+  border-top: 1px solid var(--baby-blue);
+  border-bottom: 1px solid var(--baby-blue);
+  background-color: var(--lightest-blue);
+  font-size: 0.8rem;
+  color: var(--gray4);
+}
+
+@media (max-width: 700px) {
+  .stretch {
+    grid-template-columns: 1fr;
+  }
+
+  .stretch__rail {
+    flex-flow: row wrap;
+    align-items: baseline;
+    gap: 0.25rem 1rem;
+    padding: 1rem 1rem 0;
+  }
+
+  .stretch__body {
+    border-left: 0;
+    padding: 0.75rem;
+  }
+
+  .stretches-gap {
+    padding-left: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .clutch-header__score { font-size: 2.1rem; }
+  .clutch-section__title { font-size: 1.4rem; }
+}
+
+/* ---------- Margin chart ---------- */
+.margin-chart {
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.25rem 0.5rem;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 1px 8px rgb(0 0 0 / 8%);
+}
+
+.margin-chart__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem 1.5rem;
+}
+
+.margin-chart__title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--gray4);
+}
+
+.margin-chart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.85rem;
+  color: var(--gray4);
+}
+
+.margin-chart__legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.margin-chart__swatch--band {
+  width: 1rem;
+  height: 0.75rem;
+  border-radius: 2px;
+  background-color: #dfe8f6;
+}
+
+.margin-chart__swatch--line {
+  width: 1rem;
+  height: 3px;
+  border-radius: 2px;
+  background-color: var(--royal-blue);
+}
+
+.margin-chart__swatch--dot {
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background-color: var(--navy-blue);
+}
+
+.margin-chart .chart-band {
+  fill: #dfe8f6;
+}
+
+.margin-chart .margin-chart__base {
+  stroke: var(--gray3);
+  stroke-width: 1.5;
+}
+
+.margin-chart .margin-chart__stretch {
+  stroke: var(--royal-blue);
+  stroke-width: 3;
+}
+
+.margin-chart__tip-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.margin-chart__tip-badge {
+  padding: 0 0.4rem;
+  border-radius: 999px;
+  background-color: var(--lightest-blue);
+  color: var(--royal-blue);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.margin-chart__tip-play {
+  color: var(--secondary-text);
+}
+
+/* touch devices: fixed readout above the chart, height reserved so selecting never shifts the layout */
+.margin-chart__readout {
+  display: flex;
+  align-items: center;
+  min-height: 4.25rem;
+  margin: 0.5rem 0;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  background-color: var(--lightest-blue);
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+.margin-chart__readout-hint {
+  color: var(--secondary-text);
+}

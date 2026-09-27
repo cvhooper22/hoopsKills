@@ -1,0 +1,149 @@
+.streaks-section {
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.streaks-section h2 { margin: 0 0 0.25rem; }
+
+.streaks-section__subtitle {
+  margin: 0 0 1rem;
+  color: var(--secondary-text);
+}
+
+.streaks-callout {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  background: var(--lightest-blue);
+}
+
+.streaks-callout__eyebrow {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--royal-blue);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.streaks-callout__headline {
+  margin: 0 0 0.35rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.streaks-callout__detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.5rem;
+  margin: 0;
+  color: var(--secondary-text);
+  font-size: 0.9rem;
+}
+
+/* Matches the table style already used by Lineups (.lineup-table__headers)
+   and Clutch (.clutch-table): header in --blue-stop-3, and here the wrapping
+   scroll div (not the table) carries the radius/shadow. */
+.streaks-table-scroll {
+  overflow-x: auto;
+  border-radius: 2px;
+  box-shadow: 0 0.125rem 0.5rem rgb(0 0 0 / 12%);
+}
+
+.streaks-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.streaks-table thead th {
+  padding: 0.6rem 0.9rem;
+  background: var(--blue-stop-3);
+  color: white;
+  text-align: left;
+  font-weight: 600;
+}
+
+/* The sort control itself carries the padding (see .sort-header), so its <th>
+   goes flush — same split Clutch uses (.clutch-table__th). */
+.streaks-table th.streaks-table__th { padding: 0; }
+.streaks-table .sort-header { display: block; padding: 0.6rem 0.9rem; text-align: left; }
+.streaks-table .sort-header.streaks-sort--center { text-align: center; }
+
+.streaks-table tbody td {
+  padding: 0.55rem 0.9rem;
+  background: var(--app-bg);
+  border-bottom: 1px solid var(--gray1);
+}
+
+.streaks-table tbody tr:nth-child(even) td { background: var(--lightest-blue); }
+.streaks-table tbody tr:last-child td { border-bottom: none; }
+
+/* Beats the ".streaks-table thead th { text-align: left }" rule above on
+   specificity (two classes vs. a class + two elements). */
+.streaks-table th.streaks-table__col-center,
+.streaks-table td.streaks-table__col-center { text-align: center; }
+
+.streak-dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.streak-dots__group { display: flex; gap: 2px; }
+.streak-dots__group + .streak-dots__group { margin-left: 0.3rem; }
+
+.streak-dots__cell {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+}
+
+.streak-dots__cell--kill { background: var(--royal-blue); }
+.streak-dots__cell--pk { background: var(--baby-blue); border: 1px solid var(--blue-stop-3); }
+.streak-dots__cell--none { background: var(--gray1); }
+
+.streak-dots__count { font-weight: 700; }
+
+.streaks-table__half {
+  display: inline-block;
+  margin-left: 0.15rem;
+  padding: 0 0.3rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--secondary-text);
+}
+
+.streaks-table__half--2 {
+  background: var(--lightest-blue);
+  color: var(--royal-blue);
+}
+
+.streaks-table__margin {
+  display: inline-block;
+  min-width: 2.25rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.streaks-table__margin--pos { background: var(--success-3); color: var(--success-1); }
+.streaks-table__margin--neg { background: var(--error-3); color: var(--error-1); }
+.streaks-table__margin--flat { background: var(--gray1); color: var(--secondary-text); }
+
+.streaks-table__cause { color: var(--secondary-text); }
+.streaks-table__cause--avoidable { color: var(--almostBlack); font-weight: 700; }
+
+.streaks-table__avoidable-pill {
+  display: inline-block;
+  padding: 0.1rem 0.6rem;
+  border: 1px solid var(--error-2);
+  border-radius: 999px;
+  color: var(--error-1);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.streaks-table__no { color: var(--gray3); }

@@ -53,6 +53,36 @@ module.exports = function (app) {
     }
   });
 
+  // Dev-only endpoint used by the hidden /admin/stops page to save which plays
+  // are marked as stops (plus notes and where the user left off) for a game, to public/data/stops/<gameId>.json.
+  app.use('/api/stops', express.json({ limit: '1mb' }));
+
+  app.post('/api/stops/:gameId', (req, res) => {
+    const { gameId } = req.params;
+    if (!/^[\w-]+$/.test(gameId)) {
+      res.status(400).json({ error: 'Bad game id' });
+      return;
+    }
+    const stops = req.body;
+    if (!stops || typeof stops !== 'object' || !Array.isArray(stops.plays)) {
+      logError('api/stops', '400 expected { leftOff, plays: [] }');
+      res.status(400).json({ error: 'Expected { leftOff, plays: [] }' });
+      return;
+    }
+
+    const dir = path.join(__dirname, '..', 'public', 'data', 'stops');
+    const filePath = path.join(dir, `${gameId}.json`);
+    try {
+      fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(filePath, JSON.stringify(stops, null, 2) + '\n', 'utf8');
+      log('api/stops', `200 wrote ${stops.plays.length} annotated plays to ${filePath}`);
+      res.json({ ok: true });
+    } catch (err) {
+      logError('api/stops', `500 failed writing ${filePath}:`, err);
+      res.status(500).json({ error: err.message });
+    }
+  });
+
   // Dev-only proxy to the image-uploader Lambda (see ../../image-uploader-lambda).
   // Keeps the API key server-side — it never reaches the browser bundle.
   // Configure via .env.local: IMAGE_UPLOAD_API_URL, IMAGE_UPLOAD_API_KEY.
@@ -121,7 +151,7 @@ module.exports = function (app) {
 
   // Catches errors from the body parsers above (malformed JSON, payload too
   // large) which otherwise never reach the route handlers or the terminal.
-  app.use(['/api/alum', '/api/upload-image'], (err, req, res, next) => {
+  app.use(['/api/alum', '/api/stops', '/api/upload-image'], (err, req, res, next) => {
     logError(req.originalUrl, `${err.status || 500} ${err.type || ''} ${err.message}`);
     res.status(err.status || 500).json({ error: err.message });
   });

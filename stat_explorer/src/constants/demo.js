@@ -3,3 +3,6 @@
 // Turn off with REACT_APP_LINEUPS_DEMO=false in .env.local, or flip the default here.
 export const LINEUPS_DEMO = process.env.REACT_APP_LINEUPS_DEMO !== 'false';
 export const LINEUPS_DEMO_TITLE = 'Villanova';
+
+// Single-game preview of the Clutch view (BYU at Dayton play-by-play file).
+export const CLUTCH_DEMO_GAME_ID = '2025-11-28-byu-at-dayton';

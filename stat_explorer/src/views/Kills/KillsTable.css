@@ -1,0 +1,280 @@
+.kills-table-section {
+  margin: 2rem 0;
+  text-align: left;
+}
+
+.kills-table-section h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 0.75rem;
+}
+
+/* ---------- Legend: a "Show legend" trigger, with the panel animated as if it
+   rises up from behind the table (grid-rows 0fr->1fr gives a smooth height
+   animation without measuring pixel heights; the translateY adds the rise). ---------- */
+.kills-legend { margin-bottom: 0.75rem; }
+
+.kills-legend__toggle-row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Deliberately low-key — a plain text link, not a button — so it doesn't
+   compete with the table itself for attention. */
+.kills-legend__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0;
+  border: none;
+  background: none;
+  color: var(--secondary-text);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.kills-legend__toggle:hover { color: var(--royal-blue); text-decoration: underline; }
+
+.kills-legend__caret {
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid currentColor;
+  transition: transform 200ms ease;
+}
+
+.kills-legend__caret--open { transform: rotate(180deg); }
+
+.kills-legend__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: grid-template-rows 320ms ease, opacity 260ms ease, transform 320ms ease;
+}
+
+.kills-legend__panel--open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Three columns (Kill quality | Kill type | Stop types) on wide screens, so
+   the legend doesn't eat vertical space; back to one stacked column on
+   mobile, divider moving from a side border to a top border to match.
+   Kill type gets half the width (it has 5 defs to fit); quality and stop
+   types split the rest — quality only has 2 short items, so it doesn't need
+   a full third and was left looking empty. */
+.kills-legend__inner {
+  overflow: hidden;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 0 1.5rem;
+}
+
+.kills-legend__section { padding: 0.85rem 0; }
+
+.kills-legend__section + .kills-legend__section {
+  border-left: 1px solid var(--gray1);
+  padding-left: 1.5rem;
+}
+
+@media screen and (max-width: 900px) {
+  .kills-legend__inner { grid-template-columns: 1fr; }
+
+  .kills-legend__section + .kills-legend__section {
+    border-left: none;
+    padding-left: 0;
+    border-top: 1px solid var(--gray1);
+  }
+}
+
+.kills-legend__section h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0 0 0.5rem;
+  font-size: 0.85rem;
+  color: var(--navy-blue);
+}
+
+.kills-legend__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+}
+
+/* One item per line — reads better than a wrapped flex row once a section is
+   squeezed into one of three columns (Stop types has 6 items to fit). */
+.kills-legend__row--stack {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.4rem;
+}
+
+.kills-legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--secondary-text);
+  font-size: 0.8rem;
+}
+
+.kills-legend__item .kills-table__purity { font-size: 0.95rem; }
+
+.kills-legend__defs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.kills-legend__defs li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  color: var(--secondary-text);
+  font-size: 0.8rem;
+}
+
+.kills-legend__defs .kills-table__tag { flex: none; }
+
+/* Matches the table style already used by Lineups (.lineup-table__headers)
+   and Clutch (.clutch-table): header in --blue-stop-3, and here the wrapping
+   scroll div (not the table) carries the radius/shadow. */
+.kills-table-scroll {
+  overflow-x: auto;
+  border-radius: 2px;
+  box-shadow: 0 0.125rem 0.5rem rgb(0 0 0 / 12%);
+}
+
+.kills-table-v2 {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.kills-table-v2 thead th {
+  padding: 0.5rem;
+  background: var(--blue-stop-3);
+  color: white;
+  text-align: left;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* The sort control itself carries the padding (see .sort-header), so its <th>
+   goes flush — same split Clutch uses (.clutch-table__th). */
+.kills-table-v2 th.kills-table-v2__th { padding: 0; }
+.kills-table-v2 .sort-header { display: block; padding: 0.5rem; text-align: left; }
+.kills-table-v2 .sort-header.kills-sort--center { text-align: center; }
+
+/* Beats the ".kills-table-v2 thead th { text-align: left }" rule above on
+   specificity (two classes vs. a class + two elements). */
+.kills-table-v2 th.kills-table__col-center,
+.kills-table-v2 td.kills-table__col-center { text-align: center; }
+
+.kills-table-v2 tbody td {
+  padding: 0.55rem 0.9rem;
+  background: var(--app-bg);
+  border-bottom: 1px solid var(--gray1);
+  vertical-align: middle;
+}
+
+.kills-table-v2 tbody tr:nth-child(even) td { background: var(--lightest-blue); }
+.kills-table-v2 tbody tr:last-child td { border-bottom: none; }
+
+.kills-table__kill-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.kills-table__kill-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--royal-blue);
+  font-weight: 800;
+}
+
+.kills-table__purity {
+  font-family: 'Material Symbols Sharp';
+  font-style: normal;
+  line-height: 1;
+  font-size: 1.05rem;
+  color: var(--royal-blue);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Pure: solid shield. Dirty: outlined shield with a warning mark — reinforces
+   that a dirty kill is "incomplete" rather than just a different flavor. */
+.kills-table__purity--pure { font-variation-settings: 'FILL' 1, 'wght' 600, 'opsz' 20; }
+.kills-table__purity--dirty { font-variation-settings: 'FILL' 0, 'wght' 600, 'opsz' 20; }
+
+.kills-table__tag-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.kills-table__tag {
+  padding: 0.05rem 0.5rem;
+  border-radius: 999px;
+  background: var(--navy-blue);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.kills-table__half {
+  margin-left: 0.15rem;
+  padding: 0 0.3rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--secondary-text);
+}
+
+.kills-table__margin {
+  display: inline-block;
+  min-width: 2.25rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.kills-table__margin--pos { background: var(--success-3); color: var(--success-1); }
+.kills-table__margin--neg { background: var(--error-3); color: var(--error-1); }
+.kills-table__margin--flat { background: var(--gray1); color: var(--secondary-text); }
+
+.kills-table__stops {
+  display: inline-flex;
+  gap: 0.3rem;
+}
+
+.kills-table__stop {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: var(--navy-blue);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.kills-table__stop--unmarked { outline: 2px dashed var(--error-2); outline-offset: 1px; }
+
+/* Smaller badge for the legend's exhaustive stop-type list — placed after the
+   base .kills-table__stop rule above so it actually wins on equal specificity. */
+.kills-table__stop--small { width: 1rem; height: 1rem; font-size: 0.5rem; }

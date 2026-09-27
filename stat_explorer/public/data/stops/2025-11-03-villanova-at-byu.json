@@ -1,0 +1,237 @@
+{
+  "leftOff": 519,
+  "plays": [
+    {
+      "sequence_number": 6,
+      "stop": true
+    },
+    {
+      "sequence_number": 22,
+      "stop": true
+    },
+    {
+      "sequence_number": 24,
+      "stop": false,
+      "note": "i would want to provide some granularity/options to the kills and stops. this shooting foul would completely stop this defensive stop chain but count towards a \"dirty kill\" i.e. one that had a shooting foul but still ended up in no points. Not the case for this one because he makes the first free throw but may be helpful in granular deifnitions"
+    },
+    {
+      "sequence_number": 29,
+      "stop": false,
+      "note": "not the case here but just as a not, a defensive rebound after a missed FT isn't always a stop, it depends on what the previous free throw was. If the previous play was also a missed free throw it's a \"dirty stop\" i.e. you got lucky they missed"
+    },
+    {
+      "sequence_number": 54,
+      "stop": true,
+      "note": "i think this might be a \"dirty\" stop as well since there was an offensive rebound involved. not sure how I want to handle those right now"
+    },
+    {
+      "sequence_number": 59,
+      "stop": true,
+      "note": "this is two stops in a row, what I call a \"potential kill\""
+    },
+    {
+      "sequence_number": 77,
+      "stop": true,
+      "note": "this is where a kill is. Three stops in a row without a Villanova score. The stop can then be marked as \"dirty\" or \"pure\" (or some other moniker) depending on the underlying stops that made it up. It can be part of a larger stop streak (9 stops in a row is 3 kills)"
+    },
+    {
+      "sequence_number": 80,
+      "stop": true,
+      "note": "this starts a potential new kill but is still part of the ongoing 4 stop streak"
+    },
+    {
+      "sequence_number": 81,
+      "stop": false,
+      "note": "I'd like to attribute stops to players when possible. A steal is a stop accredited to the stealing player"
+    },
+    {
+      "sequence_number": 96,
+      "stop": true,
+      "note": "5 stop streak but this one is a dirty stop because of the offensive rebound during Villanova's possession"
+    },
+    {
+      "sequence_number": 99,
+      "stop": true,
+      "note": "6 stop streak so the second kill of the game"
+    },
+    {
+      "sequence_number": 103,
+      "stop": true,
+      "note": "7 stops in a row"
+    },
+    {
+      "sequence_number": 119,
+      "stop": true,
+      "note": "8 stops in a row, and this block to defensive rebound (doesn't have to be the same player on the rebound, just the same team) is another stop that can be attributed to a player"
+    },
+    {
+      "sequence_number": 124,
+      "stop": false,
+      "note": "the stop streak was over, it resulted in 2 kills and a potential kill. I would like to track what stopped the potential kill from converting to a kill if it has an attributable thing (for example this one was a second chance point, a make after an offensive rebound. it could also be a shooting foul or some other foul that leads to a FT make by the other team)"
+    },
+    {
+      "sequence_number": 140,
+      "stop": true
+    },
+    {
+      "sequence_number": 156,
+      "stop": true
+    },
+    {
+      "sequence_number": 160,
+      "stop": true,
+      "note": "two stop streak, this on attributable to Keita"
+    },
+    {
+      "sequence_number": 177,
+      "stop": false,
+      "note": "be careful of these plays where the possession spans a timeout, make sure not to lose context of that single possession"
+    },
+    {
+      "sequence_number": 181,
+      "stop": true
+    },
+    {
+      "sequence_number": 209,
+      "stop": true
+    },
+    {
+      "sequence_number": 214,
+      "stop": true,
+      "note": "2 stops in a row, another potential kill. In the end I like to show how close a team was to getting more kills by giving a kill percentage i.e. how many potential kills were converted to full on kills"
+    },
+    {
+      "sequence_number": 229,
+      "stop": true,
+      "note": "a dirty stop because while technically they didn't score it was just because the available free throws were missed"
+    },
+    {
+      "sequence_number": 237,
+      "stop": true
+    },
+    {
+      "sequence_number": 255,
+      "stop": false,
+      "note": "the previous block was not a stop beacuse it was recovered by the offensive team"
+    },
+    {
+      "sequence_number": 260,
+      "stop": true
+    },
+    {
+      "sequence_number": 287,
+      "stop": true,
+      "note": "stop"
+    },
+    {
+      "sequence_number": 292,
+      "stop": true,
+      "note": "2 stops"
+    },
+    {
+      "sequence_number": 296,
+      "stop": true,
+      "note": "kill"
+    },
+    {
+      "sequence_number": 303,
+      "stop": true,
+      "note": "dirty stop, 4 stop streak"
+    },
+    {
+      "sequence_number": 329,
+      "stop": true
+    },
+    {
+      "sequence_number": 335,
+      "stop": true,
+      "note": "2 stops in a row"
+    },
+    {
+      "sequence_number": 356,
+      "stop": true,
+      "note": "stop"
+    },
+    {
+      "sequence_number": 361,
+      "stop": false,
+      "note": "maybe attribute who killed the stop streaks as well. This one would be attributed to Dawson "
+    },
+    {
+      "sequence_number": 373,
+      "stop": true,
+      "note": "stop even though there is no immediate BYU play after but a rule like \"a turnover is always a stop\" will catch this one)"
+    },
+    {
+      "sequence_number": 390,
+      "stop": true
+    },
+    {
+      "sequence_number": 396,
+      "stop": true,
+      "note": "this one can be tricky because of the previous offensive foul, I want to record those as well as \"Charges\" I don't have the player obviously but want to record them in \"individual\" stops because someone took it"
+    },
+    {
+      "sequence_number": 408,
+      "stop": true,
+      "note": "2 stop streak"
+    },
+    {
+      "sequence_number": 414,
+      "stop": false,
+      "note": "I might want to have a breakdown of \"avoidable\" stop streaks breakups. So something like an offensive rebound could potentially have been \"prevented\" but a made shot is something more uncontrollable"
+    },
+    {
+      "sequence_number": 423,
+      "stop": true
+    },
+    {
+      "sequence_number": 438,
+      "stop": true
+    },
+    {
+      "sequence_number": 446,
+      "stop": true,
+      "note": "2 stop streak"
+    },
+    {
+      "sequence_number": 449,
+      "stop": true,
+      "note": "kill, possible bonus for \"clutch\" kill (5 minutes or less score within 5) or some sort of callout"
+    },
+    {
+      "sequence_number": 453,
+      "stop": true,
+      "note": "4 stop streak"
+    },
+    {
+      "sequence_number": 460,
+      "stop": true,
+      "note": "5 stop streak"
+    },
+    {
+      "sequence_number": 465,
+      "stop": true,
+      "note": "kill, 6 stop streak"
+    },
+    {
+      "sequence_number": 470,
+      "stop": true,
+      "note": "dirty stop, previous play was first mess of a one and one, 7 stop streak"
+    },
+    {
+      "sequence_number": 474,
+      "stop": true,
+      "note": "8 stop streak"
+    },
+    {
+      "sequence_number": 476,
+      "stop": false,
+      "note": "this stop streak ender can be attributed to Richie cuz of his shooting foul"
+    },
+    {
+      "sequence_number": 491,
+      "stop": true
+    }
+  ]
+}
