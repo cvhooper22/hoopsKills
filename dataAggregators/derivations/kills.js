@@ -261,7 +261,7 @@ function detectKills(plays, defense = 'home') {
     const leftover = s.stops.slice(streakKills.length * KILL_SIZE);
     let potential = null;
     if (leftover.length === 2) {
-      potential = { stops: leftover.map((x) => x.seq), dirty: leftover.some((x) => x.dirty), end: breaker };
+      potential = { stops: leftover.map((x) => x.seq), period: leftover[0].period, dirty: leftover.some((x) => x.dirty), end: breaker };
       potentialKills.push(potential);
     }
     kills.push(...streakKills);
@@ -272,5 +272,3 @@ function detectKills(plays, defense = 'home') {
   const total = converted + potentialKills.length;
   return { stops, streaks, kills, potentialKills, completion: total ? converted / total : null };
 }
-
-module.exports = { detectKills };

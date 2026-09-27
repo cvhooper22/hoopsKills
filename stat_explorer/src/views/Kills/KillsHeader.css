@@ -1,0 +1,99 @@
+.kills-header {
+  padding: 1.5rem 0 2rem;
+  text-align: center;
+}
+
+.kills-header__meta {
+  margin: 0 0 0.5rem;
+  color: var(--secondary-text);
+  font-size: 0.9rem;
+}
+
+.kills-header__title {
+  margin: 0 0 1.75rem;
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.kills-header__byu { color: var(--royal-blue); }
+.kills-header__opp { color: var(--almostBlack); }
+.kills-header__vs { margin: 0 0.5rem; color: var(--gray2); font-weight: 700; }
+
+/* KPI row: the same FlipPad tiles the Clutch view uses (src/components/FlipPad). */
+.kills-kpis {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0 auto 1.75rem;
+  max-width: 70rem;
+}
+
+.kills-kpi {
+  flex: 1 1 9rem;
+  max-width: 12rem;
+}
+
+.kills-kpi__caption {
+  margin: 0.4rem 0 0;
+  color: var(--secondary-text);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.kills-half-table {
+  width: 100%;
+  max-width: 44rem;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: var(--app-bg);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  font-size: 0.9rem;
+}
+
+/* Rounded corners via the corner cells rather than overflow:hidden on the
+   table — overflow:hidden would clip the Pure/dirty info tooltip, which is
+   absolutely positioned inside a header cell and needs to escape the table. */
+.kills-half-table thead tr:first-child th:first-child { border-top-left-radius: 10px; }
+.kills-half-table thead tr:first-child th:last-child { border-top-right-radius: 10px; }
+.kills-half-table tbody tr:last-child > :first-child { border-bottom-left-radius: 10px; }
+.kills-half-table tbody tr:last-child > :last-child { border-bottom-right-radius: 10px; }
+
+.kills-half-table th,
+.kills-half-table td {
+  padding: 0.6rem 0.75rem;
+  background: var(--app-bg);
+  text-align: center;
+}
+
+.kills-half-table thead th {
+  color: var(--secondary-text);
+  font-weight: 500;
+  font-size: 0.8rem;
+  border-bottom: 1px solid var(--gray1);
+}
+
+.kills-half-table tbody th {
+  text-align: left;
+  font-weight: 700;
+}
+
+.kills-half-table tbody tr:not(:last-child) td,
+.kills-half-table tbody tr:not(:last-child) th {
+  border-bottom: 1px solid var(--gray1);
+}
+
+.kills-half-table__kills {
+  font-weight: 700;
+  color: var(--royal-blue);
+}
+
+.kills-half-table__pure-dirty {
+  position: relative;
+  white-space: nowrap;
+}
+
+.kills-half-table__pure-dirty .pure-dirty-info { vertical-align: middle; margin-left: 0.1rem; }
+
+.kills-half-table small { color: var(--secondary-text); }
