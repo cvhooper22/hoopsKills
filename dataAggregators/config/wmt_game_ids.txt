@@ -2,3 +2,45 @@
 6422769
 6490506
 6464331
+
+# Rest of 2025-26 season, ids found via byucougars.com/boxscore/<id> -> the page's
+# wmt.games/byucougars/stats/match/full/<wmtId> resource. Nebraska (exhibition) and
+# North Carolina (Hall of Fame Series) have no live box score page, so no id.
+# Order matches the schedule: Holy Cross, Delaware, at UConn, at Wisconsin, at Miami,
+# at Cal Baptist, at Clemson, UC Riverside, Pacific, Abilene Christian, Eastern
+# Washington, Arizona State, at Utah, TCU, at Texas Tech, Utah, Arizona, at Kansas,
+# at Oklahoma State, Houston, at Baylor, Colorado, at Arizona, Iowa State, UCF,
+# at West Virginia, at Cincinnati, Texas Tech, at Kansas State (Big 12 Tourney),
+# at West Virginia (Big 12 Tourney), at Houston (Big 12 Tourney), at Texas (NCAA Tourney).
+6422770
+6422771
+6422772
+6422774
+6468421
+6498190
+6422779
+6422780
+6422782
+6422783
+6422785
+6473584
+6473585
+6473588
+6473591
+6473593
+6458031
+6473596
+6466884
+6467259
+6469738
+6473598
+6466511
+6469754
+6466910
+6466575
+6468273
+6473603
+6558207
+6558203
+6558198
+6564826

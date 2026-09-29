@@ -10,6 +10,9 @@ const fs = require('fs');
 const path = require('path');
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 
+const CONTENT_TYPES = { '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp' };
+const contentTypeFor = (file) => CONTENT_TYPES[path.extname(file).toLowerCase()] || 'application/octet-stream';
+
 function loadEnv() {
   const file = path.join(__dirname, '../../../stat_explorer/.env.local');
   fs.readFileSync(file, 'utf8').split('\n').forEach(line => {
@@ -41,7 +44,7 @@ async function main() {
     Bucket: bucket,
     Key: key,
     Body: body,
-    ContentType: 'application/json',
+    ContentType: contentTypeFor(localFile),
     CacheControl: 'public, max-age=300',
   }));
   console.log(`uploaded ${localFile} -> s3://${bucket}/${key}`);
