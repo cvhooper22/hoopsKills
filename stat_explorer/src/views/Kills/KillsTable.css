@@ -273,7 +273,7 @@
   font-weight: 700;
 }
 
-.kills-table__stop--unmarked { outline: 2px dashed var(--error-2); outline-offset: 1px; }
+.kills-table__stop--dirty { outline: 2px dashed var(--royal-blue); outline-offset: 1px; }
 
 /* Smaller badge for the legend's exhaustive stop-type list — placed after the
    base .kills-table__stop rule above so it actually wins on equal specificity. */

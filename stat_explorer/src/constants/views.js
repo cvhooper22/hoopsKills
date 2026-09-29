@@ -1,5 +1,3 @@
-import { LINEUPS_DEMO } from './demo';
-
 const LINEUP_VIEW = "Lineups";
 const CLUTCH_VIEW = "Clutch";
 const KILLS_VIEW = "Kills";
@@ -12,21 +10,18 @@ const views = [
     },
     {
       title: LINEUP_VIEW,
-      route: '/lineups/smc-wcc',
+      route: '/lineups',
       routeRoot: '/lineups',
-      subtitle: LINEUPS_DEMO ? 'Preview' : undefined,
     },
     {
       title: KILLS_VIEW,
       route: '/kills',
       routeRoot: '/kills',
-      subtitle: 'Preview',
     },
     {
       title: CLUTCH_VIEW,
       route: '/clutch',
       routeRoot: '/clutch',
-      subtitle: 'Preview',
     },
     {
       title: ALMUNI_VIEW,

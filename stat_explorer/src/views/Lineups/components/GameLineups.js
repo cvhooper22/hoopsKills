@@ -1,27 +1,26 @@
 import { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import genLineupData from "../../../utils/lineupUtils";
-import { LINEUPS_DEMO, LINEUPS_DEMO_TITLE } from "../../../constants/demo";
 import playsToBbgame from "../../../utils/playsToBbgame";
 import PlayerFilters from "../../../components/PlayerFilters/PlayerFilters";
 import "../Lineups.css";
 import LineupTable from "./LineupTable";
 import YBallLoader from "../../../components/Loaders/YBballLoader";
-import { nameFromId, idFromPath } from '../../../constants/games';
+import urls from "../../../constants/assetUrls";
 import { GAME_CUSTOM_SORTERS, GAME_SORT_KEYS } from "../../../utils/gameLineupSorters";
 import { SORT_KEYS } from "../../../constants/sorting";
 import { makeSortAscByKey, makeSortDescByKey } from "../../../utils/lineupSorters";
 
 export default function Lineups() {
   const {name} = useParams();
+  const gameId = name;
   const [lineupData, setLineupData] = useState({
     lineups: {},
     starterHash: ""
   });
+  const [meta, setMeta] = useState(null);
   const [loading, setLoading] = useState(true);
   const [currSort, setCurrSort] = useState({key: GAME_SORT_KEYS.NET, direction: SORT_KEYS.DESC});
-  const initialId = idFromPath(name);
-  const [currentGame, setCurrentGame] = useState(initialId ?? "1300217");
   const [players, setPlayers] = useState([]);
   const [filterPlayers, setFilterPlayers] = useState([]);
 
@@ -44,22 +43,11 @@ export default function Lineups() {
   };
 
   useEffect(() => {
-    const newGameId = idFromPath(name);
-    if (newGameId !== currentGame) {
-        setLoading(true);
-        setCurrentGame(newGameId);
-        setLineupData({
-          lineups: {},
-          starterHash: ""
-        });
-    }
-  }, [name, currentGame]);
-
-  useEffect(() => {
-    fetch(`${process.env.PUBLIC_URL}/data/2025-11-03-villanova-at-byu.json`)
-      .then((resp) => {
-        return resp.json();
-      })
+    setLoading(true);
+    setLineupData({ lineups: {}, starterHash: "" });
+    setMeta(null);
+    fetch(urls.pbpGame(gameId))
+      .then((resp) => resp.json())
       .then((data) => {
         const bbgame = playsToBbgame(data);
         const lineups = genLineupData(bbgame);
@@ -72,10 +60,15 @@ export default function Lineups() {
       })
       .catch((err) => {
         setLoading(false);
-        setLineupData({...lineupData, error: true});
+        setLineupData((prev) => ({ ...prev, error: true }));
         console.error(err);
       });
-  }, [currentGame]);
+    // header team names are optional: the page still works from the plays alone
+    fetch(urls.pbpGameMeta(gameId))
+      .then((resp) => (resp.ok ? resp.json() : null))
+      .then(setMeta)
+      .catch(() => setMeta(null));
+  }, [gameId]);
 
   const lineupCount = Object.keys(lineupData).length;
   const currentLineupData = useMemo(() => {
@@ -115,9 +108,10 @@ export default function Lineups() {
       summary: filteredLineupData.summary,
     };
   }, [filterPlayers.length, lineupCount, currSort.key, currSort.direction]);
+  const title = meta ? `${meta.teams[meta.homeId]?.name ?? ''} vs ${meta.teams[meta.awayId]?.name ?? ''}` : '';
   return (
     <>
-        <h1 className="lineup-game-label">{LINEUPS_DEMO ? LINEUPS_DEMO_TITLE : `${nameFromId(currentGame)} [2022-2023]`}</h1>
+        <h1 className="lineup-game-label">{title}</h1>
         {loading && <YBallLoader />}
         { !loading && lineupData.error && <div className="mt-l">There was an error fetching the play by play data</div>}
         {!loading && !lineupData.error && (
