@@ -33,7 +33,7 @@ const alum = [
     "team": "Brooklyn Nets",
     "position": "Guard",
     "teamLogo": {
-      "url": "https://content.sportslogos.net/logos/6/3786/full/brooklyn_nets_logo_primary_2025_sportslogosnet-1501.png"
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/brooklyn-nets.png"
     },
     "league": "NBA",
     "division": "Highest",

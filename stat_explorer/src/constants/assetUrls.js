@@ -6,6 +6,13 @@ const urls = {
   assetBase: 'https://dd0v7fgd2sjsh.cloudfront.net',
   logosPath: 'assets/logos',
   flagBasePath: `https://flagcdn.com/w40`, 
+  pbpGame: id => `${urls.assetBase}/pbp/games/${id}.json`,
+  pbpGameMeta: id => `${urls.assetBase}/pbp/games/${id}.meta.json`,
+  killsGame: id => `${urls.assetBase}/kills/games/${id}.json`,
+  clutchGame: id => `${urls.assetBase}/clutch/games/${id}.json`,
+  lineupsGame: id => `${urls.assetBase}/lineups/games/${id}.json`,
+  teamLogo: slug => `${urls.assetBase}/${urls.logosPath}/${slug}.png`,
+  gamesIndex: () => `${urls.assetBase}/games/index.json`,
 };
 
 export default urls;

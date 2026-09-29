@@ -1,12 +1,11 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import GameSelector from "../../components/GameSelector/GameSelector";
-import { LINEUPS_DEMO } from "../../constants/demo";
+import GameSwitcher from "../../components/GameSwitcher/GameSwitcher";
 
 export default function LineupRouter () {
     return (
         <div className="lineups flex">
-            {!LINEUPS_DEMO && <GameSelector />}
+            <GameSwitcher basePath="lineups" />
             <div className="lineups-content f1 flex-c pr-l">
                 <Outlet />
             </div>

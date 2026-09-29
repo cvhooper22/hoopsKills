@@ -1,0 +1,176 @@
+.game-switcher__result {
+  font-size: 0.75rem;
+  font-weight: bold;
+  width: 16px;
+  text-align: center;
+}
+
+.game-switcher__result--w {
+  color: var(--royal-blue);
+}
+
+.game-switcher__result--l {
+  color: #b00020;
+}
+
+.game-switcher__score {
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* Floating game/season pill */
+.game-pill {
+  position: fixed;
+  top: 114px;
+  left: 16px;
+  z-index: 21;
+  text-align: left;
+  max-width: calc(100vw - 32px);
+}
+
+.game-pill__row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.game-pill__main,
+.game-pill__season-pill {
+  font: inherit;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: white;
+  color: var(--royal-blue);
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: background-color 200ms, color 200ms;
+}
+
+.game-pill__main:hover { background: #eef3fb; }
+
+.game-pill__final { font-variant-numeric: tabular-nums; }
+.game-pill__byu-score { font-weight: bold; }
+.game-pill__byu-score--win { color: #1a8f3c; }
+.game-pill__byu-score--loss { color: #b00020; }
+
+.game-pill__season-pill:hover,
+.game-pill__season-pill--active {
+  background: var(--royal-blue);
+  color: white;
+}
+
+.game-pill__season { font-weight: bold; }
+
+.game-pill__divider {
+  width: 1px;
+  height: 16px;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.game-pill__chevron {
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform 250ms;
+}
+
+.game-pill--open .game-pill__chevron { transform: rotate(225deg) translate(-1px, -1px); }
+
+/* Season pills slide out to the right of the main pill */
+.game-pill__seasons {
+  display: flex;
+  gap: 8px;
+  overflow: hidden;
+  max-width: 0;
+  opacity: 0;
+  transform: translateX(-16px);
+  padding: 4px 0;
+  margin: -4px 0;
+  transition: max-width 350ms ease, opacity 250ms ease, transform 350ms ease;
+}
+
+.game-pill--open .game-pill__seasons {
+  max-width: 600px;
+  opacity: 1;
+  transform: none;
+  padding-right: 4px;
+}
+
+/* Game list drops down beneath the pill */
+.game-pill__list {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+  margin-top: 8px;
+  transition: grid-template-rows 350ms ease, opacity 250ms ease, visibility 0s 350ms;
+}
+
+.game-pill--open .game-pill__list {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+  transition: grid-template-rows 350ms ease, opacity 250ms ease;
+}
+
+.game-pill__list-inner {
+  min-height: 0;
+  overflow-y: auto;
+  max-height: calc(100vh - 190px);
+  width: max-content;
+  min-width: 260px;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.game-pill__game-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 16px;
+  font-size: 0.85rem;
+  color: unset;
+  text-decoration: none;
+}
+
+.game-pill__game-row:hover {
+  background: var(--royal-blue);
+  color: white;
+}
+
+.game-pill__game-row:hover .game-switcher__result { color: white; }
+
+.game-pill__game-row--selected {
+  color: var(--royal-blue);
+  font-weight: bold;
+}
+
+.game-pill__opponent { white-space: nowrap; }
+
+/* Leave room above the content for the floating pill */
+.lineups-content { padding-top: 56px; }
+
+.game-pill__game,
+.game-pill__opponent {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.game-pill__logo {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}

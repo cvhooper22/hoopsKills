@@ -1,8 +1,17 @@
+import { useMemo } from 'react';
 import './FlipPad.css';
 
 const RING_PATH = 'M8,19 C6.4,13 5.6,4 8.6,3.4 C11.4,2.9 11.6,9 10.6,13';
 
-function Ring({ x, tilt, scale }) {
+// mostly-upright random tilt, capped at 30deg off the midline; a signed power
+// curve biases toward 0 while still landing in the outer 25-30deg band ~5% of the time
+function randomTilt() {
+  const u = Math.random() * 2 - 1;
+  return Math.sign(u) * Math.abs(u) ** 1.73 * 30;
+}
+
+function Ring({ x, scale }) {
+  const tilt = useMemo(randomTilt, []);
   return (
     <svg
       className="flip-pad__ring"
@@ -13,7 +22,7 @@ function Ring({ x, tilt, scale }) {
       aria-hidden="true"
     >
       <circle cx="8" cy="19" r="2.3" className="flip-pad__hole" />
-      <g transform={tilt ? `rotate(${tilt} 8 19)` : undefined}>
+      <g transform={`rotate(${tilt} 8 19)`}>
         <path d={RING_PATH} className="flip-pad__ring-shadow" />
         <path d={RING_PATH} className="flip-pad__ring-metal" />
         <path d="M7.2,14 C6.6,10 6.8,5.6 8.4,4.6" className="flip-pad__ring-hi" />
@@ -30,7 +39,7 @@ const SIZES = {
 
 export default function FlipPad({
   label, value, unit, delta, up = true,
-  board = true, box = 'sky', cards = 'white', tilt = 0, tone, condensed = false,
+  board = true, box = 'sky', cards = 'white', tone, condensed = false,
 }) {
   const { full, narrow: narrowW, inset, scale } = SIZES[condensed ? 'condensed' : 'regular'];
   // tone tints the page digits: 'pos' | 'neg' | 'auto' (green for a leading +, red for a leading -)
@@ -60,10 +69,10 @@ export default function FlipPad({
               <div className={'flip-pad__page' + (narrow ? ' flip-pad__page--narrow' : '')} key={i}>
                 <div className="flip-pad__sheet"><span>{c}</span></div>
                 {narrow
-                  ? <Ring x={w / 2} tilt={tilt} scale={scale} />
+                  ? <Ring x={w / 2} scale={scale} />
                   : <>
-                      <Ring x={inset} tilt={tilt} scale={scale} />
-                      <Ring x={w - inset} tilt={tilt} scale={scale} />
+                      <Ring x={inset} scale={scale} />
+                      <Ring x={w - inset} scale={scale} />
                     </>}
               </div>
             );

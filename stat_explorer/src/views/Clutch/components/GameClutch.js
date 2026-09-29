@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import YBallLoader from "../../../components/Loaders/YBballLoader";
 import { DEFAULT_CLUTCH, genClutchData } from "../../../utils/clutchUtils";
-import { CLUTCH_DEMO_GAME_ID } from "../../../constants/demo";
+import urls from "../../../constants/assetUrls";
 import ClutchHeader from "./ClutchHeader";
 import ClutchBoxScore from "./ClutchBoxScore";
 import ClutchStretches from "./ClutchStretches";
@@ -26,7 +26,7 @@ function readDefinition(params) {
 
 export default function GameClutch() {
   const { name } = useParams();
-  const gameId = name ?? CLUTCH_DEMO_GAME_ID;
+  const gameId = name;
   const [params, setParams] = useSearchParams();
   const [plays, setPlays] = useState(null);
   const [meta, setMeta] = useState(null);
@@ -36,8 +36,7 @@ export default function GameClutch() {
     setPlays(null);
     setMeta(null);
     setError(false);
-    const base = `${process.env.PUBLIC_URL}/data/${gameId}`;
-    fetch(`${base}.json`)
+    fetch(urls.pbpGame(gameId))
       .then((resp) => resp.json())
       .then(setPlays)
       .catch((err) => {
@@ -45,7 +44,7 @@ export default function GameClutch() {
         setError(true);
       });
     // header facts and headshots are optional: the page still works from the plays alone
-    fetch(`${base}.meta.json`)
+    fetch(urls.pbpGameMeta(gameId))
       .then((resp) => (resp.ok ? resp.json() : null))
       .then(setMeta)
       .catch(() => setMeta(null));

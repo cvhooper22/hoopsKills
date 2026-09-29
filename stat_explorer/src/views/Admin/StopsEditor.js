@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { KILL_GAMES, killGameById } from '../../constants/killGames';
+import urls from '../../constants/assetUrls';
 import './StopsEditor.css';
 
 // Hidden page for marking which plays count as a "stop" in a normalized game.
@@ -40,7 +41,7 @@ function StopsGame({ game }) {
   useEffect(() => {
     async function load() {
       try {
-        const res = await fetch(`/data/${GAME_ID}.json`);
+        const res = await fetch(urls.pbpGame(GAME_ID));
         if (!res.ok) throw new Error(`game data: ${res.status}`);
         setPlays(await res.json());
         const stopsRes = await fetch(`/data/stops/${GAME_ID}.json`);

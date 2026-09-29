@@ -39,3 +39,24 @@
   background-color: rgba(0, 0, 255, 0.75);
   border-color: blue;
 }
+
+.player__initials {
+  box-sizing: border-box;
+  height: 50px;
+  width: 50px;
+  border-radius: 50px;
+  border: 2px solid blue;
+  background-color: white;
+  color: blue;
+  font-weight: bold;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 200ms linear;
+}
+
+.player__initials.active {
+  background-color: blue;
+  color: white;
+}
