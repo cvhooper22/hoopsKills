@@ -11,6 +11,7 @@ const urls = {
   killsGame: id => `${urls.assetBase}/kills/games/${id}.json`,
   clutchGame: id => `${urls.assetBase}/clutch/games/${id}.json`,
   lineupsGame: id => `${urls.assetBase}/lineups/games/${id}.json`,
+  teamLogo: slug => `${urls.assetBase}/${urls.logosPath}/${slug}.png`,
   gamesIndex: () => `${urls.assetBase}/games/index.json`,
 };
 

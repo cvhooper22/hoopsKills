@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import YBallLoader from "../../../components/Loaders/YBballLoader";
 import { DEFAULT_CLUTCH, genClutchData } from "../../../utils/clutchUtils";
-import { CLUTCH_DEMO_GAME_ID } from "../../../constants/demo";
 import urls from "../../../constants/assetUrls";
 import ClutchHeader from "./ClutchHeader";
 import ClutchBoxScore from "./ClutchBoxScore";
@@ -27,7 +26,7 @@ function readDefinition(params) {
 
 export default function GameClutch() {
   const { name } = useParams();
-  const gameId = name ?? CLUTCH_DEMO_GAME_ID;
+  const gameId = name;
   const [params, setParams] = useSearchParams();
   const [plays, setPlays] = useState(null);
   const [meta, setMeta] = useState(null);

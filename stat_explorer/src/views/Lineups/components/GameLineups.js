@@ -1,7 +1,6 @@
 import { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import genLineupData from "../../../utils/lineupUtils";
-import { LINEUPS_DEMO_GAME_ID } from "../../../constants/demo";
 import playsToBbgame from "../../../utils/playsToBbgame";
 import PlayerFilters from "../../../components/PlayerFilters/PlayerFilters";
 import "../Lineups.css";
@@ -14,7 +13,7 @@ import { makeSortAscByKey, makeSortDescByKey } from "../../../utils/lineupSorter
 
 export default function Lineups() {
   const {name} = useParams();
-  const gameId = name ?? LINEUPS_DEMO_GAME_ID;
+  const gameId = name;
   const [lineupData, setLineupData] = useState({
     lineups: {},
     starterHash: ""

@@ -10,6 +10,7 @@ import SeasonLineups from "./views/Lineups/components/SeasonLineups";
 import GameClutch from './views/Clutch/components/GameClutch';
 import Kills from "./views/Kills/Kills";
 import KillsRouter from "./views/Kills/KillsRouter";
+import LatestGameRedirect from "./components/GameSwitcher/LatestGameRedirect";
 import Home from "./views/Home/Home";
 import { views } from './constants/views';
 import AlumniRouter from "./views/Alumni/AlmuniRouter";
@@ -33,16 +34,16 @@ export default function App() {
           <Routes>
             <Route index element={<Home />} />
             <Route path="lineups" element={<LineupRouter />}>
-              <Route index element={<GameLineups />} />
+              <Route index element={<LatestGameRedirect basePath="lineups" />} />
               <Route path=":name" element={<GameLineups />} />
               <Route path="season" element={<SeasonLineups /> } />
             </Route>
             <Route path="clutch" element={<ClutchRouter />}>
-              <Route index element={<GameClutch />} />
+              <Route index element={<LatestGameRedirect basePath="clutch" />} />
               <Route path=":name" element={<GameClutch />} />
             </Route>
             <Route path="kills" element={<KillsRouter />}>
-              <Route index element={<Kills />} />
+              <Route index element={<LatestGameRedirect basePath="kills" />} />
               <Route path=":name" element={<Kills />} />
             </Route>
             <Route path="alumni" element={<AlumniRouter />} ></Route>

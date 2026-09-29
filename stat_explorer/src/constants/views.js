@@ -12,19 +12,16 @@ const views = [
       title: LINEUP_VIEW,
       route: '/lineups',
       routeRoot: '/lineups',
-      subtitle: 'Preview',
     },
     {
       title: KILLS_VIEW,
       route: '/kills',
       routeRoot: '/kills',
-      subtitle: 'Preview',
     },
     {
       title: CLUTCH_VIEW,
       route: '/clutch',
       routeRoot: '/clutch',
-      subtitle: 'Preview',
     },
     {
       title: ALMUNI_VIEW,
