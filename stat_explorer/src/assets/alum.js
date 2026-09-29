@@ -169,29 +169,23 @@ const alum = [
   },
   {
     "name": "Zac Seljaas",
-    "statuses": [
-      "updateSoon"
-    ],
-    "country": "France",
-    "countryCode": "fr",
-    "team": "LDLC Asvel",
+    "country": "Italy",
+    "countryCode": "it",
+    "team": "Napoli Basket",
     "position": "Forward",
     "teamLogo": {
-      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/asvelWhite.png",
-      "style": {
-        "filter": "none"
-      }
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/napoli.png"
     },
-    "league": "LNB Pro A / Euroleague",
+    "league": "Pro Serie A (LBA)",
     "division": "Highest",
     "teamSocial": {
-      "twitter": "https://x.com/LDLCASVEL",
-      "instagram": "https://www.instagram.com/ldlc_asvel/",
-      "youtube": "https://www.youtube.com/channel/UCI1Q8wU2aWLmy0yaPWwx48w",
-      "facebook": "https://www.facebook.com/LDLCASVEL/"
+      "twitter": "https://www.napolibasketball.com/en/website/social/twitter",
+      "instagram": "https://www.napolibasketball.com/en/website/social/instagram",
+      "youtube": "https://www.napolibasketball.com/en/website/social/youtube",
+      "facebook": "https://www.napolibasketball.com/en/website/social/facebook"
     },
     "playerUrl": "https://basketball.eurobasket.com/player/Zac-Seljaas/366912",
-    "teamWebsite": "https://ldlcasvel.com/",
+    "teamWebsite": "https://www.napolibasketball.com/en",
     "coverPhoto": {
       "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/zacasvel.jpg"
     }
@@ -340,6 +334,36 @@ const alum = [
     }
   },
   {
+    "name": "Seneca Knight",
+    "country": "Italy",
+    "countryCode": "it",
+    "team": "UEB Gesteco CIVIDALE",
+    "position": "Guard",
+    "teamLogo": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/teamLogos/cividale_it_a2.png",
+      "style": {
+        "top": "6px",
+        "left": "-2px"
+      }
+    },
+    "league": "Serie A2",
+    "division": "Middle",
+    "teamSocial": {
+      "instagram": "https://www.instagram.com/uebcividale",
+      "youtube": "https://www.youtube.com/channel/UClF1tJ1Zhy8TfFe_20tm2yQ",
+      "facebook": "https://www.facebook.com/uebcividale"
+    },
+    "recentTweetsUrl": "https://x.com/search?q=from%3Anewcastleeagle%20knight&src=typed_query&f=live",
+    "playerUrl": "https://basketball.eurobasket.com/player/Seneca-Knight/492367",
+    "teamWebsite": "https://www.unitedeaglesbasketball.it/",
+    "coverPhoto": {
+      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/senecaPistoiaZoom.png",
+      "style": {
+        "objectPosition": "54% 0"
+      }
+    }
+  },
+  {
     "name": "Noah Waterman",
     "country": "Japan",
     "countryCode": "jp",
@@ -447,7 +471,7 @@ const alum = [
   {
     "name": "Spencer Johnson",
     "statuses": [
-      "updateSoon"
+      "injured"
     ],
     "country": "England",
     "countryCode": "gb",
@@ -469,7 +493,10 @@ const alum = [
     "teamWebsite": "https://riders.basketball/bbl-games/",
     "coverPhoto": {
       "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/spencerCard.jpg"
-    }
+    },
+    "notes": [
+      "Spencer's working his way back from an Achilles injury sustained March 2026"
+    ]
   },
   {
     "name": "Mawot Mag",
@@ -518,39 +545,6 @@ const alum = [
     "teamWebsite": "https://www.etoile-angers-basket.com/billetterie/",
     "coverPhoto": {
       "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/barndonIceland.jpg"
-    }
-  },
-  {
-    "name": "Seneca Knight",
-    "statuses": [
-      "updateSoon"
-    ],
-    "country": "Italy",
-    "countryCode": "it",
-    "team": "Pistoia",
-    "position": "Guard",
-    "teamLogo": {
-      "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Pistoia_Basket_logo_2019.png/250px-Pistoia_Basket_logo_2019.png",
-      "style": {
-        "top": "10px",
-        "left": "8px"
-      }
-    },
-    "league": "Serie A2",
-    "division": "Middle",
-    "teamSocial": {
-      "instagram": "https://www.instagram.com/pistoiabasket2000/",
-      "youtube": "https://www.youtube.com/user/PistoiaBasket2000/videos",
-      "facebook": "https://www.facebook.com/pistoiabasket/"
-    },
-    "recentTweetsUrl": "https://x.com/search?q=from%3Anewcastleeagle%20knight&src=typed_query&f=live",
-    "playerUrl": "https://basketball.eurobasket.com/player/Seneca-Knight/492367",
-    "teamWebsite": "https://newcastle-eagles.com/fixtures-and-results/",
-    "coverPhoto": {
-      "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/senecaPistoiaZoom.png",
-      "style": {
-        "objectPosition": "54% 0"
-      }
     }
   },
   {
