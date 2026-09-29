@@ -1,8 +1,8 @@
-// Single-game Villanova preview of the Lineups view (data from public/data/*.json).
-// Hides the game sidebar, retitles the page, and tags the nav item "Preview".
-// Turn off with REACT_APP_LINEUPS_DEMO=false in .env.local, or flip the default here.
-export const LINEUPS_DEMO = process.env.REACT_APP_LINEUPS_DEMO !== 'false';
-export const LINEUPS_DEMO_TITLE = 'Villanova';
+// Default game for the Lineups view until a game is picked from the switcher.
+export const LINEUPS_DEMO_GAME_ID = '2025-11-03-villanova-at-byu';
 
 // Single-game preview of the Clutch view (BYU at Dayton play-by-play file).
 export const CLUTCH_DEMO_GAME_ID = '2025-11-28-byu-at-dayton';
+
+// Default game for the Kills view until a game is picked from the switcher.
+export const KILLS_DEMO_GAME_ID = '2025-11-03-villanova-at-byu';

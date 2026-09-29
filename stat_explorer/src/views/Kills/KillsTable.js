@@ -3,6 +3,7 @@ import SortableHeader from '../../components/SortableHeader/SortableHeader';
 import { SORT_KEYS } from '../../constants/sorting';
 import { STOP_TYPES, STOP_TYPE_LETTER, STOP_TYPE_NAME } from '../../constants/stopTypes';
 import { halfLabel, CREDIT_ABBR, killGain, gainTone } from '../../utils/killInsights';
+import Tooltip from '../../components/Tooltip/Tooltip';
 import PureDirtyInfo from './PureDirtyInfo';
 import './KillsTable.css';
 
@@ -26,6 +27,14 @@ const KILL_TAG_DEFS = [
   { tag: 'Garbage', def: 'BYU led by 15 or more with under 8 minutes left when the kill started.' },
   { tag: 'Late stop', def: "One of the kill's stops happened with under 5 seconds left in the period." },
 ];
+
+// Plain-language reason for each way a single stop can come back dirty (see
+// dataAggregators/derivations/kills.js's markDirty/isEmptyTrip). Shown in a
+// dirty stop badge's tooltip, and a stop can carry more than one.
+const DIRTY_REASON_TEXT = {
+  offensive_rebound: 'the offense got an offensive rebound first',
+  empty_ft_trip: 'it only happened because the free throws were missed',
+};
 
 // Collapsible legend for the table's icons, tucked behind a "Show legend"
 // toggle so the table itself is the first thing on the page. Stop types are
@@ -52,6 +61,9 @@ function KillsLegend() {
               </span>
               <span className="kills-legend__item">
                 <span className="material-symbols-sharp kills-table__purity kills-table__purity--dirty" aria-hidden="true">gpp_maybe</span> Dirty kill
+              </span>
+              <span className="kills-legend__item">
+                <span className="kills-table__stop kills-table__stop--dirty kills-table__stop--small">R</span> Dirty stop — hover a stop for why
               </span>
             </div>
           </section>
@@ -119,16 +131,25 @@ function formatHeld(durationSeconds) {
   return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, '0')}`;
 }
 
-function StopBadge({ stop, unmarked }) {
-  const title = [STOP_TYPE_NAME[stop.type], unmarked && 'not in your marks'].filter(Boolean).join(' · ');
+function StopBadge({ stop }) {
+  const content = stop.dirty && stop.dirtyReasons.length
+    ? (
+      <>
+        <p><strong>{STOP_TYPE_NAME[stop.type]}</strong> — dirty</p>
+        <ul>{stop.dirtyReasons.map((r) => <li key={r}>{DIRTY_REASON_TEXT[r] || r}</li>)}</ul>
+      </>
+    )
+    : STOP_TYPE_NAME[stop.type];
   return (
-    <span className={`kills-table__stop ${unmarked ? 'kills-table__stop--unmarked' : ''}`} title={title}>
-      {STOP_TYPE_LETTER[stop.type]}
-    </span>
+    <Tooltip content={content}>
+      <span className={`kills-table__stop ${stop.dirty ? 'kills-table__stop--dirty' : ''}`}>
+        {STOP_TYPE_LETTER[stop.type]}
+      </span>
+    </Tooltip>
   );
 }
 
-export default function KillsTable({ result, isUnmarked }) {
+export default function KillsTable({ result }) {
   const [sort, setSort] = useState({ key: '', direction: '' });
   const stopsBySeq = {};
   result.stops.forEach((s) => { stopsBySeq[s.seq] = s; });
@@ -190,7 +211,7 @@ export default function KillsTable({ result, isUnmarked }) {
                   </td>
                   <td>
                     <span className="kills-table__stops">
-                      {stops.map((s) => <StopBadge key={s.seq} stop={s} unmarked={isUnmarked(s)} />)}
+                      {stops.map((s) => <StopBadge key={s.seq} stop={s} />)}
                     </span>
                   </td>
                   <td>{credits.length ? credits.join(', ') : '—'}</td>

@@ -1,0 +1,18 @@
+.game-switcher__result {
+  font-size: 0.75rem;
+  font-weight: bold;
+  width: 16px;
+  text-align: center;
+}
+
+.game-switcher__result--w {
+  color: var(--royal-blue);
+}
+
+.game-switcher__result--l {
+  color: #b00020;
+}
+
+.game-switcher__score {
+  font-variant-numeric: tabular-nums;
+}

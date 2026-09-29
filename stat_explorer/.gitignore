@@ -11,6 +11,9 @@
 # production
 /build
 
+# per-game data now lives in S3 (see ../dataAggregators/README.md) — stops/ hand-marks stay local
+/public/data/*.json
+
 # misc
 .DS_Store
 .env.local
