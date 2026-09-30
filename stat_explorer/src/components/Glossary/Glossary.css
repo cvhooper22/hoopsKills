@@ -1,0 +1,89 @@
+.glossary {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.6rem;
+  max-width: calc(100vw - 2rem);
+}
+
+.glossary__pill {
+  display: flex;
+  align-items: center;
+  border-radius: 999px;
+  background: var(--royal-blue);
+  color: white;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.glossary__trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.6rem 0.4rem 0.6rem 1rem;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.glossary__glyph {
+  font-family: 'Material Symbols Sharp';
+  font-style: normal;
+  line-height: 1;
+  font-size: 1.1rem;
+}
+
+.glossary__icon-btn {
+  border: 0;
+  background: none;
+  color: inherit;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+.glossary__icon-btn:hover { opacity: 1; }
+
+.glossary__dismiss { padding: 0.6rem 0.85rem 0.6rem 0.4rem; }
+
+.glossary__panel {
+  width: 22rem;
+  max-width: 100%;
+  max-height: min(28rem, 60vh);
+  overflow-y: auto;
+  border-radius: 10px;
+  background: var(--app-bg);
+  color: inherit;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.glossary__panel-header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 1rem;
+  background: var(--royal-blue);
+  color: white;
+}
+
+.glossary__panel-header h2 { margin: 0; font-size: 0.95rem; }
+
+.glossary__body { margin: 0; padding: 0.4rem 1rem 0.8rem; font-size: 0.85rem; line-height: 1.45; }
+.glossary__entry { padding: 0.6rem 0; }
+.glossary__entry:not(:last-child) { border-bottom: 1px solid var(--gray1); }
+.glossary__term { margin: 0 0 0.3rem; font-size: inherit; font-weight: 700; color: var(--royal-blue); }
+.glossary__definition p { margin: 0 0 0.5rem; }
+.glossary__definition ul { margin: 0 0 0.5rem; padding-left: 1.1rem; }
+.glossary__definition li { margin-bottom: 0.35rem; }
+.glossary__definition p:last-child,
+.glossary__definition ul:last-child { margin-bottom: 0; }

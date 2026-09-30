@@ -35,13 +35,6 @@
   max-width: 12rem;
 }
 
-.kills-kpi__caption {
-  margin: 0.4rem 0 0;
-  color: var(--secondary-text);
-  font-size: 0.8rem;
-  text-align: center;
-}
-
 .kills-half-table {
   width: 100%;
   max-width: 44rem;
@@ -88,6 +81,12 @@
   font-weight: 700;
   color: var(--royal-blue);
 }
+
+.kills-half-table__pks { position: relative; white-space: nowrap; }
+.kills-half-table__pks .tooltip { vertical-align: middle; margin-left: 0.1rem; }
+
+.kills-half-table__total th,
+.kills-half-table__total td { border-top: 2px solid var(--gray1); }
 
 .kills-half-table__pure-dirty {
   position: relative;

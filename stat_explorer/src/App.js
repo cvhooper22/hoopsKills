@@ -1,5 +1,5 @@
 import { lazy, Suspense } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import "./App.css";
 import Header from './components/Layout/Header';
 import Nav from "./components/Layout/Nav";
@@ -15,6 +15,8 @@ import LatestGameRedirect from "./components/GameSwitcher/LatestGameRedirect";
 import Home from "./views/Home/Home";
 import { views } from './constants/views';
 import AlumniRouter from "./views/Alumni/AlmuniRouter";
+import useMediaQuery from "./hooks/useMediaQuery";
+import useHideOnScroll from "./hooks/useHideOnScroll";
 import { TouchPointsContextProvider } from "./contexts/TouchpointsContext";
 
 // Admin pages are lazy-loaded so none of their code is in the main bundle. The gated
@@ -25,12 +27,15 @@ const StopsEditor = lazy(() => import("./views/Admin/StopsEditor"));
 
 export default function App() {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const isMobile = useMediaQuery("(max-width: 900px)"); // matches styles/mobile.css
+  const topBarHidden = useHideOnScroll(isMobile, pathname);
   function handleNavClick (viewOpt) {
     navigate(viewOpt.route);
   }
   return (
     <TouchPointsContextProvider>
-      <div className="flex-c App">
+      <div className={`flex-c App${topBarHidden ? " App--top-bar-hidden" : ""}`}>
         <div className="top-bar">
           <Header />
           <Nav options={views} onOptionClick={handleNavClick}/>
