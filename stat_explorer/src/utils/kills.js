@@ -227,13 +227,55 @@ function describeBreaker(e, lastPlay, defense) {
   };
 }
 
-function tagKill(stops, breaker) {
+// BYU's margin when its possession right after a stop ends (the "swing" the stop created), or the
+// margin at the stop itself if the period ends first. The possession ends on a made basket (after
+// any and-one or the last free throw of the trip), a BYU turnover, or an opponent defensive
+// rebound. A BYU offensive rebound keeps it alive, so second-chance points count. The opponent's
+// next score is never reached: it can only come after one of those endings.
+function swingMargin(plays, stop, defense, indexBySeq) {
+  const offense = defense === 'home' ? 'away' : 'home';
+  const defKey = `${defense}_score_after`;
+  const start = indexBySeq.get(stop.seqs[stop.seqs.length - 1]);
+  let margin = stop.margin;
+  for (let j = start + 1; j < plays.length; j += 1) {
+    const p = plays[j];
+    if (p.period_number !== plays[start].period_number || p.play_category === 'period_admin') break;
+    const scored = p[defKey] != null && p[defKey] > plays[prevIndex(plays, j)][defKey];
+    if (p.home_score_after != null) margin = marginFor(p, defense);
+    if (scored) {
+      if (p.play_category === 'free_throw') {
+        const [, n, of] = /(\d+)of(\d+)/.exec(p.play_description) || [];
+        if (n === of) return margin;
+      } else if (!andOneFollows(plays, j, defense)) return margin;
+    } else if (p.play_category === 'turnover' && p.team_side === defense) {
+      return margin;
+    } else if (p.play_category === 'rebound' && p.team_side === offense && p.play_type === 'defensive') {
+      const before = plays[prevIndex(plays, j)];
+      if (p.play_subtype !== 'deadball' || (before.play_category === 'free_throw' && /(\d+)of\1\b/.test(before.play_description))) return margin;
+    }
+  }
+  return margin;
+}
+
+// A made basket with a foul and free throws at the same clock time: the trip isn't over yet.
+function andOneFollows(plays, j, defense) {
+  const offense = defense === 'home' ? 'away' : 'home';
+  for (let k = j + 1; k < plays.length && plays[k].clock_seconds_remaining === plays[j].clock_seconds_remaining; k += 1) {
+    const q = plays[k];
+    if (q.play_category === 'free_throw' && q.team_side === defense) return true;
+    if (!['assist', 'substitution', 'timeout'].includes(q.play_category) && !(q.play_category === 'foul' && q.team_side === offense)) return false;
+  }
+  return false;
+}
+
+function tagKill(stops, breaker, swingEndMargin) {
   const first = stops[0];
   const inWindow = stops.filter((s) => s.inClutchWindow).length;
   return {
     stops: stops.map((s) => s.seq),
     start: { seq: first.seq, period: first.period, clock: first.clock, gameSeconds: first.gameSeconds, margin: first.margin },
     end: breaker,
+    gainEnd: swingEndMargin, // margin when BYU's possession after the third stop ended
     durationSeconds: Math.round((breaker.gameSeconds - first.gameSeconds) * 10) / 10,
     dirty: stops.some((s) => s.dirty),
     critical: Math.abs(first.margin) <= CRITICAL_MARGIN,
@@ -246,6 +288,7 @@ function tagKill(stops, breaker) {
 export function detectKills(plays, defense = 'home') {
   const lastPlay = plays[plays.length - 1];
   const events = scan(plays, defense);
+  const indexBySeq = new Map(plays.map((p, i) => [p.sequence_number, i]));
   const stops = events.filter((e) => e.kind === 'stop').map((e) => e.stop);
   const kills = [];
   const potentialKills = [];
@@ -256,7 +299,8 @@ export function detectKills(plays, defense = 'home') {
     const breaker = n >= 2 ? describeBreaker(s.breakerEvent, lastPlay, defense) : null;
     const streakKills = [];
     for (let k = 0; k + KILL_SIZE <= n; k += KILL_SIZE) {
-      streakKills.push(tagKill(s.stops.slice(k, k + KILL_SIZE), breaker));
+      const kStops = s.stops.slice(k, k + KILL_SIZE);
+      streakKills.push(tagKill(kStops, breaker, swingMargin(plays, kStops[KILL_SIZE - 1], defense, indexBySeq)));
     }
     const leftover = s.stops.slice(streakKills.length * KILL_SIZE);
     let potential = null;

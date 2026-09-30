@@ -13,7 +13,7 @@
 .glossary__pill {
   display: flex;
   align-items: center;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   background: var(--royal-blue);
   color: white;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
@@ -59,7 +59,7 @@
   max-width: 100%;
   max-height: min(28rem, 60vh);
   overflow-y: auto;
-  border-radius: 10px;
+  border-radius: var(--radius-card);
   background: var(--app-bg);
   color: inherit;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);

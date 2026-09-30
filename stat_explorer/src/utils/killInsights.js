@@ -21,14 +21,13 @@ export function halfLabel(period) {
 // a steal, matching how creditedTable() below groups it.
 export const CREDIT_ABBR = { steal: 'Stl', block: 'Blk', tie_up: 'Stl' };
 
-// The margin swing across a kill's span, from its first stop to the breaker that
-// ends it — not the margin value at the kill's start, which is the standing
-// score line from everything earlier in the game and says nothing about this
-// kill. Usually positive (BYU scoring while the kill built), but the breaker
-// itself is the opponent's own basket and always counts against it, so a big
-// shot right at the end can make this negative even for a completed kill.
+// The swing this kill created: BYU's margin change from the kill's first stop to the end of BYU's
+// possession right after its third stop (what the defense turned into on offense, like a "five
+// point swing" on a missed layup and a three). Points BYU scores between the stops count; the
+// streak's breaker and any later stops are left out, so a kill inside a long streak doesn't
+// absorb the rest of it. Can be negative if the opponent outscored BYU within the kill.
 export function killGain(kill) {
-  return kill.end.margin - kill.start.margin;
+  return kill.gainEnd - kill.start.margin;
 }
 
 // Average points gained per kill, for the header KPI. null with no kills yet.

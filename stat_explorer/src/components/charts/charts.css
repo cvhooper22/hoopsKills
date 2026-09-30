@@ -112,7 +112,7 @@
   z-index: 5;
   pointer-events: none;
   padding: 0.5rem 0.75rem;
-  border-radius: 6px;
+  border-radius: var(--radius-card);
   background: white;
   box-shadow: 0 2px 12px rgb(0 0 0 / 18%);
   width: max-content;

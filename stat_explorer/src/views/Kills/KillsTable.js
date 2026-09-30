@@ -24,9 +24,25 @@ const KILL_TAG_DEFS = [
   { tag: 'Critical', def: 'The score was within 5 points when the kill started.' },
   { tag: 'Clutch', def: "2 or 3 of the kill's stops happened in the last 5 minutes of a half or OT, with the score within 5." },
   { tag: 'Clutch-adjacent', def: 'Only 1 of the 3 stops happened in that same late-and-close window.' },
-  { tag: 'Garbage', def: 'BYU led by 15 or more with under 8 minutes left when the kill started.' },
+  { tag: 'Garbage', def: 'Margin was 15 or more with under 8 minutes left when the kill started.' },
   { tag: 'Late stop', def: "One of the kill's stops happened with under 5 seconds left in the period." },
 ];
+
+const PURITY_DEF = {
+  pure: <><strong>Pure kill</strong> — all 3 stops were clean.</>,
+  dirty: <><strong>Dirty kill</strong> — at least one of its 3 stops was dirty (an offensive rebound, or a stop that only came off missed free throws).</>,
+};
+
+const TAG_DEF = Object.fromEntries(KILL_TAG_DEFS.map((d) => [d.tag, d.def]));
+
+// A kill-type pill that explains itself on hover, so the legend isn't needed to read the table.
+function TagPill({ tag }) {
+  return (
+    <Tooltip content={TAG_DEF[tag]}>
+      <span className="kills-table__tag">{tag}</span>
+    </Tooltip>
+  );
+}
 
 // Plain-language reason for each way a single stop can come back dirty (see
 // dataAggregators/derivations/kills.js's markDirty/isEmptyTrip). Shown in a
@@ -104,20 +120,21 @@ function KillTags({ kill }) {
         K{kill.index}
         {/* Material Symbols Sharp (see public/index.html's icon_names subset):
             pure = solid shield, dirty = outlined shield with a warning mark. */}
-        <span
-          className={`material-symbols-sharp kills-table__purity ${kill.dirty ? 'kills-table__purity--dirty' : 'kills-table__purity--pure'}`}
-          role="img"
-          aria-label={kill.dirty ? 'Dirty kill' : 'Pure kill'}
-          title={kill.dirty ? 'Dirty kill' : 'Pure kill'}
-        >
-          {kill.dirty ? 'gpp_maybe' : 'shield'}
-        </span>
+        <Tooltip content={kill.dirty ? PURITY_DEF.dirty : PURITY_DEF.pure}>
+          <span
+            className={`material-symbols-sharp kills-table__purity ${kill.dirty ? 'kills-table__purity--dirty' : 'kills-table__purity--pure'}`}
+            role="img"
+            aria-label={kill.dirty ? 'Dirty kill' : 'Pure kill'}
+          >
+            {kill.dirty ? 'gpp_maybe' : 'shield'}
+          </span>
+        </Tooltip>
       </span>
       <span className="kills-table__tag-stack">
-        {kill.critical && <span className="kills-table__tag">Critical</span>}
-        {kill.clutch !== 'none' && <span className="kills-table__tag">{kill.clutch === 'clutch' ? 'Clutch' : 'Clutch-adjacent'}</span>}
-        {kill.garbage && <span className="kills-table__tag">Garbage</span>}
-        {kill.late && <span className="kills-table__tag">Late stop</span>}
+        {kill.critical && <TagPill tag="Critical" />}
+        {kill.clutch !== 'none' && <TagPill tag={kill.clutch === 'clutch' ? 'Clutch' : 'Clutch-adjacent'} />}
+        {kill.garbage && <TagPill tag="Garbage" />}
+        {kill.late && <TagPill tag="Late stop" />}
       </span>
     </div>
   );

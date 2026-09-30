@@ -174,3 +174,9 @@
   height: 22px;
   object-fit: contain;
 }
+
+/* Corner-radius rules (see styles/variables.css). Opt-in per view via the --radii modifier,
+   because Lineups shares this switcher and keeps its original look. */
+.game-pill--radii .game-pill__main,
+.game-pill--radii .game-pill__season-pill { border-radius: var(--radius-control); }
+.game-pill--radii .game-pill__list-inner { border-radius: var(--radius-card); }
