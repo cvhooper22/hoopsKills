@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
 import Header from './components/Layout/Header';
@@ -14,9 +15,13 @@ import LatestGameRedirect from "./components/GameSwitcher/LatestGameRedirect";
 import Home from "./views/Home/Home";
 import { views } from './constants/views';
 import AlumniRouter from "./views/Alumni/AlmuniRouter";
-import AlumniEditor from "./views/Admin/AlumniEditor";
-import StopsEditor from "./views/Admin/StopsEditor";
 import { TouchPointsContextProvider } from "./contexts/TouchpointsContext";
+
+// Admin pages are lazy-loaded so none of their code is in the main bundle. The gated
+// ones (alumni, recent games) load their editor only after the password is accepted.
+const AlumniAdminRoute = lazy(() => import("./views/Admin/AdminRoutes").then((m) => ({ default: m.AlumniAdminRoute })));
+const RecentGamesAdminRoute = lazy(() => import("./views/Admin/AdminRoutes").then((m) => ({ default: m.RecentGamesAdminRoute })));
+const StopsEditor = lazy(() => import("./views/Admin/StopsEditor"));
 
 export default function App() {
   const navigate = useNavigate();
@@ -48,9 +53,10 @@ export default function App() {
             </Route>
             <Route path="alumni" element={<AlumniRouter />} ></Route>
             {/* Hidden — not in nav, only reachable by navigating directly here */}
-            <Route path="admin/alumni" element={<AlumniEditor />} ></Route>
-            <Route path="admin/stops" element={<StopsEditor />} ></Route>
-            <Route path="admin/stops/:gameId" element={<StopsEditor />} ></Route>
+            <Route path="admin/alumni" element={<Suspense fallback={null}><AlumniAdminRoute /></Suspense>} ></Route>
+            <Route path="admin/recent-games" element={<Suspense fallback={null}><RecentGamesAdminRoute /></Suspense>} ></Route>
+            <Route path="admin/stops" element={<Suspense fallback={null}><StopsEditor /></Suspense>} ></Route>
+            <Route path="admin/stops/:gameId" element={<Suspense fallback={null}><StopsEditor /></Suspense>} ></Route>
             <Route path="*" element={<Home />} />
           </Routes>
         </div>

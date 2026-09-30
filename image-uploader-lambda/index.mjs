@@ -10,6 +10,9 @@ const ASSET_BASE_URL = process.env.ASSET_BASE_URL; // optional, e.g. https://dd0
 const KEY_PREFIX = (process.env.KEY_PREFIX || '').replace(/^\/+|\/+$/g, '');
 const MAX_BYTES = 20 * 1024 * 1024; // 20MB
 const FETCH_TIMEOUT_MS = 10_000;
+// Browser origins allowed to call this API (comma-separated), e.g. "https://yoursite.com,http://localhost:3000".
+// Requests are already gated by the API Gateway Lambda authorizer (see ../alum-admin-lambda).
+const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGIN || '').split(',').map((o) => o.trim()).filter(Boolean);
 
 const CATEGORY_PREFIXES = {
   player: 'assets/alum/players/',
@@ -38,15 +41,14 @@ function sniffImageType(buf) {
   return null;
 }
 
+let requestOrigin;
+
 function jsonResponse(statusCode, body) {
-  return {
-    statusCode,
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-    },
-    body: JSON.stringify(body),
-  };
+  const headers = { 'Content-Type': 'application/json', Vary: 'Origin' };
+  if (requestOrigin && ALLOWED_ORIGINS.includes(requestOrigin)) {
+    headers['Access-Control-Allow-Origin'] = requestOrigin;
+  }
+  return { statusCode, headers, body: JSON.stringify(body) };
 }
 
 function sanitizeFileName(raw) {
@@ -119,6 +121,7 @@ class HttpError extends Error {
 }
 
 export const handler = async (event) => {
+  requestOrigin = event.headers?.origin || event.headers?.Origin;
   if (!BUCKET_NAME) {
     return jsonResponse(500, { error: 'Lambda misconfigured: BUCKET_NAME env var is not set' });
   }

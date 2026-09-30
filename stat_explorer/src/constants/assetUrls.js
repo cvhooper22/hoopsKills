@@ -13,6 +13,7 @@ const urls = {
   lineupsGame: id => `${urls.assetBase}/lineups/games/${id}.json`,
   teamLogo: slug => `${urls.assetBase}/${urls.logosPath}/${slug}.png`,
   gamesIndex: () => `${urls.assetBase}/games/index.json`,
+  alumJson: () => `${urls.assetBase}/data/alum.json`,
 };
 
 export default urls;

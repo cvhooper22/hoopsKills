@@ -441,3 +441,77 @@ def parse_player(html: str, url: str, slug: str | None = None,
         )
 
     return facts
+
+
+# -- recent-games reader ----------------------------------------------
+
+
+def game_log(html: str) -> list[dict]:
+    """Every game in the Details tables as a full box line, newest first.
+
+    Unlike `parse_player` (one Fact per stat), this keeps each game together so a
+    per-game composite like Game Score can be computed. Keys: date, team, opp,
+    score, competition, min, pts, fgm, fga, tpm, tpa, ftm, fta, orb, drb, trb,
+    ast, stl, blk, tov, pf. Same distinct-line de-dupe as `parse_player`.
+    """
+    soup = BeautifulSoup(html, "html.parser")
+    games: list[dict] = []
+    seen: set[tuple] = set()
+    for year_label, competition, title, table in _season_tables(soup):
+        if not title.lower().startswith("detail"):
+            continue
+        headers: list[str] = []
+        for tr in table.find_all("tr"):
+            cells = [_clean(td) for td in tr.find_all("td")]
+            if "my_Headers" in tr.get("class", []):
+                if cells[:1] == ["Date"]:
+                    headers = cells
+                continue
+            if not headers or len(cells) < len(headers):
+                continue
+            row = dict(zip(headers, cells))
+            date = _iso_date(row.get("Date", ""))
+            if not date:
+                continue
+            two_m, two_a = _made_att(row.get("2FGP", ""))
+            tri_m, tri_a = _made_att(row.get("3FGP", ""))
+            ft_m, ft_a = _made_att(row.get("FT", ""))
+            if two_m is None and tri_m is None:
+                continue  # DNP / no box line
+            two_m, two_a, tri_m, tri_a = (two_m or 0), (two_a or 0), (tri_m or 0), (tri_a or 0)
+            orb, drb, trb = (_int(row.get(h)) or 0 for h in ("RO", "RD", "RT"))
+            if trb and orb + drb != trb:
+                drb = max(trb - orb, 0)  # league only tracks total rebounds
+            game = {
+                "date": date,
+                "team": row.get("Team", "").strip() or None,
+                "opp": row.get("Against Team", "").strip() or None,
+                "score": row.get("Result", "").strip() or None,
+                "competition": competition or None,
+                "min": row.get("MIN", "").strip() or None,
+                "pts": _int(row.get("PTS")) or 0,
+                "fgm": two_m + tri_m, "fga": two_a + tri_a,
+                "tpm": tri_m, "tpa": tri_a,
+                "ftm": ft_m or 0, "fta": ft_a or 0,
+                "orb": orb, "drb": drb, "trb": trb or orb + drb,
+                "ast": _int(row.get("AS")) or 0, "stl": _int(row.get("ST")) or 0,
+                "blk": _int(row.get("BS")) or 0, "tov": _int(row.get("TO")) or 0,
+                "pf": _int(row.get("PF")) or 0,
+            }
+            key = (date, game["opp"], game["pts"], game["min"], game["trb"], game["ast"])
+            if key in seen:
+                continue
+            seen.add(key)
+            games.append(game)
+    games.sort(key=lambda g: g["date"], reverse=True)
+    return games
+
+
+def season_end_years(html: str) -> set[int]:
+    """End-years of the season blocks already present in `html` ('2026-27' -> 2027)."""
+    out: set[int] = set()
+    for year_label, _c, _t, _tab in _season_tables(BeautifulSoup(html, "html.parser")):
+        m = re.match(r"(\d{4})(?:-(\d{2}))?$", year_label)
+        if m:
+            out.add(int(m.group(1)) + (1 if m.group(2) else 0))
+    return out

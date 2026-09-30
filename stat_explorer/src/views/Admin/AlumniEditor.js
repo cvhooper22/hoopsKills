@@ -1,15 +1,14 @@
 import React, { useEffect, useId, useMemo, useState } from 'react';
-import alumSeed from '../../assets/alum';
 import AlumniCard from '../Alumni/components/AlumniCard';
 import { STATUSES } from '../../components/StatusBadge/StatusBadge';
 import '../Alumni/Alumni.css';
 import './AlumniEditor.css';
+import { saveAlum, uploadImage } from './adminApi';
 
-// Hidden editor for src/assets/alum.js. Not linked from anywhere in the
-// app nav — reachable only by navigating directly to /admin/alumni.
-// Saving only works while running `npm start` locally: it POSTs to a
-// dev-server-only endpoint (see src/setupProxy.js) that rewrites
-// src/assets/alum.js on disk. It does nothing in a production build.
+// Hidden editor for the alumni data (alum.json in S3). Not linked from anywhere in
+// the app nav — reachable only by navigating directly to /admin/alumni, behind the
+// password gate (AdminGate). Receives the current list as `initialAlum` (loaded
+// fresh from S3 by AdminAlumLoader) and saves through the admin API (adminApi.js).
 
 // Stable identity for an alum in the editor. Names are editable and list
 // positions change on reorder, so neither can be used to track an alum.
@@ -33,6 +32,7 @@ function emptyAlum() {
     teamSocial: { twitter: '', instagram: '', youtube: '', facebook: '' },
     recentTweetsUrl: '',
     playerUrl: '',
+    recentGamesUrl: '',
     teamWebsite: '',
     coverPhoto: { url: '', styleText: '' },
     notesText: '',
@@ -65,6 +65,7 @@ function toEditable(a) {
     },
     recentTweetsUrl: a.recentTweetsUrl || '',
     playerUrl: a.playerUrl || '',
+    recentGamesUrl: a.recentGamesUrl || '',
     teamWebsite: a.teamWebsite || '',
     coverPhoto: {
       url: a.coverPhoto?.url || '',
@@ -82,9 +83,8 @@ function slugify(text) {
     .replace(/^-+|-+$/g, '');
 }
 
-// Downloads an external image server-side and re-hosts it in S3, via the
-// dev-only proxy in setupProxy.js -> the image-uploader Lambda. Only works
-// under `npm start` with IMAGE_UPLOAD_API_URL/KEY set in .env.local.
+// Downloads an external image server-side and re-hosts it in S3, via the admin API
+// -> the image-uploader Lambda.
 function ImageImporter({ category, defaultFileName, onImported }) {
   const [sourceUrl, setSourceUrl] = useState('');
   const [fileName, setFileName] = useState(defaultFileName);
@@ -99,18 +99,12 @@ function ImageImporter({ category, defaultFileName, onImported }) {
     setLoading(true);
     setStatus(null);
     try {
-      const res = await fetch('/api/upload-image', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ imageUrl: sourceUrl.trim(), category, fileName: fileName.trim() }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Upload failed');
+      const data = await uploadImage({ imageUrl: sourceUrl.trim(), category, fileName: fileName.trim() });
       onImported(data.url);
       setSourceUrl('');
       setStatus({ ok: true, message: `Hosted at ${data.url}` });
     } catch (e) {
-      setStatus({ ok: false, message: `${e.message} (this only works when running "npm start" locally with the uploader Lambda configured)` });
+      setStatus({ ok: false, message: e.message });
     } finally {
       setLoading(false);
     }
@@ -187,6 +181,7 @@ function toStored(editable, errors) {
 
   if (editable.recentTweetsUrl.trim()) out.recentTweetsUrl = editable.recentTweetsUrl.trim();
   out.playerUrl = editable.playerUrl.trim();
+  if (editable.recentGamesUrl.trim()) out.recentGamesUrl = editable.recentGamesUrl.trim();
   out.teamWebsite = editable.teamWebsite.trim();
 
   const coverPhoto = { url: editable.coverPhoto.url.trim() };
@@ -256,11 +251,11 @@ function parseError(styleText) {
   }
 }
 
-export default function AlumniEditor() {
-  const [initial] = useState(() => alumSeed.map(toEditable));
+export default function AlumniEditor({ initialAlum }) {
+  const [initial] = useState(() => initialAlum.map(toEditable));
   // Working copy: what's on screen, including unsaved edits, order and removals.
   const [list, setList] = useState(initial);
-  // What was last written to alum.js, in file order: [{ id, data }].
+  // What was last written to S3, in file order: [{ id, data }].
   const [savedList, setSavedList] = useState(() =>
     initial.map((e) => ({ id: e._id, data: toStored(e, []) }))
   );
@@ -359,17 +354,11 @@ export default function AlumniEditor() {
     setSaving(kind);
     setStatus(null);
     try {
-      const res = await fetch('/api/alum', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(nextSaved.map((s) => s.data)),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Save failed');
+      await saveAlum(nextSaved.map((s) => s.data));
       setSavedList(nextSaved);
       setStatus({ ok: true, message: kind === 'order' ? 'Order saved' : 'Player saved' });
     } catch (e) {
-      setStatus({ ok: false, message: `${e.message} (this only works when running "npm start" locally)` });
+      setStatus({ ok: false, message: e.message });
     } finally {
       setSaving(null);
     }
@@ -460,7 +449,7 @@ export default function AlumniEditor() {
           {orderStatus && !orderStatus.ok ? (
             <p className="alumni-editor__list-note alumni-editor__list-note--error">{orderStatus.message}</p>
           ) : orderDirty ? (
-            <p className="alumni-editor__list-note">Reordering or removing alumni isn't written to alum.js until you save.</p>
+            <p className="alumni-editor__list-note">Reordering or removing alumni isn't saved until you save.</p>
           ) : (
             orderStatus && <p className="alumni-editor__list-note alumni-editor__list-note--ok">{orderStatus.message}</p>
           )}
@@ -603,6 +592,9 @@ export default function AlumniEditor() {
               <div className="alumni-editor__row">
                 <Field label="Player stats URL">
                   <input type="url" value={current.playerUrl} onChange={(e) => updateCurrent({ playerUrl: e.target.value })} />
+                </Field>
+                <Field label="Recent games URL" hint="Optional. Used instead of the player stats URL by /admin/recent-games (e.g. a FIBA 3x3 World Tour team page for the latest event).">
+                  <input type="url" value={current.recentGamesUrl} onChange={(e) => updateCurrent({ recentGamesUrl: e.target.value })} />
                 </Field>
                 <Field label="Recent tweets search URL" hint="Optional. Replaces the player link in the card footer.">
                   <input type="url" value={current.recentTweetsUrl} onChange={(e) => updateCurrent({ recentTweetsUrl: e.target.value })} />
