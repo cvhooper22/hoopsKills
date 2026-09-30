@@ -15,6 +15,16 @@
 }
 
 .alumni-card-flipper {
+  /* Front-face extras fade per element. The flip is 0.6s and edge-on at 0.3s. */
+  /* out = flipping to the back, in = flipping to the front */
+  --logo-fade-out-duration: 0.15s;
+  --logo-fade-out-delay: 0.15s;
+  --logo-fade-in-duration: 0.15s;
+  --logo-fade-in-delay: 0.2s;
+  --badge-fade-out-duration: 0.15s;
+  --badge-fade-out-delay: 0.15s;
+  --badge-fade-in-duration: 0.15s;
+  --badge-fade-in-delay: 0.1s;
   position: relative;
   transition: transform 0.6s;
   transform-style: preserve-3d;
@@ -65,12 +75,12 @@
 .alumni-card__logo-image {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  transition: opacity 0.2s 0.35s; /* fade in only after the flip passes halfway */
+  transition: opacity var(--logo-fade-in-duration) var(--logo-fade-in-delay);
 }
 
 .alumni-card-flipper--flipped .alumni-card__logo-image {
   opacity: 0;
-  transition-delay: 0s;
+  transition: opacity var(--logo-fade-out-duration) var(--logo-fade-out-delay);
 }
 
 .alumni-card__image {
@@ -110,12 +120,12 @@
   pointer-events: none;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  transition: opacity 0.2s 0.35s; /* fade in only after the flip passes halfway */
+  transition: opacity var(--badge-fade-in-duration) var(--badge-fade-in-delay);
 }
 
 .alumni-card-flipper--flipped .alumni-card__badges {
   opacity: 0;
-  transition-delay: 0s;
+  transition: opacity var(--badge-fade-out-duration) var(--badge-fade-out-delay);
 }
 
 .alumni-card__name {
