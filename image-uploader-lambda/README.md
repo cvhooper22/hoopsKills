@@ -9,6 +9,12 @@ writes it to S3 under:
 Extension is derived from the source image's `Content-Type` (jpg/png/webp/gif/svg).
 Response: `{ "key": "...", "url": "..." }`.
 
+> **Auth changed.** This API is now fronted by the shared Lambda authorizer
+> (password) described in [../alum-admin-lambda/README.md](../alum-admin-lambda/README.md),
+> and the admin editor calls it directly from the browser. Ignore the API-key /
+> usage-plan sections and the dev `setupProxy.js` proxy below; set the
+> `ALLOWED_ORIGIN` env var (comma-separated site origins) instead of relying on `*`.
+
 Everywhere below, replace `YOUR_BUCKET_NAME`, `YOUR_REGION` (e.g. `us-west-2`),
 and `YOUR_ACCOUNT_ID` with your real values.
 

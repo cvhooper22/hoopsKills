@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import "./Alumni.css";
-import alum from '../../assets/alum';
+import urls from '../../constants/assetUrls';
 import AlmuniCard from './components/AlumniCard';
 import BadgeFilters, { matchesFilters } from './components/BadgeFilters';
 import { TouchPointsContext } from '../../contexts/TouchpointsContext';
@@ -10,8 +10,23 @@ import XClose from '../../components/Icons/XClose';
 export default function AlumniRouter () {
     const [helpOpen, setHelpOpen] = useState(false);
     const [filters, setFilters] = useState([]);
+    const [alum, setAlum] = useState(null);
+    const [loadError, setLoadError] = useState(false);
     const hasTouchEnabled = useContext(TouchPointsContext);
-    const displayAlum = alum.filter(a => matchesFilters(a, filters));
+    const displayAlum = (alum ?? []).filter(a => matchesFilters(a, filters));
+
+    useEffect(() => {
+        fetch(urls.alumJson())
+            .then(res => {
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                return res.json();
+            })
+            .then(data => {
+                if (!Array.isArray(data)) throw new Error('alum.json is not a list');
+                setAlum(data);
+            })
+            .catch(() => setLoadError(true));
+    }, []);
 
     function onHelpClick () {
         setHelpOpen(!helpOpen);
@@ -33,6 +48,8 @@ export default function AlumniRouter () {
                 </div>
             </div>
             <BadgeFilters selected={filters} onChange={setFilters} />
+            {loadError && <div className='p-l'>Couldn't load alumni right now. Please try again later.</div>}
+            {!alum && !loadError && <div className='p-l'>Loading alumni…</div>}
             <div className='alumni-cards flex f-wrap'>
                 {displayAlum.map((alumnus) => <AlmuniCard alum={alumnus} key={alumnus.name} />)}
             </div>

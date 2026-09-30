@@ -1,0 +1,183 @@
+.recent-games {
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+  padding: 20px 24px 60px;
+  text-align: left;
+  font-family: sans-serif;
+  color: #002e52;
+}
+
+.recent-games *,
+.recent-games *::before,
+.recent-games *::after {
+  box-sizing: border-box;
+}
+
+.recent-games__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.recent-games__bar h2 {
+  margin: 0 12px 0 0;
+}
+
+.recent-games__bar input[type="number"] {
+  width: 56px;
+}
+
+.recent-games button {
+  padding: 5px 12px;
+  border: 1px solid #002e52;
+  border-radius: 4px;
+  background: #002e52;
+  color: white;
+  cursor: pointer;
+}
+
+.recent-games button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.recent-games__hint {
+  max-width: 760px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #4a6178;
+}
+
+.recent-games__alum {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: white;
+  border: 1px solid #dde3ea;
+  border-radius: 6px;
+}
+
+.recent-games__head,
+.recent-games__event {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.recent-games__head .recent-games__team {
+  color: #4a6178;
+  font-size: 13px;
+}
+
+.recent-games__src {
+  margin-left: auto;
+  font-size: 12px;
+  color: #6b7f92;
+}
+
+.recent-games__event {
+  margin: 8px 0;
+}
+
+.recent-games__event input {
+  flex: 1;
+  min-width: 0;
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.recent-games__saved {
+  font-size: 12px;
+  color: #1a7a3c;
+}
+
+.recent-games__note {
+  margin: 6px 0;
+  font-size: 12px;
+  color: #4a6178;
+}
+
+.recent-games__note--error {
+  color: #b00020;
+}
+
+.recent-games__table {
+  border-collapse: collapse;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.recent-games__table th,
+.recent-games__table td {
+  padding: 4px 10px;
+  text-align: center;
+  border-bottom: 1px solid #edf0f4;
+  white-space: nowrap;
+}
+
+.recent-games__table th {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #6b7f92;
+}
+
+.recent-games__table .recent-games__left {
+  text-align: left;
+}
+
+.recent-games__strong {
+  font-weight: 700;
+}
+
+.recent-games__arrow {
+  display: inline-flex;
+  color: #002e52;
+}
+
+.recent-games__arrow:hover {
+  color: #0062b8;
+}
+
+.recent-games__combined {
+  margin-top: 16px;
+  padding: 12px 14px;
+  background: white;
+  border: 2px solid #002e52;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.recent-games__combined-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.recent-games__combined-head h3 {
+  margin: 0;
+}
+
+.recent-games__combined-head button {
+  margin-left: auto;
+}
+
+.recent-games__table--sortable th {
+  cursor: pointer;
+  user-select: none;
+}
+
+.recent-games__table--sortable th:hover {
+  color: #002e52;
+}
+
+.recent-games__table--sortable .recent-games__team {
+  font-weight: 400;
+  font-size: 11px;
+  color: #6b7f92;
+}
+
+.recent-games__table--sortable tbody tr:nth-child(even) {
+  background: #f3f6fa;
+}

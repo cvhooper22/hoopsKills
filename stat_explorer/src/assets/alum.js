@@ -1,6 +1,6 @@
 const alum = [
   {
-    "name": "AJ Dybansta",
+    "name": "AJ Dybantsa",
     "country": "USA",
     "countryCode": "us",
     "team": "Washington Wizards",
@@ -44,7 +44,7 @@ const alum = [
       "facebook": "https://www.facebook.com/BrooklynNets/"
     },
     "recentTweetsUrl": "https://x.com/search?q=from%3ABrooklynNets%20egor&src=typed_query&f=live",
-    "playerUrl": "https://www.basketball-reference.com/international/players/egor-demin-1.html",
+    "playerUrl": "https://www.basketball-reference.com/players/d/demineg01.html",
     "teamWebsite": "https://www.brooklynnets.com",
     "coverPhoto": {
       "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/egorBrooklynUse.jpeg",
@@ -137,7 +137,8 @@ const alum = [
     },
     "notes": [
       "Jimmer made his return back to Fiba 3x3 in September 2026. He joins a Miami team that is ranked 2nd in the Fiba World Tour"
-    ]
+    ],
+    "recentGamesUrl": "https://worldtour.fiba3x3.com/2026/deqing/teams/174bbdf1-b357-4b19-ab05-ac3c510ac38b"
   },
   {
     "name": "Alex Barcello",
@@ -264,7 +265,7 @@ const alum = [
       "youtube": "https://www.youtube.com/c/nbagleague/featured",
       "facebook": "https://www.facebook.com/nbagleague/"
     },
-    "playerUrl": "https://basketball.realgm.com/player/Jax-Robinson/D-League/151236/Career/By_Split",
+    "playerUrl": "https://basketball.realgm.com/player/Jax-Robinson/GameLogs/151236/All",
     "teamWebsite": "",
     "coverPhoto": {
       "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/jaxCharge.jpg",
@@ -294,7 +295,7 @@ const alum = [
       "youtube": "https://www.youtube.com/c/nbagleague/featured",
       "facebook": "https://www.facebook.com/nbagleague/"
     },
-    "playerUrl": "https://basketball.realgm.com/player/Keba-Keita/NBA/176341/Career/By_Split/Per_Game/Recent_Games/Summer_League",
+    "playerUrl": "https://basketball.realgm.com/player/Keba-Keita/GameLogs/176341/All",
     "teamWebsite": "https://noblesville.gleague.nba.com/schedule?month=11",
     "coverPhoto": {
       "url": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/keitaSummerLeague.jpg",
