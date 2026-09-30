@@ -107,7 +107,7 @@ export default function GameSwitcher({ basePath }) {
   }
 
   return (
-    <div className={`game-pill${open ? ' game-pill--open' : ''}`} ref={rootRef}>
+    <div className={`game-pill${open ? ' game-pill--open' : ''}${basePath === 'lineups' ? '' : ' game-pill--radii'}`} ref={rootRef}>
       <div className="game-pill__row">
         <button type="button" className="game-pill__main" onClick={toggle} aria-expanded={open}>
           <span className="game-pill__season">{labelFor(currentKey)}</span>

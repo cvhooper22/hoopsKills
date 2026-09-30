@@ -1,4 +1,28 @@
 :root {
+  /* Corner radii, "Round means touch": anything you can tap or click gets a rounded corner,
+     everything else stays square (2px).
+     1. Controls (buttons, filter chips, search inputs, dropdown triggers, toggles) use
+        --radius-control. Use the token, never a hard-coded value.
+     2. Nested corners go 4px smaller: a shape inside a rounded control uses 12px
+        (--radius-seg-inner). For any other inset, inner radius = outer radius - padding.
+     3. Content is 2px: cards, panels, rails, tags, badges, stat blocks.
+     4. Tags are not chips. A label you can't tap is 2px; if it becomes tappable it becomes a
+        chip at 16px.
+     5. Clickable cards stay 2px. Show interactivity with hover (lift or inversion) plus a
+        16px control inside the card (a button or open-in-new icon button).
+     6. Circles stay circles: avatars and icon-only buttons are 50%.
+     7. Controls under 32px tall render as pills at 16px. Don't add a smaller radius.
+     8. Nothing else is rounded (modals, sheets, images, chrome bands). If a new element
+        doesn't fit rules 1-6, it's 2px.
+     Quick check: if you can click it, it's round; if you can only read it, it's square.
+     Applied so far to Kills, Clutch and the game selector. Tables, nav, alumni and lineups
+     keep their existing rendering. */
+  --radius-control: 16px;
+  --radius-seg: 16px;
+  --radius-seg-inner: 12px;
+  --radius-card: 2px;
+  --radius-tag: 2px;
+
   --royal-blue: #003fa2;
   --blue-stop-1: #003C95;
   --blue-stop-2: #003987;

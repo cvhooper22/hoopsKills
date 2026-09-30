@@ -7,8 +7,3 @@
   font-variation-settings: 'FILL' 0, 'wght' 500, 'opsz' 20;
   -webkit-font-smoothing: antialiased;
 }
-
-/* In the half-breakdown table header (KillsHeader) the icon sits mid-row, so
-   center the panel under it instead of expanding from one edge — expanding
-   either edge risks running off the narrower table's side. */
-.kills-half-table .tooltip__panel { left: 50%; transform: translateX(-50%); }

@@ -48,10 +48,10 @@
 /* Rounded corners via the corner cells rather than overflow:hidden on the
    table — overflow:hidden would clip the Pure/dirty info tooltip, which is
    absolutely positioned inside a header cell and needs to escape the table. */
-.kills-half-table thead tr:first-child th:first-child { border-top-left-radius: 10px; }
-.kills-half-table thead tr:first-child th:last-child { border-top-right-radius: 10px; }
-.kills-half-table tbody tr:last-child > :first-child { border-bottom-left-radius: 10px; }
-.kills-half-table tbody tr:last-child > :last-child { border-bottom-right-radius: 10px; }
+.kills-half-table thead tr:first-child th:first-child { border-top-left-radius: var(--radius-card); }
+.kills-half-table thead tr:first-child th:last-child { border-top-right-radius: var(--radius-card); }
+.kills-half-table tbody tr:last-child > :first-child { border-bottom-left-radius: var(--radius-card); }
+.kills-half-table tbody tr:last-child > :last-child { border-bottom-right-radius: var(--radius-card); }
 
 .kills-half-table th,
 .kills-half-table td {

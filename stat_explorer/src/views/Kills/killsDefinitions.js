@@ -34,7 +34,7 @@ export function EfficiencyDefinition({ showLabel = true }) {
   return (
     <>
       <p>
-        <Lead label="Efficiency" showLabel={showLabel}>the average net points BYU gained per kill. For each kill it's the change in scoring margin from its first stop to the opponent basket that ends the streak. Gives an idea on how well BYU capitalized on each kill.</Lead>
+        <Lead label="Efficiency" showLabel={showLabel}>the average net points BYU gained per kill. For each kill it's the change in scoring margin from its first stop to the end of BYU's possession right after its third stop. Gives an idea on how well BYU capitalized on each kill.</Lead>
       </p>
       <p>Single Kill Example: BYU scores 6 points while the kill builds, then the opponent's basket that ends it takes 2 back. That's +4 net.</p>
     </>
