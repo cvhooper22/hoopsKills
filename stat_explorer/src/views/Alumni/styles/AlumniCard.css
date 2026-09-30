@@ -65,11 +65,12 @@
 .alumni-card__logo-image {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  transition: opacity 0.25s;
+  transition: opacity 0.2s 0.35s; /* fade in only after the flip passes halfway */
 }
 
 .alumni-card-flipper--flipped .alumni-card__logo-image {
   opacity: 0;
+  transition-delay: 0s;
 }
 
 .alumni-card__image {
@@ -109,11 +110,12 @@
   pointer-events: none;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  transition: opacity 0.25s;
+  transition: opacity 0.2s 0.35s; /* fade in only after the flip passes halfway */
 }
 
 .alumni-card-flipper--flipped .alumni-card__badges {
   opacity: 0;
+  transition-delay: 0s;
 }
 
 .alumni-card__name {
