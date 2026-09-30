@@ -96,6 +96,13 @@
   align-items: flex-end;
   gap: 4px;
   pointer-events: none;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transition: opacity 0.25s;
+}
+
+.alumni-card-flipper--flipped .alumni-card__badges {
+  opacity: 0;
 }
 
 .alumni-card__name {
