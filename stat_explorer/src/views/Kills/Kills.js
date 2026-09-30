@@ -7,6 +7,8 @@ import KillsHeader from './KillsHeader';
 import KillsTable from './KillsTable';
 import StreaksTable from './StreaksTable';
 import RhythmMix from './RhythmMix';
+import Glossary, { GlossaryEntry, GlossaryTerm, GlossaryDefinition } from '../../components/Glossary/Glossary';
+import { PURE_DIRTY_DEFINITION, PotentialKillDefinition, EfficiencyDefinition } from './killsDefinitions';
 import './Kills.css';
 
 const FOCUS_TEAM = 'byu';
@@ -61,6 +63,21 @@ export default function Kills() {
       <KillsTable result={result} />
       <StreaksTable result={result} />
       <RhythmMix result={result} />
+
+      <Glossary storageKey="kills-glossary-dismissed">
+        <GlossaryEntry>
+          <GlossaryTerm>Pure / dirty kills</GlossaryTerm>
+          <GlossaryDefinition>{PURE_DIRTY_DEFINITION}</GlossaryDefinition>
+        </GlossaryEntry>
+        <GlossaryEntry>
+          <GlossaryTerm>Potential kills (PKs)</GlossaryTerm>
+          <GlossaryDefinition><PotentialKillDefinition showLabel={false} /></GlossaryDefinition>
+        </GlossaryEntry>
+        <GlossaryEntry>
+          <GlossaryTerm>Efficiency</GlossaryTerm>
+          <GlossaryDefinition><EfficiencyDefinition showLabel={false} /></GlossaryDefinition>
+        </GlossaryEntry>
+      </Glossary>
     </div>
   );
 }

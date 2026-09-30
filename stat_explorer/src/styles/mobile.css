@@ -45,6 +45,40 @@
     padding-right: 0;
   }
 
+  /* The top bar hides on scroll down (useHideOnScroll), so a page whose scroller is
+     .lineups (lineups, clutch, kills) can't sit below it via .content's margin — that
+     would leave a dead 102px strip once the bar is gone. Let the scroller span the
+     screen and reserve the bar's height as its own padding instead, which scrolls away. */
+  .content:has(> .lineups) {
+    margin-top: 0;
+  }
+
+  .content > div.lineups {
+    box-sizing: border-box; /* height: 100% plus this padding would otherwise overshoot the screen */
+    padding-top: calc(102px + var(--s));
+  }
+
+  /* Home and Alumni scroll in their own root element too; same treatment, keeping
+     each page's existing top spacing below the bar's 102px. */
+  .content:has(> .home),
+  .content:has(> .alumni) {
+    margin-top: 0;
+  }
+
+  .content > div.home,
+  .content > div.alumni {
+    box-sizing: border-box;
+    height: 100%;
+  }
+
+  .content > div.home {
+    padding-top: calc(102px + 9rem);
+  }
+
+  .content > div.alumni {
+    padding-top: calc(102px + var(--alumni-padding));
+  }
+
   .games.flex-c.scroll {
     flex-direction: row;
     height: auto;

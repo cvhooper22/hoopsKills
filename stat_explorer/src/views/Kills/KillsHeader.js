@@ -1,5 +1,7 @@
 import FlipPad from '../../components/FlipPad/FlipPad';
+import Tooltip from '../../components/Tooltip/Tooltip';
 import PureDirtyInfo from './PureDirtyInfo';
+import { PotentialKillDefinition } from './killsDefinitions';
 import { avgKillGain } from '../../utils/killInsights';
 import './KillsHeader.css';
 
@@ -49,21 +51,19 @@ function pct(n) {
   return n === null ? '–' : Math.round(n * 100);
 }
 
-function KpiTile({ label, value, caption }) {
+function KpiTile({ label, value }) {
   return (
     <div className="kills-kpi">
       <FlipPad condensed label={label} value={value} />
-      {caption && <p className="kills-kpi__caption">{caption}</p>}
     </div>
   );
 }
 
 export default function KillsHeader({ game, result }) {
   const { kills, potentialKills, completion, stops } = result;
-  const dirtyKills = kills.filter((k) => k.dirty).length;
-  const dirtyStops = stops.filter((s) => s.dirty).length;
   const rows = byPeriod(result);
-  const chances = kills.length + potentialKills.length;
+  const sum = (key) => rows.reduce((n, r) => n + r[key], 0);
+  const totalChances = sum('chances');
   const efficiency = avgKillGain(kills);
 
   return (
@@ -78,15 +78,11 @@ export default function KillsHeader({ game, result }) {
       </h1>
 
       <div className="kills-kpis">
-        <KpiTile label="Kills" value={String(kills.length)} caption={`${kills.length - dirtyKills} pure · ${dirtyKills} dirty`} />
-        <KpiTile label="Potential kills" value={String(potentialKills.length)} caption="never got the 3rd stop" />
-        <KpiTile label="Completion" value={`${pct(completion)}%`} caption={`${kills.length} of ${chances} chances`} />
-        <KpiTile label="Stops" value={String(stops.length)} caption={`${dirtyStops} dirty`} />
-        <KpiTile
-          label="Efficiency"
-          value={efficiency === null ? '–' : efficiency.toFixed(1)}
-          caption={efficiency === null ? 'no kills yet' : 'BYU pts scored per kill, while it was building'}
-        />
+        <KpiTile label="Kills" value={String(kills.length)} />
+        <KpiTile label="Potential kills" value={String(potentialKills.length)} />
+        <KpiTile label="Completion" value={`${pct(completion)}%`} />
+        <KpiTile label="Stops" value={String(stops.length)} />
+        <KpiTile label="Efficiency" value={efficiency === null ? '–' : efficiency.toFixed(1)} />
       </div>
 
       <table className="kills-half-table">
@@ -95,7 +91,12 @@ export default function KillsHeader({ game, result }) {
             <th></th>
             <th>Kills</th>
             <th className="kills-half-table__pure-dirty">Pure / dirty <PureDirtyInfo /></th>
-            <th>PKs</th>
+            <th className="kills-half-table__pks">
+              PKs
+              <Tooltip content={<PotentialKillDefinition />}>
+                <span className="material-symbols-sharp pure-dirty-info__icon" role="img" aria-label="What is a potential kill">info</span>
+              </Tooltip>
+            </th>
             <th>Completion</th>
             <th>Stops</th>
           </tr>
@@ -111,6 +112,14 @@ export default function KillsHeader({ game, result }) {
               <td>{row.stops} <small>({row.stopsDirty} dirty)</small></td>
             </tr>
           ))}
+          <tr className="kills-half-table__total">
+            <th scope="row">Total</th>
+            <td className="kills-half-table__kills">{sum('kills')}</td>
+            <td>{sum('pure')} / {sum('dirty')}</td>
+            <td>{sum('potentialKills')}</td>
+            <td>{totalChances ? `${pct(sum('kills') / totalChances)}%` : '–'}</td>
+            <td>{sum('stops')} <small>({sum('stopsDirty')} dirty)</small></td>
+          </tr>
         </tbody>
       </table>
     </div>

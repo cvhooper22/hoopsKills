@@ -6,4 +6,19 @@
   text-align: left;
 }
 
+/* Desktop: the page scrolls inside .kills, which sits below the fixed bar, the
+   .lineups padding (24px) and .lineups-content's pill clearance (56px) — so scrolled
+   content used to be cut off at a hard edge under a dead band. Pull .kills up to the
+   bar's bottom edge and re-add that space as its own padding: the layout at rest is
+   identical, but content now scrolls up behind the floating game pill. (Mobile is
+   handled in styles/mobile.css.) */
+@media (min-width: 901px) {
+  .kills {
+    box-sizing: border-box;
+    height: calc(100% + 80px);
+    margin-top: -80px;
+    padding-top: 80px;
+  }
+}
+
 .kills-check { color: var(--secondary-text); font-size: 0.85rem; }
