@@ -61,6 +61,17 @@
   filter: drop-shadow(-1px -1px 0px white);
 }
 
+/* Safari ignores the parent's backface-visibility on positioned/filtered children */
+.alumni-card__logo-image {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transition: opacity 0.25s;
+}
+
+.alumni-card-flipper--flipped .alumni-card__logo-image {
+  opacity: 0;
+}
+
 .alumni-card__image {
   height: 295px;
   display: block;
