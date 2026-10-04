@@ -6,9 +6,17 @@ export function getStorageItem (key) {
   }
 }
 
-export function setStorageItem () {
+export function setStorageItem (key, value) {
   try {
     return window.localStorage.setItem(key, value);
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+export function removeStorageItem (key) {
+  try {
+    return window.localStorage.removeItem(key);
   } catch (err) {
     console.error(err);
   }

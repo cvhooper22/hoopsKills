@@ -5,13 +5,26 @@ const RING_PATH = 'M8,19 C6.4,13 5.6,4 8.6,3.4 C11.4,2.9 11.6,9 10.6,13';
 
 // mostly-upright random tilt, capped at 30deg off the midline; a signed power
 // curve biases toward 0 while still landing in the outer 25-30deg band ~5% of the time
-function randomTilt() {
-  const u = Math.random() * 2 - 1;
+function tiltFrom(r) {
+  const u = r * 2 - 1;
   return Math.sign(u) * Math.abs(u) ** 1.73 * 30;
 }
 
-function Ring({ x, scale }) {
-  const tilt = useMemo(randomTilt, []);
+// With a seed the tilt is a pure function of it (so a collected tile re-renders, and
+// exports, identically every time); without one it's random per mount as before.
+function seededUnit(seed) {
+  let h = 1779033703 ^ seed.length;
+  for (let i = 0; i < seed.length; i++) {
+    h = Math.imul(h ^ seed.charCodeAt(i), 3432918353);
+    h = (h << 13) | (h >>> 19);
+  }
+  h = Math.imul(h ^ (h >>> 16), 2246822507);
+  h = Math.imul(h ^ (h >>> 13), 3266489909);
+  return ((h ^ (h >>> 16)) >>> 0) / 4294967296;
+}
+
+function Ring({ x, scale, seed }) {
+  const tilt = useMemo(() => tiltFrom(seed ? seededUnit(seed) : Math.random()), [seed]);
   return (
     <svg
       className="flip-pad__ring"
@@ -39,7 +52,7 @@ const SIZES = {
 
 export default function FlipPad({
   label, value, unit, delta, up = true,
-  board = true, box = 'sky', cards = 'white', tone, condensed = false,
+  board = true, box = 'sky', cards = 'white', tone, condensed = false, seed,
 }) {
   const { full, narrow: narrowW, inset, scale } = SIZES[condensed ? 'condensed' : 'regular'];
   // tone tints the page digits: 'pos' | 'neg' | 'auto' (green for a leading +, red for a leading -)
@@ -69,10 +82,10 @@ export default function FlipPad({
               <div className={'flip-pad__page' + (narrow ? ' flip-pad__page--narrow' : '')} key={i}>
                 <div className="flip-pad__sheet"><span>{c}</span></div>
                 {narrow
-                  ? <Ring x={w / 2} scale={scale} />
+                  ? <Ring x={w / 2} scale={scale} seed={seed && `${seed}:${i}`} />
                   : <>
-                      <Ring x={inset} scale={scale} />
-                      <Ring x={w - inset} scale={scale} />
+                      <Ring x={inset} scale={scale} seed={seed && `${seed}:${i}:l`} />
+                      <Ring x={w - inset} scale={scale} seed={seed && `${seed}:${i}:r`} />
                     </>}
               </div>
             );

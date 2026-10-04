@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import YBallLoader from '../../components/Loaders/YBballLoader';
 import { detectKills } from '../../utils/kills';
 import urls from '../../constants/assetUrls';
-import KillsHeader from './KillsHeader';
+import KillsHeader, { gameLabel } from './KillsHeader';
 import KillsTable from './KillsTable';
 import StreaksTable from './StreaksTable';
 import RhythmMix from './RhythmMix';
@@ -58,9 +58,9 @@ export default function Kills() {
 
   return (
     <div className="kills">
-      <KillsHeader game={game} result={result} />
+      <KillsHeader game={game} result={result} gameId={gameId} />
 
-      <KillsTable result={result} />
+      <KillsTable result={result} gameId={gameId} gameLabel={gameLabel(game)} />
       <StreaksTable result={result} />
       <RhythmMix result={result} />
 

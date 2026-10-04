@@ -86,6 +86,7 @@ export default function Nav ({ options = [], onOptionClick}) {
             return (
               <li className={classes.join(' ')} role="button" onClick={handleClick(opt)} key={opt.title}>
                 {opt.title}
+                {opt.badge > 0 && <span className="nav__badge">{opt.badge}</span>}
                 {opt.disabled && <sub>Coming Soon</sub>}
                 {!opt.disabled && opt.subtitle && <sub>{opt.subtitle}</sub>}
               </li>

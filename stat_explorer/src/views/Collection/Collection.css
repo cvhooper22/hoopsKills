@@ -1,0 +1,114 @@
+.collection {
+  padding: var(--l);
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.collection__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s) var(--m);
+  margin-bottom: var(--m);
+}
+
+.collection__header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--s);
+}
+
+.collection__title {
+  margin: 0;
+  color: var(--navy-blue);
+}
+
+.collection__status {
+  font-size: 0.8rem;
+  color: var(--secondary-text);
+}
+
+.collection__empty {
+  color: var(--secondary-text);
+}
+
+.collection__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--m);
+}
+
+.collection__unavailable {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--m);
+  padding: var(--m);
+  border: 1px solid var(--gray1);
+  border-radius: var(--radius-card);
+  background: white;
+  color: var(--secondary-text);
+}
+
+.collection__btn {
+  flex: none;
+  padding: var(--xs) var(--m);
+  border: 1px solid var(--royal-blue);
+  border-radius: var(--radius-control);
+  background: white;
+  color: var(--royal-blue);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.collection__btn:hover:not(:disabled) {
+  background: var(--lightest-blue);
+}
+
+.collection__btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.collection__ratios {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s);
+  margin-bottom: var(--m);
+}
+
+.collection__ratios-label {
+  font-size: 0.85rem;
+  color: var(--secondary-text);
+}
+
+/* Filter chip: tappable, so 16px (variables.css, rule 1). */
+.collection__chip {
+  padding: var(--xs) var(--m);
+  border: 1px solid var(--royal-blue);
+  border-radius: var(--radius-control);
+  background: white;
+  color: var(--royal-blue);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.collection__chip:hover {
+  background: var(--lightest-blue);
+}
+
+.collection__chip--active {
+  background: var(--royal-blue);
+  color: white;
+}
+
+.collection__chip--active:hover {
+  background: var(--navy-blue);
+}

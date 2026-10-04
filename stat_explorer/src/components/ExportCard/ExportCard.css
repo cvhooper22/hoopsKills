@@ -1,0 +1,134 @@
+.export-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s);
+  padding: var(--m);
+  background: white;
+  border: 1px solid var(--gray1);
+  border-radius: var(--radius-card);
+}
+
+.export-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s) var(--m);
+}
+
+.export-card__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--xs);
+  min-width: 0;
+  text-align: left;
+}
+
+.export-card__title {
+  font-weight: bold;
+  color: var(--navy-blue);
+}
+
+.export-card__subtitle {
+  font-size: 0.8rem;
+  color: var(--secondary-text);
+}
+
+.export-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s);
+}
+
+.export-card__status {
+  font-size: 0.8rem;
+  color: var(--secondary-text);
+}
+
+.export-card__btn {
+  padding: var(--xs) var(--m);
+  border: 1px solid var(--royal-blue);
+  border-radius: var(--radius-control);
+  background: white;
+  color: var(--royal-blue);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.export-card__btn:hover:not(:disabled) {
+  background: var(--lightest-blue);
+}
+
+.export-card__btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.export-card__btn--primary {
+  background: var(--royal-blue);
+  color: white;
+}
+
+.export-card__btn--primary:hover:not(:disabled) {
+  background: var(--navy-blue);
+}
+
+/* The preview: a fixed-width frame shrunk to the screen (FitToWidth). */
+.fit-to-width {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--gray1);
+}
+
+.fit-to-width__inner {
+  transform-origin: top left;
+}
+
+/* What gets exported. Colors are literal-safe: the image is rendered on white regardless of theme. */
+.export-frame {
+  box-sizing: border-box;
+  padding: 1.5rem;
+  background: white;
+  text-align: left;
+}
+
+.export-frame__caption {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: var(--secondary-text);
+}
+
+.export-frame__body {
+  display: flex;
+  justify-content: center;
+}
+
+.export-frame__body > * {
+  min-width: 0;
+}
+
+.export-frame__footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--gray1);
+  font-size: 0.8rem;
+  color: var(--secondary-text);
+}
+
+.export-frame__brand {
+  font-weight: bold;
+  color: var(--royal-blue);
+}
+
+/* What actually gets captured: the frame centered on a white canvas of the chosen shape.
+   Without a ratio it is exactly as big as the frame. */
+.export-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
