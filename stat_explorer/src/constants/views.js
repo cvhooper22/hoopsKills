@@ -3,6 +3,7 @@ const CLUTCH_VIEW = "Clutch";
 const KILLS_VIEW = "Kills";
 const HOME_VIEW = "Home";
 const ALMUNI_VIEW = "Alumni";
+const COLLECTION_VIEW_TITLE = "Collection";
 const views = [
     {
       title: HOME_VIEW,
@@ -29,4 +30,10 @@ const views = [
       routeRoot: '/alumni',
     } 
   ];
-export { views, HOME_VIEW, LINEUP_VIEW, CLUTCH_VIEW, KILLS_VIEW, ALMUNI_VIEW };
+// Added to the nav only while the `collection` feature flag is on.
+const COLLECTION_VIEW = {
+  title: COLLECTION_VIEW_TITLE,
+  route: '/collection',
+  routeRoot: '/collection',
+};
+export { views, COLLECTION_VIEW, COLLECTION_VIEW_TITLE, HOME_VIEW, LINEUP_VIEW, CLUTCH_VIEW, KILLS_VIEW, ALMUNI_VIEW };

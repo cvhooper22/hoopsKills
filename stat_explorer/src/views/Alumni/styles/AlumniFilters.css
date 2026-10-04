@@ -1,0 +1,241 @@
+/* Wrapper for the whole filter control. It carries the card-grid max-widths (Alumni.css) and
+   sits above the hover-scaled cards, so the drop-down groups can overlay them. */
+.alumni-filters {
+  position: relative;
+  z-index: 3;
+  display: flow-root;
+  width: 100%;
+  flex-shrink: 0;
+  --filters-gutter: calc(1rem + var(--s));
+}
+
+/* The badge row keeps its own sizing; the wrapper owns the width now. */
+.alumni-filters .badge-filters {
+  max-width: none;
+  padding-inline: var(--filters-gutter);
+}
+
+/* Under 700px the single card column (324px) is a narrow strip, so the expanded badges
+   wrapped into a cramped stack. Let the control break out of the page padding
+   and use the full screen width, with the trigger sitting near the left edge. (Prefixed with
+   .alumni to outrank the card-column max-widths in Alumni.css.) */
+@media screen and (max-width: 699px) {
+  .alumni div.alumni-filters {
+    --edge: 0.75rem; /* gap kept between the screen edge and the control */
+    --filters-gutter: 0.25rem;
+    max-width: none;
+    width: calc(100% + 2 * (var(--alumni-padding) - var(--edge)));
+    margin-inline: calc(-1 * (var(--alumni-padding) - var(--edge)));
+  }
+
+  /* Keep the row clear of the fixed "?" help tab on the right edge (its width is set on .alumni). */
+  .alumni div.alumni-filters .badge-filters {
+    padding-right: calc(var(--filters-gutter) + var(--alumni-info-width));
+  }
+}
+
+/* Dims the page behind the open filters and, more importantly, swallows the pointer so
+   crossing the gap between Division and Geo doesn't hover the cards underneath. It sits
+   behind the filter controls (z-index -1 inside the wrapper's stacking context). */
+.alumni-filters__scrim {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: rgba(0, 24, 64, 0.06);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms ease;
+}
+
+.alumni-filters__scrim--shown {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Division / Geo drop down beneath the trigger, overlaying the cards instead of pushing them. */
+.filter-groups {
+  position: absolute;
+  top: calc(100% - 14px);
+  left: var(--filters-gutter);
+  right: var(--filters-gutter);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  pointer-events: none;
+}
+
+.filter-group {
+  --filter-stagger: 60ms;
+  display: flex;
+  /* top-aligned, so the label never moves when the options wrap onto a second line */
+  align-items: flex-start;
+  max-width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  /* closing: fold up bottom-first, then hide */
+  transition: opacity 200ms ease, transform 250ms ease, visibility 0s 250ms;
+  transition-delay: calc((1 - var(--g)) * var(--filter-stagger)), calc((1 - var(--g)) * var(--filter-stagger)), calc(250ms + (1 - var(--g)) * var(--filter-stagger));
+}
+
+.filter-group--shown {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  pointer-events: auto;
+  transition: opacity 250ms ease, transform 300ms ease;
+  transition-delay: calc(var(--g) * var(--filter-stagger) + 120ms);
+}
+
+.filter-group__label,
+.filter-option {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 26px;
+  padding: 0 11px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: var(--radius-control);
+  background: white;
+  color: var(--royal-blue);
+  font: inherit;
+  font-size: 0.72rem;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  transition: background-color 200ms, color 200ms;
+}
+
+.filter-group__label:hover,
+.filter-option:hover {
+  background: var(--lightest-blue);
+}
+
+.filter-group__label {
+  /* lines up with the first row of options, which sit inside 3px of padding */
+  margin-top: 3px;
+  font-weight: 600;
+}
+
+.filter-group--open .filter-group__label,
+.filter-group__label--active,
+.filter-option--selected {
+  background: var(--royal-blue);
+  color: white;
+  border-color: var(--royal-blue);
+}
+
+.filter-group--open .filter-group__label:hover,
+.filter-group__label--active:hover,
+.filter-option--selected:hover {
+  background: var(--royal-blue);
+}
+
+.filter-group__count {
+  min-width: 1rem;
+  padding: 0 4px;
+  border-radius: var(--radius-tag);
+  background: white;
+  color: var(--royal-blue);
+  font-size: 0.65rem;
+  line-height: 1rem;
+  text-align: center;
+}
+
+/* Points right when closed, the way the game pill's chevron points down. */
+.filter-group__chevron {
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg);
+  transition: transform 250ms;
+}
+
+.filter-group--open .filter-group__chevron {
+  transform: rotate(-45deg) translate(1px, 1px);
+}
+
+/* Options slide out to the right of the label. The padding (not a margin) keeps the pointer
+   inside the group while crossing from the label onto the first option. */
+.filter-group__options {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  max-width: 0;
+  max-height: 32px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(-16px);
+  padding: 3px 0;
+  /* closing: snap the cap back right away so the shrinking box can't stack its chips tall */
+  transition: max-width 350ms ease, opacity 250ms ease, transform 350ms ease, padding 350ms ease, max-height 0s;
+}
+
+.filter-group--open .filter-group__options {
+  max-width: 40rem;
+  max-height: 120px;
+  opacity: 1;
+  transform: none;
+  padding: 3px 4px 3px 8px;
+  /* opening: the box starts ~0 wide, where its chips would stack into a tall column. Hold
+     the one-line cap until the slide-out has finished, then lift it (only matters where the
+     options have to wrap, i.e. narrow screens). Lifting it sooner made the whole row jump. */
+  transition: max-width 350ms ease, opacity 250ms ease, transform 350ms ease, padding 350ms ease, max-height 150ms ease 350ms;
+}
+
+/* A selected option kept next to the trigger while the filter panel is closed. Outlined
+   rather than filled, so it reads as a different thing from the filled Filter trigger. */
+.filter-option.filter-chip {
+  margin-left: 6px;
+  border-color: var(--royal-blue);
+  background: white;
+  color: var(--royal-blue);
+  animation: filter-chip-in 250ms ease-out;
+}
+
+.filter-option.filter-chip:hover {
+  background: var(--lightest-blue);
+}
+
+/* Plain text button, deliberately quiet. */
+.filter-clear {
+  margin-left: 10px;
+  padding: 4px 2px;
+  border: none;
+  background: none;
+  color: var(--secondary-text);
+  font: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+  animation: filter-chip-in 250ms ease-out;
+}
+
+.filter-clear:hover,
+.filter-clear:focus-visible {
+  color: var(--royal-blue);
+  text-decoration: underline;
+}
+
+@keyframes filter-chip-in {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .filter-group,
+  .filter-group--shown,
+  .filter-group__options,
+  .alumni-filters__scrim,
+  .filter-clear,
+  .filter-chip {
+    transition-duration: 1ms;
+    transition-delay: 0s;
+    animation: none;
+  }
+}

@@ -1,0 +1,61 @@
+.collectable {
+  position: relative;
+}
+
+/* Icon-only round button: circles stay circles (variables.css, rule 6). Hidden until the
+   item is hovered or focused on pointer devices; always visible on touch, where there is no hover. */
+.collectable__controls {
+  position: absolute;
+  top: var(--xs);
+  right: var(--xs);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: var(--xs);
+  opacity: 0;
+  transition: opacity 120ms ease-in;
+}
+
+.collectable:hover .collectable__controls,
+.collectable:focus-within .collectable__controls,
+.collectable--collected .collectable__controls {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .collectable__controls {
+    opacity: 1;
+  }
+}
+
+.collectable__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid var(--royal-blue);
+  border-radius: 50%;
+  background: white;
+  color: var(--royal-blue);
+  cursor: pointer;
+}
+
+.collectable__btn:hover {
+  background: var(--lightest-blue);
+}
+
+.collectable--collected .collectable__btn {
+  background: var(--royal-blue);
+  color: white;
+}
+
+.collectable__notice {
+  padding: 0 var(--s);
+  border-radius: var(--radius-tag);
+  background: var(--error-3);
+  color: var(--error-1);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}

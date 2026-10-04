@@ -5,6 +5,7 @@ import { STOP_TYPES, STOP_TYPE_LETTER, STOP_TYPE_NAME } from '../../constants/st
 import { halfLabel, CREDIT_ABBR, killGain, gainTone } from '../../utils/killInsights';
 import Tooltip from '../../components/Tooltip/Tooltip';
 import PureDirtyInfo from './PureDirtyInfo';
+import Collectable from '../../components/Collectable/Collectable';
 import './KillsTable.css';
 
 const ARIA_SORT = { [SORT_KEYS.ASC]: 'ascending', [SORT_KEYS.DESC]: 'descending' };
@@ -166,8 +167,10 @@ function StopBadge({ stop }) {
   );
 }
 
-export default function KillsTable({ result }) {
-  const [sort, setSort] = useState({ key: '', direction: '' });
+// gameId / gameLabel only feed the collection descriptor. `exportMode` is the read-only copy
+// rendered on /collection: no add button, legend, or sorting, and it starts from `initialSort`.
+export default function KillsTable({ result, initialSort, exportMode = false, gameId, gameLabel }) {
+  const [sort, setSort] = useState(initialSort ?? { key: '', direction: '' });
   const stopsBySeq = {};
   result.stops.forEach((s) => { stopsBySeq[s.seq] = s; });
 
@@ -179,10 +182,21 @@ export default function KillsTable({ result }) {
     setSort({ key: direction ? key : '', direction });
   }
 
+  // The table reads only kills and stops, so that is all the snapshot keeps.
+  const descriptor = {
+    type: 'kills-table',
+    gameId,
+    params: { sort },
+    title: 'Kills table',
+    subtitle: gameLabel,
+    snapshot: { kills: result.kills, stops: result.stops },
+  };
+
   return (
-    <section className="kills-table-section">
+    <Collectable descriptor={descriptor} exportMode={exportMode}>
+    <section className={`kills-table-section${exportMode ? ' kills-table-section--export' : ''}`}>
       <h2>Kills</h2>
-      <KillsLegend />
+      {!exportMode && <KillsLegend />}
       <div className="kills-table-scroll">
         <table className="kills-table-v2">
           <thead>
@@ -191,7 +205,7 @@ export default function KillsTable({ result }) {
               <th>Start</th>
               <th>Ended</th>
               <th className="kills-table-v2__th" aria-sort={ARIA_SORT[sort.key === 'held' ? sort.direction : ''] ?? 'none'}>
-                <SortableHeader classes="" sortKey="held" sortDirection={sort.key === 'held' ? sort.direction : ''} onHeaderClick={onSort}>
+                <SortableHeader classes="" sortKey="held" sortDirection={sort.key === 'held' ? sort.direction : ''} onHeaderClick={exportMode ? undefined : onSort}>
                   Held
                 </SortableHeader>
               </th>
@@ -200,7 +214,7 @@ export default function KillsTable({ result }) {
                 aria-sort={ARIA_SORT[sort.key === 'gained' ? sort.direction : ''] ?? 'none'}
                 title="BYU's own points scored while this kill was building, from its first stop to the breaker. The opponent scores 0 in that span by definition."
               >
-                <SortableHeader classes="kills-sort--center" sortKey="gained" sortDirection={sort.key === 'gained' ? sort.direction : ''} onHeaderClick={onSort}>
+                <SortableHeader classes="kills-sort--center" sortKey="gained" sortDirection={sort.key === 'gained' ? sort.direction : ''} onHeaderClick={exportMode ? undefined : onSort}>
                   Pts gained
                 </SortableHeader>
               </th>
@@ -239,6 +253,7 @@ export default function KillsTable({ result }) {
         </table>
       </div>
     </section>
+    </Collectable>
   );
 }
 

@@ -2,14 +2,15 @@ import React, { useContext, useEffect, useState } from 'react';
 import "./Alumni.css";
 import urls from '../../constants/assetUrls';
 import AlmuniCard from './components/AlumniCard';
-import BadgeFilters, { matchesFilters } from './components/BadgeFilters';
+import AlumniFilters from './components/AlumniFilters';
+import { EMPTY_FILTERS, hasAnyFilter, matchesFilters } from '../../utils/alumniFilters';
 import { TouchPointsContext } from '../../contexts/TouchpointsContext';
 import QuestionMark from '../../components/Icons/QuestionMark';
 import XClose from '../../components/Icons/XClose';
 
 export default function AlumniRouter () {
     const [helpOpen, setHelpOpen] = useState(false);
-    const [filters, setFilters] = useState([]);
+    const [filters, setFilters] = useState(EMPTY_FILTERS);
     const [alum, setAlum] = useState(null);
     const [loadError, setLoadError] = useState(false);
     const hasTouchEnabled = useContext(TouchPointsContext);
@@ -47,9 +48,12 @@ export default function AlumniRouter () {
                     <QuestionMark height={20} width={20} />
                 </div>
             </div>
-            <BadgeFilters selected={filters} onChange={setFilters} />
+            <AlumniFilters alum={alum} selected={filters} onChange={setFilters} />
             {loadError && <div className='p-l'>Couldn't load alumni right now. Please try again later.</div>}
             {!alum && !loadError && <div className='p-l'>Loading alumni…</div>}
+            {alum && displayAlum.length === 0 && hasAnyFilter(filters) && (
+                <div className='p-l'>No alumni match these filters.</div>
+            )}
             <div className='alumni-cards flex f-wrap'>
                 {displayAlum.map((alumnus) => <AlmuniCard alum={alumnus} key={alumnus.name} />)}
             </div>

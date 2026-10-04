@@ -83,6 +83,10 @@
   transition: opacity var(--logo-fade-out-duration) var(--logo-fade-out-delay);
 }
 
+.alumni-card__photo {
+    overflow: hidden;
+}
+
 .alumni-card__image {
   height: 295px;
   display: block;

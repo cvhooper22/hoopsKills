@@ -279,3 +279,13 @@
 /* Smaller badge for the legend's exhaustive stop-type list — placed after the
    base .kills-table__stop rule above so it actually wins on equal specificity. */
 .kills-table__stop--small { width: 1rem; height: 1rem; font-size: 0.5rem; }
+
+/* Read-only copy on /collection: sort arrows still show the saved sort, but aren't clickable. */
+.kills-table-section--export {
+  width: 100%;
+  margin: 0;
+}
+
+.kills-table-section--export .sort-header {
+  pointer-events: none;
+}

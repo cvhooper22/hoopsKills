@@ -82,3 +82,18 @@ nav li:hover {
 
 .nav-wrap__edge--end::before { transform: rotate(45deg); }
 .nav-wrap__edge--start::before { transform: rotate(-135deg); }
+
+/* Count on a nav item (e.g. items in the collection). Not tappable on its own, so square. */
+.nav__badge {
+  display: inline-block;
+  min-width: 1.1rem;
+  margin-left: var(--xs);
+  padding: 0 var(--xs);
+  border-radius: var(--radius-tag);
+  background: var(--royal-blue);
+  color: white;
+  font-size: 0.7rem;
+  line-height: 1.1rem;
+  text-align: center;
+  vertical-align: middle;
+}

@@ -3,6 +3,7 @@ import Tooltip from '../../components/Tooltip/Tooltip';
 import PureDirtyInfo from './PureDirtyInfo';
 import { PotentialKillDefinition } from './killsDefinitions';
 import { avgKillGain } from '../../utils/killInsights';
+import Collectable from '../../components/Collectable/Collectable';
 import './KillsHeader.css';
 
 // Header for a single game's kills page: matchup, headline stats as the same
@@ -14,6 +15,11 @@ const BYU = 'BYU';
 function formatDate(iso) {
   const [y, m, d] = iso.split('-').map(Number);
   return new Date(y, m - 1, d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+// "BYU vs Utah · Feb 3, 2026", the caption a collected item carries.
+export function gameLabel(game) {
+  return `${game.home} vs ${game.away} · ${formatDate(game.date)}`;
 }
 
 function periodLabel(period) {
@@ -51,15 +57,21 @@ function pct(n) {
   return n === null ? '–' : Math.round(n * 100);
 }
 
-function KpiTile({ label, value }) {
+// The snapshot is the FlipPad's own props, so /collection renders it with no other context.
+function KpiTile({ label, value, gameId, gameLabel }) {
+  const pad = { label, value, condensed: true };
+  const descriptor = { type: 'kpi-flip', gameId, params: { label }, title: label, subtitle: gameLabel, snapshot: pad };
   return (
     <div className="kills-kpi">
-      <FlipPad condensed label={label} value={value} />
+      <Collectable descriptor={descriptor}>
+        <FlipPad {...pad} />
+      </Collectable>
     </div>
   );
 }
 
-export default function KillsHeader({ game, result }) {
+export default function KillsHeader({ game, result, gameId }) {
+  const label = gameLabel(game);
   const { kills, potentialKills, completion, stops } = result;
   const rows = byPeriod(result);
   const sum = (key) => rows.reduce((n, r) => n + r[key], 0);
@@ -78,11 +90,11 @@ export default function KillsHeader({ game, result }) {
       </h1>
 
       <div className="kills-kpis">
-        <KpiTile label="Kills" value={String(kills.length)} />
-        <KpiTile label="Potential kills" value={String(potentialKills.length)} />
-        <KpiTile label="Completion" value={`${pct(completion)}%`} />
-        <KpiTile label="Stops" value={String(stops.length)} />
-        <KpiTile label="Efficiency" value={efficiency === null ? '–' : efficiency.toFixed(1)} />
+        <KpiTile gameId={gameId} gameLabel={label} label="Kills" value={String(kills.length)} />
+        <KpiTile gameId={gameId} gameLabel={label} label="Potential kills" value={String(potentialKills.length)} />
+        <KpiTile gameId={gameId} gameLabel={label} label="Completion" value={`${pct(completion)}%`} />
+        <KpiTile gameId={gameId} gameLabel={label} label="Stops" value={String(stops.length)} />
+        <KpiTile gameId={gameId} gameLabel={label} label="Efficiency" value={efficiency === null ? '–' : efficiency.toFixed(1)} />
       </div>
 
       <table className="kills-half-table">
