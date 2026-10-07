@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { fetchAlum, saveAlum } from './adminApi';
-import CombinedRecentGames from './CombinedRecentGames';
+import CombinedRecentGames, { flattenGames } from './CombinedRecentGames';
+import TopGamesPostSection from './TopGamesPost';
 import './RecentGamesAdmin.css';
 
 // Hidden page at /admin/recent-games, behind the password gate. The alumni list comes
@@ -111,6 +112,7 @@ export default function RecentGamesAdmin({ initialAlum: alumSeed }) {
   const resultsRef = useRef(results);
   resultsRef.current = results;
 
+  const alumByName = useMemo(() => Object.fromEntries(alumSeed.map((a) => [a.name, a])), [alumSeed]);
   const teams = useMemo(() => Object.fromEntries(alumSeed.map((a) => [a.name, a.team])), [alumSeed]);
 
   // Saved results from the last "Run all", if any. In dev a missing file falls back to
@@ -241,7 +243,8 @@ export default function RecentGamesAdmin({ initialAlum: alumSeed }) {
         {saveMsg && <span className="recent-games__saved">{saveMsg}</span>}
         {publishMsg && <span className={publishMsg.startsWith('Not') ? 'recent-games__note--error' : 'recent-games__saved'}>{publishMsg}</span>}
       </div>
-      <CombinedRecentGames results={results} teams={teams} generatedAt={generatedAt} />
+      <CombinedRecentGames results={results} teams={teams} alumByName={alumByName} generatedAt={generatedAt} />
+      <TopGamesPostSection rows={flattenGames(results, teams, alumByName)} alumni={alumSeed} />
       <p className="recent-games__hint">
         Ranked by Hollinger Game Score (BBR&rsquo;s own where published, otherwise computed from the box line).
         Runs on demand and stores nothing. FIBA 3x3: paste that event&rsquo;s World Tour <em>team</em> page

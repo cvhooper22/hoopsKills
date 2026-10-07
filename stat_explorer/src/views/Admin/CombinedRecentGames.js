@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react';
+import { leagueLabel } from './TopGamesPost';
 
 // Every alum's recent games in one table: top 5 by Game Score first, expandable to
 // all, every column sortable. Rows are flattened from the per-alum results the
@@ -27,6 +28,7 @@ const COLUMNS = [
   { key: 'player', label: 'Player', left: true, sort: (r) => r.player.toLowerCase(), cell: (r) => <><strong>{r.player}</strong><span className="recent-games__team"> {r.team}</span></> },
   { key: 'gameScore', label: 'GmSc', numeric: true, strong: true, sort: (r) => r.gameScore,
     cell: (r) => (r.gameScore == null ? '–' : <span title={r.gameScoreRaw != null ? `3x3: raw ${r.gameScoreRaw} × ${r.gameScoreScale}` : undefined}>{r.gameScore.toFixed(1)}{r.gameScoreRaw != null ? '*' : ''}</span>) },
+  { key: 'league', label: 'League', left: true, sort: (r) => r.league.toLowerCase(), cell: (r) => r.league },
   { key: 'date', label: 'Date', sort: (r) => r.date, cell: (r) => usDate(r.date) },
   { key: 'opp', label: 'Opp', left: true, sort: (r) => (r.opp || '').toLowerCase(), cell: (r) => `${r.home === false ? '@ ' : ''}${r.opp || ''}` },
   { key: 'result', label: 'Result', left: true, sort: (r) => r.result || '', cell: (r) => r.result },
@@ -42,11 +44,11 @@ const COLUMNS = [
   { key: 'min', label: 'MIN', numeric: true, sort: (r) => leadingNumber(r.min), cell: (r) => r.min },
 ];
 
-export function flattenGames(results, teams) {
+export function flattenGames(results, teams, alumByName = {}) {
   const rows = [];
   Object.entries(results).forEach(([player, entry]) => {
     (entry && entry.games ? entry.games : []).forEach((g) => {
-      rows.push({ ...g, player, team: teams[player] || '', source: entry.source });
+      rows.push({ ...g, player, team: teams[player] || '', league: leagueLabel(g, alumByName[player]), source: entry.source });
     });
   });
   return rows;
@@ -62,11 +64,11 @@ function compare(a, b, dir) {
   return 0;
 }
 
-export default function CombinedRecentGames({ results, teams, generatedAt }) {
+export default function CombinedRecentGames({ results, teams, alumByName, generatedAt }) {
   const [sort, setSort] = useState({ key: 'gameScore', dir: -1 });
   const [expanded, setExpanded] = useState(false);
 
-  const rows = useMemo(() => flattenGames(results, teams), [results, teams]);
+  const rows = useMemo(() => flattenGames(results, teams, alumByName), [results, teams, alumByName]);
   const sorted = useMemo(() => {
     const col = COLUMNS.find((c) => c.key === sort.key);
     return [...rows].sort((a, b) => compare(col.sort(a), col.sort(b), sort.dir) || compare(b.gameScore, a.gameScore, 1));
@@ -84,7 +86,7 @@ export default function CombinedRecentGames({ results, teams, generatedAt }) {
         <span className="recent-games__note">
           {rows.length} games from {new Set(rows.map((r) => r.player)).size} alumni
           {generatedAt ? ` · saved ${new Date(generatedAt).toLocaleString()}` : ''}
-          {' · * = 3x3, scaled'}
+          {rows.some((r) => r.gameScoreRaw != null) ? ' · * = 3x3, scaled' : ''}
         </span>
         {rows.length > TOP && (
           <button type="button" onClick={() => setExpanded((e) => !e)}>{expanded ? `Show top ${TOP}` : `Show all ${rows.length}`}</button>
