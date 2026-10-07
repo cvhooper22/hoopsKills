@@ -1,0 +1,7 @@
+{
+  "_comment": "Per seasonYear (the year the season started): the last game BEFORE the conference tournament and the last game BEFORE the NCAA/other postseason. Games after the first marker are conf_tourney, after the second are postseason. Markers are game ids, not dates, since the dates shift each year. See ../../futureWork/season-kills-aggregation.md.",
+  "2025": {
+    "confTourneyStartsAfter": "2026-03-07-texas-tech-at-byu",
+    "postseasonStartsAfter": "2026-03-12-byu-at-houston"
+  }
+}

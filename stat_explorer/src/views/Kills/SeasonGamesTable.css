@@ -1,0 +1,127 @@
+.season-table-section { margin: 2rem 0; text-align: left; }
+
+.season-table-section__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.season-table-section__head h2 { margin: 0; }
+
+.season-table-section__more {
+  min-height: 2rem;
+  padding: 0 0.85rem;
+  border: 1px solid var(--gray2);
+  border-radius: var(--radius-control);
+  background: var(--app-bg);
+  color: var(--almostBlack);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.season-table-section__more:hover { border-color: var(--royal-blue); }
+
+/* The scroll container is the sticky column's reference, so it must be the thing that scrolls. */
+.season-table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: var(--app-bg);
+}
+
+.season-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.season-table th,
+.season-table td {
+  padding: 0.55rem 0.6rem;
+  background: var(--app-bg);
+  border-bottom: 1px solid var(--gray1);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.season-table thead th {
+  position: sticky;
+  top: 0;
+  color: var(--secondary-text);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.season-table__sort { display: inline-block; cursor: pointer; }
+
+/* Sticky first column: opponent, date and result stay put while the numbers scroll. */
+.season-table .season-table__opp,
+.season-table .season-table__opp-head {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  min-width: 7.5rem;
+  max-width: 9rem;
+  text-align: left;
+  box-shadow: 1px 0 0 var(--gray1);
+}
+
+.season-table thead .season-table__opp-head { z-index: 2; }
+
+.season-table__row { cursor: pointer; }
+.season-table__row:hover td,
+.season-table__row:hover .season-table__opp { background: var(--lightest-blue); }
+
+/* A game after the regular season carries the app's left indicator rule. */
+.season-table__row--post .season-table__opp { box-shadow: inset var(--border-indicator-width) 0 0 var(--royal-blue), 1px 0 0 var(--gray1); }
+
+.season-table__total th,
+.season-table__total td {
+  background: var(--lightest-blue);
+  font-weight: 700;
+}
+
+.season-table__total small { display: block; color: var(--secondary-text); font-weight: 500; }
+
+.season-table__link { display: block; color: inherit; text-decoration: none; }
+
+.season-table__opp-line { display: flex; align-items: center; gap: 0.35rem; font-weight: 700; }
+
+.season-table__loc {
+  min-width: 1.1rem;
+  color: var(--secondary-text);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.season-table__logo { width: 1.1rem; height: 1.1rem; object-fit: contain; flex: none; }
+
+.season-table__opp-name { overflow: hidden; text-overflow: ellipsis; }
+
+.season-table__sub {
+  display: block;
+  margin-top: 0.1rem;
+  color: var(--secondary-text);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* W / L is a letter as well as a colour, so it doesn't rely on colour alone. */
+.season-table__wl { font-weight: 800; }
+.season-table__wl--w { color: var(--success-1); }
+.season-table__wl--l { color: var(--error-1); }
+
+.season-table__tone--pos { color: var(--success-1); font-weight: 700; }
+.season-table__tone--neg { color: var(--error-1); font-weight: 700; }
+
+.season-table__empty { padding: 1.5rem; color: var(--secondary-text); text-align: center; }
+
+/* Tap target: rows are at least 44px tall on touch screens. */
+@media (max-width: 900px) {
+  .season-table th,
+  .season-table td { padding-left: 0.5rem; padding-right: 0.5rem; }
+  .season-table tbody tr { height: 2.75rem; }
+}

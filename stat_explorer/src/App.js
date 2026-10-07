@@ -10,6 +10,7 @@ import GameLineups from './views/Lineups/components/GameLineups';
 import SeasonLineups from "./views/Lineups/components/SeasonLineups";
 import GameClutch from './views/Clutch/components/GameClutch';
 import Kills from "./views/Kills/Kills";
+import KillsSeason from "./views/Kills/KillsSeason";
 import KillsRouter from "./views/Kills/KillsRouter";
 import LatestGameRedirect from "./components/GameSwitcher/LatestGameRedirect";
 import Home from "./views/Home/Home";
@@ -77,6 +78,7 @@ function AppContent() {
             </Route>
             <Route path="kills" element={<KillsRouter />}>
               <Route index element={<LatestGameRedirect basePath="kills" />} />
+              <Route path="season" element={<KillsSeason />} />
               <Route path=":name" element={<Kills />} />
             </Route>
             <Route path="alumni" element={<AlumniRouter />} ></Route>

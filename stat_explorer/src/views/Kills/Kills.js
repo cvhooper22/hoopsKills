@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import YBallLoader from '../../components/Loaders/YBballLoader';
 import { detectKills } from '../../utils/kills';
 import urls from '../../constants/assetUrls';
+import KillsSubnav from './KillsSubnav';
 import KillsHeader, { gameLabel } from './KillsHeader';
 import KillsTable from './KillsTable';
 import StreaksTable from './StreaksTable';
@@ -58,6 +59,7 @@ export default function Kills() {
 
   return (
     <div className="kills">
+      <KillsSubnav active="game" />
       <KillsHeader game={game} result={result} gameId={gameId} />
 
       <KillsTable result={result} gameId={gameId} gameLabel={gameLabel(game)} />

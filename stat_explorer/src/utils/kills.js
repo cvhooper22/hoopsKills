@@ -1,8 +1,14 @@
 // Stops, streaks and kills from normalized plays. Rules: /kills-rules.md.
-// Keep in sync with dataAggregators/derivations/kills.js (same logic, CommonJS export).
+// This file is the single source of truth: dataAggregators/derivations/kills.js re-exports it
+// (Node can require() an ES module), so the season aggregation and the app never disagree.
 //
 // detectKills(plays, defenseSide) -> { stops, streaks, kills, potentialKills, completion }
 // `plays` is the array from ingest/tools/export-game-plays.js, ordered by sequence_number.
+
+// Bump whenever a change to the rules below would change a game's kills (stop definitions, dirty
+// rules, thresholds, kill size). Per-game summaries are stamped with it, and the season
+// aggregator refuses to mix versions.
+export const KILLS_RULES_VERSION = 1;
 
 const KILL_SIZE = 3;
 const CLUTCH_SECONDS = 300;

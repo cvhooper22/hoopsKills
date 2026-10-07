@@ -1,0 +1,27 @@
+.kills-subnav {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  margin: 0.5rem 0 0;
+}
+
+.kills-subnav__tab {
+  min-height: 2rem;
+  padding: 0 1rem;
+  border: 1px solid var(--gray2);
+  border-radius: var(--radius-control);
+  background: var(--app-bg);
+  color: var(--almostBlack);
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 2rem;
+  text-decoration: none;
+}
+
+.kills-subnav__tab:hover { border-color: var(--royal-blue); }
+
+.kills-subnav__tab--active {
+  border-color: var(--royal-blue);
+  background: var(--royal-blue);
+  color: #fff;
+}

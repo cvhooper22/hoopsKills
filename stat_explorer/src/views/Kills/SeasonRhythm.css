@@ -1,0 +1,47 @@
+.season-streak .kill-duration-bar { grid-template-columns: 4.5rem 1fr 2.5rem; }
+
+.season-when {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.35rem;
+  height: 9rem;
+  padding-top: 1rem;
+}
+
+.season-when__col {
+  position: relative;
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  min-width: 0;
+}
+
+.season-when__bar {
+  display: block;
+  width: 100%;
+  min-height: 2px;
+  background: var(--royal-blue);
+  border-radius: var(--radius-card);
+}
+
+.season-when__count { margin-bottom: 0.15rem; font-size: 0.78rem; font-weight: 700; }
+
+.season-when__label {
+  margin-top: 0.3rem;
+  color: var(--secondary-text);
+  font-size: 0.68rem;
+  white-space: nowrap;
+}
+
+.season-rhythm__more {
+  margin-top: 0.6rem;
+  border: none;
+  background: none;
+  color: var(--royal-blue);
+  font-size: 0.85rem;
+  text-decoration: underline;
+  cursor: pointer;
+}

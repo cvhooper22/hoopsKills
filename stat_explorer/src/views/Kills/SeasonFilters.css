@@ -1,0 +1,71 @@
+.season-filters { margin: 0 0 1rem; }
+
+.season-filters__toggle {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2rem;
+  padding: 0 0.9rem;
+  border: 1px solid var(--gray2);
+  border-radius: var(--radius-control);
+  background: var(--app-bg);
+  color: var(--almostBlack);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.season-filters__count {
+  min-width: 1.1rem;
+  padding: 0 0.3rem;
+  border-radius: var(--radius-control);
+  background: var(--royal-blue);
+  color: #fff;
+  font-size: 0.72rem;
+  line-height: 1.1rem;
+  text-align: center;
+}
+
+.season-filters__panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.25rem;
+}
+
+.season-filters__group { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+.season-chip {
+  min-height: 2rem;
+  padding: 0 0.85rem;
+  border: 1px solid var(--gray2);
+  border-radius: var(--radius-control);
+  background: var(--app-bg);
+  color: var(--almostBlack);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.season-chip:hover { border-color: var(--royal-blue); }
+
+.season-chip--active {
+  border-color: var(--royal-blue);
+  background: var(--royal-blue);
+  color: #fff;
+}
+
+.season-filters__clear {
+  border: none;
+  background: none;
+  color: var(--secondary-text);
+  font-size: 0.85rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Mobile: the filters collapse behind one "Filters" button so the KPIs and table stay near the top. */
+@media (max-width: 900px) {
+  .season-filters__toggle { display: inline-flex; }
+  .season-filters__panel { display: none; margin-top: 0.6rem; }
+  .season-filters__panel--open { display: flex; }
+}

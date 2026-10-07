@@ -1,0 +1,51 @@
+.season-kills__header { padding-bottom: 1rem; }
+
+.season-kills__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.season-kills__view { display: flex; gap: 0.4rem; }
+
+.season-kills__select {
+  min-height: 2rem;
+  padding: 0 0.75rem;
+  border: 1px solid var(--gray2);
+  border-radius: var(--radius-control);
+  background: var(--app-bg);
+  font-size: 0.85rem;
+}
+
+.season-kills .season-filters { display: flex; flex-direction: column; align-items: center; }
+.season-kills .season-filters__panel { justify-content: center; }
+
+.season-kills__empty { padding: 2rem 0; color: var(--secondary-text); text-align: center; }
+
+.season-streak-note { margin: -0.5rem 0 1.25rem; text-align: center; color: var(--secondary-text); font-size: 0.9rem; }
+.season-streak-note a { color: var(--royal-blue); }
+
+/* Desktop shows every tile, so the toggle only exists on a phone. */
+.season-kills__more-stats { display: none; }
+
+/* Two tiles across on a phone, so Kills and Completion are what shows before any scrolling. */
+@media (max-width: 900px) {
+  .season-kills__kpis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin-bottom: 0.75rem; }
+  .season-kills__kpis .kills-kpi { max-width: none; }
+  .season-kills__kpis:not(.season-kills__kpis--all) .kills-kpi--extra { display: none; }
+  .season-kills__more-stats {
+    display: block;
+    margin: 0 auto 1.25rem;
+    min-height: 2rem;
+    padding: 0 1rem;
+    border: 1px solid var(--gray2);
+    border-radius: var(--radius-control);
+    background: var(--app-bg);
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+}
+

@@ -2,12 +2,12 @@ import { useMemo } from 'react';
 import { killGaps, stopMix, creditedTable } from '../../utils/killInsights';
 import './RhythmMix.css';
 
-const MIX_COLORS = {
+export const MIX_COLORS = {
   rebound: '#aebfd4', turnover: 'var(--royal-blue)', steal: 'var(--blue-stop-3)',
   block: 'var(--navy-blue)', charge: 'var(--almostBlack)', tie_up: 'var(--gray4)',
 };
 
-function clockFmt(seconds) {
+export function clockFmt(seconds) {
   const s = Math.round(seconds);
   return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
 }
