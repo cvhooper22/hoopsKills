@@ -1,0 +1,149 @@
+:root {
+  /* How far below the top of the scroller (.kills) the sticky header sits: just under the game pill. */
+  --season-sticky-top: 56px;
+  /* .kills' desktop top padding (Kills.css). Sticky offsets are measured inside that padding, so
+     they have to subtract it to be measured from the scroller's edge. */
+  --kills-top-pad: 80px;
+}
+
+.season-table-section { margin: 2rem 0; text-align: left; }
+
+.season-table-section__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.season-table-section__head h2 { margin: 0; }
+
+.season-table-section__more {
+  min-height: 2rem;
+  padding: 0 0.85rem;
+  border: 1px solid var(--gray2);
+  border-radius: var(--radius-control);
+  background: var(--app-bg);
+  color: var(--almostBlack);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.season-table-section__more:hover { border-color: var(--royal-blue); }
+
+/* Matches the other tables (.kills-table-v2, Lineups, Clutch): blue header, white rows with a
+   light-blue zebra. The page scrolls inside .kills, so on desktop the container lets the header
+   stick to it (an overflow container would capture the sticky); the header sits snug under the
+   floating game pill (see .season-kills__scrim). */
+.season-table-scroll {
+  border-radius: 2px;
+  box-shadow: 0 0.125rem 0.5rem rgb(0 0 0 / 12%);
+}
+
+.season-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.season-table th,
+.season-table td {
+  padding: 0.55rem 0.6rem;
+  background: var(--app-bg);
+  border-bottom: 1px solid var(--gray1);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.season-table thead th {
+  position: sticky;
+  top: calc(var(--season-sticky-top) - var(--kills-top-pad));
+  z-index: 3;
+  padding: 0;
+  background: var(--blue-stop-3);
+  color: white;
+  font-weight: 600;
+  border-bottom: none;
+}
+
+.season-table thead .season-table__sort,
+.season-table thead .season-table__opp-head { padding: 0.5rem 0.6rem; }
+
+.season-table__sort { display: block; cursor: pointer; }
+
+/* Sticky first column: opponent, date and result stay put while the numbers scroll. */
+.season-table .season-table__opp,
+.season-table .season-table__opp-head {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  min-width: 7.5rem;
+  max-width: 9rem;
+  text-align: left;
+  box-shadow: 1px 0 0 var(--gray1);
+}
+
+.season-table thead .season-table__opp-head { z-index: 4; box-shadow: none; }
+
+.season-table__row { cursor: pointer; }
+.season-table__row:nth-child(even) td,
+.season-table__row:nth-child(even) .season-table__opp { background: var(--lightest-blue); }
+.season-table__row:hover td,
+.season-table__row:hover .season-table__opp { background: var(--baby-blue); }
+
+/* A game after the regular season carries the app's left indicator rule. */
+.season-table__row--post .season-table__opp { box-shadow: inset var(--border-indicator-width) 0 0 var(--royal-blue), 1px 0 0 var(--gray1); }
+
+.season-table__total th,
+.season-table__total td {
+  background: var(--app-bg);
+  border-bottom: 2px solid var(--blue-stop-3);
+  font-weight: 700;
+}
+
+.season-table__total small { display: block; color: var(--secondary-text); font-weight: 500; }
+
+.season-table__link { display: block; color: inherit; text-decoration: none; }
+
+.season-table__opp-line { display: flex; align-items: center; gap: 0.35rem; font-weight: 700; }
+
+.season-table__loc {
+  min-width: 1.1rem;
+  color: var(--secondary-text);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.season-table__logo { width: 1.1rem; height: 1.1rem; object-fit: contain; flex: none; }
+
+.season-table__opp-name { overflow: hidden; text-overflow: ellipsis; }
+
+.season-table__sub {
+  display: block;
+  margin-top: 0.1rem;
+  color: var(--secondary-text);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* W / L is a letter as well as a colour, so it doesn't rely on colour alone. */
+.season-table__wl { font-weight: 800; }
+.season-table__wl--w { color: var(--success-1); }
+.season-table__wl--l { color: var(--error-1); }
+
+.season-table__tone--pos { color: var(--success-1); font-weight: 700; }
+.season-table__tone--neg { color: var(--error-1); font-weight: 700; }
+
+.season-table__empty { padding: 1.5rem; color: var(--secondary-text); text-align: center; }
+
+/* Tap target: rows are at least 44px tall on touch screens. */
+@media (max-width: 900px) {
+  .season-table th,
+  .season-table td { padding-left: 0.5rem; padding-right: 0.5rem; }
+  .season-table tbody tr { height: 2.75rem; }
+  /* Narrow screens scroll sideways, and a horizontal scroller can't also stick to the page, so
+     the table scrolls inside its own box and the header sticks to that. */
+  .season-table-scroll { overflow: auto; max-height: calc(100vh - 8rem); -webkit-overflow-scrolling: touch; }
+  .season-table thead th { top: 0; }
+}

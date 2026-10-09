@@ -1,0 +1,37 @@
+.season-records { max-width: 70rem; margin: 0 auto 1.75rem; }
+.season-records h2 { margin: 0 0 0.6rem; }
+
+.season-records__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.season-records__item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 3.25rem;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--gray1);
+  border-left: var(--border-indicator-width) solid var(--royal-blue);
+  border-radius: 2px;
+  background: var(--app-bg);
+  box-shadow: 0 0.125rem 0.5rem rgb(0 0 0 / 8%);
+  color: var(--almostBlack);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.season-records__item:hover { background: var(--lightest-blue); }
+
+.season-records__wl { flex: none; color: var(--royal-blue); font-size: 1.35rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.season-records__text { flex: 1; font-size: 0.9rem; }
+.season-records__text::before { content: 'when they '; color: var(--secondary-text); }
+.season-records__copy { flex: none; color: var(--secondary-text); font-size: 0.75rem; }
+.season-records__rest { display: block; margin-top: 0.1rem; color: var(--secondary-text); font-size: 0.75rem; }

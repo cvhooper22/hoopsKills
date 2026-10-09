@@ -52,7 +52,7 @@ const SIZES = {
 
 export default function FlipPad({
   label, value, unit, delta, up = true,
-  board = true, box = 'sky', cards = 'white', tone, condensed = false, seed,
+  board = true, box = 'sky', cards = 'white', tone, condensed = false, seed, reserveFoot = false,
 }) {
   const { full, narrow: narrowW, inset, scale } = SIZES[condensed ? 'condensed' : 'regular'];
   // tone tints the page digits: 'pos' | 'neg' | 'auto' (green for a leading +, red for a leading -)
@@ -93,11 +93,14 @@ export default function FlipPad({
         </div>
       </div>
 
-      {(unit || delta) && (
+      {(unit || delta) ? (
         <div className="flip-pad__foot">
           <span>{unit}</span>
           <b className={up ? 'is-up' : 'is-down'}>{delta}</b>
         </div>
+      ) : reserveFoot && (
+        // an empty footer, so this pad matches the height of its neighbours that have one
+        <div className="flip-pad__foot flip-pad__foot--empty" aria-hidden="true"><span>&nbsp;</span></div>
       )}
     </div>
   );

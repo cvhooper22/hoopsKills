@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 import urls from '../../constants/assetUrls';
 import './GameSwitcher.css';
 
@@ -68,6 +68,7 @@ export default function GameSwitcher({ basePath }) {
   const [open, setOpen] = useState(false);
   const [pickedSeason, setPickedSeason] = useState(null);
   const location = useLocation();
+  const [searchParams] = useSearchParams();
   const rootRef = useRef(null);
 
   useEffect(() => {
@@ -95,10 +96,16 @@ export default function GameSwitcher({ basePath }) {
 
   const seasons = [...groupBySeason(games).entries()];
   const currentGame = games.find((g) => location.pathname === `/${basePath}/${g.gameId}`);
-  const currentKey = currentGame ? (currentGame.seasonYear ?? 'unknown') : seasons[0]?.[0];
+  // Kills has a "Full Season" entry at the top of each season's list, living at /kills/season.
+  const hasSeasonPage = basePath === 'kills';
+  const onSeasonPage = hasSeasonPage && location.pathname === `/${basePath}/season`;
+  const seasonParam = Number(searchParams.get('season')) || null;
+  const currentKey = currentGame ? (currentGame.seasonYear ?? 'unknown')
+    : (onSeasonPage && seasons.some(([k]) => k === seasonParam) ? seasonParam : seasons[0]?.[0]);
   const activeKey = pickedSeason ?? currentKey;
   const activeGames = seasons.find(([k]) => k === activeKey)?.[1] ?? [];
   const currentInfo = currentGame ? formatGame(currentGame) : null;
+  const fullSeasonTo = (k) => `/${basePath}/season?season=${k}`;
   const labelFor = (k) => seasonLabel(k === 'unknown' ? null : k);
 
   function toggle() {
@@ -113,7 +120,7 @@ export default function GameSwitcher({ basePath }) {
           <span className="game-pill__season">{labelFor(currentKey)}</span>
           <span className="game-pill__divider" />
           <span className="game-pill__game">
-            {currentInfo ? <OpponentLabel info={currentInfo} /> : 'Select a game'}
+            {currentInfo ? <OpponentLabel info={currentInfo} /> : (onSeasonPage ? 'Full Season' : 'Select a game')}
           </span>
           {currentInfo?.scoreText && (
             <span className="game-pill__final">
@@ -141,6 +148,15 @@ export default function GameSwitcher({ basePath }) {
       </div>
       <div className="game-pill__list" aria-hidden={!open}>
         <div className="game-pill__list-inner">
+          {hasSeasonPage && activeKey !== 'unknown' && (
+            <Link
+              to={fullSeasonTo(activeKey)}
+              tabIndex={open ? 0 : -1}
+              className={`game-pill__game-row game-pill__game-row--season${onSeasonPage && activeKey === currentKey ? ' game-pill__game-row--selected' : ''}`}
+            >
+              Full Season {activeKey}
+            </Link>
+          )}
           {activeGames.map((g) => {
             const to = `/${basePath}/${g.gameId}`;
             const isCurrent = location.pathname === to;

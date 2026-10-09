@@ -1,5 +1,5 @@
 import { lazy, Suspense, useMemo } from "react";
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate, useLocation } from "react-router-dom";
 import "./App.css";
 import Header from './components/Layout/Header';
 import Nav from "./components/Layout/Nav";
@@ -10,6 +10,7 @@ import GameLineups from './views/Lineups/components/GameLineups';
 import SeasonLineups from "./views/Lineups/components/SeasonLineups";
 import GameClutch from './views/Clutch/components/GameClutch';
 import Kills from "./views/Kills/Kills";
+import KillsSeason from "./views/Kills/KillsSeason";
 import KillsRouter from "./views/Kills/KillsRouter";
 import LatestGameRedirect from "./components/GameSwitcher/LatestGameRedirect";
 import Home from "./views/Home/Home";
@@ -76,7 +77,10 @@ function AppContent() {
               <Route path=":name" element={<GameClutch />} />
             </Route>
             <Route path="kills" element={<KillsRouter />}>
-              <Route index element={<LatestGameRedirect basePath="kills" />} />
+              <Route index element={<Navigate replace to="/kills/season" />} />
+              <Route path="season" element={<KillsSeason />} />
+              <Route path="seasons" element={<Navigate replace to="/kills/season" />} />
+              <Route path="latest" element={<LatestGameRedirect basePath="kills" />} />
               <Route path=":name" element={<Kills />} />
             </Route>
             <Route path="alumni" element={<AlumniRouter />} ></Route>

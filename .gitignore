@@ -7,3 +7,10 @@ ivanti.main.css
 /production
 *.woff
 *.woff2
+
+# Playwright artifacts
+.playwright-mcp/
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/

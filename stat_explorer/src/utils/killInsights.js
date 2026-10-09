@@ -1,4 +1,4 @@
-import { STOP_TYPES, STOP_TYPE_LABEL } from '../constants/stopTypes';
+import { STOP_TYPES, STOP_TYPE_LABEL } from '../constants/stopTypes.js';
 
 // Derived views over detectKills() output, for the "What broke the streaks" and
 // "Rhythm and mix" sections of the Kills page. Nothing here changes the rules in

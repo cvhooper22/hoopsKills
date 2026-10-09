@@ -1,0 +1,81 @@
+.season-kills__header { padding-bottom: 1rem; }
+
+.season-kills__controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.season-kills__kpi-controls { display: flex; justify-content: flex-end; max-width: 70rem; margin: -0.9rem auto 1.25rem; }
+
+.season-kills__select {
+  min-height: 2rem;
+  padding: 0 0.75rem;
+  border: 1px solid var(--gray2);
+  border-radius: var(--radius-control);
+  background: var(--app-bg);
+  font-size: 0.85rem;
+}
+
+
+.season-kills__empty { padding: 2rem 0; color: var(--secondary-text); text-align: center; }
+
+.season-kills__streak-link { color: inherit; text-decoration: underline; }
+.season-kills__streak-games { text-decoration: underline dotted; cursor: help; }
+.season-kills__streak-list { margin: 0; padding: 0; list-style: none; }
+/* a footnote never wraps; a long one would make its tile taller than the others */
+.season-kills__kpis .flip-pad__foot span { white-space: nowrap; }
+
+/* Desktop shows every tile, so the toggle only exists on a phone. */
+.season-kills__more-stats { display: none; }
+
+/* Two tiles across on a phone, so Kills and Completion are what shows before any scrolling. */
+@media (max-width: 900px) {
+  .season-kills__kpis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; margin-bottom: 0.75rem; }
+  .season-kills__kpis .kills-kpi { max-width: none; }
+  .season-kills__kpis:not(.season-kills__kpis--all) .kills-kpi--extra { display: none; }
+  .season-kills__more-stats {
+    display: block;
+    margin: 0 auto 1.25rem;
+    min-height: 2rem;
+    padding: 0 1rem;
+    border: 1px solid var(--gray2);
+    border-radius: var(--radius-control);
+    background: var(--app-bg);
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+}
+
+
+/* Desktop: the game pill floats over the top of the scrolling area. This band covers the whole
+   row the pill sits in and blurs whatever scrolls up behind it, so the sticky table header reads
+   cleanly just below. It starts at the very top of the scroller, so at rest it only covers the empty pill row, and it takes no room in the layout. Same height as
+   --season-sticky-top. */
+@media (min-width: 901px) {
+  .season-kills__scrim {
+    position: sticky;
+    top: calc(-1 * var(--kills-top-pad));
+    z-index: 5;
+    height: var(--season-sticky-top);
+    margin: calc(-1 * var(--kills-top-pad)) -1rem calc(var(--kills-top-pad) - var(--season-sticky-top));
+    background: rgb(255 255 253 / 0.65);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    pointer-events: none;
+  }
+}
+@media (max-width: 900px) {
+  .season-kills__scrim { display: none; }
+}
+
+/* Footnotes under the tiles sit on the right. */
+.season-kills__kpis .flip-pad__foot { justify-content: flex-end; text-align: right; }
+
+/* Phones: leave room above the bottom bar of active filters so it never covers the last rows. */
+@media (max-width: 600px) {
+  .season-kills--filtered { padding-bottom: 4.5rem; }
+}

@@ -1,0 +1,35 @@
+.kills-flow { margin: 2rem 0; text-align: left; }
+.kills-flow h2 { margin: 0 0 0.75rem; }
+.kills-flow__zero { stroke: var(--gray3, #8f8f8f); stroke-width: 1.5; }
+
+.kills-flow__legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1rem; margin-bottom: 0.5rem; color: var(--secondary-text); font-size: 0.85rem; }
+.kills-flow__legend > span { display: inline-flex; align-items: center; gap: 0.35rem; }
+.kills-flow__legend-icon { font-size: 1rem; color: var(--royal-blue); font-variation-settings: 'FILL' 1, 'wght' 600, 'opsz' 20; }
+.kills-flow__key { display: inline-block; width: 1.3rem; height: 0; border-top: 3px solid; }
+.kills-flow__key--byu { border-color: var(--royal-blue); }
+.kills-flow__key--trail { border-color: var(--gray3, #8f8f8f); }
+.kills-flow__key--good { border-color: var(--success-2); }
+.kills-flow__key--bad { border-color: var(--error-2); }
+
+.kills-flow__chart .chart-line.kills-flow__byu { stroke: var(--royal-blue); stroke-width: 2.5; }
+.kills-flow__chart .chart-line.kills-flow__segment { stroke-width: 4; }
+.kills-flow__segment--good { stroke: var(--success-2); }
+.kills-flow__segment--bad { stroke: var(--error-2); }
+
+.kills-flow__fan { stroke-width: 1; stroke-opacity: 0.5; fill-opacity: 0.12; }
+.kills-flow__fan--good { fill: var(--success-2); stroke: var(--success-2); }
+.kills-flow__fan--bad { fill: var(--error-2); stroke: var(--error-2); }
+.kills-flow__mark { cursor: pointer; outline: none; }
+.kills-flow__tip { display: grid; gap: 0.15rem; white-space: nowrap; font-size: 0.85rem; }
+.kills-flow__tip span { color: var(--secondary-text); }
+.kills-flow__tip-gain--good { color: var(--success-1); }
+.kills-flow__tip-gain--bad { color: var(--error-1); }
+
+.kills-flow__break { stroke: var(--gray2, #c5c5c5); stroke-dasharray: 3 3; }
+
+.kills-flow__shield { font-size: 22px; font-variation-settings: 'FILL' 1, 'wght' 600, 'opsz' 20; paint-order: stroke; stroke: var(--app-bg, #fff); stroke-width: 3px; }
+.kills-flow__mark--good .kills-flow__shield { fill: var(--success-1); }
+.kills-flow__mark--bad .kills-flow__shield { fill: var(--error-1); }
+.kills-flow__shield--open { font-variation-settings: 'FILL' 0, 'wght' 600, 'opsz' 20; }
+.kills-flow__legend-icon--open { font-variation-settings: 'FILL' 0, 'wght' 600, 'opsz' 20; }
+.kills-flow .kills-flow__shield--fill { fill: var(--app-bg, #fff); }

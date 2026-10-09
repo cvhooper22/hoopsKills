@@ -1,8 +1,14 @@
 // Stops, streaks and kills from normalized plays. Rules: /kills-rules.md.
-// Keep in sync with dataAggregators/derivations/kills.js (same logic, CommonJS export).
+// This file is the single source of truth: dataAggregators/derivations/kills.js re-exports it
+// (Node can require() an ES module), so the season aggregation and the app never disagree.
 //
 // detectKills(plays, defenseSide) -> { stops, streaks, kills, potentialKills, completion }
 // `plays` is the array from ingest/tools/export-game-plays.js, ordered by sequence_number.
+
+// Bump whenever a change to the rules below would change a game's kills (stop definitions, dirty
+// rules, thresholds, kill size). Per-game summaries are stamped with it, and the season
+// aggregator refuses to mix versions.
+export const KILLS_RULES_VERSION = 1;
 
 const KILL_SIZE = 3;
 const CLUTCH_SECONDS = 300;
@@ -305,7 +311,11 @@ export function detectKills(plays, defense = 'home') {
     const leftover = s.stops.slice(streakKills.length * KILL_SIZE);
     let potential = null;
     if (leftover.length === 2) {
-      potential = { stops: leftover.map((x) => x.seq), period: leftover[0].period, dirty: leftover.some((x) => x.dirty), end: breaker };
+      potential = {
+        stops: leftover.map((x) => x.seq), period: leftover[0].period, dirty: leftover.some((x) => x.dirty), end: breaker,
+        // Like a kill's gainEnd: margin when BYU's possession after the second stop ended, and the margin at the first stop.
+        gainEnd: swingMargin(plays, leftover[1], defense, indexBySeq), startMargin: leftover[0].margin,
+      };
       potentialKills.push(potential);
     }
     kills.push(...streakKills);

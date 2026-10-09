@@ -35,6 +35,37 @@ node ingest/tools/export-games-index.js /tmp/games-index.json
 node ingest/tools/upload.js /tmp/games-index.json games/index.json
 ```
 
+### Kills summaries and the season file
+
+Season type (regular / conference tournament / postseason) comes from
+`config/season-boundaries.json`, which names the last game before each stage per `seasonYear`.
+Ingest applies it per game; after editing the markers run
+`node ingest/tools/apply-season-types.js`.
+
+```bash
+# 5. Per-game kills summary (one game, or --all for every final BYU game), then upload each
+node ingest/tools/export-game-kills.js <gameId> /tmp/kills/games/<gameId>.json
+node ingest/tools/upload.js /tmp/kills/games/<gameId>.json kills/games/<gameId>.json
+
+# 6. Games index (now with conference / neutral / season type) and the team lookup
+node ingest/tools/export-games-index.js /tmp/games-index.json
+node ingest/tools/upload.js /tmp/games-index.json games/index.json
+node ingest/tools/export-teams-meta.js /tmp/meta/teams.json     # names from config/team-labels.json
+node ingest/tools/upload.js /tmp/meta/teams.json meta/teams.json
+
+# 7. Rebuild the season file from the uploaded summaries (rebuilt from scratch every time)
+node derivations/aggregate-kills.js --season 2025 --out-dir /tmp/kills
+node ingest/tools/upload.js /tmp/kills/seasons/2025.json kills/seasons/2025.json
+node ingest/tools/upload.js /tmp/kills/seasons/index.json kills/seasons/index.json
+```
+
+`aggregate-kills.js` refuses to mix kill-rule versions (`KILLS_RULES_VERSION` in the app's
+`kills.js`; bump it when the rules change, then regenerate every game's summary). To aggregate
+summaries that are only on disk, pass `--base /tmp --index <games-index.json>`.
+The kill logic itself lives in `stat_explorer/src/utils/{kills,killsSummary,killsSeason}.js`;
+`derivations/` loads those files directly, so there is one copy. Details:
+`../futureWork/season-kills-aggregation.md`.
+
 `upload.js` sets a 5-minute cache on everything it writes, so changes (including a
 freshly-added game) can take a few minutes to show up everywhere.
 
@@ -51,8 +82,9 @@ freshly-added game) can take a few minutes to show up everywhere.
 - `ingest/espn/`, `ingest/wmt/` — per-source fetch + normalize + ingest CLIs.
 - `ingest/lib/` — shared entity resolution (teams/players/games across sources) and DB writes.
 - `ingest/tools/` — export (DB → JSON) and upload (JSON → S3) CLIs, plus dev utilities.
-- `derivations/` — stats computed from normalized plays (currently just kills; clutch and
-  lineups are still computed client-side in `stat_explorer` — see the project plan for why).
+- `derivations/` — loads the app's kills code (`kills.js` re-export, `app-modules.js`) and holds
+  `aggregate-kills.js`, the season rollup. Clutch and lineups are still computed client-side in
+  `stat_explorer` — see the project plan for why.
 - `config/`, `fixtures/` — seed data and cached raw payloads for offline dev/testing.
 
 Note: `seasonLineups.js`, `updateLineupsWithGame.js`, and `modules/` are a separate, older

@@ -4,6 +4,7 @@ import YBallLoader from '../../components/Loaders/YBballLoader';
 import { detectKills } from '../../utils/kills';
 import urls from '../../constants/assetUrls';
 import KillsHeader, { gameLabel } from './KillsHeader';
+import KillsFlow from './KillsFlow';
 import KillsTable from './KillsTable';
 import StreaksTable from './StreaksTable';
 import RhythmMix from './RhythmMix';
@@ -59,6 +60,8 @@ export default function Kills() {
   return (
     <div className="kills">
       <KillsHeader game={game} result={result} gameId={gameId} />
+
+      <KillsFlow plays={plays} result={result} game={game} />
 
       <KillsTable result={result} gameId={gameId} gameLabel={gameLabel(game)} />
       <StreaksTable result={result} />

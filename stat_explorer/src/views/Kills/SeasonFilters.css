@@ -1,0 +1,20 @@
+.season-filters__group { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
+
+.season-chip {
+  min-height: 2rem;
+  padding: 0 0.85rem;
+  border: 1px solid var(--gray2);
+  border-radius: var(--radius-control);
+  background: var(--app-bg);
+  color: var(--almostBlack);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.season-chip:hover { border-color: var(--royal-blue); }
+
+.season-chip--active {
+  border-color: var(--royal-blue);
+  background: var(--royal-blue);
+  color: #fff;
+}

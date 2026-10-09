@@ -1,4 +1,6 @@
 // Storage steps shared by every source adapter.
+const { applySeasonTypes } = require('./season-type');
+
 const PLAY_COLUMNS = [
   'play_id', 'game_id', 'sequence_number', 'source', 'source_play_id', 'source_play_ref',
   'period_number', 'period_type', 'clock_seconds_remaining', 'clock_display', 'game_seconds_elapsed', 'wallclock_utc',
@@ -36,6 +38,8 @@ async function upsertGame(client, g) {
        winner_team_id = EXCLUDED.winner_team_id, status = EXCLUDED.status, primary_source = EXCLUDED.primary_source`,
     [g.gameId, g.date, g.tipoffLocal, g.venueTz, g.seasonYear, g.homeTeamId, g.awayTeamId, g.isNeutralSite,
       g.isConferenceGame, g.venue, g.attendance, g.finalScoreHome, g.finalScoreAway, g.winnerTeamId, g.status, g.source]);
+  // Season type comes from config/season-boundaries.json, not the feed (see lib/season-type.js).
+  await applySeasonTypes(client, { gameId: g.gameId });
 }
 
 async function linkSourceGame(client, source, sourceGameId, gameId, matchedBy) {

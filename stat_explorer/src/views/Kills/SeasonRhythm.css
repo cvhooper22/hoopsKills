@@ -1,0 +1,88 @@
+.season-streak .kill-duration-bar { grid-template-columns: 4.5rem 1fr 2.5rem; }
+
+
+
+
+
+
+.season-rhythm__more {
+  margin-top: 0.6rem;
+  border: none;
+  background: none;
+  color: var(--royal-blue);
+  font-size: 0.85rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* A card that is not following the active filters. */
+.rhythm-card--stale { filter: grayscale(1); opacity: 0.55; transition: filter 200ms ease, opacity 200ms ease; }
+
+/* When kills happen: stopwatch donut with a legend beside it (below it when the card is narrow). */
+.when-donut { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1.25rem 2rem; }
+.when-donut__watch { flex: none; width: 15rem; max-width: 100%; }
+
+.when-donut__readout { fill: var(--navy-blue); font-weight: 800; font-variant-numeric: tabular-nums; }
+.when-donut__sub { fill: var(--secondary-text); font-weight: 600; }
+
+.when-donut__legend { flex: 1 1 9rem; margin: 0; padding: 0; list-style: none; display: grid; gap: 0.15rem; }
+
+.when-donut__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.25rem 0.5rem;
+  border: none;
+  border-radius: var(--radius-control);
+  background: none;
+  color: var(--almostBlack);
+  font: inherit;
+  font-size: 0.85rem;
+  text-align: left;
+  cursor: default;
+}
+
+.when-donut__item--active { background: var(--lightest-blue); }
+.when-donut__swatch { flex: none; width: 0.75rem; height: 0.75rem; border-radius: 2px; }
+.when-donut__label { flex: 1; }
+.when-donut__item strong { font-variant-numeric: tabular-nums; }
+
+/* Stop mix: donut beside its legend; a legend row can be clicked off. */
+.mix-donut { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1rem 2rem; }
+.mix-donut__chart { flex: none; width: 11rem; max-width: 100%; }
+.when-donut__item--off { opacity: 0.45; text-decoration: line-through; }
+.mix-donut .when-donut__item { cursor: pointer; }
+
+/* The card's own Per game / Totals switch, under its heading. */
+.rhythm-card__mode { display: flex; justify-content: flex-end; margin: -0.25rem 0 0.6rem; }
+
+/* A card that spans the whole grid row. */
+.rhythm-card--wide { grid-column: 1 / -1; }
+.rhythm-card--wide .kills-half-table { box-shadow: none; }
+
+/* A grid cell may be narrower than its content (a wide table scrolls inside its card instead). */
+.rhythm-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.rhythm-grid > * { min-width: 0; }
+@media (max-width: 60rem) { .rhythm-grid { grid-template-columns: minmax(0, 1fr); } }
+.rhythm-card__scroll { overflow-x: auto; }
+.rhythm-card__scroll .kills-half-table { min-width: 28rem; }
+
+/* The stream takes three quarters of the row and "When kills happen" the other quarter; stacked on narrow screens. */
+.rhythm-row { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 1fr); gap: 1rem; }
+@media (max-width: 60rem) { .rhythm-row { grid-template-columns: minmax(0, 1fr); } }
+.rhythm-row > .rhythm-card { min-width: 0; }
+
+.when-bars { display: grid; gap: 0.6rem; }
+.when-bars__group { display: grid; gap: 0.3rem; }
+.when-bars__name { margin: 0; color: var(--secondary-text); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+.when-bars .kill-duration-bar { grid-template-columns: 3.2rem 1fr 1.6rem; gap: 0.5rem; }
+.when-bars .kill-duration-bar__track { height: 0.65rem; }
+.when-bars .kill-duration-bar__label { font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+.when-bars .kill-duration-bar__value { font-size: 0.8rem; }
+
+/* "When kills happen" rows are buttons that light up their window in the stream. */
+.when-bars__row { width: 100%; padding: 0.15rem 0.25rem; margin: 0 -0.25rem; border: none; border-radius: var(--radius-control); background: none; color: inherit; font: inherit; text-align: left; cursor: default; transition: background-color 120ms ease, opacity 120ms ease; }
+.when-bars__row--active { background: var(--lightest-blue); }
+.when-bars__row--quiet { opacity: 0.55; }
+.when-bars__row:focus-visible { outline: 2px solid var(--royal-blue); outline-offset: 1px; }
