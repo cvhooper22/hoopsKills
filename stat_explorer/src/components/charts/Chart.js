@@ -8,13 +8,16 @@ const DEFAULT_MARGIN = { top: 16, right: 16, bottom: 28, left: 40 };
 
 // Responsive SVG frame. Fills its container's width, measures it, builds the x/y scales for the
 // inner plot area and shares them (plus sizes) with children through context.
+// x / y default to a unit scale so charts with no cartesian axes (Donut) can leave them out.
 // Titles, legends and tooltips are deliberately not here: the consuming component renders those
 // as ordinary HTML around the chart.
 //
 //   <Chart height={260} margin={{ left: 48 }} x={{ domain: [600, 0] }} y={{ domain: [-8, 8] }} label="...">
 //     <Band .../> <Axis orient="bottom" /> <Line .../>
 //   </Chart>
-export default function Chart({ height = 260, margin, x, y, label, description, className, children }) {
+const UNIT_SCALE = { domain: [0, 1] };
+
+export default function Chart({ height = 260, margin, x = UNIT_SCALE, y = UNIT_SCALE, label, description, className, children }) {
   const [ref, { width }] = useElementSize();
   const m = useMemo(() => ({ ...DEFAULT_MARGIN, ...margin }), [margin?.top, margin?.right, margin?.bottom, margin?.left]); // eslint-disable-line react-hooks/exhaustive-deps
   const clipId = useId();

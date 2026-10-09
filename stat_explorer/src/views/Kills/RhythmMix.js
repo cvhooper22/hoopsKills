@@ -2,9 +2,11 @@ import { useMemo } from 'react';
 import { killGaps, stopMix, creditedTable } from '../../utils/killInsights';
 import './RhythmMix.css';
 
+// One color per stop type. Neighbors in STOP_TYPES order step clearly apart in lightness and hue
+// (light gray-blue, bright blue, royal, navy, tan, gray) so adjacent slices and bar segments read.
 export const MIX_COLORS = {
-  rebound: '#aebfd4', turnover: 'var(--royal-blue)', steal: 'var(--blue-stop-3)',
-  block: 'var(--navy-blue)', charge: 'var(--almostBlack)', tie_up: 'var(--gray4)',
+  rebound: '#aebfd4', turnover: '#3b8beb', steal: 'var(--royal-blue)',
+  block: 'var(--navy-blue)', charge: '#c8ad7f', tie_up: '#7a828c',
 };
 
 export function clockFmt(seconds) {

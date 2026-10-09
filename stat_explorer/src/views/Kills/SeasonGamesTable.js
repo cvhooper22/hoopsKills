@@ -14,6 +14,12 @@ export function teamName(teams, id) {
   return String(id).replace(/-/g, ' ');
 }
 
+// Short code for a team ("PAC"), falling back to the name when the metadata has none.
+export function teamAbbrev(teams, id) {
+  const t = teams && teams[id];
+  return (t && t.abbrev) || teamName(teams, id);
+}
+
 // Hides itself quietly if the logo file is missing, like the game switcher does.
 export function TeamLogo({ teams, id }) {
   const [failed, setFailed] = useState(false);

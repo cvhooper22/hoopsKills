@@ -101,6 +101,18 @@ describe('filterRows', () => {
     expect(ids(filterRows(rows, { postseasonOnly: true, conferenceOnly: true }))).toEqual(['2026-03-11']);
   });
 
+  it('keeps only wins or only losses, and last N then counts those', () => {
+    const mixed = [
+      gameRow(summary('2025-11-01-a', { game: { result: 'W' } })),
+      gameRow(summary('2025-11-05-b', { game: { result: 'L' } })),
+      gameRow(summary('2026-01-05-c', { game: { result: 'W' } })),
+      gameRow(summary('2026-03-11-d', { game: { result: 'L' } })),
+    ];
+    expect(ids(filterRows(mixed, { result: 'W' }))).toEqual(['2025-11-01', '2026-01-05']);
+    expect(ids(filterRows(mixed, { result: 'L' }))).toEqual(['2025-11-05', '2026-03-11']);
+    expect(ids(filterRows(mixed, { result: 'W', lastN: 1 }))).toEqual(['2026-01-05']);
+  });
+
   it('applies last N after the other filters', () => {
     expect(ids(filterRows(rows, { conferenceOnly: true, lastN: 1 }))).toEqual(['2026-03-11']);
   });

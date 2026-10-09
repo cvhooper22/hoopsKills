@@ -132,3 +132,49 @@
   box-shadow: none;
   background: none;
 }
+
+/* ---------- Donut ---------- */
+.chart-donut__slice {
+  stroke: none;
+  outline: none;
+  cursor: pointer;
+  transition: opacity 150ms ease;
+}
+
+/* with one slice active, the others step back */
+.chart-donut:has(.chart-donut__slice--active) .chart-donut__slice:not(.chart-donut__slice--active) { opacity: 0.55; }
+
+.chart-donut__slice:focus-visible { stroke: var(--navy-blue, #002e52); stroke-width: 2; }
+
+.chart-donut__center { pointer-events: none; }
+
+/* ---------- Stopwatch frame ---------- */
+.stopwatch { position: relative; width: 100%; }
+.stopwatch__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 3px 5px rgb(0 0 0 / 22%)); }
+.stopwatch__face { position: absolute; }
+
+.stopwatch__case { stroke: #6f767d; stroke-width: 1.5; }
+.stopwatch__bezel { stroke: #fff; stroke-width: 2; opacity: 0.8; }
+.stopwatch__dial { fill: var(--app-bg, #fffffd); stroke: #8d949b; stroke-width: 1.5; }
+.stopwatch__metal { stroke: #6f767d; stroke-width: 1; }
+.stopwatch__ring { stroke: #aeb4ba; }
+.stopwatch__knurl { stroke: #6f767d; stroke-width: 1; opacity: 0.55; }
+.stopwatch__tick { stroke: var(--gray4, #666); stroke-width: 1; }
+.stopwatch__tick--major { stroke: var(--royal-blue, #003fa2); stroke-width: 2; }
+
+/* ---------- Bubble stream ---------- */
+.chart-bubbles__dot {
+  stroke: white;
+  stroke-width: 1;
+  fill-opacity: 0.92;
+  transition: r 100ms ease;
+}
+
+.chart-bubbles__dot--active { stroke: var(--navy-blue, #002e52); stroke-width: 1.5; fill-opacity: 1; }
+
+/* ---------- Highlight ---------- */
+.chart-highlight__fill { fill: var(--royal-blue, #003fa2); fill-opacity: 0.13; }
+.chart-highlight__edge { stroke: var(--royal-blue, #003fa2); stroke-opacity: 0.55; stroke-width: 1.5; }
+.chart-highlight__label { fill: var(--royal-blue, #003fa2); font-size: 0.72rem; font-weight: 700; }
+.chart-bubbles__dot { transition: r 100ms ease, fill-opacity 150ms ease; }
+.chart-bubbles__dot--dim { fill-opacity: 0.22; stroke-opacity: 0.4; }

@@ -9,13 +9,15 @@
    not display/height, so the page doesn't reflow. The floating game pill rides up
    into the freed space. */
 .App--top-bar-hidden .top-bar { transform: translateY(-100%); }
-.App--top-bar-hidden .game-pill { top: 12px; }
+.App--top-bar-hidden .game-pill,
+.App--top-bar-hidden .filter-pill { top: 12px; }
 .App--top-bar-hidden .alumni-info-positioner,
 .App--top-bar-hidden .alumni__help { top: 25px; }
 
 @media (prefers-reduced-motion: no-preference) {
   .top-bar { transition: transform 200ms ease; }
-  .game-pill { transition: top 200ms ease; }
+  .game-pill,
+  .filter-pill { transition: top 200ms ease; }
   .alumni-info-positioner { transition: right 200ms ease-in, top 200ms ease; }
   .alumni__help { transition: right 200ms ease-in, top 200ms ease; }
 }

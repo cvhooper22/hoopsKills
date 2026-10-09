@@ -1,0 +1,65 @@
+.ball-toggle {
+  --bt-track-w: 3rem;
+  --bt-track-h: 1.6rem;
+  --bt-knob: 1.3rem;
+  --bt-font: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ball-toggle--small {
+  --bt-track-w: 2.1rem;
+  --bt-track-h: 1.1rem;
+  --bt-knob: 0.85rem;
+  --bt-font: 0.72rem;
+  gap: 0.4rem;
+}
+
+.ball-toggle__label {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--secondary-text);
+  font-size: var(--bt-font);
+  cursor: pointer;
+}
+
+.ball-toggle__label--on { color: var(--almostBlack); font-weight: 700; }
+
+.ball-toggle__track {
+  position: relative;
+  flex: none;
+  width: var(--bt-track-w);
+  height: var(--bt-track-h);
+  padding: 0;
+  border: 1px solid var(--gray2);
+  border-radius: 1rem;
+  background: var(--lightest-blue);
+  cursor: pointer;
+}
+
+.ball-toggle__track:focus-visible { outline: 2px solid var(--royal-blue); outline-offset: 2px; }
+
+.ball-toggle__knob {
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  width: var(--bt-knob);
+  height: var(--bt-knob);
+  margin-top: calc(var(--bt-knob) / -2);
+  transition: left 220ms ease;
+}
+
+.ball-toggle__track--right .ball-toggle__knob { left: calc(100% - var(--bt-knob) - 2px); }
+
+.ball-toggle__ball { display: block; width: 100%; height: 100%; filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.3)); transition: transform 220ms ease; }
+.ball-toggle__track--right .ball-toggle__ball { transform: rotate(180deg); }
+
+.ball-toggle__leather { fill: var(--navy-blue); }
+.ball-toggle__seams { stroke: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ball-toggle__knob,
+  .ball-toggle__ball { transition: none; }
+}

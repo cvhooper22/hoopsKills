@@ -209,3 +209,6 @@
 .flip-pad--condensed .flip-pad__colon { width: 6px; height: 57px; gap: 13px; padding-top: 6px; }
 .flip-pad--condensed .flip-pad__colon i { width: 6px; height: 6px; }
 .flip-pad--condensed .flip-pad__foot { padding-top: .35rem; }
+
+/* Reserves a footer's height without drawing it (see the reserveFoot prop). */
+.flip-pad__foot--empty { border-top-color: transparent; }

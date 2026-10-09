@@ -180,3 +180,5 @@
 .game-pill--radii .game-pill__main,
 .game-pill--radii .game-pill__season-pill { border-radius: var(--radius-control); }
 .game-pill--radii .game-pill__list-inner { border-radius: var(--radius-card); }
+
+.game-pill__game-row--season { font-weight: 600; }

@@ -311,7 +311,11 @@ export function detectKills(plays, defense = 'home') {
     const leftover = s.stops.slice(streakKills.length * KILL_SIZE);
     let potential = null;
     if (leftover.length === 2) {
-      potential = { stops: leftover.map((x) => x.seq), period: leftover[0].period, dirty: leftover.some((x) => x.dirty), end: breaker };
+      potential = {
+        stops: leftover.map((x) => x.seq), period: leftover[0].period, dirty: leftover.some((x) => x.dirty), end: breaker,
+        // Like a kill's gainEnd: margin when BYU's possession after the second stop ended, and the margin at the first stop.
+        gainEnd: swingMargin(plays, leftover[1], defense, indexBySeq), startMargin: leftover[0].margin,
+      };
       potentialKills.push(potential);
     }
     kills.push(...streakKills);

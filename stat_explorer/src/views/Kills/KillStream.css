@@ -1,0 +1,18 @@
+.kill-stream__legend {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: -0.2rem 0 0.4rem;
+  color: var(--secondary-text);
+  font-size: 0.8rem;
+}
+
+.kill-stream__legend i { display: inline-block; width: 0.7rem; height: 0.7rem; margin-right: 0.35rem; border-radius: 50%; }
+.kill-stream__count { margin-left: auto; }
+
+.kill-stream__break-line { stroke: var(--gray3, #8f8f8f); stroke-dasharray: 3 3; }
+.kill-stream__break-label { fill: var(--navy-blue); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.03em; text-transform: uppercase; }
+.kill-stream .chart-axis__tick text { font-variant-numeric: tabular-nums; }
+
+.kill-stream__tip { display: grid; gap: 0.1rem; white-space: nowrap; }
+.kill-stream__tip span { color: var(--secondary-text); }

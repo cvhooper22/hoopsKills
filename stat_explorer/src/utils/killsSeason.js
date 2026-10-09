@@ -139,12 +139,14 @@ export function mergeCredit(summaries) {
 }
 
 // Filters stack (AND). `location` is 'home' | 'away' | 'neutral'; neutral games never count as
-// home or away. `postseasonOnly` keeps conference-tournament and postseason games.
-export function filterRows(rows, { conferenceOnly = false, location = null, postseasonOnly = false, lastN = null } = {}) {
+// home or away. `postseasonOnly` keeps conference-tournament and postseason games. `result` is 'W' or
+// 'L' to keep only wins or losses. Last N applies after the rest, so it is the last N wins, say.
+export function filterRows(rows, { conferenceOnly = false, location = null, postseasonOnly = false, result = null, lastN = null } = {}) {
   let out = rows.filter((r) => (
     (!conferenceOnly || r.isConferenceGame)
     && (!location || r.location === location)
     && (!postseasonOnly || r.seasonType !== 'regular')
+    && (!result || r.result === result)
   ));
   if (lastN) out = out.slice(-lastN); // rows are date-sorted
   return out;
