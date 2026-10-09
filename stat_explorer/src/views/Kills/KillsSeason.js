@@ -43,11 +43,11 @@ function seasonTiles(folded, perGame, teams) {
   const count = (total, avg) => (perGame ? avg.toFixed(1) : String(total));
   return [
     ['Kills', count(totals.kills, totals.kills / n), `vs ${count(totals.oppKills, totals.oppKills / n)} against`],
-    ['Completion', pct(derived.completion)],
     ['Kill diff', perGame ? signed(derived.diff / n, 1) : signed(derived.diff), null, 'auto'],
     ['Potential kills', count(totals.potential, totals.potential / n)],
-    ['Stops', count(totals.stops, totals.stops / n)],
+    ['Completion', pct(derived.completion)],
     ['Efficiency', derived.efficiency === null ? '–' : derived.efficiency.toFixed(1)],
+    ['Stops', count(totals.stops, totals.stops / n)],
     ['Longest streak', derived.longestStreak ? String(derived.longestStreak.length) : '–', streakNote(derived.longestStreak, teams)],
   ];
 }
