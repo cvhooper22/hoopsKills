@@ -101,17 +101,16 @@ function Segments({ spans, points }) {
   );
 }
 
-// A kill is a solid shield, a potential kill the same shield left open. The open one gets a solid
-// shield in the card's background color underneath, so no line or gridline shows through it.
+// The Material "shield" icon as a path (960-unit box, centered on 480,-480). It is drawn as a shape,
+// not as the icon font's text, because Safari lays out the unshaped letters of SVG text before
+// centering it and the markers land far left of their spot.
+const SHIELD = 'M480-80q-139-35-229.5-159.5T160-516v-244l320-120 320 120v244q0 152-90.5 276.5T480-80Z';
+const SHIELD_SCALE = 22 / 960;
+
+// A kill is a solid shield, a potential kill an open one filled with the card's background color, so no
+// line or gridline shows through it.
 function Glyph({ s }) {
-  const open = s.kind === 'potential';
-  const props = { textAnchor: 'middle', dominantBaseline: 'central' };
-  return (
-    <>
-      {open && <text className="material-symbols-sharp kills-flow__shield kills-flow__shield--fill" {...props}>shield</text>}
-      <text className={`material-symbols-sharp kills-flow__shield${open ? ' kills-flow__shield--open' : ''}`} {...props}>shield</text>
-    </>
-  );
+  return <path className={`kills-flow__shape${s.kind === 'potential' ? ' kills-flow__shape--open' : ''}`} d={SHIELD} transform={`scale(${SHIELD_SCALE}) translate(-480 480)`} />;
 }
 
 // BYU's margin over the opponent in one line, so a kill (opponent held) reads as a climb. The markers

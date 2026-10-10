@@ -27,9 +27,9 @@
 
 .kills-flow__break { stroke: var(--gray2, #c5c5c5); stroke-dasharray: 3 3; }
 
-.kills-flow__shield { font-size: 22px; font-variation-settings: 'FILL' 1, 'wght' 600, 'opsz' 20; paint-order: stroke; stroke: var(--app-bg, #fff); stroke-width: 3px; }
-.kills-flow__mark--good .kills-flow__shield { fill: var(--success-1); }
-.kills-flow__mark--bad .kills-flow__shield { fill: var(--error-1); }
-.kills-flow__shield--open { font-variation-settings: 'FILL' 0, 'wght' 600, 'opsz' 20; }
 .kills-flow__legend-icon--open { font-variation-settings: 'FILL' 0, 'wght' 600, 'opsz' 20; }
-.kills-flow .kills-flow__shield--fill { fill: var(--app-bg, #fff); }
+
+.kills-flow__mark--good { color: var(--success-1); }
+.kills-flow__mark--bad { color: var(--error-1); }
+.kills-flow__shape { vector-effect: non-scaling-stroke; fill: currentColor; stroke: var(--app-bg, #fff); stroke-width: 3px; paint-order: stroke; }
+.kills-flow__shape--open { fill: var(--app-bg, #fff); stroke: currentColor; stroke-width: 2px; }
