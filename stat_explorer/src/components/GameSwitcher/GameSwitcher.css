@@ -55,10 +55,6 @@
 
 .game-pill__main:hover { background: #eef3fb; }
 
-/* The whole pill is the click target: its contents never take the click themselves, so the button
-   always does, whichever part (season, divider, opponent, logo, score, chevron) is pressed. */
-.game-pill__main * { pointer-events: none; }
-
 .game-pill__final { font-variant-numeric: tabular-nums; }
 .game-pill__byu-score { font-weight: bold; }
 .game-pill__byu-score--win { color: #1a8f3c; }
