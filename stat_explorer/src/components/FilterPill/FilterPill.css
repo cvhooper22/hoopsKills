@@ -8,7 +8,14 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+  /* The box is as wide as its panel even while the panel is closed, so on a phone it spans over the
+     game pill beside it. Only the parts you can see take clicks. */
+  pointer-events: none;
 }
+
+.filter-pill__button,
+.filter-pill__selected,
+.filter-pill__panel-inner { pointer-events: auto; }
 
 .filter-pill__button {
   position: relative;
