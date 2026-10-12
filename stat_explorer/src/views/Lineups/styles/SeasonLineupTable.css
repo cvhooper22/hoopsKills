@@ -61,3 +61,11 @@
 .game__img-container > .game__logo {
     width: 20px;
 }
+
+.game__logo-fallback {
+    display: inline-block;
+    min-width: 20px;
+    font-size: 0.6rem;
+    text-align: center;
+    text-transform: uppercase;
+}

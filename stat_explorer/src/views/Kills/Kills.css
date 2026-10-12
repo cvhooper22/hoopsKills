@@ -22,3 +22,6 @@
 }
 
 .kills-check { color: var(--secondary-text); font-size: 0.85rem; }
+
+/* Tint the page behind the Kills views so white cards lift off it. */
+.lineups:has(.kills) { background-color: var(--page-bg); }

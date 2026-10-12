@@ -47,7 +47,7 @@
 .streaks-table-scroll {
   overflow-x: auto;
   border-radius: 2px;
-  box-shadow: 0 0.125rem 0.5rem rgb(0 0 0 / 12%);
+  box-shadow: var(--shadow-card);
 }
 
 .streaks-table {

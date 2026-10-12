@@ -1,6 +1,7 @@
-import { useId, useMemo, useState } from 'react';
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { curveMonotoneX, line } from 'd3';
-import { Axis, Chart, Line, Marker, Tooltip, positionOf, useChart } from '../../components/charts';
+import { Axis, Chart, Line, Marker, positionOf, useChart } from '../../components/charts';
 import { halfLabel } from '../../utils/killInsights';
 import { Breaks, buildMarks } from './KillStream';
 import { scoreSeries, stepPoints, flowSpans, windowPoints, spanEnd } from '../../utils/killsFlow';
@@ -37,10 +38,64 @@ function SpanTip({ s, opponent }) {
   );
 }
 
-// The markers, with one tooltip shared between them. Hover on a mouse, tap or focus otherwise.
+// The tooltip's gap to the screen edge.
+const TIP_EDGE = 8;
+
+// An HTML tooltip centered under a marker and kept inside the screen. The chart's own Tooltip only
+// picks the left or right side of its anchor, which is not enough on a phone, so this measures the
+// box (offsetWidth, a plain pixel width every browser agrees on) and the container's place on the
+// screen, then clamps its left edge. It stays hidden until the first measurement so it never
+// flashes in the wrong spot, and is measured again when the window resizes or turns.
+function MarkerTip({ x, y, children }) {
+  const { container, margin } = useChart();
+  const ref = useRef(null);
+  const [left, setLeft] = useState(null);
+
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el || !container) return undefined;
+    const place = () => {
+      const screen = document.documentElement.clientWidth || window.innerWidth;
+      const box = container.getBoundingClientRect();
+      const centered = box.left + margin.left + x - el.offsetWidth / 2;
+      const clamped = Math.max(TIP_EDGE, Math.min(centered, screen - el.offsetWidth - TIP_EDGE));
+      setLeft(Math.round(clamped - box.left));
+    };
+    place();
+    window.addEventListener('resize', place);
+    window.addEventListener('orientationchange', place);
+    return () => {
+      window.removeEventListener('resize', place);
+      window.removeEventListener('orientationchange', place);
+    };
+  }, [container, margin.left, x]);
+
+  if (!container) return null;
+  return createPortal(
+    <div ref={ref} className="chart-tooltip" style={{ left: left ?? 0, top: margin.top + y, visibility: left === null ? 'hidden' : 'visible' }}>
+      {children}
+    </div>,
+    container
+  );
+}
+
+// The markers, with one tooltip shared between them. A mouse hovers, a finger taps (a tap shows the
+// tooltip and stays until the same marker or anywhere else is tapped), and the keyboard focuses. Each
+// has its own handler because a tap fires the hover and focus events too, and mixing them made the
+// tooltip flash on and straight off.
 function Markers({ spans, opponent }) {
   const { x, y } = useChart();
   const [active, setActive] = useState(null);
+  const toggle = (s) => setActive((cur) => (cur === s ? null : s));
+  const clearIf = (s) => setActive((cur) => (cur === s ? null : cur));
+
+  useEffect(() => {
+    if (!active) return undefined;
+    const onOutside = (e) => { if (!e.target.closest?.('.kills-flow__mark')) setActive(null); };
+    document.addEventListener('pointerdown', onOutside);
+    return () => document.removeEventListener('pointerdown', onOutside);
+  }, [active]);
+
   return (
     <g>
       {spans.map((s) => (
@@ -49,16 +104,18 @@ function Markers({ spans, opponent }) {
             <g
               className={`kills-flow__mark kills-flow__mark--${toneOf(s)}`} tabIndex={0} role="img"
               aria-label={`${s.label}: margin added ${s.pts}`}
-              onPointerEnter={() => setActive(s)} onPointerLeave={() => setActive(null)}
-              onFocus={() => setActive(s)} onBlur={() => setActive(null)}
-              onClick={() => setActive((cur) => (cur === s ? null : s))}
+              onPointerEnter={(e) => { if (e.pointerType === 'mouse') setActive(s); }}
+              onPointerLeave={(e) => { if (e.pointerType === 'mouse') clearIf(s); }}
+              onPointerDown={(e) => { if (e.pointerType !== 'mouse') toggle(s); }}
+              onFocus={(e) => { if (e.target.matches(':focus-visible')) setActive(s); }}
+              onBlur={() => clearIf(s)}
             >
               <Glyph s={s} />
             </g>
           )}
         </Marker>
       ))}
-      {active && <Tooltip x={x(midOf(active))} y={y(0) + 14}><SpanTip s={active} opponent={opponent} /></Tooltip>}
+      {active && <MarkerTip key={active.label} x={x(midOf(active))} y={y(0) + 14}><SpanTip s={active} opponent={opponent} /></MarkerTip>}
     </g>
   );
 }

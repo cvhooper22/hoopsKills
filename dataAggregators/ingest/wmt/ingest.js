@@ -7,7 +7,7 @@ const fetch = require('node-fetch');
 const { connect } = require('../../db/client');
 const { seedTeamsFromConfig, resolveTeams, resolvePlayer, resolveGame, seasonYear, drainNotes } = require('../lib/entities');
 const { insertRaw, upsertGame, linkSourceGame, storeGamePlays } = require('../lib/store');
-const { extractHeader, normalizePlays } = require('./normalize');
+const { extractHeader, normalizePlays, aliasActionPlayerIds } = require('./normalize');
 const { checkGame } = require('./check');
 
 const API = id =>
@@ -36,6 +36,9 @@ async function ingestPayload(client, payload) {
       playerByGamePlayer.set(p.gamePlayerId,
         await resolvePlayer(client, 'wmt', p.wmtPlayerId, p.name, teamByWmtTeamId.get(p.teamWmtId)));
     }
+    const { aliased, unmatched } = aliasActionPlayerIds(payload, header, playerByGamePlayer);
+    if (aliased.length) console.log(`  note: ${aliased.length} action player ids were not on the roster; matched by name`);
+    if (unmatched.length) console.log('  WARNING: action players with no roster match:', unmatched.map(u => u.name).join(', '));
 
     const match = await resolveGame(client, 'wmt', header.wmtGameId, { date: header.date, homeTeamId, awayTeamId });
     const gameId = match.gameId;

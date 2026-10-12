@@ -3,13 +3,13 @@ import SeasonLineupRow from './SeasonLineupRow';
 import { getLineupHash } from '../../../utils/lineupUtils';
 import { namesToReadable, getStintsLabel } from '../../../utils/playerLineupUtils';
 import { aggregateGamesForLineups } from '../../../utils/seasonLineups';
-import { gameNameToUrl } from '../../../constants/games';
+import GameChip from './GameChip';
 import LineupSummary from './LineupSummary';
 import Net from '../../../components/Net/Net';
 import SortableHeader from '../../../components/SortableHeader/SortableHeader';
 import { SEASON_SORT_KEYS } from '../../../utils/seasonLineupSorters';
 
-export default function LineupTable ({lineups, filterPlayers,summary, onSortClick, currSortKey, currSortDir}) {
+export default function LineupTable ({teams, lineups, filterPlayers,summary, onSortClick, currSortKey, currSortDir}) {
   const [showSummary, setShowSummary] = useState(false);
 
   function handleToggleShow () {
@@ -61,19 +61,10 @@ export default function LineupTable ({lineups, filterPlayers,summary, onSortClic
         </div>
         <div className="lineup-games flex-jcc mb-m">
             {allGames.map((g) => {
-              const gameClass = ['game flex-aic mr-m pt-s'];
-              if (g.name.includes('(N)') || g.name.includes('(WCC)')) {
-                gameClass.push('game--neutral')
-              }
-              if (g.name.includes('(A)')) {
-                gameClass.push('game--away')
-              }
-              const url = gameNameToUrl[g.name];
               return (
-                <div className={gameClass.join(' ')} key={g.name}>
-                  <div className="game__img-container mr-xs"><img src={url} className='game__logo' title={g.name} alt={`Logo for ${g.name}`}/></div>
+                <GameChip game={g} teams={teams} className="pt-s" key={g.gameId}>
                   <Net classes="game__net" netVal={g.net} />
-                </div>
+                </GameChip>
               );
             })}
           </div>
@@ -121,7 +112,7 @@ export default function LineupTable ({lineups, filterPlayers,summary, onSortClic
         </div>
         <div className='lineup-table__body f1-scroll'>
           {
-            lineups.map((l) => <SeasonLineupRow lineup={l} key={getLineupHash(l.names)}/>)
+            lineups.map((l) => <SeasonLineupRow lineup={l} teams={teams} key={getLineupHash(l.names)}/>)
           }
         </div>
       </div>

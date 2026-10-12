@@ -232,4 +232,38 @@ function normalizePlays(payload, ctx) {
   return { plays, participants, unmapped };
 }
 
-module.exports = { extractHeader, normalizePlays, parseClock, gameSecondsElapsed, REGULATION_PERIODS };
+const nameKey = n => String(n || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+  .replace(/[^a-z\s]/g, '').replace(/\b(jr|sr|ii|iii|iv)\b/g, '').replace(/\s+/g, ' ').trim();
+
+/**
+ * Some games' actions carry game_player_ids that are not the ones in the roster (WMT regenerated
+ * the roster ids after the game), so every lookup in playerByGamePlayer misses. For each action id
+ * the roster doesn't know, match the roster entry with the same team and name (accents, punctuation
+ * and Jr./III ignored) and alias the action id to that player. Ambiguous or unmatched ids are left
+ * out. Returns { aliased: [{id, name}], unmatched: [{id, name}] } for logging.
+ */
+function aliasActionPlayerIds(payload, header, playerByGamePlayer) {
+  const teamOfCompetitor = new Map(header.competitors.map(c => [c.competitorId, c.wmtTeamId]));
+  const rosterByKey = new Map();
+  for (const p of header.players) {
+    const key = `${p.teamWmtId}|${nameKey(p.name)}`;
+    rosterByKey.set(key, rosterByKey.has(key) ? null : p.gamePlayerId);
+  }
+  const seen = new Map();
+  for (const r of payload.data.actions.data) {
+    const id = r.game_player_id && String(r.game_player_id);
+    if (!id || playerByGamePlayer.has(id) || seen.has(id) || !r.action.dsp_name || r.action.dsp_name === 'Team') continue;
+    seen.set(id, { id, name: r.action.dsp_name, team: teamOfCompetitor.get(r.competitor_id) });
+  }
+  const aliased = [], unmatched = [];
+  for (const s of seen.values()) {
+    const rosterId = rosterByKey.get(`${s.team}|${nameKey(s.name)}`);
+    if (rosterId && playerByGamePlayer.has(rosterId)) {
+      playerByGamePlayer.set(s.id, playerByGamePlayer.get(rosterId));
+      aliased.push({ id: s.id, name: s.name });
+    } else unmatched.push({ id: s.id, name: s.name });
+  }
+  return { aliased, unmatched };
+}
+
+module.exports = { extractHeader, normalizePlays, aliasActionPlayerIds, parseClock, gameSecondsElapsed, REGULATION_PERIODS };
