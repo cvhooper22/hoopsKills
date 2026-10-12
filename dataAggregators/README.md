@@ -87,7 +87,7 @@ freshly-added game) can take a few minutes to show up everywhere.
   `stat_explorer` — see the project plan for why.
 - `config/`, `fixtures/` — seed data and cached raw payloads for offline dev/testing.
 
-Note: `seasonLineups.js`, `updateLineupsWithGame.js`, and `modules/` are a separate, older
-pipeline (scrapes `gamestats.byucougars.com` directly) that still generates the season
-lineups view. It's slated for retirement once season-level aggregation moves onto this
-pipeline — see the project plan.
+Season lineups follow the same flow as kills: `node ingest/tools/export-game-lineups.js --all`
+writes `lineups/games/<id>.json`, then `node derivations/aggregate-lineups.js --season <year>` writes
+`lineups/seasons/<year>.json` (games identified by gameId + oppTeamId, like kills). Logic lives in
+`stat_explorer/src/utils/{lineupsSummary,lineupsSeason}.js`; bump `LINEUPS_RULES_VERSION` if it changes.

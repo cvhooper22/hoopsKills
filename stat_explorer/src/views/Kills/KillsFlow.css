@@ -20,7 +20,7 @@
 .kills-flow__fan--good { fill: var(--success-2); stroke: var(--success-2); }
 .kills-flow__fan--bad { fill: var(--error-2); stroke: var(--error-2); }
 .kills-flow__mark { cursor: pointer; outline: none; }
-.kills-flow__tip { display: grid; gap: 0.15rem; white-space: nowrap; font-size: 0.85rem; }
+.kills-flow__tip { display: grid; gap: 0.15rem; font-size: 0.85rem; }
 .kills-flow__tip span { color: var(--secondary-text); }
 .kills-flow__tip-gain--good { color: var(--success-1); }
 .kills-flow__tip-gain--bad { color: var(--error-1); }

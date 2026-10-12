@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { lineupToString, getLineupHash } from '../../../utils/lineupUtils';
-import { gameNameToUrl } from '../../../constants/games';
+import GameChip from './GameChip';
 
-export default function SeasonLineupRow ({lineup}) {
+export default function SeasonLineupRow ({lineup, teams}) {
   const [showGgames, setshowGgames] = useState(false);
   const hash = getLineupHash(lineup.names);
   
@@ -44,19 +44,10 @@ export default function SeasonLineupRow ({lineup}) {
                   gameNetClass.push('game__net--pos');
                 }
               }
-              const gameClass = ['game flex-aic mr-m'];
-              if (s.name.includes('(N)') || s.name.includes('(WCC)')) {
-                gameClass.push('game--neutral')
-              }
-              if (s.name.includes('(A)')) {
-                gameClass.push('game--away')
-              }
-              const url = gameNameToUrl[s.name];
               return (
-                <div className={gameClass.join(' ')} key={`${hash}${s.name}`}>
-                  <div className="game__img-container mr-xs"><img src={url} className='game__logo' title={`${s.name} - ${s.mins ? s.mins.toFixed(2) : ''}`} alt={`Logo for ${s.name}`}/></div>
+                <GameChip game={s} teams={teams} key={`${hash}${s.gameId}`}>
                   <span className={gameNetClass.join(' ')}>{s.net}</span>
-                </div>
+                </GameChip>
               );
             })}
           </div>

@@ -1,29 +1,12 @@
-import { makeSortAscByKey } from "./lineupSorters";
-import { gameFromName } from "../constants/games";
-
+// Sums the per-game net of a set of lineups. Each lineup game is { gameId, net, mins, date, ... }
+// (the season file's game info is merged in by SeasonLineups), returned in date order.
 export function aggregateGamesForLineups (lineups) {
-  const lineupGames = lineups.reduce((games, l) => {
-    const updatedGames = [...games];
+  const byGame = new Map();
+  lineups.forEach(l => {
     l.games.forEach(g => {
-      const existingGameIndex = updatedGames.findIndex(existing => existing.name === g.name);
-      if (existingGameIndex < 0) {
-        updatedGames.push(g);
-      } else {
-        const updatedGame = {...updatedGames[existingGameIndex]};
-        updatedGame.net = updatedGame.net + g.net;
-        updatedGames[existingGameIndex] = updatedGame;
-      }
+      const existing = byGame.get(g.gameId);
+      byGame.set(g.gameId, existing ? { ...existing, net: existing.net + g.net, mins: existing.mins + g.mins } : g);
     });
-    return updatedGames;
-  }, []);
-  const gamesWithOrder = lineupGames.map(g => {
-    const gameData = gameFromName(g.name);
-    return {
-      ...g,
-      order: gameData.order,
-    }
   });
-  const sortByOrder = makeSortAscByKey('order');
-  const sortedGames = gamesWithOrder.sort(sortByOrder);
-  return sortedGames;
+  return [...byGame.values()].sort((a, b) => a.date.localeCompare(b.date) || a.gameId.localeCompare(b.gameId));
 }

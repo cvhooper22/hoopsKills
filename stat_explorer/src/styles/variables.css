@@ -32,6 +32,8 @@
   --navy-blue: #002e52;
   --baby-blue: #BDD6E6;
   --app-bg: #fffffd;
+  --page-bg: #f4f7fb;
+  --shadow-card: 0 1px 2px rgb(0 46 82 / 6%), 0 4px 14px rgb(0 46 82 / 7%);
   --lightest-blue: #edf4ff;
   --success-1: #006141;
   --success-2: #10A170;

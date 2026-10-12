@@ -1,21 +1,23 @@
 import { useEffect, useState, useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
 import PlayerFilters from "../../../components/PlayerFilters/PlayerFilters";
 import "../Lineups.css";
 import SeasonLineupTable from "./SeasonLineupTable";
 import BlockFaceLoader from '../../../components/Loaders/BlockFaceLoader';
 import urls from '../../../constants/assetUrls';
-import {checknames} from '../../../constants/playerInfo';
 import { SEASON_CUSTOM_SORTERS, SEASON_SORT_KEYS } from "../../../utils/seasonLineupSorters";
 import { SORT_KEYS } from "../../../constants/sorting";
 import { makeSortAscByKey, makeSortDescByKey } from "../../../utils/lineupSorters";
 
 export default function SeasonLineups() {
+  const [params] = useSearchParams();
+  const seasonParam = Number(params.get('season')) || null;
   const [loading, setLoading] = useState(true);
-  const players = checknames;
-  // console.log('players', players);
+  const [players, setPlayers] = useState([]);
   const [filterPlayers, setFilterPlayers] = useState([]);
   const [currSort, setCurrSort] = useState({key: SEASON_SORT_KEYS.NET, direction: SORT_KEYS.DESC});
   const [lineupData, setLineupData] = useState({});
+  const [teams, setTeams] = useState(null);
   function onPlayerChange(player) {
     const newFilters = [...filterPlayers];
     if (filterPlayers.includes(player)) {
@@ -35,12 +37,24 @@ export default function SeasonLineups() {
   };
 
   useEffect(() => {
-    fetch(urls.seasonLineups)
-      .then((resp) => {
-        return resp.json();
-      })
+    // the opponent names and logos are optional: the chips fall back to the team ids
+    fetch(urls.teamsMeta())
+      .then((r) => (r.ok ? r.json() : null))
+      .then(setTeams)
+      .catch(() => setTeams(null));
+    // ?season= from the game picker, else the latest season in the index. The season file keeps
+    // per-game info once, so merge it into each lineup's games.
+    setLoading(true);
+    fetch(urls.lineupsSeasonsIndex())
+      .then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+      .then((seasons) => fetch(urls.lineupsSeason((seasons.find((s) => s.season === seasonParam) || seasons[0]).season)))
+      .then((r) => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
       .then((data) => {
-        const lineups = data;
+        const lineups = {};
+        Object.entries(data.lineups).forEach(([hash, l]) => {
+          lineups[hash] = { ...l, games: l.games.map((g) => ({ ...data.games[g.gameId], ...g })) };
+        });
+        setPlayers(data.players.map((p) => p.name));
         setLoading(false);
         setLineupData(lineups);
       })
@@ -48,7 +62,7 @@ export default function SeasonLineups() {
         setLoading(false);
         console.error(callErr);
       });
-  }, []);
+  }, [seasonParam]);
 
   const lineupCount = Object.keys(lineupData).length;
   const currentLineupData = useMemo(() => {
@@ -87,7 +101,7 @@ export default function SeasonLineups() {
       lineups: sortedLineups,
       summary: filteredLineupData.summary,
     };
-  }, [filterPlayers.length, lineupCount, currSort.key, currSort.direction]);
+  }, [filterPlayers.length, lineupData, currSort.key, currSort.direction]);
   return (
     <>
         <h1 className="lineup-game-label">Season Lineups</h1>
@@ -101,6 +115,7 @@ export default function SeasonLineups() {
           <div className="f1-hide flex-c">
             {filterPlayers.length < 1 && <h4 className="lineups__totals">{`Total Lineups: ${currentLineupData.lineups.length}`}</h4>}
             <SeasonLineupTable
+              teams={teams}
               summary={currentLineupData.summary}
               lineups={currentLineupData.lineups}
               filterPlayers={filterPlayers}

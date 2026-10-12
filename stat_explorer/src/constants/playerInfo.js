@@ -61,25 +61,4 @@ const info = {
   "XAVIONSTATON": { id: 5143304, no: 33, checkname: "STATON,XAVION" },
 };
 
-export const checknames = [
-  'ALLY ATIKI,ATIKI',
-  'CHRISTENSEN,TREDYN',
-  'DONG,HAO',
-  'GEORGE,GIDEON',
-  'HALL,DALLIN',
-  'HAYHURST,TANNER',
-  'JOHNSON,SPENCER',
-  'KNELL,TREVIN',
-  'MCGREGOR,JARED',
-  'MOORE,BRAEDEN',
-  'ROBINSON,JAXSON',
-  'SAUNDERS,RICHIE',
-  'STEWART,TREY',
-  'TOOLSON,TANNER',
-  'TRAORE,FOUSSEYNI',
-  'WATERMAN,NOAH',
-  'WEBB,NATE',
-  'WILLIAMS,RUDI',
-]
-
 export default info;

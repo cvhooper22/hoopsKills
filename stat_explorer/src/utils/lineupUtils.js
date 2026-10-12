@@ -116,11 +116,14 @@ function collectSubs(plays, startIndex) {
     }
     currPlayIdx = currPlayIdx + 1;
   }
+  // A player both subbed in and out at the same stoppage nets to no change; keeping both
+  // leaves more outs than ins and puts an undefined player in the lineup.
+  const bothWays = subIns.filter((p) => subOuts.includes(p));
   return {
     lastSubIndex: currPlayIdx - 1,
     subs: {
-      in: subIns,
-      out: subOuts
+      in: subIns.filter((p) => !bothWays.includes(p)),
+      out: subOuts.filter((p) => !bothWays.includes(p))
     }
   };
 }
