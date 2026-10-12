@@ -476,3 +476,28 @@
     padding-right: 12px;
   }
 }
+
+.alumni-editor__other-url {
+  display: grid;
+  grid-template-columns: 160px 1fr auto auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.alumni-editor__other-remove,
+.alumni-editor__other-add {
+  padding: 6px 10px;
+  border: 1px solid #c5ced8;
+  border-radius: 6px;
+  background: white;
+  color: #002e52;
+  cursor: pointer;
+}
+
+.alumni-editor__other-add {
+  align-self: flex-start;
+}
+
+.alumni-editor__other-urls {
+  grid-column: 1 / -1;
+}

@@ -23,6 +23,21 @@ const usDate = (iso) => {
   return m ? `${MONTHS[Number(m[2]) - 1]} ${Number(m[3])}, ${m[1]}` : iso;
 };
 
+// "2026-10-10" -> "10/10" (the shareable view drops the year and month names).
+const shortDate = (iso) => {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
+  return m ? `${Number(m[2])}/${Number(m[3])}` : iso;
+};
+// "W 114-108 OT" -> "W". Eurobasket lists the player's own team first in its bare scores ("84-78"),
+// so those read as W / L (a guess, not published by the source; a tie stays as the score). Bare
+// scores from any other source are left as they are.
+export function shortResult(result, source) {
+  if (/^[WL]\b/i.test(result || '')) return result.trim()[0].toUpperCase();
+  const m = source === 'eurobasket' && /^(\d+)-(\d+)$/.exec((result || '').trim());
+  if (m && Number(m[1]) !== Number(m[2])) return Number(m[1]) > Number(m[2]) ? 'W' : 'L';
+  return result;
+}
+
 // key, label, numeric (sorts high-to-low first), value used for sorting, cell renderer
 const COLUMNS = [
   { key: 'player', label: 'Player', left: true, sort: (r) => r.player.toLowerCase(), cell: (r) => <><strong>{r.player}</strong><span className="recent-games__team"> {r.team}</span></> },
@@ -44,6 +59,22 @@ const COLUMNS = [
   { key: 'min', label: 'MIN', numeric: true, sort: (r) => leadingNumber(r.min), cell: (r) => r.min },
 ];
 
+// Identity of one game row, used to remember which ones were dropped from the table.
+export const rowKey = (r) => `${r.player}|${r.date}|${r.opp}|${r.url || r.min}`;
+
+// Hand edits to a row's team / league ({ [rowKey]: { team?, league? } }), applied on top of the data.
+export function applyEdits(rows, edits) {
+  return rows.map((r) => {
+    const e = edits[rowKey(r)];
+    if (!e) return r;
+    return {
+      ...r,
+      ...(e.team != null && { team: e.team }),
+      ...(e.league != null && { league: e.league, leagueEdit: e.league }),
+    };
+  });
+}
+
 export function flattenGames(results, teams, alumByName = {}) {
   const rows = [];
   Object.entries(results).forEach(([player, entry]) => {
@@ -64,16 +95,44 @@ function compare(a, b, dir) {
   return 0;
 }
 
-export default function CombinedRecentGames({ results, teams, alumByName, generatedAt }) {
+// Text box that saves on blur or Enter, so a row doesn't re-sort under the cursor while typing.
+function EditText({ value, label, onCommit }) {
+  return (
+    <input
+      key={value}
+      className="recent-games__edit"
+      type="text"
+      defaultValue={value}
+      aria-label={label}
+      placeholder={label}
+      onBlur={(e) => { if (e.target.value !== value) onCommit(e.target.value); }}
+      onKeyDown={(e) => { if (e.key === 'Enter') e.target.blur(); }}
+    />
+  );
+}
+
+export default function CombinedRecentGames({ results, teams, alumByName, generatedAt, dropped, onDrop, onRestoreAll, edits, onEdit, onResetEdits }) {
   const [sort, setSort] = useState({ key: 'gameScore', dir: -1 });
   const [expanded, setExpanded] = useState(false);
+  const [dropMode, setDropMode] = useState(false);
+  const [shareable, setShareable] = useState(false);
 
-  const rows = useMemo(() => flattenGames(results, teams, alumByName), [results, teams, alumByName]);
+  const rows = useMemo(
+    () => applyEdits(flattenGames(results, teams, alumByName), edits).filter((r) => !dropped.has(rowKey(r))),
+    [results, teams, alumByName, dropped, edits]
+  );
   const sorted = useMemo(() => {
     const col = COLUMNS.find((c) => c.key === sort.key);
     return [...rows].sort((a, b) => compare(col.sort(a), col.sort(b), sort.dir) || compare(b.gameScore, a.gameScore, 1));
   }, [rows, sort]);
   const shown = expanded ? sorted : sorted.slice(0, TOP);
+  // "To Shareable" for screenshots: short dates, W/L only, no turnovers.
+  const columns = shareable
+    ? COLUMNS.filter((c) => c.key !== 'tov').map((c) => (
+      c.key === 'date' ? { ...c, cell: (r) => shortDate(r.date) }
+        : c.key === 'result' ? { ...c, cell: (r) => shortResult(r.result, r.source) }
+          : c))
+    : COLUMNS;
 
   function onSort(col) {
     setSort((s) => (s.key === col.key ? { key: col.key, dir: -s.dir } : { key: col.key, dir: col.numeric ? -1 : 1 }));
@@ -88,6 +147,16 @@ export default function CombinedRecentGames({ results, teams, alumByName, genera
           {generatedAt ? ` · saved ${new Date(generatedAt).toLocaleString()}` : ''}
           {rows.some((r) => r.gameScoreRaw != null) ? ' · * = 3x3, scaled' : ''}
         </span>
+        <button type="button" onClick={() => setShareable((s) => !s)} aria-pressed={shareable} title="Condensed table for screenshots: short dates, W/L results, no turnovers">
+          {shareable ? 'Full table' : 'To Shareable'}
+        </button>
+        <button type="button" onClick={() => setDropMode((d) => !d)} aria-pressed={dropMode}>{dropMode ? 'Done editing' : 'Edit table'}</button>
+        {Object.keys(edits).length > 0 && (
+          <button type="button" onClick={onResetEdits} title="Undo every team / league edit">Reset {Object.keys(edits).length} edited</button>
+        )}
+        {dropped.size > 0 && (
+          <button type="button" onClick={onRestoreAll} title="Bring back every game you dropped">Restore {dropped.size} dropped</button>
+        )}
         {rows.length > TOP && (
           <button type="button" onClick={() => setExpanded((e) => !e)}>{expanded ? `Show top ${TOP}` : `Show all ${rows.length}`}</button>
         )}
@@ -98,19 +167,32 @@ export default function CombinedRecentGames({ results, teams, alumByName, genera
         <table className="recent-games__table recent-games__table--sortable">
           <thead>
             <tr>
-              {COLUMNS.map((c) => (
+              {columns.map((c) => (
                 <th key={c.key} onClick={() => onSort(c)} aria-sort={sort.key === c.key ? (sort.dir === 1 ? 'ascending' : 'descending') : 'none'}>
                   {c.label}{sort.key === c.key ? (sort.dir === 1 ? ' ▲' : ' ▼') : ''}
                 </th>
               ))}
+              {dropMode && <th aria-label="Drop" />}
             </tr>
           </thead>
           <tbody>
             {shown.map((r) => (
-              <tr key={`${r.player}-${r.date}-${r.opp}-${r.url || r.min}`}>
-                {COLUMNS.map((c) => (
-                  <td key={c.key} className={`${c.left ? 'recent-games__left' : ''}${c.strong ? ' recent-games__strong' : ''}`}>{c.cell(r) ?? '–'}</td>
+              <tr key={rowKey(r)}>
+                {columns.map((c) => (
+                  <td key={c.key} className={`${c.left ? 'recent-games__left' : ''}${c.strong ? ' recent-games__strong' : ''}`}>
+                    {dropMode && (c.key === 'player' || c.key === 'league')
+                      ? <>
+                          {c.key === 'player' && <strong>{r.player} </strong>}
+                          <EditText value={c.key === 'player' ? r.team : r.league} label={c.key === 'player' ? 'Team' : 'League'} onCommit={(v) => onEdit(rowKey(r), c.key === 'player' ? 'team' : 'league', v)} />
+                        </>
+                      : (c.cell(r) ?? '–')}
+                  </td>
                 ))}
+                {dropMode && (
+                  <td>
+                    <button type="button" className="recent-games__drop" onClick={() => onDrop(rowKey(r))} title={`Drop ${r.player} vs ${r.opp}, ${usDate(r.date)}`}>×</button>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

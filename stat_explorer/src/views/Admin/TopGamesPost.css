@@ -12,7 +12,10 @@
   --neg-700: #b3122f;
   --hand-font: 'Permanent Marker', cursive;
   --hand-scale: 1;
-  --lead-scale: 0.82;
+  /* lead panel type sizes (px, before --hand-scale for the handwritten ones) */
+  --lead-score-size: 88px;
+  --lead-stat-size: 40px;
+  --lead-label-size: 24px;
   width: 1600px;
   height: 900px;
   display: grid;
@@ -45,8 +48,8 @@
   position: relative;
   display: grid;
   grid-template-columns: 375px 1fr;
-  gap: 36px;
-  padding: 64px 48px 56px 64px;
+  gap: 28px;
+  padding: 64px 28px 56px 56px; /* tight so the 40px stat values (e.g. 10-10) fit the info column */
   color: #fff;
 }
 .top-post__lead > :not(.top-post__wordmarkBg) { position: relative; z-index: 1; }
@@ -84,16 +87,16 @@
 
 .top-post__gameScore {
   font-family: var(--hand-font); font-weight: 400; letter-spacing: 0;
-  font-size: calc(150px * var(--hand-scale) * var(--lead-scale));
+  font-size: calc(var(--lead-score-size) * var(--hand-scale));
   line-height: 1; white-space: nowrap; font-variant-numeric: tabular-nums;
   transform: rotate(-4deg); transform-origin: left bottom;
 }
-.top-post__gameScore sup { font-size: 56px; vertical-align: top; margin-left: 2px; }
+.top-post__gameScore sup { font-size: 0.5em; vertical-align: top; margin-left: 2px; }
 
-.top-post__leadStats { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(255, 255, 255, 0.3); }
+.top-post__leadStats { display: grid; grid-template-columns: repeat(3, auto); justify-content: space-between; column-gap: 6px; border-top: 1px solid rgba(255, 255, 255, 0.3); }
 .top-post__leadStats > div { padding: 10px 0 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
-.top-post__leadStats .v { font-family: var(--hand-font); font-weight: 400; font-size: calc(40px * var(--hand-scale) * var(--lead-scale) * 0.85); line-height: 1.2; white-space: nowrap; }
-.top-post__leadStats .k { text-transform: uppercase; letter-spacing: 0.06em; font-size: 18px; opacity: 0.85; margin-top: 4px; }
+.top-post__leadStats .v { font-family: var(--hand-font); font-weight: 400; font-size: calc(var(--lead-stat-size) * var(--hand-scale)); line-height: 1.2; white-space: nowrap; }
+.top-post__leadStats .k { text-transform: uppercase; letter-spacing: 0.06em; font-size: var(--lead-label-size); opacity: 0.85; margin-top: 4px; }
 
 /* ---- board ---- */
 .top-post__board { display: flex; flex-direction: column; padding: 56px 64px 0 56px; background: linear-gradient(180deg, #fffffd, #edf4ff); }

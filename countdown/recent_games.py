@@ -22,7 +22,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from finder.fetcher import Fetcher
-from finder.recent_games import DEFAULT_DAYS, DEFAULT_N, recent_games
+from urllib.parse import urlparse
+
+from finder.recent_games import DEFAULT_DAYS, DEFAULT_N, merge_extra, recent_games
 
 # The alumni list lives in S3 (edited via the /admin/alumni page) and is served publicly through
 # CloudFront. Override with ALUM_JSON_URL, or pass --alum-file to use a local JSON copy.
@@ -82,9 +84,16 @@ def main() -> int:
     players = []
     for alum in targets:
         url = alum.get("recentGamesUrl") or alum.get("playerUrl")
-        if not url:
+        extras = [o for o in alum.get("otherGamesUrls") or [] if o.get("url") and o.get("active", True)]  # inactive ones are never fetched
+        if not (url or extras):
             continue
-        entry = {"name": alum["name"], "playerUrl": url, **recent_games(url, fetcher, args.n, args.days, alum["name"])}
+        if url:
+            entry = {"name": alum["name"], "playerUrl": url, **recent_games(url, fetcher, args.n, args.days, alum["name"])}
+        else:
+            entry = {"name": alum["name"], "playerUrl": "", "source": "other", "status": "no-games", "message": "", "games": []}
+        for extra in extras:
+            label = extra.get("label") or urlparse(extra["url"]).hostname or "other"
+            merge_extra(entry, recent_games(extra["url"], fetcher, args.n, args.days, alum["name"]), label, args.n, args.days)
         players.append(entry)
         if not args.json:
             print_player(entry)

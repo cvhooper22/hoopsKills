@@ -14,6 +14,8 @@ of the N). Sources, picked by URL host:
 * **fiba3x3** -- a World Tour *team* page for an event (see `finder.fiba3x3`): the
   event's schedule, plus each in-window game's boxscore for the player's line. Game
   Score is Hollinger on that line times `gamescore.SCALE_3X3` (3x3 goes to 21).
+* **espn** -- a player's game-log page (``espn.com/<league>/player/gamelog/_/id/<id>``), read
+  from ESPN's JSON API with no browser (see `finder.espn`). Covers preseason, which BBR doesn't.
 * **realgm** -- Cloudflare 403s plain HTTP and headless browsers, so the page is
   loaded in a headed Chrome via Playwright (optional dependency; a window
   flashes) and saved to ``<cache>/_recent/realgm/<id>.html``. If that fails, a
@@ -34,7 +36,7 @@ from urllib.parse import urlparse
 import requests
 from bs4 import BeautifulSoup
 
-from . import eurobasket, fiba3x3
+from . import eurobasket, espn, fiba3x3
 from .fetcher import Fetcher
 from .gamescore import game_score, game_score_3x3
 
@@ -368,6 +370,9 @@ def recent_games(url: str, fetcher: Fetcher | None = None, n: int = DEFAULT_N, d
             if path.startswith("/international/players/"):
                 return done("basketball-reference", _bbr_international_games(fetcher, path, n, since))
             return done("basketball-reference", _bbr_nba_games(fetcher, path, n, since))
+        if espn.is_gamelog_url(url):
+            boxes, message = espn.game_log(fetcher, url, n, since)
+            return done("espn", [_record(b, game_score_value=game_score(b), home=b["home"]) for b in boxes], message)
         if fiba3x3.is_team_page(url):
             games = [g for g in fiba3x3.parse_team_page(fiba3x3.fetch_team_page(url), url)
                      if not since or g["date"] >= since][:n]
@@ -392,3 +397,21 @@ def recent_games(url: str, fetcher: Fetcher | None = None, n: int = DEFAULT_N, d
         return {"source": host, "status": "error", "message": str(exc), "games": []}
     return {"source": host or "none", "status": "unsupported",
             "message": f"no game-log parser for {host or 'missing url'}", "games": []}
+
+
+def merge_extra(entry: dict, extra: dict, label: str, n: int = DEFAULT_N, days: int | None = DEFAULT_DAYS) -> dict:
+    """Fold one extra source's games (an alum's `otherGamesUrls`) into their main entry.
+
+    Extra games are tagged `source: label`; the main entry's games stay untagged (the admin page shows
+    the entry's own source for those). The union is cut to the newest `n` in the same window and
+    re-ranked by Game Score. FIBA 3x3 entries are schedule-shaped and can't be merged.
+    """
+    if "schedule" in (entry.get("kind"), extra.get("kind")):
+        entry["message"] = "; ".join(m for m in (entry.get("message"), f"{label}: a FIBA 3x3 source can't be merged") if m)
+        return entry
+    for g in extra["games"]:
+        g["source"] = label
+    games = rank_games(entry["games"] + extra["games"], n, window_start(days))
+    notes = [entry.get("message"), f"{label}: {extra['message']}" if extra.get("message") else None]
+    entry.update(games=games, status="ok" if games else "no-games", message="; ".join(m for m in notes if m))
+    return entry

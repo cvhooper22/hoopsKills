@@ -153,6 +153,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 12px;
+  margin-bottom: 1rem;
 }
 
 .recent-games__combined-head h3 {
@@ -180,4 +181,19 @@
 
 .recent-games__table--sortable tbody tr:nth-child(even) {
   background: #f3f6fa;
+}
+
+.recent-games__drop {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  line-height: 1;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.recent-games__edit {
+  width: 140px;
+  padding: 2px 4px;
+  font: inherit;
 }
