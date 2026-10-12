@@ -33,6 +33,7 @@ function emptyAlum() {
     recentTweetsUrl: '',
     playerUrl: '',
     recentGamesUrl: '',
+    otherGamesUrls: [],
     teamWebsite: '',
     coverPhoto: { url: '', styleText: '' },
     notesText: '',
@@ -66,6 +67,7 @@ function toEditable(a) {
     recentTweetsUrl: a.recentTweetsUrl || '',
     playerUrl: a.playerUrl || '',
     recentGamesUrl: a.recentGamesUrl || '',
+    otherGamesUrls: (a.otherGamesUrls || []).map((o) => ({ url: o.url || '', label: o.label || '', active: o.active !== false })),
     teamWebsite: a.teamWebsite || '',
     coverPhoto: {
       url: a.coverPhoto?.url || '',
@@ -182,6 +184,11 @@ function toStored(editable, errors) {
   if (editable.recentTweetsUrl.trim()) out.recentTweetsUrl = editable.recentTweetsUrl.trim();
   out.playerUrl = editable.playerUrl.trim();
   if (editable.recentGamesUrl.trim()) out.recentGamesUrl = editable.recentGamesUrl.trim();
+  // Admin-only extra game sources for /admin/recent-games; inactive ones are kept but never scraped.
+  const otherGamesUrls = editable.otherGamesUrls
+    .map((o) => ({ url: o.url.trim(), label: o.label.trim(), active: !!o.active }))
+    .filter((o) => o.url);
+  if (otherGamesUrls.length) out.otherGamesUrls = otherGamesUrls;
   out.teamWebsite = editable.teamWebsite.trim();
 
   const coverPhoto = { url: editable.coverPhoto.url.trim() };
@@ -596,6 +603,22 @@ export default function AlumniEditor({ initialAlum }) {
                 <Field label="Recent games URL" hint="Optional. Used instead of the player stats URL by /admin/recent-games (e.g. a FIBA 3x3 World Tour team page for the latest event).">
                   <input type="url" value={current.recentGamesUrl} onChange={(e) => updateCurrent({ recentGamesUrl: e.target.value })} />
                 </Field>
+                <div className="alumni-editor__field alumni-editor__other-urls">
+                  <span className="alumni-editor__label">Other games URLs</span>
+                  <span className="alumni-editor__hint">Admin only, never shown on the public site. Extra sources (e.g. NBA preseason) merged into this player&rsquo;s games on /admin/recent-games. Untick Active to skip one without deleting it.</span>
+                  {current.otherGamesUrls.map((o, i) => {
+                    const setOther = (patch) => updateCurrent({ otherGamesUrls: current.otherGamesUrls.map((x, j) => (j === i ? { ...x, ...patch } : x)) });
+                    return (
+                      <div className="alumni-editor__other-url" key={i}>
+                        <input type="text" className="alumni-editor__other-label" placeholder="Label (e.g. NBA preseason)" value={o.label} onChange={(e) => setOther({ label: e.target.value })} />
+                        <input type="url" placeholder="https://" value={o.url} onChange={(e) => setOther({ url: e.target.value })} />
+                        <Checkbox label="Active" checked={o.active} onChange={(active) => setOther({ active })} />
+                        <button type="button" className="alumni-editor__other-remove" title="Remove this URL" onClick={() => updateCurrent({ otherGamesUrls: current.otherGamesUrls.filter((_, j) => j !== i) })}>×</button>
+                      </div>
+                    );
+                  })}
+                  <button type="button" className="alumni-editor__other-add" onClick={() => updateCurrent({ otherGamesUrls: [...current.otherGamesUrls, { url: '', label: '', active: true }] })}>+ Add URL</button>
+                </div>
                 <Field label="Recent tweets search URL" hint="Optional. Replaces the player link in the card footer.">
                   <input type="url" value={current.recentTweetsUrl} onChange={(e) => updateCurrent({ recentTweetsUrl: e.target.value })} />
                 </Field>

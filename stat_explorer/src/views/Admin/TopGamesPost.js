@@ -78,6 +78,7 @@ function boardLine(g, keys) {
 // The game's own competition ("Japan-B.Premier League" -> "B.Premier League (Japan)", "Euroleague" as is),
 // falling back to the alum's league and country when the source doesn't record one (RealGM, 3x3).
 export function leagueLabel(game, alum) {
+  if (game.leagueEdit != null) return game.leagueEdit; // typed in the table's edit mode
   const raw = (game.competition || '').trim().replace(/^.*?\((.+)\)$/, '$1');
   const m = /^([A-Za-z.]+)-(.+)$/.exec(raw);
   if (m) return `${m[2]} (${m[1]})`;

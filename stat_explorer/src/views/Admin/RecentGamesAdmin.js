@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { fetchAlum, saveAlum } from './adminApi';
-import CombinedRecentGames, { flattenGames } from './CombinedRecentGames';
+import CombinedRecentGames, { applyEdits, flattenGames, rowKey } from './CombinedRecentGames';
 import TopGamesPostSection from './TopGamesPost';
 import './RecentGamesAdmin.css';
 
@@ -14,22 +14,37 @@ const hostOf = (url) => {
   try { return new URL(url).hostname.replace(/^www\./, ''); } catch (e) { return ''; }
 };
 
+// Games dropped from the table (wrong or not actually recent). Kept per browser, not in the saved
+// results, so a fresh "Run all" can't bring them back; Restore in the table undoes it.
+const DROPPED_KEY = 'recentGames.dropped';
+const loadDropped = () => {
+  try { return new Set(JSON.parse(localStorage.getItem(DROPPED_KEY)) || []); } catch (e) { return new Set(); }
+};
+// Hand edits to a row's team / league, kept the same way: { [rowKey]: { team?, league? } }.
+const EDITS_KEY = 'recentGames.edits';
+const loadEdits = () => {
+  try { return JSON.parse(localStorage.getItem(EDITS_KEY)) || {}; } catch (e) { return {}; }
+};
+
 const ARROW = (
   <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     <circle cx="12" cy="12" r="10" /><polyline points="12 16 16 12 12 8" /><line x1="8" y1="12" x2="16" y2="12" />
   </svg>
 );
 
-function RankedGames({ games }) {
+// `source` names where each game came from; shown only when a player has extra sources merged in
+// (games without their own source came from the main URL), and not in the combined table.
+function RankedGames({ games, source }) {
   const byRank = [...games].sort((a, b) => a.rank - b.rank);
+  const showSource = games.some((g) => g.source && g.source !== source);
   return (
     <table className="recent-games__table">
       <thead>
-        <tr><th>#</th><th>GmSc</th><th>Date</th><th>Opp</th><th>PTS</th><th>REB</th><th>AST</th><th>STL</th><th>BLK</th><th>TOV</th><th>FG</th><th>3P</th><th>FT</th><th>MIN</th><th>Result</th></tr>
+        <tr><th>#</th><th>GmSc</th><th>Date</th><th>Opp</th><th>PTS</th><th>REB</th><th>AST</th><th>STL</th><th>BLK</th><th>TOV</th><th>FG</th><th>3P</th><th>FT</th><th>MIN</th><th>Result</th>{showSource && <th>Source</th>}</tr>
       </thead>
       <tbody>
         {byRank.map((g) => (
-          <tr key={`${g.date}-${g.opp}`}>
+          <tr key={`${g.date}-${g.opp}-${g.source || ''}`}>
             <td>{g.rank}</td>
             <td className="recent-games__strong">{g.gameScore.toFixed(1)}</td>
             <td>{g.date}</td>
@@ -37,6 +52,7 @@ function RankedGames({ games }) {
             <td>{g.pts}</td><td>{g.reb}</td><td>{g.ast}</td><td>{g.stl}</td><td>{g.blk}</td><td>{g.tov}</td>
             <td>{g.fg}</td><td>{g.threes}</td><td>{g.ft}</td><td>{g.min}</td>
             <td>{g.result}</td>
+            {showSource && <td className="recent-games__left">{g.source || source}</td>}
           </tr>
         ))}
       </tbody>
@@ -89,7 +105,7 @@ function Result({ entry }) {
       <div className="recent-games__note">
         {entry.source} · {entry.status}{entry.message ? ` — ${entry.message}` : ''}
       </div>
-      {entry.games.length > 0 && (entry.kind === 'schedule' ? <ScheduleGames games={entry.games} /> : <RankedGames games={entry.games} />)}
+      {entry.games.length > 0 && (entry.kind === 'schedule' ? <ScheduleGames games={entry.games} /> : <RankedGames games={entry.games} source={entry.source} />)}
     </div>
   );
 }
@@ -109,8 +125,23 @@ export default function RecentGamesAdmin({ initialAlum: alumSeed }) {
   const [saveMsg, setSaveMsg] = useState('');
   const [publishMsg, setPublishMsg] = useState('');
   const [publishing, setPublishing] = useState(false);
+  const [dropped, setDropped] = useState(loadDropped);
+  const [edits, setEdits] = useState(loadEdits);
   const resultsRef = useRef(results);
   resultsRef.current = results;
+
+  function updateDropped(next) {
+    setDropped(next);
+    try { localStorage.setItem(DROPPED_KEY, JSON.stringify([...next])); } catch (e) { /* storage unavailable: still applies this session */ }
+  }
+  const dropGame = (key) => updateDropped(new Set(dropped).add(key));
+  const restoreAll = () => updateDropped(new Set());
+  function updateEdits(next) {
+    setEdits(next);
+    try { localStorage.setItem(EDITS_KEY, JSON.stringify(next)); } catch (e) { /* storage unavailable: still applies this session */ }
+  }
+  const editRow = (key, field, value) => updateEdits({ ...edits, [key]: { ...edits[key], [field]: value } });
+  const resetEdits = () => updateEdits({});
 
   const alumByName = useMemo(() => Object.fromEntries(alumSeed.map((a) => [a.name, a])), [alumSeed]);
   const teams = useMemo(() => Object.fromEntries(alumSeed.map((a) => [a.name, a.team])), [alumSeed]);
@@ -243,8 +274,8 @@ export default function RecentGamesAdmin({ initialAlum: alumSeed }) {
         {saveMsg && <span className="recent-games__saved">{saveMsg}</span>}
         {publishMsg && <span className={publishMsg.startsWith('Not') ? 'recent-games__note--error' : 'recent-games__saved'}>{publishMsg}</span>}
       </div>
-      <CombinedRecentGames results={results} teams={teams} alumByName={alumByName} generatedAt={generatedAt} />
-      <TopGamesPostSection rows={flattenGames(results, teams, alumByName)} alumni={alumSeed} />
+      <CombinedRecentGames results={results} teams={teams} alumByName={alumByName} generatedAt={generatedAt} dropped={dropped} onDrop={dropGame} onRestoreAll={restoreAll} edits={edits} onEdit={editRow} onResetEdits={resetEdits} />
+      <TopGamesPostSection rows={applyEdits(flattenGames(results, teams, alumByName), edits).filter((r) => !dropped.has(rowKey(r)))} alumni={alumSeed} />
       <p className="recent-games__hint">
         Ranked by Hollinger Game Score (BBR&rsquo;s own where published, otherwise computed from the box line).
         Runs on demand and stores nothing. FIBA 3x3: paste that event&rsquo;s World Tour <em>team</em> page
