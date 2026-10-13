@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { findRecords, recordSentence, restSentence } from '../../utils/killsRecords';
+import RecordTile from '../../components/RecordTile/RecordTile';
 import './SeasonRecords.css';
 
 // "BYU is 7-1 when they get 8 kills": thresholds in the season's own games where BYU won 80%+
@@ -23,14 +24,17 @@ export default function SeasonRecords({ rows, label }) {
       <ul className="season-records__list">
         {records.map((rec, i) => (
           <li key={rec.conditions.map((c) => `${c.metric}${c.op}${c.value}`).join('&')}>
-            <button type="button" className="season-records__item" onClick={() => copy(rec, i)} title="Copy this line">
-              <span className="season-records__wl">{rec.wins}-{rec.losses}</span>
-              <span className="season-records__text">
-                {recordSentence(rec).replace(/^BYU is \d+-\d+ when they /, '')}
-                <small className="season-records__rest">{restSentence(rec)}</small>
-              </span>
-              <span className="season-records__copy">{copied === i ? 'Copied' : 'Copy'}</span>
-            </button>
+            <RecordTile
+              variant="slim"
+              wins={rec.wins}
+              losses={rec.losses}
+              note={copied === i ? 'Copied' : restSentence(rec)}
+              onClick={() => copy(rec, i)}
+              title="Copy this line"
+            >
+              <span className="record-tile__lead">When they </span>
+              <b>{recordSentence(rec).replace(/^BYU is \d+-\d+ when they /, '')}</b>
+            </RecordTile>
           </li>
         ))}
       </ul>

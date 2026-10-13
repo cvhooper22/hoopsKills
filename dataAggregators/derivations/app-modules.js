@@ -8,6 +8,8 @@ module.exports = {
   kills: require(`${utils}/kills.js`),
   killsSummary: require(`${utils}/killsSummary.js`),
   killsSeason: require(`${utils}/killsSeason.js`),
+  clutchSummary: require(`${utils}/clutchSummary.js`),
+  clutchSeason: require(`${utils}/clutchSeason.js`),
   lineupsSummary: require(`${utils}/lineupsSummary.js`),
   lineupsSeason: require(`${utils}/lineupsSeason.js`),
 };

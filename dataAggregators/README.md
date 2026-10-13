@@ -91,3 +91,11 @@ Season lineups follow the same flow as kills: `node ingest/tools/export-game-lin
 writes `lineups/games/<id>.json`, then `node derivations/aggregate-lineups.js --season <year>` writes
 `lineups/seasons/<year>.json` (games identified by gameId + oppTeamId, like kills). Logic lives in
 `stat_explorer/src/utils/{lineupsSummary,lineupsSeason}.js`; bump `LINEUPS_RULES_VERSION` if it changes.
+
+Season clutch follows the same flow: `node ingest/tools/export-game-clutch.js --all` writes
+`clutch/games/<id>.json` (BYU player lines, team totals for both sides, stretch splits), then
+`node derivations/aggregate-clutch.js --season <year>` writes `clutch/seasons/<year>.json` and
+`clutch/seasons/index.json`. Upload each to the matching `clutch/` key. The definition is fixed
+(2nd half / OT, 5:00 or less, margin of 5 or less) in `CLUTCH_DEFINITION`; the per-game clutch
+page keeps its adjustable definition by working from the plays. Logic lives in
+`stat_explorer/src/utils/{clutchSummary,clutchSeason}.js`; bump `CLUTCH_RULES_VERSION` if it changes.

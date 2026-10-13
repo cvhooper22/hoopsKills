@@ -4,17 +4,21 @@
 // so it works the same whether the plays come from a static file or an API.
 export const DEFAULT_CLUTCH = { seconds: 300, margin: 5 };
 
-const STAT_KEYS = ["pts", "fgm", "fga", "tpm", "tpa", "ftm", "fta", "reb", "oreb", "ast", "stl", "blk", "tov", "pf", "plusMinus", "seconds"];
+export const CLUTCH_STAT_KEYS = ["pts", "fgm", "fga", "tpm", "tpa", "ftm", "fta", "reb", "oreb", "ast", "stl", "blk", "tov", "pf", "plusMinus", "seconds"];
 const EVENT_CATEGORIES = ["shot_attempt", "free_throw", "turnover", "steal", "block"];
 
 function newLine(id, name, teamId) {
   const line = { id, name, teamId };
-  STAT_KEYS.forEach((k) => { line[k] = 0; });
+  CLUTCH_STAT_KEYS.forEach((k) => { line[k] = 0; });
   return line;
 }
 
 function slugToName(slug) {
   return slug.split("-").map((s) => s[0].toUpperCase() + s.slice(1)).join(" ");
+}
+
+function periodTally(stretch, period) {
+  return (stretch.byPeriod[period] ??= { seconds: 0, pts: {} });
 }
 
 function scoreEvent(p, prev, leaderOf) {
@@ -89,6 +93,7 @@ export function genClutchData(plays, { seconds: limit, margin: maxMargin } = DEF
           entry: cutBack ? lastScore : null,
           seconds: 0,
           pts: {},
+          byPeriod: {}, // period -> { seconds, pts: { teamId: points } }, for stretches that run from regulation into overtime
           events: [],
           exit: null,
         };
@@ -99,6 +104,7 @@ export function genClutchData(plays, { seconds: limit, margin: maxMargin } = DEF
       if (elapsed > 0) {
         totalSeconds += elapsed;
         stretch.seconds += elapsed;
+        periodTally(stretch, p.period_number).seconds += elapsed;
         prev.lineup.forEach(({ id }) => { players[id].seconds += elapsed; });
       }
       const line = p.player_id ? lineFor(p) : null;
@@ -134,6 +140,9 @@ export function genClutchData(plays, { seconds: limit, margin: maxMargin } = DEF
         teamFor(awayId).pts += awayDelta;
         stretch.pts[homeId] = (stretch.pts[homeId] ?? 0) + homeDelta;
         stretch.pts[awayId] = (stretch.pts[awayId] ?? 0) + awayDelta;
+        const tally = periodTally(stretch, p.period_number);
+        tally.pts[homeId] = (tally.pts[homeId] ?? 0) + homeDelta;
+        tally.pts[awayId] = (tally.pts[awayId] ?? 0) + awayDelta;
       }
       if (EVENT_CATEGORIES.includes(cat)) {
         stretch.events.push({

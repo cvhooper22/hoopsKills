@@ -1,0 +1,60 @@
+.season-clutch__definition { margin: 0.25rem 0 0.75rem; color: var(--secondary-text); font-size: 0.85rem; text-align: center; }
+
+/* Clutch record / Stretches won, centred under the flip tiles */
+.season-clutch__records {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 22rem));
+  justify-content: center;
+  gap: 0.75rem;
+  max-width: 70rem;
+  margin: 0 auto 1.75rem;
+}
+
+/* the season sections sit in the same column as the kills page content */
+.season-clutch .clutch-section { max-width: 70rem; margin-left: auto; margin-right: auto; }
+
+.season-clutch .season-box { max-width: none; }
+.season-box__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 0.5rem 1rem; }
+.season-box__head .clutch-section__sub { margin-bottom: 0.75rem; }
+.season-box__head .ball-toggle { margin-bottom: 0.75rem; }
+
+/* ---------- Outplaying them? ---------- */
+.outplayed { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 23rem), 1fr)); gap: 1rem; align-items: start; }
+
+.outplayed__card {
+  padding: 1rem;
+  border-radius: var(--radius-card, 8px);
+  background: white;
+  box-shadow: 0 0.125rem 0.5rem rgb(0 0 0 / 12%);
+}
+
+.outplayed__title { margin: 0 0 0.25rem; font-size: 1.05rem; font-weight: 800; }
+.outplayed__note { margin: 0 0 0.6rem; color: var(--gray4); font-size: 0.8rem; }
+.outplayed__verdict { margin: 0 0 0.75rem; color: var(--secondary-text); font-size: 0.9rem; }
+
+.outplayed__list { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.55rem; }
+
+.outplayed__row { display: grid; grid-template-columns: 3.6rem 1fr 3.6rem; align-items: center; gap: 0.5rem; }
+.outplayed__val { font-variant-numeric: tabular-nums; font-size: 0.95rem; text-align: left; }
+.outplayed__val--them { text-align: right; }
+.outplayed__made { display: block; color: var(--gray4); font-size: 0.65rem; font-weight: 400; }
+.outplayed__val--win { font-weight: 800; color: var(--royal-blue); }
+.outplayed__val--them.outplayed__val--win { color: var(--error-1); }
+
+.outplayed__mid { display: grid; gap: 0.2rem; text-align: center; }
+.outplayed__label { font-size: 0.75rem; color: var(--secondary-text); }
+.outplayed__bar { display: block; height: 0.4rem; border-radius: 999px; background: var(--error-3, #f4c7c3); overflow: hidden; }
+.outplayed__fill { display: block; height: 100%; border-radius: 999px; background: var(--royal-blue); }
+.outplayed__fill--behind { background: var(--gray3, #9aa3b2); }
+
+.outplayed__legend { display: flex; justify-content: space-between; margin: 0.6rem 0 0; color: var(--gray4); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.04em; }
+
+.outplayed__scroll { overflow-x: auto; }
+.outplayed__table { width: 100%; border-collapse: collapse; font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+.outplayed__table th, .outplayed__table td { padding: 0.45rem 0.4rem; text-align: right; white-space: nowrap; }
+.outplayed__table thead th { color: var(--secondary-text); font-size: 0.75rem; font-weight: 600; border-bottom: 1px solid var(--gray2); }
+.outplayed__table tbody th { text-align: left; font-weight: 700; }
+.outplayed__table tbody tr + tr > * { border-top: 1px solid var(--gray1); }
+.outplayed__net--pos { color: var(--success-1); font-weight: 700; }
+.outplayed__net--neg { color: var(--error-1); font-weight: 700; }
+.outplayed__empty { text-align: center !important; color: var(--secondary-text); }

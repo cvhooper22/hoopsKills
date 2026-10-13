@@ -3,7 +3,7 @@ import { CLUTCH_COLUMNS, sortClutchRows } from "./clutchColumns";
 import ClutchTableHead from "./ClutchTableHead";
 import { teamName } from "./teamNames";
 
-const SUM_KEYS = ["pts", "fgm", "fga", "tpm", "tpa", "ftm", "fta", "reb", "ast", "stl", "blk", "tov", "pf"];
+const SUM_KEYS = ["pts", "fgm", "fga", "tpm", "tpa", "ftm", "fta", "oreb", "reb", "ast", "stl", "blk", "tov", "pf"];
 
 const hasClutchActivity = (p) => p.seconds > 0 || SUM_KEYS.some((k) => p[k]);
 
