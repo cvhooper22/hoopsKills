@@ -1,5 +1,6 @@
 .home {
-  height: calc(100% - 2rem);
+  padding: 0;
+  height: 100%;
   background-image: linear-gradient(
       110deg,
       hsl(60deg 100% 100%) 0%,
@@ -11,57 +12,227 @@
   );
 }
 
-.feature-area {
-  display: flex;
-  justify-content: center;
-  height: 300px;
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  overflow: hidden;
 }
 
-.feature-area.feature-area--description-left {
-  flex-direction: row-reverse;
-}
-
-.feature-area.feature-area--description-left .home-image{
-  flex-direction: row-reverse;
-  transform: perspective(100px) rotateY(-2deg);
-  box-shadow: 7px 7px 2px -3px rgb(100 100 100 / 10%);
-}
-
-.feature-area.feature-area--description-left .home-description{
-  margin-left: 0;
-  margin-right: 3rem;
-}
-
-.home-image {
-  align-self: center;
-  transform: perspective(100px) rotateY(2deg);
-  box-shadow: -7px 7px 2px -3px rgb(100 100 100 / 10%);
-  border: 1px solid rgba(0,0,0,0.12);
-  height: 200px;
-}
-
-.home-description {
-  width: 300px;
-  margin-left: 3rem;
-  margin-top: 3rem;
-}
-
-.home-link {
-  display: flex;
+.carousel-slide {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: minmax(220px, 28%) minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
   align-items: center;
-  justify-content: center;
-  border-radius: 16px;
-  border: 1px solid var(--royal-blue);
-  color: var(--royal-blue);
-  text-decoration: none;
-  margin-top: 1rem;
-  margin-right: auto;
-  margin-left: auto;
-  font-size: 0.875rem;
-  padding: 2px 14px;
-  width: fit-content;
+  gap: 2.5rem;
+  padding: 2.5rem 4.5rem 4rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
 }
 
-.home-link:visited {
+.carousel-slide--active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.carousel-image {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+  max-width: 100%;
+  max-height: 100%;
+  border: 1px solid rgb(0 0 0 / 12%);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 16px 40px rgb(20 40 90 / 20%), 0 2px 6px rgb(20 40 90 / 10%);
+}
+
+.carousel-caption {
+  grid-column: 1;
+  grid-row: 1;
+  text-align: left;
+}
+
+.carousel-caption h2 {
+  margin: 0 0 0.75rem;
+  font-size: 2.5rem;
+  line-height: 1.1;
+}
+
+.carousel-caption p {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #444;
+}
+
+.carousel-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  padding: 6px 22px;
+  border: 1px solid var(--royal-blue);
+  border-radius: 16px;
   color: var(--royal-blue);
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+.carousel-link:visited {
+  color: var(--royal-blue);
+}
+
+.carousel-link:hover {
+  background: var(--royal-blue);
+  color: #fff;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid rgb(0 0 0 / 10%);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--royal-blue);
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgb(20 40 90 / 15%);
+}
+
+.carousel-arrow:hover {
+  background: #eef3fc;
+}
+
+.carousel-arrow--prev { left: 0.75rem; }
+.carousel-arrow--next { right: 0.75rem; }
+
+.carousel-dots {
+  position: absolute;
+  bottom: 0.9rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 1px solid var(--royal-blue);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+.carousel-dot--active {
+  background: var(--royal-blue);
+}
+
+/* Under 600px the carousel gives way to a vertical list of the same features. */
+.feature-list {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .carousel-slide {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 1.25rem;
+    padding: 1.5rem 3.5rem 3rem;
+  }
+
+  .carousel-image,
+  .carousel-caption {
+    grid-column: 1;
+  }
+
+  .carousel-caption {
+    grid-row: 1;
+    text-align: center;
+  }
+
+  .carousel-image {
+    grid-row: 2;
+  }
+
+  .carousel-caption h2 {
+    font-size: 1.75rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .carousel-caption p {
+    font-size: 0.95rem;
+  }
+
+  .carousel-link {
+    margin-top: 0.9rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .carousel {
+    display: none;
+  }
+
+  .feature-list {
+    display: block;
+    padding: 1rem;
+  }
+
+  .feature-area {
+    margin-bottom: 2rem;
+  }
+
+  .home-image {
+    width: 100%;
+    height: auto;
+    border: 1px solid rgb(0 0 0 / 12%);
+    border-radius: 12px;
+    box-shadow: 0 16px 40px rgb(20 40 90 / 20%), 0 2px 6px rgb(20 40 90 / 10%);
+  }
+
+  .home-description {
+    margin-top: 0.75rem;
+  }
+
+  .home-description h2 {
+    margin: 0 0 0.25rem;
+  }
+
+  .home-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin: 1rem auto 0;
+    padding: 2px 14px;
+    border: 1px solid var(--royal-blue);
+    border-radius: 16px;
+    color: var(--royal-blue);
+    font-size: 0.875rem;
+    text-decoration: none;
+  }
+}
+
+/* Lineups' global mobile rules pad .home for its game pills; here we only clear the fixed top bar. */
+@media screen and (max-width: 900px) {
+  div.content > div.home {
+    padding-top: 105px;
+    height: 100%;
+    overflow-y: auto;
+  }
+}
+
+/* .content reserves 1rem of white at the bottom; let the home gradient run to the window edge. */
+.content:has(> .home) {
+  padding-bottom: 0;
 }
