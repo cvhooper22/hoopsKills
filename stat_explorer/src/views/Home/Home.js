@@ -12,7 +12,7 @@ const SLIDES = [
   {
     title: 'Kills',
     image: 'kills.png',
-    description: "Track the defensive stops and kills (three stops in a row), game by game and across the season.",
+    description: "Track defensive stops and kills (three stops in a row), game by game and across the season.",
     href: '/kills/season',
     cta: 'Go to Kills',
   },
@@ -69,8 +69,8 @@ export default function Home () {
             </div>
           </div>
         ))}
-        <button className="carousel-arrow carousel-arrow--prev" onClick={() => go(index - 1)} aria-label="Previous">‹</button>
-        <button className="carousel-arrow carousel-arrow--next" onClick={() => go(index + 1)} aria-label="Next">›</button>
+        <button className="carousel-arrow carousel-arrow--prev" onClick={() => go(index - 1)} aria-label="Previous"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg></button>
+        <button className="carousel-arrow carousel-arrow--next" onClick={() => go(index + 1)} aria-label="Next"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/></svg></button>
         <div className="carousel-dots">
           {SLIDES.map((slide, i) => (
             <button
