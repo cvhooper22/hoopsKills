@@ -38,6 +38,7 @@ export function gameRow(summary) {
     outcomes: summary.outcomes,
     entries: summary.entries,
     periods: summary.periods,
+    last2: summary.last2,
     team: summary.team,
     players: summary.players,
     // Per-game derived value, so the table does no math.
@@ -70,6 +71,7 @@ function sideRates(t) {
 // `games` counts the games that had any of this kind of clutch: a game with two stretches that began
 // trailing counts once. That is the denominator for the per-game numbers, since a game, not a stretch,
 // is the unit of clutch opportunity.
+const TALLY_KEYS = ['stretches', 'seconds', 'ptsFor', 'ptsAgainst'];
 const tally = () => ({ games: 0, stretches: 0, seconds: 0, ptsFor: 0, ptsAgainst: 0 });
 const addTally = (acc, t) => {
   Object.keys(acc).forEach((k) => { if (k !== 'games') acc[k] += t[k] || 0; });
@@ -109,6 +111,8 @@ export function foldRows(rows) {
     against: zeros(TEAM_STAT_KEYS),
     entries: Object.fromEntries(SITUATIONS.map((s) => [s, tally()])),
     periods: Object.fromEntries(PERIOD_KEYS.map((p) => [p, tally()])),
+    last2: tally(),
+    all: tally(), // regulation and overtime clutch together
   };
   const record = { w: 0, l: 0 }; // results of the games that had any clutch time
 
@@ -126,6 +130,10 @@ export function foldRows(rows) {
     });
     SITUATIONS.forEach((s) => addTally(totals.entries[s], r.entries[s] || {}));
     PERIOD_KEYS.forEach((p) => addTally(totals.periods[p], r.periods[p] || {}));
+    addTally(totals.last2, r.last2 || {}); // rows from before rules version 2 have none
+    const all = {};
+    TALLY_KEYS.forEach((k) => { all[k] = PERIOD_KEYS.reduce((n, p) => n + ((r.periods || {})[p]?.[k] || 0), 0); });
+    addTally(totals.all, all);
   });
 
   const net = totals.for.pts - totals.against.pts;
@@ -141,6 +149,8 @@ export function foldRows(rows) {
     againstRates: sideRates(totals.against),
     entries: Object.fromEntries(SITUATIONS.map((s) => [s, withNet(totals.entries[s])])),
     periods: Object.fromEntries(PERIOD_KEYS.map((p) => [p, withNet(totals.periods[p])])),
+    last2: withNet(totals.last2),
+    all: withNet(totals.all),
   };
   return { totals, derived, players: foldPlayers(rows) };
 }

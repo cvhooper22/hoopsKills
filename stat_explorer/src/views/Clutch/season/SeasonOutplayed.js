@@ -10,18 +10,22 @@ const TOTALS = [
   { label: 'Points', get: (t) => t.pts, fmt: count, better: 'high' },
   { label: 'Points / poss', get: (t, r) => r.ppp, fmt: ppp, better: 'high', title: 'Points per estimated possession' },
   { label: 'Possessions (est.)', get: (t, r) => r.poss, fmt: (n) => n.toFixed(1), better: null },
-  { label: 'FT attempts', get: (t) => t.fta, fmt: count, better: 'high' },
   { label: 'Rebounds', get: (t) => t.reb, fmt: count, better: 'high' },
+  { label: 'Offensive rebounds', get: (t) => t.oreb, fmt: count, better: 'high' },
   { label: 'Assists', get: (t) => t.ast, fmt: count, better: 'high' },
   { label: 'Turnovers', get: (t) => t.tov, fmt: count, better: 'low' },
   { label: 'Steals + blocks', get: (t) => t.stl + t.blk, fmt: count, better: 'high' },
+  { label: 'Fouls', get: (t) => t.pf, fmt: count, better: 'low', title: 'Personal fouls committed' },
 ];
 
 const SHOOTING = [
-  { label: 'FG%', get: (t, r) => r.fgPct, fmt: pct, better: 'high', made: (t) => [t.fgm, t.fga] },
-  { label: '2P%', get: (t, r) => r.twoPct, fmt: pct, better: 'high', made: (t) => [t.fgm - t.tpm, t.fga - t.tpa] },
-  { label: '3P%', get: (t, r) => r.tpPct, fmt: pct, better: 'high', made: (t) => [t.tpm, t.tpa] },
-  { label: 'FT%', get: (t, r) => r.ftPct, fmt: pct, better: 'high', made: (t) => [t.ftm, t.fta] },
+  { label: 'FG%', get: (t, r) => r.fgPct, fmt: pct, better: 'high' },
+  { label: '2PA', get: (t) => t.fga - t.tpa, fmt: count, better: 'high', title: 'Two-point attempts' },
+  { label: '2P%', get: (t, r) => r.twoPct, fmt: pct, better: 'high' },
+  { label: '3PA', get: (t) => t.tpa, fmt: count, better: 'high', title: 'Three-point attempts' },
+  { label: '3P%', get: (t, r) => r.tpPct, fmt: pct, better: 'high' },
+  { label: 'FTA', get: (t) => t.fta, fmt: count, better: 'high', title: 'Free throw attempts' },
+  { label: 'FT%', get: (t, r) => r.ftPct, fmt: pct, better: 'high' },
   { label: 'eFG%', get: (t, r) => r.efg, fmt: pct, better: 'high', title: 'Effective field goal %: counts a three as 1.5 makes' },
   { label: 'TS%', get: (t, r) => r.tsPct, fmt: pct, better: 'high', title: 'True shooting %: points per shooting attempt, free throws included' },
 ];
@@ -31,10 +35,11 @@ function winner(row, a, b) {
   return (a > b) === (row.better === 'high') ? 'us' : 'them';
 }
 
-// Width of BYU's half of the bar. Lower-is-better stats flip so a longer bar always means "better".
+// Width of BYU's half of the bar. Lower-is-better stats flip so a longer bar always means "better";
+// stats with no better side (attempts, possessions) are just BYU's share of the two.
 function share(row, a, b) {
-  const x = row.better === 'high' ? a : b;
-  const y = row.better === 'high' ? b : a;
+  const x = row.better === 'low' ? b : a;
+  const y = row.better === 'low' ? a : b;
   if (a === null || b === null || x + y === 0) return 50;
   return (x / (x + y)) * 100;
 }
@@ -62,7 +67,7 @@ function Matchups({ title, defs, totals, derived, verdict, note }) {
         {rows.map((r) => (
           <li key={r.label} className="outplayed__row" title={r.title}>
             <span className={`outplayed__val${r.win === 'us' ? ' outplayed__val--win' : ''}`}>
-              {r.fmt(r.a)}{r.made && <small className="outplayed__made">{r.made(totals.for).join('-')}</small>}
+              {r.fmt(r.a)}
             </span>
             <span className="outplayed__mid">
               <span className="outplayed__label">{r.label}</span>
@@ -71,7 +76,7 @@ function Matchups({ title, defs, totals, derived, verdict, note }) {
               </span>
             </span>
             <span className={`outplayed__val outplayed__val--them${r.win === 'them' ? ' outplayed__val--win' : ''}`}>
-              {r.fmt(r.b)}{r.made && <small className="outplayed__made">{r.made(totals.against).join('-')}</small>}
+              {r.fmt(r.b)}
             </span>
           </li>
         ))}
@@ -89,10 +94,15 @@ const SPLITS = [
     gamesTitle: 'Games with a stretch that began this way',
   },
   {
-    title: 'Regulation or overtime',
-    note: 'Points each side scored in clutch time, split by where it fell on the clock',
-    rows: (d) => [['2nd half', d.periods['2']], ['Overtime', d.periods.OT]],
-    gamesTitle: 'Games with clutch time in this period',
+    title: 'By time left',
+    note: 'Points each side scored in clutch time, by how much time was left on the clock',
+    // a season with no overtime clutch shows the all-clutch total in its place, so the card keeps three rows
+    rows: (d) => [
+      ['Last 5:00', d.periods['2']],
+      ['Last 2:00', d.last2],
+      d.periods.OT.games > 0 ? ['Overtime', d.periods.OT] : ['Total', d.all],
+    ],
+    gamesTitle: 'Games with clutch time in this window',
     hideStretches: true,
   },
 ];
@@ -145,11 +155,10 @@ export default function SeasonOutplayed({ folded }) {
   const { totals, derived } = folded;
   return (
     <section className="clutch-section">
-      <h2 className="clutch-section__title">Outplaying them?</h2>
-      <p className="clutch-section__sub">BYU against its opponents in clutch time</p>
+      <h2 className="clutch-section__title">Team Comparison</h2>
       <div className="outplayed">
-        <Matchups title="Team totals" defs={TOTALS} totals={totals} derived={derived} verdict />
-        <Matchups title="Shooting" defs={SHOOTING} totals={totals} derived={derived} note="Percentages with makes-attempts underneath" />
+        <Matchups title="Overall Totals" defs={TOTALS} totals={totals} derived={derived} />
+        <Matchups title="Shooting" defs={SHOOTING} totals={totals} derived={derived} />
         {SPLITS.map((s) => <SplitTable key={s.title} split={s} derived={derived} />)}
       </div>
     </section>

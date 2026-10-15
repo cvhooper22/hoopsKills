@@ -53,6 +53,12 @@ describe('buildGameClutchSummary', () => {
     expect(s.seconds).toBe(290); // from the 4:50 play to 0:00
   });
 
+  it('tallies the last 2:00 of regulation on its own', () => {
+    const s = buildGameClutchSummary({ plays: gamePlays(), game: game() });
+    // from the 1:40 turnover to 0:00: BYU scored nothing, the opponent's free throw tied it
+    expect(s.last2).toEqual({ stretches: 1, seconds: 120, ptsFor: 0, ptsAgainst: 1 });
+  });
+
   it('reads the entry situation from the focus team when it is the away side', () => {
     const away = buildGameClutchSummary({
       plays: gamePlays().map((p) => ({ ...p, team_side: p.team_side === 'home' ? 'away' : 'home', home_score_after: p.away_score_after, away_score_after: p.home_score_after })),
@@ -106,6 +112,16 @@ describe('foldRows', () => {
     expect(forRates.twoPct).toBeCloseTo(3 / 7);
     expect(forRates.tsPct).toBeCloseTo(12 / (2 * (10 + 0.44 * 5)));
     expect(againstRates.ppp).toBeCloseTo(6 / 7);
+  });
+
+  it('folds the last 2:00 and the all-clutch total, and tolerates rows without them', () => {
+    const a = gameRow(summary('2025-12-01-a'));
+    const old = { ...gameRow(summary('2025-12-02-b')) };
+    delete old.last2;
+    const { last2, all, periods } = foldRows([a, old]).derived;
+    expect(last2).toMatchObject({ games: 1, stretches: 1, seconds: 120, net: -1 });
+    expect(all).toMatchObject({ games: 2, stretches: 2, ptsFor: 6, ptsAgainst: 6 });
+    expect(periods.OT.games).toBe(0);
   });
 
   it('divides the entry and period splits by the games that had that kind of clutch', () => {

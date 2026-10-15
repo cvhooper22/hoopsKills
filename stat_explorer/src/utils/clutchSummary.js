@@ -9,8 +9,10 @@
 import { genClutchData, CLUTCH_STAT_KEYS } from './clutchUtils.js';
 
 // Bump when the definition or the counting changes. The season aggregator refuses mixed versions.
-export const CLUTCH_RULES_VERSION = 1;
+export const CLUTCH_RULES_VERSION = 2;
 export const CLUTCH_DEFINITION = { seconds: 300, margin: 5 };
+// The tighter window reported on its own (last2): the same rule with 2:00 instead of 5:00.
+export const LAST_WINDOW_SECONDS = 120;
 
 // What a team line carries. Players also carry minutes and plus/minus; a team's own are its clutch
 // time and net, so those come from the totals instead.
@@ -86,6 +88,18 @@ export function buildGameClutchSummary({ plays, game, focusTeamId = 'byu', gener
     periods[periodKey(s.start.period)].stretches += 1;
   });
 
+  // The last 2:00 of regulation. Runs the clutch rule again with the shorter window, so it is a subset
+  // of the 5:00 stretches; overtime stays in the periods split.
+  const last2 = zeroTally();
+  genClutchData(plays, { ...CLUTCH_DEFINITION, seconds: LAST_WINDOW_SECONDS }).stretches.forEach((s) => {
+    const t = s.byPeriod[2];
+    if (!t) return;
+    last2.seconds += t.seconds;
+    last2.ptsFor += t.pts[focusTeamId] ?? 0;
+    last2.ptsAgainst += t.pts[oppTeamId] ?? 0;
+    if (s.start.period === 2) last2.stretches += 1;
+  });
+
   return {
     gameId: game.gameId,
     source: game.primarySource || null,
@@ -111,6 +125,7 @@ export function buildGameClutchSummary({ plays, game, focusTeamId = 'byu', gener
     outcomes,
     entries: roundTallies(entries),
     periods: roundTallies(periods),
+    last2: { ...last2, seconds: round1(last2.seconds) },
     team: {
       for: teamLine(focusTeamId, teamPts(focusTeamId)),
       against: teamLine(oppTeamId, teamPts(oppTeamId)),

@@ -19,7 +19,7 @@
 .season-box__head .ball-toggle { margin-bottom: 0.75rem; }
 
 /* ---------- Outplaying them? ---------- */
-.outplayed { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 23rem), 1fr)); gap: 1rem; align-items: start; }
+.outplayed { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 23rem), 1fr)); gap: 1rem; align-items: start; margin-top: 2rem}
 
 .outplayed__card {
   padding: 1rem;
@@ -34,16 +34,16 @@
 
 .outplayed__list { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.55rem; }
 
-.outplayed__row { display: grid; grid-template-columns: 3.6rem 1fr 3.6rem; align-items: center; gap: 0.5rem; }
-.outplayed__val { font-variant-numeric: tabular-nums; font-size: 0.95rem; text-align: left; }
-.outplayed__val--them { text-align: right; }
-.outplayed__made { display: block; color: var(--gray4); font-size: 0.65rem; font-weight: 400; }
+/* label on its own line above; the two numbers share a line with the bar so they centre on it */
+.outplayed__row { display: grid; grid-template-columns: 3.6rem 1fr 3.6rem; align-items: center; gap: 0.2rem 0.5rem; }
+.outplayed__val { grid-column: 1; grid-row: 2; font-variant-numeric: tabular-nums; font-size: 0.95rem; text-align: left; }
+.outplayed__val--them { grid-column: 3; text-align: right; }
 .outplayed__val--win { font-weight: 800; color: var(--royal-blue); }
 .outplayed__val--them.outplayed__val--win { color: var(--error-1); }
 
-.outplayed__mid { display: grid; gap: 0.2rem; text-align: center; }
-.outplayed__label { font-size: 0.75rem; color: var(--secondary-text); }
-.outplayed__bar { display: block; height: 0.4rem; border-radius: 999px; background: var(--error-3, #f4c7c3); overflow: hidden; }
+.outplayed__mid { display: contents; }
+.outplayed__label { grid-column: 2; grid-row: 1; font-size: 0.75rem; color: var(--secondary-text); text-align: center; }
+.outplayed__bar { grid-column: 2; grid-row: 2; display: block; height: 0.4rem; border-radius: 999px; background: var(--error-3, #f4c7c3); overflow: hidden; }
 .outplayed__fill { display: block; height: 100%; border-radius: 999px; background: var(--royal-blue); }
 .outplayed__fill--behind { background: var(--gray3, #9aa3b2); }
 
