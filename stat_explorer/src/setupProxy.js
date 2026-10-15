@@ -21,6 +21,12 @@ function logError(tag, ...args) {
 const ADMIN_API_ROUTES = { '/whoami': ['GET'], '/alum': ['GET', 'PUT'], '/images': ['POST'] };
 
 module.exports = function (app) {
+  // TEMPORARY, dev-only: serves the gitignored design exports (../design/Hoops Stats (1)) so a
+  // design can be viewed live while it's being refined, e.g.
+  //   http://localhost:4444/design-preview/Landing%20Menu%20-%20Jumbotron.html
+  // Remove once the landing page is implemented.
+  app.use('/design-preview', express.static(path.join(__dirname, '..', '..', 'design', 'Hoops Stats (1)')));
+
   app.use('/api/admin', express.text({ type: '*/*', limit: '1mb' }));
 
   app.all('/api/admin/*', async (req, res) => {

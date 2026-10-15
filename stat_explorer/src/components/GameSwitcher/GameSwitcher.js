@@ -96,8 +96,8 @@ export default function GameSwitcher({ basePath }) {
 
   const seasons = [...groupBySeason(games).entries()];
   const currentGame = games.find((g) => location.pathname === `/${basePath}/${g.gameId}`);
-  // Kills and lineups have a "Full Season" entry at the top of each season's list, living at /<basePath>/season.
-  const hasSeasonPage = basePath === 'kills' || basePath === 'lineups';
+  // Kills, lineups and clutch have a "Full Season" entry at the top of each season's list, living at /<basePath>/season.
+  const hasSeasonPage = basePath === 'kills' || basePath === 'lineups' || basePath === 'clutch';
   const onSeasonPage = hasSeasonPage && location.pathname === `/${basePath}/season`;
   const seasonParam = Number(searchParams.get('season')) || null;
   const currentKey = currentGame ? (currentGame.seasonYear ?? 'unknown')

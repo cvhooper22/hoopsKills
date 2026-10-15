@@ -9,6 +9,7 @@ import ClutchRouter from './views/Clutch/ClutchRouter';
 import GameLineups from './views/Lineups/components/GameLineups';
 import SeasonLineups from "./views/Lineups/components/SeasonLineups";
 import GameClutch from './views/Clutch/components/GameClutch';
+import ClutchSeason from './views/Clutch/season/ClutchSeason';
 import Kills from "./views/Kills/Kills";
 import KillsSeason from "./views/Kills/KillsSeason";
 import KillsRouter from "./views/Kills/KillsRouter";
@@ -73,7 +74,9 @@ function AppContent() {
               <Route path="season" element={<SeasonLineups /> } />
             </Route>
             <Route path="clutch" element={<ClutchRouter />}>
-              <Route index element={<LatestGameRedirect basePath="clutch" />} />
+              <Route index element={<Navigate replace to="/clutch/season" />} />
+              <Route path="season" element={<ClutchSeason />} />
+              <Route path="latest" element={<LatestGameRedirect basePath="clutch" />} />
               <Route path=":name" element={<GameClutch />} />
             </Route>
             <Route path="kills" element={<KillsRouter />}>

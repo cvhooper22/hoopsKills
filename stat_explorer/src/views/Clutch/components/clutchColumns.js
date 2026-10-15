@@ -18,6 +18,7 @@ export const CLUTCH_COLUMNS = [
   shootingColumn("fg", "FG", "fgm", "fga"),
   shootingColumn("tp", "3P", "tpm", "tpa"),
   shootingColumn("ft", "FT", "ftm", "fta"),
+  countColumn("oreb", "OREB"),
   countColumn("reb", "REB"),
   countColumn("ast", "AST"),
   countColumn("stl", "STL"),
