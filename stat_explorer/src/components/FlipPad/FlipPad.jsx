@@ -52,7 +52,7 @@ const SIZES = {
 
 export default function FlipPad({
   label, value, unit, delta, up = true,
-  board = true, box = 'sky', cards = 'white', tone, condensed = false, seed, reserveFoot = false,
+  board = true, box = 'sky', cards = 'white', tone, condensed = false, seed, reserveFoot = false, className,
 }) {
   const { full, narrow: narrowW, inset, scale } = SIZES[condensed ? 'condensed' : 'regular'];
   // tone tints the page digits: 'pos' | 'neg' | 'auto' (green for a leading +, red for a leading -)
@@ -64,6 +64,7 @@ export default function FlipPad({
     cards !== 'white' && `flip-pad--cards-${cards}`,
     digitTone && `flip-pad--tone-${digitTone}`,
     condensed && 'flip-pad--condensed',
+    className,
   ].filter(Boolean).join(' ');
 
   return (

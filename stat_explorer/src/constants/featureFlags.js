@@ -7,13 +7,15 @@
 //   3. build-time env     - REACT_APP_FF_<NAME> (set in .env.local for local dev)
 //   4. off
 const COLLECTION = 'collection';
+const LIVE_GAME = 'liveGame'; // the in-game page (/live), fed by the local live box server
 
 const FLAGS = {
   [COLLECTION]: { envVar: 'REACT_APP_FF_COLLECTION' },
+  [LIVE_GAME]: { envVar: 'REACT_APP_FF_LIVE_GAME' },
 };
 
 const OVERRIDES_STORAGE_KEY = 'ff_overrides';
 const OVERRIDES_QUERY_PARAM = 'ff';
 const FLAGS_FETCH_TIMEOUT_MS = 3000;
 
-export { FLAGS, COLLECTION, OVERRIDES_STORAGE_KEY, OVERRIDES_QUERY_PARAM, FLAGS_FETCH_TIMEOUT_MS };
+export { FLAGS, COLLECTION, LIVE_GAME, OVERRIDES_STORAGE_KEY, OVERRIDES_QUERY_PARAM, FLAGS_FETCH_TIMEOUT_MS };

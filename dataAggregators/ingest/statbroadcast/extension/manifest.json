@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "hoopsKills StatBroadcast Capture",
+  "version": "0.1.0",
+  "description": "Reads the play-by-play from an open StatBroadcast game tab and sends it to the local hoopsKills receiver.",
+  "permissions": ["storage", "tabs"],
+  "host_permissions": ["https://stats.statbroadcast.com/*", "http://127.0.0.1:4600/*", "http://localhost:4600/*"],
+  "background": { "service_worker": "background.js" },
+  "content_scripts": [
+    { "matches": ["https://stats.statbroadcast.com/broadcast/*", "https://stats.statbroadcast.com/mobile/*"], "js": ["content.js"], "run_at": "document_idle" }
+  ],
+  "action": { "default_popup": "popup.html", "default_title": "StatBroadcast capture" }
+}

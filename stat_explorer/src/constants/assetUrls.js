@@ -2,6 +2,7 @@
 // http://localhost:4444/data, i.e. public/data) to read the season kills and lineups files and the team
 // lookup from there instead of the CloudFront. Everything else still comes from the CloudFront.
 const previewBase = process.env.REACT_APP_PREVIEW_DATA_BASE;
+const liveBase = process.env.REACT_APP_LIVE_BOX_BASE || 'http://127.0.0.1:4610';
 
 const urls = {
   espnPhotoStart: 'https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/',
@@ -20,6 +21,13 @@ const urls = {
   teamsMeta: () => `${previewBase || urls.assetBase}/meta/teams.json`,
   clutchSeason: season => `${previewBase || urls.assetBase}/clutch/seasons/${season}.json`,
   clutchSeasonsIndex: () => `${previewBase || urls.assetBase}/clutch/seasons/index.json`,
+  // Box scores are local-only for now: the prototype in dataAggregators/derivations writes them to public/data/box.
+  boxGame: id => `${previewBase || '/data'}/box/${id}.json`,
+  boxIndex: () => `${previewBase || '/data'}/box/index.json`,
+  // In-game data comes from derivations/live-box-server.js (local only), not from the data CloudFront.
+  liveGames: () => `${liveBase}/games`,
+  liveBox: id => `${liveBase}/box/${id}`,
+  liveBoxStream: id => `${liveBase}/box/${id}/stream`,
   clutchGame: id => `${urls.assetBase}/clutch/games/${id}.json`,
   lineupsGame: id => `${urls.assetBase}/lineups/games/${id}.json`,
   teamLogo: slug => `${urls.assetBase}/${urls.logosPath}/${slug}.png`,

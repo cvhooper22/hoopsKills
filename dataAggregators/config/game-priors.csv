@@ -1,0 +1,5 @@
+# Pregame priors for the win-probability model. One row per game; see derivations/priors.js for the columns.
+# A game with no row is modelled as an even matchup (and labelled that way in the output).
+game_id,byu_net_rating,opp_net_rating,site,expected_margin
+2026-03-12-byu-at-houston,23.23,32.49,neutral,
+2026-10-16-nebraska-at-byu,20.75,24.61,home,

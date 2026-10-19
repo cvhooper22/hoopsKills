@@ -16,7 +16,7 @@ const FOCUS_TEAM = 'byu';
 
 // game.json (see KillsHeader) from the game's meta sidecar: matchup, venue, and which
 // side BYU played defense on — BYU is the defense in every game.
-function gameFromMeta(meta) {
+export function gameFromMeta(meta) {
   const byuHome = meta.homeId === FOCUS_TEAM;
   return {
     date: meta.date,
@@ -57,6 +57,11 @@ export default function Kills() {
   if (error) return <div className="kills"><p>Could not load the game data.</p></div>;
   if (!result) return <div className="kills"><YBallLoader /></div>;
 
+  return <KillsBody plays={plays} game={game} result={result} gameId={gameId} />;
+}
+
+// The page below the loading logic, shared with the live page (views/Box/LiveBox.js), which feeds it plays that are still arriving.
+export function KillsBody({ plays, game, result, gameId }) {
   return (
     <div className="kills">
       <KillsHeader game={game} result={result} gameId={gameId} />

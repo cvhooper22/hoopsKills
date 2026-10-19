@@ -1,0 +1,24 @@
+<!doctype html>
+<meta charset="utf-8">
+<style>
+  body { font: 13px system-ui, sans-serif; width: 280px; margin: 10px; }
+  label { display: block; margin: 6px 0 2px; color: #555; }
+  input { width: 100%; box-sizing: border-box; padding: 4px; }
+  .row { display: flex; gap: 6px; } .row > div { flex: 1; }
+  button { margin-top: 10px; padding: 6px 12px; width: 100%; }
+  #status { margin-top: 10px; white-space: pre-wrap; color: #333; }
+  .err { color: #b00020; }
+</style>
+<div id="ev"></div>
+<label>Game date</label><input id="date" type="date">
+<div class="row">
+  <div><label>Home team id</label><input id="home" placeholder="byu"></div>
+  <div><label>Away team id</label><input id="away" placeholder="villanova"></div>
+</div>
+<div class="row">
+  <div><label>Interval (s)</label><input id="intervalSec" type="number" min="2" value="5"></div>
+  <div><label>Receiver</label><input id="receiverUrl" value="http://127.0.0.1:4600"></div>
+</div>
+<button id="toggle">Start capture</button>
+<div id="status"></div>
+<script src="popup.js"></script>

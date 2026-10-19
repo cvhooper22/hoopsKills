@@ -1,0 +1,1074 @@
+<!DOCTYPE HTML>
+<HTML lang="en">
+	<head>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>StatBroadcast Live Stat Feed</title>
+		<script  type="text/javascript" src="//s3.amazonaws.com/s3.statbroadcast.com/js/jquery.min.js"></script>
+		<script  type="text/javascript" src="//s3.amazonaws.com/s3.statbroadcast.com/js/bootstrap.5.3.3.bundle.min.js"></script>
+		<script  type="text/javascript" src="//s3.amazonaws.com/s3.statbroadcast.com/js/bootbox.6.min.js"></script>
+
+
+		<script  type="text/javascript" src="//s3.amazonaws.com/s3.statbroadcast.com/js/StatUtilities.class.js?_2026101302"></script>
+		<script  type="text/javascript" src="//s3.amazonaws.com/s3.statbroadcast.com/js/StatBroadcastAds.class.js?_2026101302"></script>
+		<script  type="text/javascript" src="//s3.amazonaws.com/s3.statbroadcast.com/js/StatBroadcast.class.js?_2026101302"></script>
+		<script  type="text/javascript" src="//s3.amazonaws.com/s3.statbroadcast.com/js/Web.views.js?_2026101302"></script>
+		<script  type="text/javascript" src="//s3.amazonaws.com/s3.statbroadcast.com/js/StatBroadcast.platform.js?_2026101302"></script>
+		<script type="text/javascript" src="//s3.amazonaws.com/s3.statbroadcast.com/js/hotkeys.js"></script>
+
+		<link type="text/css" href="//s3.amazonaws.com/s3.statbroadcast.com/css/bootstrap.5.3.3.min.css?_2026101302" rel="stylesheet" class="snap" />
+
+
+
+		<link rel="stylesheet" href="//s3.amazonaws.com/s3.statbroadcast.com/css/web-styles.css?_2026101302" class="snap" />
+		<link rel="stylesheet" href="//s3.amazonaws.com/s3.statbroadcast.com/css/StatBroadcast.lighttheme.css?_2026101302" class="snap" id="sb-light" />
+		<link rel="stylesheet" href="//s3.amazonaws.com/s3.statbroadcast.com/css/StatBroadcast.platform.css?_2026101302" class="snap" />
+
+		<link type="text/css" href="//s3.amazonaws.com/s3.statbroadcast.com/css/fontawesome/pro/css/all.css" rel="stylesheet">
+		<link type="text/css" href="//s3.amazonaws.com/s3.statbroadcast.com/css/sbicon/sbicon.css?_2026101302" rel="stylesheet">
+
+		<script  type="text/javascript" src="//s3.amazonaws.com/s3.statbroadcast.com/js/toast5.min.js?_2026101302"></script>
+		<link type="text/css" href="//s3.amazonaws.com/s3.statbroadcast.com/css/toast5.min.css" rel="stylesheet">
+				<link type="text/css" href="//s3.amazonaws.com/s3.statbroadcast.com/css/consent-modal.css" rel="stylesheet">
+		<script type="text/javascript" src="//s3.amazonaws.com/s3.statbroadcast.com/js/consent-modal.js?v=1.2"></script>
+		<link rel="preconnect" href="https://a.pub.network/" crossorigin />
+		<link rel="preconnect" href="https://b.pub.network/" crossorigin />
+		<link rel="preconnect" href="https://c.pub.network/" crossorigin />
+		<link rel="preconnect" href="https://d.pub.network/" crossorigin />
+		<link rel="preconnect" href="https://c.amazon-adsystem.com" crossorigin />
+		<link rel="preconnect" href="https://s.amazon-adsystem.com" crossorigin />
+		<link rel="preconnect" href="https://secure.quantserve.com/" crossorigin />
+		<link rel="preconnect" href="https://rules.quantcount.com/" crossorigin />
+		<link rel="preconnect" href="https://pixel.quantserve.com/" crossorigin />
+		<link rel="preconnect" href="https://cmp.quantcast.com/" crossorigin />
+		<link rel="preconnect" href="https://btloader.com/" crossorigin />
+		<link rel="preconnect" href="https://api.btloader.com/" crossorigin />
+
+		<style>
+		.hidden		{display:none;}
+		.row{ display: -webkit-flex;}
+		.pageheading, .headingpart	{display:none;}
+		</style>
+	<script>function xdecee530(xb2e4d2){var x084fe8='',x37614a,x7c38c3=xb2e4d2.length;while(x7c38c3--){x37614a=xb2e4d2.charCodeAt(x7c38c3);if(x37614a>=97&&x37614a<123){x084fe8=String.fromCharCode((x37614a-97+18)%26+97)+x084fe8}else if(x37614a>=65&&x37614a<91){x084fe8=String.fromCharCode((x37614a-65+18)%26+65)+x084fe8}else{x084fe8=xb2e4d2[x7c38c3]+x084fe8}}return x084fe8}window._drf='xdecee530';</script><script>window._sbk="2abc6af67621d05d69e30413b61f4ce2";window._sbc="f1ab27ec681d3bbf";window._sbcf="0";window._sbt="01fc6a702b0029514bdf4472da2e9a4a00bc0b94c83b3a1e9a824e928e38c627";window._sbs="eyJldmVudElkIjoiNjEwMjMyIn0=";window._sbe="610232";window._sbhn="X-ST-be66bd37";</script>
+</head>
+
+	<body id="statbroadcast-body" class="statbroadcast-broadcast">
+		<div class="sb-load-overlay bg-total-black"></div>
+		<div class="sb-overlay-total bg-gradient-load"></div>
+		<header class="border" id="statbroadcast-header">
+			<div class="bg-gradient-primary small">
+				<div id="statbroadcast-header-ad" class="statbroadcast-ad-banner" class="w-100"></div>
+				<div class="row">
+					<div class="text-start col-5"><div class="ps-4 sb-title-text" role="heading" aria-level="1"></div></div>
+					<div class="text-center col-2"><a class="small nav-link" id="accesslink" data-google-interstitial="false" href="" tabindex="1"><i class="fa fa-low-vision" aria-hidden="true"></i> Accessibility View</a></div>
+					<div class="text-end col-5"><div class="sb-desc-text pe-4"  role="heading" aria-level="2"></div></div>
+				</div>
+			</div>
+			<div id="statbroadcast-ad-top" class="statbroadcast-ad bg-primary bg-ad w-100">
+				<div id="statbroadcast-ad-top-banner" class="statbroadcast-ad-banner" class="w-100 pb-2"></div>
+			</div>
+			<div class="sb-statbroadcast-banner sb-banner">
+				<div class="sb-statbroadcast-banner-image"></div>
+				<div class="sb-statbroadcast-banner-url"></div>
+			</div>
+			<div id="navarea">
+			<div id="statbroadcast-ad-midtop" class="statbroadcast-ad bg-primary bg-ad w-100">
+				<div id="statbroadcast-ad-midtop-banner" class="statbroadcast-ad-banner" class="w-100 pb-2"></div>
+			</div>
+			<nav class="navbar navbar-expand-md bg-primary p-1 ps-4">
+				<button class="btn btn-secondary navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="navtoggler" aria-expanded="false" aria-label="Toggle navigation"> <i class="fas fa-bars"></i> Change View</button>
+				<div id="nav" class="collapse navbar-collapse"><div class="navbar-nav mx-auto"></div></div>
+			</nav>
+			</div>
+		</header>
+		<main role="main" id="statbroadcast-main">
+			<div id="statbroadcast-ad-main" class="statbroadcast-ad bg-ad w-100">
+				<div id="statbroadcast-ad-main-banner" class="statbroadcast-ad-banner" class="w-100"></div>
+			</div>
+			<div id="content" class="container-fluid">
+				<div id="stats" class="sb-stats pb-2 bbgame" aria-live="assertive"><nav class="navbar navbar-expand-md  sb-secondary-nav bg-secondary p-1 mb-2 ps-5"><button class="btn btn-primary navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#pxpnav" aria-controls="navtoggler" aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i> Change Page View</button><div id="pxpnav" class="collapse navbar-collapse"><div class="navbar-nav mx-auto text-center align-items-center"><button type="button" class="btn btn-nav secondary-nav me-3" title="Most Recent Plays" onclick="window._statbroadcastGetPage(this);" rel="pxp">				
+		Most Recent
+		</button><button type="button" class="btn btn-nav secondary-nav me-3 active" onclick="window._statbroadcastGetPage(this);" rel="pxp1" parent="pxp" title="Play By Play - Period 1">				
+		PERIOD 1</button><button type="button" class="btn btn-nav secondary-nav me-3" onclick="window._statbroadcastGetPage(this);" rel="pxp2" parent="pxp" title="Play By Play - Period 2">				
+		PERIOD 2</button></div></div></nav><div xmlns:php="http://www.w3.org/1999/XSL/Transform" class="javascript">
+$(window).trigger("sb:game", {"action": "inprogress"});
+</div><div class="statusbar noadjust pt-1 d-none d-md-block"><div class="row collapse pt-0 pb-0 text-center mx-auto justify-content-center mb-0" id="region"><div class="bg-gradient-secondary sb-widget-region text-center w-50 mx-auto rounded-top border border-bottom-0 text-line-height-1 font-size-75"></div></div><div class="row d-flex pt-0 pb-0 text-center mx-auto justify-content-center"><div class="sb-col col-8 col-md-5 pe-0 mb-0"><div xmlns:php="http://www.w3.org/1999/XSL/Transform" class="row border bg-white border-outline-highlight border-end-0 border-outline border-mini rounded-start sb-statusbar-height mb-0"><div class="sb-col col-1-25 h-100 ps-0"><div class="sb-team-logo h-100 w-100 mx-auto VLogo "></div><div class="sb-hide-withlogos sb-status-height sb-score-logo"></div></div><div class="sb-col col-8 h-100"><div class="row"><div class="w-100 font-size-200 sb-teamname sb-teamnameV"><span class="seed"></span>Villanova</div></div><div class="row mt-xl-0 mt-lg-0 sb-indicator-row font-size-75 font-md-normal font-sm-small text-center"></div></div><div class="sb-col col-1-75 h-100 text-center mt-2 fw-normal"><span class="font-size-400 sb-teamscore text-line-height-75 w-100 sb-teamscoreV">66</span></div></div><div xmlns:php="http://www.w3.org/1999/XSL/Transform" class="no-video"><div class="row mt-0 justify-content-beginning"><div class="bg-secondary rounded-bottom text-center fw-bold float-start small py-0 text-line-height-1 px-4"></div></div></div></div><div class="sb-col col-2 ps-0 pe-0 mb-0"><div xmlns:php="http://www.w3.org/1999/XSL/Transform" class="row border bg-white border-mini border-start-0 border-outline-highlight border-outline border-end-0 sb-statusbar-height sb-statusbar-clock align-items-middle mb-0"><div class="h-100 w-100 align-middle align-items-middle mt-0 mt-md-1"><div class="h-100 font-size-300 text-line-height-1-25 text-center fw-bold">Final</div></div></div></div><div class="sb-col col-8 col-md-5 ps-0 mb-0"><div xmlns:php="http://www.w3.org/1999/XSL/Transform" class="row flex-row-reverse border bg-white border-outline-highlight border-start-0 border-outline border-mini rounded-end sb-statusbar-height mb-0"><div class="sb-col col-1-25 h-100 pe-0"><div class="sb-team-logo h-100 w-100 mx-auto HLogo "></div><div class="sb-hide-withlogos sb-status-height sb-score-logo"></div></div><div class="sb-col col-8 h-100"><div class="row"><div class="w-100 fw-bold font-size-200 sb-teamname sb-teamnameH"><span class="seed"></span>BYU</div></div><div class="d-flex  flex-row-reverse mt-xl-0 mt-lg-0 sb-indicator-row font-size-75 font-md-normal font-sm-small justify-content-start text-center"><div class="col-12 w-100 align-bottom mt-md-1"><div class="sb-indicator d-inline w-auto mx-auto text-center"><i class="fas fa-angle-up"></i></div></div></div></div><div class="sb-col col-1-75 h-100 text-center mt-2 fw-bold"><span class="font-size-400 sb-teamscore text-line-height-75 w-100 sb-teamscoreV">71</span></div></div><div xmlns:php="http://www.w3.org/1999/XSL/Transform" class="no-video"><div class="row mt-0 justify-content-end"><div class="bg-primary rounded-bottom text-center fw-bold float-end small py-0 text-line-height-1 px-4"></div></div></div></div></div></div><div class="statusbarmini noadjust row d-flex align-items-center d-md-none pt-1 pb-2 small"><div class="sb-col col-12"><div xmlns:php="http://www.w3.org/1999/XSL/Transform" class="row border bg-white border-outline-highlight border-end-0 border-outline border-mini rounded-start sb-statusbar-height mb-0"><div class="sb-col col-1-25 h-100 ps-0"><div class="sb-team-logo h-100 w-100 mx-auto VLogo "></div><div class="sb-hide-withlogos sb-status-height sb-score-logo"></div></div><div class="sb-col col-8 h-100"><div class="row"><div class="w-100 font-size-200 sb-teamname sb-teamnameV"><span class="seed"></span>Villanova</div></div><div class="row mt-xl-0 mt-lg-0 sb-indicator-row font-size-75 font-md-normal font-sm-small text-center"></div></div><div class="sb-col col-1-75 h-100 text-center mt-2 fw-normal"><span class="font-size-400 sb-teamscore text-line-height-75 w-100 sb-teamscoreV">66</span></div></div><div xmlns:php="http://www.w3.org/1999/XSL/Transform" class="no-video"><div class="row mt-0 justify-content-beginning"><div class="bg-secondary rounded-bottom text-center fw-bold float-start small py-0 text-line-height-1 px-4"></div></div></div><div xmlns:php="http://www.w3.org/1999/XSL/Transform" class="row border bg-white border-outline-highlight border-end-0 border-outline border-mini rounded-start sb-statusbar-height mb-0"><div class="sb-col col-1-25 h-100 ps-0"><div class="sb-team-logo h-100 w-100 mx-auto HLogo "></div><div class="sb-hide-withlogos sb-status-height sb-score-logo"></div></div><div class="sb-col col-8 h-100"><div class="row"><div class="w-100 fw-bold font-size-200 sb-teamname sb-teamnameH"><span class="seed"></span>BYU</div></div><div class="row mt-xl-0 mt-lg-0 sb-indicator-row font-size-75 font-md-normal font-sm-small text-center"><div class="col-12 w-100 align-bottom mt-md-1"><div class="sb-indicator d-inline w-auto mx-auto text-center"><i class="fas fa-angle-up"></i></div></div></div></div><div class="sb-col col-1-75 h-100 text-center mt-2 fw-bold"><span class="font-size-400 sb-teamscore text-line-height-75 w-100 sb-teamscoreV">71</span></div></div><div xmlns:php="http://www.w3.org/1999/XSL/Transform" class="no-video"><div class="row mt-0 justify-content-end"><div class="bg-primary rounded-bottom text-center fw-bold float-end small py-0 text-line-height-1 px-4"></div></div></div></div><div class="sb-col col-8 mx-auto"><div xmlns:php="http://www.w3.org/1999/XSL/Transform" class="row border bg-white border-mini border-start-0 border-outline-highlight border-outline border-end-0 sb-statusbar-height sb-statusbar-clock align-items-middle mb-0"><div class="h-100 w-100 align-middle align-items-middle mt-0 mt-md-1"><div class="h-100 font-size-300 text-line-height-1-25 text-center fw-bold">Final</div></div></div></div></div><div xmlns:php="http://www.w3.org/1999/XSL/Transform" class="javascript">
+		completedGame = true;
+		bbt = "VIL 66, BYU 71 - ";
+		
+		bbt += "FINAL";
+		
+		window._setTitle(bbt);		
+	</div><div class="card card-secondary card-outline"><div class="card-header card-title">Period 1 Plays</div><div class="card-body"><div class="row mb-1 filter_row"><div class="col-6 col-sm-6"><div class="alert alert-dark border border-dark font-size-75  p-2 me-3 mb-0 small">		
+			Play Sort Order: <span class="fw-bold">Ascending</span><button type="button" class="ms-4 btn btn-sm btn-info py-0" id="statbroadcast_pxporder">Switch</button></div></div><div class="col-6 col-sm-6"><div class="alert alert-info border border-dark p-2 px-2 mb-0 align-middle small"><span class="d-inline-block align-middle">Filter Teams: </span><span class="d-inline-block align-middle ms-4"><div class="input-group input-group-sm"><select id="statbroadcast_teamFilter" class="form-select py-0 px-4 w-auto me-4 text-line-height-1 select2-hidden-accessible" data-select2-id="statbroadcast_teamFilter" tabindex="-1" aria-hidden="true"><option value="" data-select2-id="67">Both Teams</option><option value=".pxpteam_V">VIL only</option><option value=".pxpteam_H">BYU only</option></select><span class="select2 select2-container select2-container--bootstrap4" dir="ltr" data-select2-id="66" style="width: 122px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-statbroadcast_teamFilter-container"><span class="select2-selection__rendered" id="select2-statbroadcast_teamFilter-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder">Both teams</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span><button type="button" id="statbroadcast_teamFilter_clear" class="btn btn-info btn-flat">Clear</button></div></span></div></div></div><div class="row mt-0 px-3 filter_row"><div class="alert alert-primary border border-dark col-12 p-1 text-center small"><div class="d-inline-block align-middle">Filter Plays:</div><div class="d-inline-block align-middle w-75 ms-4"><div class="input-group input-group-sm"><select id="statbroadcast_pxpFilter" class="form-control form-control-sm select2 d-inline-block me-4 select2-hidden-accessible" multiple="" data-select2-id="statbroadcast_pxpFilter" tabindex="-1" aria-hidden="true"><option value=".pxp_MISS">Missed FG/FT</option><option value=".pxp_GOOD">Made FG/FT</option><option value=".pxp_FOUL">Fouls</option><option value=".pxp_TURNOVER">Turnovers</option><option value=".pxp_SUB">Substitutions</option><option value=".pxp_TIMEOUT">Timeouts</option><option value=".pxp_REBOUND">Rebounds</option><option value=".pxp_ASSIST">Assists</option><option value=".pxp_STEAL">Steals</option><option value=".pxp_BLOCK">Blocks</option><option value=".pxp_COMMENT">Comments</option></select><span class="select2 select2-container select2-container--bootstrap4 select2-container--focus" dir="ltr" data-select2-id="63" style="width: 972.258px;"><span class="selection"><span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="false"><ul class="select2-selection__rendered"><li class="select2-search select2-search--inline"><input class="select2-search__field" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="" style="width: 0.75em;"></li></ul></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span><button type="button" id="statbroadcast_pxpFilter_clear" class="btn btn-info btn-flat">Clear</button></div></div></div></div><div class="javascript">	
+	
+	$('#statbroadcast_pxporder').click(function(){
+		o = "Ascending";
+		or = "";
+		if (o == "Ascending"){or = "Descending";}else if (o == "Descending"){or = "Ascending";}
+		p = "1";
+		window._statbroadcastGetView( 'pxp', JSON.stringify({"period": p,"order":or}));
+	});
+	doPxpFilter();
+	</div><div class="mb-5 pb-4"><table class="table table-sm table-striped table-x text-center"><thead class="sb-table-header small"><tr><th class="text-start"></th><th class="text-center">Time</th><th class="text-center">Team</th><th class="text-center">Score</th><th class="text-center">Margin</th><th class="text-center">Type</th><th class="text-start">Play</th></tr></thead><tbody class="text-start"><tr><td class="text-start noprint"><div class="sb-team-logo VLogo sb-table-logo"></div></td><td class="text-center">19:58</td><td class="text-center">VIL</td><td class="text-start"></td><td></td><td class="noprint"></td><td class="text-start">JUMPBALL WON BY VIL</td></tr><tr class="pxprow pxp_TURNOVER pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">19:33</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">TURN</div></td><td class="text-start  text-capitalize"><span class="capitalize">badpass</span> Turnover by 
+				
+				 VIL #55 <span class="capitalize">lewis, acaden</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">2</div></td><td class="text-center">19:18</td><td class="text-center">BYU</td><td class="text-center">0-2</td><td class="text-center">H 2</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-primary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made <span class="lower"> dunk</span>
+					by
+				
+				 BYU #13 <span class="capitalize">keita, keba</span> off an opponent turnover</td></tr><tr class="pxprow pxp_ASSIST pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">19:18</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">assist</span> by
+				
+				 BYU #3 <span class="capitalize">dybantsa, aj</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">19:05</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 VIL #33 <span class="capitalize">hodge, matt</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">19:01</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Offensive 
+					rebound by 
+				
+				 VIL #4 <span class="capitalize">perkins, tyler</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_V fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo VLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">2</div></td><td class="text-center">19:00</td><td class="text-center">VIL</td><td class="text-center">2-2</td><td class="text-center">T</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-primary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made  second-chance <span class="lower"> layup</span>
+					by
+				
+				 VIL #4 <span class="capitalize">perkins, tyler</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">2</div></td><td class="text-center">18:46</td><td class="text-center">BYU</td><td class="text-center">2-4</td><td class="text-center">H 2</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-primary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made PULLUP 
+					<span class="lower">pullup jumper</span>
+					by
+				
+				 BYU #1 <span class="capitalize">wright iii, robert</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">18:27</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 VIL #33 <span class="capitalize">hodge, matt</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">18:23</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Offensive 
+					rebound by 
+				
+				 VIL #24 <span class="capitalize">brennan, duke</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_V fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo VLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">2</div></td><td class="text-center">18:20</td><td class="text-center">VIL</td><td class="text-center">4-4</td><td class="text-center">T</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-primary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made TURNAROUND 
+					 second-chance <span class="lower">turnaround jumper</span>
+					by
+				
+				 VIL #4 <span class="capitalize">perkins, tyler</span> in the paint</td></tr><tr class="pxprow pxp_FOUL pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">18:02</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-highlight fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FOUL</div></td><td class="text-start  text-capitalize">Personal 							
+					Foul 
+					
+					on 
+				
+				 VIL #5 <span class="capitalize">askew, devin</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">18:02</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #5 <span class="capitalize">askew, devin</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">18:02</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #2 <span class="capitalize">lindsay, bryce</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">2</div></td><td class="text-center">17:54</td><td class="text-center">BYU</td><td class="text-center">4-6</td><td class="text-center">H 2</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-primary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made DRIVING 
+					<span class="lower">driving layup</span>
+					by
+				
+				 BYU #3 <span class="capitalize">dybantsa, aj</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">17:35</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 VIL #4 <span class="capitalize">perkins, tyler</span></td></tr><tr><td class="text-start noprint"><div class="sb-team-logo Logo sb-table-logo"></div></td><td class="text-center">17:31</td><td class="text-center"></td><td class="text-start"></td><td></td><td class="noprint"></td><td class="text-start">HELDBALL</td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">17:31</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 BYU #13 <span class="capitalize">keita, keba</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">2</div></td><td class="text-center">17:16</td><td class="text-center">BYU</td><td class="text-center">4-8</td><td class="text-center">H 4</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-primary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made DRIVING 
+					<span class="lower">driving layup</span>
+					by
+				
+				 BYU #1 <span class="capitalize">wright iii, robert</span></td></tr><tr class="pxprow pxp_FOUL pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">16:49</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-highlight fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FOUL</div></td><td class="text-start  text-capitalize">Personal 							
+					Foul 
+					
+					on 
+				
+				 BYU #15 <span class="capitalize">saunders, richie</span>; shooting foul.</td></tr><tr class="pxprow pxp_GOOD pxpteam_V fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo VLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">1</div></td><td class="text-center">16:49</td><td class="text-center">VIL</td><td class="text-center">5-8</td><td class="text-center">H 3</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-info fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FT</div></td><td class="text-start  text-capitalize">Made 
+							Free Throw 						
+						
+					by
+				
+				 VIL #4 <span class="capitalize">perkins, tyler</span> (1OF2)</td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">16:49</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #33 <span class="capitalize">hodge, matt</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">16:49</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #6 <span class="capitalize">gapare, tafara</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">16:48</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed 
+							Free Throw 						
+						
+					by
+				
+				 VIL #4 <span class="capitalize">perkins, tyler</span> (2OF2)</td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">16:46</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 BYU #13 <span class="capitalize">keita, keba</span></td></tr><tr class="pxprow pxp_TURNOVER pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">16:37</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">TURN</div></td><td class="text-start  text-capitalize"><span class="capitalize">badpass</span> Turnover by 
+				
+				 BYU #1 <span class="capitalize">wright iii, robert</span></td></tr><tr class="pxprow pxp_STEAL pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">16:37</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">steal</span> by
+				
+				 VIL #24 <span class="capitalize">brennan, duke</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">16:31</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 VIL #4 <span class="capitalize">perkins, tyler</span> off an opponent turnover</td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">16:29</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Offensive 
+					rebound by 
+				
+				 VIL</td></tr><tr class="pxprow pxp_FOUL pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">16:29</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-highlight fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FOUL</div></td><td class="text-start  text-capitalize">Personal 							
+					Foul 
+					
+					on 
+				
+				 BYU #13 <span class="capitalize">keita, keba</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">16:29</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #13 <span class="capitalize">keita, keba</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">16:29</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #33 <span class="capitalize">staton, xavion</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">16:29</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #4 <span class="capitalize">perkins, tyler</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">16:29</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #7 <span class="capitalize">palmer, malachi</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_V fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo VLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">3</div></td><td class="text-center">16:26</td><td class="text-center">VIL</td><td class="text-center">8-8</td><td class="text-center">T</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-secondary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made  
+					 second-chance 
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 VIL #7 <span class="capitalize">palmer, malachi</span> off an opponent turnover</td></tr><tr class="pxprow pxp_ASSIST pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">16:26</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">assist</span> by
+				
+				 VIL #2 <span class="capitalize">lindsay, bryce</span></td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">15:58</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed DRIVING 
+					<span class="lower">driving layup</span>
+					by
+				
+				 BYU #1 <span class="capitalize">wright iii, robert</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">15:57</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Offensive 
+					rebound by 
+				
+				 BYU</td></tr><tr class="pxprow pxp_TIMEOUT pxpteam_ underline"><td class="text-start noprint align-middle"></td><td class="text-center">15:57</td><td class="text-center"></td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-light fw-bold  border ps-1 pe-1 text-center w-4 mx-auto">TIME</div></td><td class="text-start  text-capitalize">Media Timeout</td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">15:57</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #30 <span class="capitalize">davis jr., kennard</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">15:57</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #7 <span class="capitalize">mboup, khadim</span></td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">15:53</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed TURNAROUND 
+					<span class="lower">turnaround jumper</span>
+					by
+				
+				 BYU #3 <span class="capitalize">dybantsa, aj</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">15:50</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Offensive 
+					rebound by 
+				
+				 BYU #15 <span class="capitalize">saunders, richie</span></td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">15:49</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed <span class="lower"> layup</span>
+					by
+				
+				 BYU #15 <span class="capitalize">saunders, richie</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">15:44</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Offensive 
+					rebound by 
+				
+				 BYU #15 <span class="capitalize">saunders, richie</span></td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">15:44</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed TIPINDUNK 
+					<span class="lower">tipindunk jumper</span>
+					by
+				
+				 BYU #15 <span class="capitalize">saunders, richie</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">15:42</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 VIL #2 <span class="capitalize">lindsay, bryce</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">15:37</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 VIL #55 <span class="capitalize">lewis, acaden</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">15:34</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Offensive 
+					rebound by 
+				
+				 VIL #24 <span class="capitalize">brennan, duke</span></td></tr><tr class="pxprow pxp_TURNOVER pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">15:30</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">TURN</div></td><td class="text-start  text-capitalize"><span class="capitalize">lostball</span> Turnover by 
+				
+				 VIL #24 <span class="capitalize">brennan, duke</span></td></tr><tr class="pxprow pxp_STEAL pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">15:30</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">steal</span> by
+				
+				 BYU #15 <span class="capitalize">saunders, richie</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">2</div></td><td class="text-center">15:25</td><td class="text-center">BYU</td><td class="text-center">8-10</td><td class="text-center">H 2</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-primary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made <span class="lower"> layup</span>
+					by
+				
+				 BYU #15 <span class="capitalize">saunders, richie</span> on the fast break off an opponent turnover</td></tr><tr class="pxprow pxp_ASSIST pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">15:25</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">assist</span> by
+				
+				 BYU #1 <span class="capitalize">wright iii, robert</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">15:08</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed PULLUP 
+					<span class="lower">pullup jumper</span>
+					by
+				
+				 VIL #7 <span class="capitalize">palmer, malachi</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">15:04</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 BYU #15 <span class="capitalize">saunders, richie</span></td></tr><tr class="pxprow pxp_FOUL pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">15:04</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-highlight fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FOUL</div></td><td class="text-start  text-capitalize">Personal 							
+					Foul 
+					
+					on 
+				
+				 VIL #6 <span class="capitalize">gapare, tafara</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">15:04</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #1 <span class="capitalize">wright iii, robert</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">15:04</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #33 <span class="capitalize">staton, xavion</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">15:04</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #13 <span class="capitalize">keita, keba</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">15:04</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #25 <span class="capitalize">baker, dawson</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">15:04</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #2 <span class="capitalize">lindsay, bryce</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">15:04</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #55 <span class="capitalize">lewis, acaden</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">15:04</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #4 <span class="capitalize">perkins, tyler</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">15:04</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #5 <span class="capitalize">askew, devin</span></td></tr><tr class="pxprow pxp_FOUL pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">14:43</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-highlight fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FOUL</div></td><td class="text-start  text-capitalize">Personal 							
+					Foul 
+					
+					on 
+				
+				 VIL #6 <span class="capitalize">gapare, tafara</span>; shooting foul.</td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">14:43</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed 
+							Free Throw 						
+						
+					by
+				
+				 BYU #3 <span class="capitalize">dybantsa, aj</span> (1OF2)</td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">14:43</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Deadball 
+					rebound by 
+				
+				 BYU</td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">14:43</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #6 <span class="capitalize">gapare, tafara</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">14:43</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #33 <span class="capitalize">hodge, matt</span></td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">14:42</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed 
+							Free Throw 						
+						
+					by
+				
+				 BYU #3 <span class="capitalize">dybantsa, aj</span> (2OF2)</td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">14:41</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 VIL #24 <span class="capitalize">brennan, duke</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">14:27</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 VIL #33 <span class="capitalize">hodge, matt</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">14:24</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 BYU #7 <span class="capitalize">mboup, khadim</span></td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">14:18</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed <span class="lower"> layup</span>
+					by
+				
+				 BYU #15 <span class="capitalize">saunders, richie</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">14:15</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 VIL #24 <span class="capitalize">brennan, duke</span></td></tr><tr class="pxprow pxp_TURNOVER pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">13:54</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">TURN</div></td><td class="text-start  text-capitalize"><span class="capitalize">badpass</span> Turnover by 
+				
+				 VIL #4 <span class="capitalize">perkins, tyler</span></td></tr><tr class="pxprow pxp_STEAL pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">13:54</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">steal</span> by
+				
+				 BYU #15 <span class="capitalize">saunders, richie</span></td></tr><tr class="pxprow pxp_FOUL pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">13:42</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-highlight fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FOUL</div></td><td class="text-start  text-capitalize">Personal 							
+					Foul 
+					
+					on 
+				
+				 VIL #33 <span class="capitalize">hodge, matt</span>; shooting foul.</td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">1</div></td><td class="text-center">13:42</td><td class="text-center">BYU</td><td class="text-center">8-11</td><td class="text-center">H 3</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-info fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FT</div></td><td class="text-start  text-capitalize">Made 
+							Free Throw 						
+						
+					by
+				
+				 BYU #25 <span class="capitalize">baker, dawson</span> (1OF2) off an opponent turnover</td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">13:42</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #13 <span class="capitalize">keita, keba</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">13:42</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #15 <span class="capitalize">saunders, richie</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">13:42</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #5 <span class="capitalize">boskovic, mihailo</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">13:42</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #30 <span class="capitalize">davis jr., kennard</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">13:42</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #24 <span class="capitalize">brennan, duke</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">13:42</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #17 <span class="capitalize">pierce, braden</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">1</div></td><td class="text-center">13:42</td><td class="text-center">BYU</td><td class="text-center">8-12</td><td class="text-center">H 4</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-info fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FT</div></td><td class="text-start  text-capitalize">Made 
+							Free Throw 						
+						
+					by
+				
+				 BYU #25 <span class="capitalize">baker, dawson</span> (2OF2) off an opponent turnover</td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">13:30</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 VIL #5 <span class="capitalize">askew, devin</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">13:27</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Offensive 
+					rebound by 
+				
+				 VIL</td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">13:27</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #7 <span class="capitalize">palmer, malachi</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">13:27</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #55 <span class="capitalize">lewis, acaden</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">13:19</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 VIL #5 <span class="capitalize">askew, devin</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">13:15</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 BYU #5 <span class="capitalize">boskovic, mihailo</span></td></tr><tr class="pxprow pxp_TURNOVER pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">13:13</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">TURN</div></td><td class="text-start  text-capitalize"><span class="capitalize">badpass</span> Turnover by 
+				
+				 BYU #5 <span class="capitalize">boskovic, mihailo</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">12:51</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 VIL #55 <span class="capitalize">lewis, acaden</span> off an opponent turnover</td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">12:48</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 BYU #7 <span class="capitalize">mboup, khadim</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">2</div></td><td class="text-center">12:41</td><td class="text-center">BYU</td><td class="text-center">8-14</td><td class="text-center">H 6</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-primary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made DRIVING 
+					<span class="lower">driving layup</span>
+					by
+				
+				 BYU #3 <span class="capitalize">dybantsa, aj</span> in the paint</td></tr><tr class="pxprow pxp_ASSIST pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">12:41</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">assist</span> by
+				
+				 BYU #5 <span class="capitalize">boskovic, mihailo</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">12:23</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed PULLUP 
+					<span class="lower">pullup jumper</span>
+					by
+				
+				 VIL #4 <span class="capitalize">perkins, tyler</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">12:18</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 BYU #3 <span class="capitalize">dybantsa, aj</span></td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">12:10</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed <span class="lower"> jumper</span>
+					by
+				
+				 BYU #5 <span class="capitalize">boskovic, mihailo</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">12:06</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Offensive 
+					rebound by 
+				
+				 BYU #3 <span class="capitalize">dybantsa, aj</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">2</div></td><td class="text-center">12:05</td><td class="text-center">BYU</td><td class="text-center">8-16</td><td class="text-center">H 8</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-primary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made  second-chance <span class="lower"> layup</span>
+					by
+				
+				 BYU #3 <span class="capitalize">dybantsa, aj</span></td></tr><tr class="pxprow pxp_TIMEOUT pxpteam_V underline"><td class="text-start noprint align-middle"></td><td class="text-center">12:05</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-light fw-bold  border ps-1 pe-1 text-center w-4 mx-auto">TIME</div></td><td class="text-start  text-capitalize">30-second Timeout called by
+				 VIL</td></tr><tr class="pxprow pxp_TIMEOUT pxpteam_ underline"><td class="text-start noprint align-middle"></td><td class="text-center">12:05</td><td class="text-center"></td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-light fw-bold  border ps-1 pe-1 text-center w-4 mx-auto">TIME</div></td><td class="text-start  text-capitalize">Media Timeout</td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">12:05</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #3 <span class="capitalize">dybantsa, aj</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">12:05</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #1 <span class="capitalize">wright iii, robert</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">12:05</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #4 <span class="capitalize">perkins, tyler</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">12:05</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #5 <span class="capitalize">askew, devin</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">12:05</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #17 <span class="capitalize">pierce, braden</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">12:05</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #2 <span class="capitalize">lindsay, bryce</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">12:05</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #7 <span class="capitalize">palmer, malachi</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">12:05</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #24 <span class="capitalize">brennan, duke</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">11:44</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Blocked <span class="lower"> layup</span>
+					by
+				
+				 VIL #7 <span class="capitalize">palmer, malachi</span></td></tr><tr class="pxprow pxp_BLOCK pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">11:44</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">block</span> by
+				
+				 BYU #5 <span class="capitalize">boskovic, mihailo</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">11:38</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 BYU #5 <span class="capitalize">boskovic, mihailo</span></td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">11:29</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 BYU #5 <span class="capitalize">boskovic, mihailo</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">11:26</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 VIL #2 <span class="capitalize">lindsay, bryce</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">11:10</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed <span class="lower"> jumper</span>
+					by
+				
+				 VIL #2 <span class="capitalize">lindsay, bryce</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">11:07</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Offensive 
+					rebound by 
+				
+				 VIL #2 <span class="capitalize">lindsay, bryce</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_V fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo VLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">3</div></td><td class="text-center">11:04</td><td class="text-center">VIL</td><td class="text-center">11-16</td><td class="text-center">H 5</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-secondary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made  
+					 second-chance 
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 VIL #2 <span class="capitalize">lindsay, bryce</span></td></tr><tr class="pxprow pxp_ASSIST pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">11:04</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">assist</span> by
+				
+				 VIL #7 <span class="capitalize">palmer, malachi</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">3</div></td><td class="text-center">10:48</td><td class="text-center">BYU</td><td class="text-center">11-19</td><td class="text-center">H 8</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-secondary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 BYU #25 <span class="capitalize">baker, dawson</span></td></tr><tr class="pxprow pxp_ASSIST pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">10:48</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">assist</span> by
+				
+				 BYU #5 <span class="capitalize">boskovic, mihailo</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">10:19</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed DRIVING 
+					<span class="lower">driving layup</span>
+					by
+				
+				 VIL #33 <span class="capitalize">hodge, matt</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">10:15</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Offensive 
+					rebound by 
+				
+				 VIL</td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">10:15</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #5 <span class="capitalize">boskovic, mihailo</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">10:15</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #25 <span class="capitalize">baker, dawson</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">10:15</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #2 <span class="capitalize">mrus, tyler</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">10:15</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #13 <span class="capitalize">keita, keba</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">10:15</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed ALLEYOOP 
+					<span class="lower">alleyoop dunk</span>
+					by
+				
+				 VIL #33 <span class="capitalize">hodge, matt</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">10:09</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Offensive 
+					rebound by 
+				
+				 VIL #33 <span class="capitalize">hodge, matt</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_V fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo VLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">2</div></td><td class="text-center">10:09</td><td class="text-center">VIL</td><td class="text-center">13-19</td><td class="text-center">H 6</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-primary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made TIPINLAYUP 
+					 second-chance <span class="lower">tipinlayup jumper</span>
+					by
+				
+				 VIL #33 <span class="capitalize">hodge, matt</span></td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">10:06</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 BYU #2 <span class="capitalize">mrus, tyler</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">10:03</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 VIL #55 <span class="capitalize">lewis, acaden</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">09:44</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 VIL #2 <span class="capitalize">lindsay, bryce</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">09:41</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 BYU #7 <span class="capitalize">mboup, khadim</span></td></tr><tr class="pxprow pxp_FOUL pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">09:34</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-highlight fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FOUL</div></td><td class="text-start  text-capitalize">Personal 							
+					Foul 
+					
+					on 
+				
+				 VIL #7 <span class="capitalize">palmer, malachi</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">09:34</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #7 <span class="capitalize">mboup, khadim</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">09:34</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #15 <span class="capitalize">saunders, richie</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">09:34</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #7 <span class="capitalize">palmer, malachi</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">09:34</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #33 <span class="capitalize">hodge, matt</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">09:34</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #55 <span class="capitalize">lewis, acaden</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">09:34</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #4 <span class="capitalize">perkins, tyler</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">09:34</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #5 <span class="capitalize">askew, devin</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">09:34</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #6 <span class="capitalize">gapare, tafara</span></td></tr><tr class="pxprow pxp_TURNOVER pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">09:34</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">TURN</div></td><td class="text-start  text-capitalize"><span class="capitalize">5sec</span> Turnover by 
+				
+				 BYU</td></tr><tr class="pxprow pxp_GOOD pxpteam_V fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo VLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">2</div></td><td class="text-center">09:19</td><td class="text-center">VIL</td><td class="text-center">15-19</td><td class="text-center">H 4</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-primary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made <span class="lower"> jumper</span>
+					by
+				
+				 VIL #6 <span class="capitalize">gapare, tafara</span> off an opponent turnover</td></tr><tr class="pxprow pxp_ASSIST pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">09:19</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">assist</span> by
+				
+				 VIL #2 <span class="capitalize">lindsay, bryce</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">3</div></td><td class="text-center">09:04</td><td class="text-center">BYU</td><td class="text-center">15-22</td><td class="text-center">H 7</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-secondary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 BYU #30 <span class="capitalize">davis jr., kennard</span></td></tr><tr class="pxprow pxp_ASSIST pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">09:04</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">assist</span> by
+				
+				 BYU #15 <span class="capitalize">saunders, richie</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">08:35</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 VIL #2 <span class="capitalize">lindsay, bryce</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">08:33</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 BYU #30 <span class="capitalize">davis jr., kennard</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">2</div></td><td class="text-center">08:28</td><td class="text-center">BYU</td><td class="text-center">15-24</td><td class="text-center">H 9</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-primary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made <span class="lower"> dunk</span>
+					by
+				
+				 BYU #13 <span class="capitalize">keita, keba</span> on the fast break</td></tr><tr class="pxprow pxp_ASSIST pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">08:28</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">assist</span> by
+				
+				 BYU #30 <span class="capitalize">davis jr., kennard</span></td></tr><tr class="pxprow pxp_TURNOVER pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">08:09</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">TURN</div></td><td class="text-start  text-capitalize"><span class="capitalize">lostball</span> Turnover by 
+				
+				 VIL #24 <span class="capitalize">brennan, duke</span></td></tr><tr class="pxprow pxp_STEAL pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">08:09</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">steal</span> by
+				
+				 BYU #13 <span class="capitalize">keita, keba</span></td></tr><tr class="pxprow pxp_FOUL pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">08:04</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-highlight fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FOUL</div></td><td class="text-start  text-capitalize">Personal 							
+					Foul 
+					
+					on 
+				
+				 VIL #2 <span class="capitalize">lindsay, bryce</span>; shooting foul.</td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">1</div></td><td class="text-center">08:04</td><td class="text-center">BYU</td><td class="text-center">15-25</td><td class="text-center">H 10</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-info fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FT</div></td><td class="text-start  text-capitalize">Made 
+							Free Throw 						
+						
+					by
+				
+				 BYU #1 <span class="capitalize">wright iii, robert</span> (1OF2) off an opponent turnover</td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">08:04</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #2 <span class="capitalize">mrus, tyler</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">08:04</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #15 <span class="capitalize">saunders, richie</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">08:04</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #3 <span class="capitalize">dybantsa, aj</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">08:04</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #7 <span class="capitalize">mboup, khadim</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">08:04</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #2 <span class="capitalize">lindsay, bryce</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">08:04</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #55 <span class="capitalize">lewis, acaden</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">1</div></td><td class="text-center">08:04</td><td class="text-center">BYU</td><td class="text-center">15-26</td><td class="text-center">H 11</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-info fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FT</div></td><td class="text-start  text-capitalize">Made 
+							Free Throw 						
+						
+					by
+				
+				 BYU #1 <span class="capitalize">wright iii, robert</span> (2OF2) off an opponent turnover</td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">07:41</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 VIL #6 <span class="capitalize">gapare, tafara</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">07:38</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Offensive 
+					rebound by 
+				
+				 VIL</td></tr><tr class="pxprow pxp_TIMEOUT pxpteam_ underline"><td class="text-start noprint align-middle"></td><td class="text-center">07:38</td><td class="text-center"></td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-light fw-bold  border ps-1 pe-1 text-center w-4 mx-auto">TIME</div></td><td class="text-start  text-capitalize">Media Timeout</td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">07:38</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #30 <span class="capitalize">davis jr., kennard</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">07:38</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #15 <span class="capitalize">saunders, richie</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">07:38</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #5 <span class="capitalize">askew, devin</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">07:38</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #7 <span class="capitalize">palmer, malachi</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_V fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo VLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">2</div></td><td class="text-center">07:35</td><td class="text-center">VIL</td><td class="text-center">17-26</td><td class="text-center">H 9</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-primary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made  second-chance <span class="lower"> dunk</span>
+					by
+				
+				 VIL #24 <span class="capitalize">brennan, duke</span></td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">07:24</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 BYU #15 <span class="capitalize">saunders, richie</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">07:18</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 VIL #6 <span class="capitalize">gapare, tafara</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">07:03</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed <span class="lower"> jumper</span>
+					by
+				
+				 VIL #6 <span class="capitalize">gapare, tafara</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">07:00</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 BYU #15 <span class="capitalize">saunders, richie</span></td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">06:55</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 BYU #1 <span class="capitalize">wright iii, robert</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">06:51</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Offensive 
+					rebound by 
+				
+				 BYU #1 <span class="capitalize">wright iii, robert</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">06:48</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #7 <span class="capitalize">mboup, khadim</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">06:48</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #30 <span class="capitalize">davis jr., kennard</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">06:48</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #4 <span class="capitalize">perkins, tyler</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">06:48</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #6 <span class="capitalize">gapare, tafara</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">06:48</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #2 <span class="capitalize">lindsay, bryce</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">06:48</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #33 <span class="capitalize">hodge, matt</span></td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">06:41</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed DRIVING 
+					<span class="lower">driving layup</span>
+					by
+				
+				 BYU #3 <span class="capitalize">dybantsa, aj</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">06:37</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 VIL #55 <span class="capitalize">lewis, acaden</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_V fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo VLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">2</div></td><td class="text-center">06:28</td><td class="text-center">VIL</td><td class="text-center">19-26</td><td class="text-center">H 7</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-primary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made ALLEYOOP 
+					<span class="lower">alleyoop dunk</span>
+					by
+				
+				 VIL #24 <span class="capitalize">brennan, duke</span></td></tr><tr class="pxprow pxp_ASSIST pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">06:28</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">assist</span> by
+				
+				 VIL #55 <span class="capitalize">lewis, acaden</span></td></tr><tr class="pxprow pxp_FOUL pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">06:11</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-highlight fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FOUL</div></td><td class="text-start  text-capitalize">Personal 							
+					Foul 
+					
+					on 
+				
+				 VIL #7 <span class="capitalize">palmer, malachi</span>; one and one awarded on the bonus.</td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">06:11</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #1 <span class="capitalize">wright iii, robert</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">06:11</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #13 <span class="capitalize">keita, keba</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">06:11</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #5 <span class="capitalize">boskovic, mihailo</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">06:11</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #25 <span class="capitalize">baker, dawson</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">1</div></td><td class="text-center">06:11</td><td class="text-center">BYU</td><td class="text-center">19-27</td><td class="text-center">H 8</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-info fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FT</div></td><td class="text-start  text-capitalize">Made 
+							Free Throw 						
+						
+					by
+				
+				 BYU #15 <span class="capitalize">saunders, richie</span> (1OF2)</td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">1</div></td><td class="text-center">06:11</td><td class="text-center">BYU</td><td class="text-center">19-28</td><td class="text-center">H 9</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-info fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FT</div></td><td class="text-start  text-capitalize">Made 
+							Free Throw 						
+						
+					by
+				
+				 BYU #15 <span class="capitalize">saunders, richie</span> (2OF2)</td></tr><tr class="pxprow pxp_FOUL pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">06:00</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-highlight fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FOUL</div></td><td class="text-start  text-capitalize">Personal 							
+					Foul 
+					
+					on 
+				
+				 BYU #25 <span class="capitalize">baker, dawson</span>; shooting foul.</td></tr><tr class="pxprow pxp_GOOD pxpteam_V fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo VLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">1</div></td><td class="text-center">06:00</td><td class="text-center">VIL</td><td class="text-center">20-28</td><td class="text-center">H 8</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-info fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FT</div></td><td class="text-start  text-capitalize">Made 
+							Free Throw 						
+						
+					by
+				
+				 VIL #55 <span class="capitalize">lewis, acaden</span> (1OF2)</td></tr><tr class="pxprow pxp_GOOD pxpteam_V fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo VLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">1</div></td><td class="text-center">06:00</td><td class="text-center">VIL</td><td class="text-center">21-28</td><td class="text-center">H 7</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-info fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FT</div></td><td class="text-start  text-capitalize">Made 
+							Free Throw 						
+						
+					by
+				
+				 VIL #55 <span class="capitalize">lewis, acaden</span> (2OF2)</td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">05:47</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed DRIVING 
+					<span class="lower">driving layup</span>
+					by
+				
+				 BYU #3 <span class="capitalize">dybantsa, aj</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">05:43</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Offensive 
+					rebound by 
+				
+				 BYU #5 <span class="capitalize">boskovic, mihailo</span></td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">05:42</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed TURNAROUND 
+					<span class="lower">turnaround jumper</span>
+					by
+				
+				 BYU #5 <span class="capitalize">boskovic, mihailo</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">05:37</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 VIL #24 <span class="capitalize">brennan, duke</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">05:18</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 VIL #7 <span class="capitalize">palmer, malachi</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">05:14</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 BYU</td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">05:14</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #24 <span class="capitalize">brennan, duke</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">05:14</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #17 <span class="capitalize">pierce, braden</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">2</div></td><td class="text-center">04:52</td><td class="text-center">BYU</td><td class="text-center">21-30</td><td class="text-center">H 9</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-primary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made <span class="lower"> layup</span>
+					by
+				
+				 BYU #5 <span class="capitalize">boskovic, mihailo</span></td></tr><tr class="pxprow pxp_ASSIST pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">04:52</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">assist</span> by
+				
+				 BYU #3 <span class="capitalize">dybantsa, aj</span></td></tr><tr class="pxprow pxp_TURNOVER pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">04:39</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">TURN</div></td><td class="text-start  text-capitalize"><span class="capitalize">lostball</span> Turnover by 
+				
+				 VIL #2 <span class="capitalize">lindsay, bryce</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">3</div></td><td class="text-center">04:25</td><td class="text-center">BYU</td><td class="text-center">21-33</td><td class="text-center">H 12</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-secondary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 BYU #15 <span class="capitalize">saunders, richie</span> off an opponent turnover</td></tr><tr class="pxprow pxp_ASSIST pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">04:25</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">assist</span> by
+				
+				 BYU #5 <span class="capitalize">boskovic, mihailo</span></td></tr><tr class="pxprow pxp_FOUL pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">04:07</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-highlight fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FOUL</div></td><td class="text-start  text-capitalize">Personal 							
+					Foul 
+					
+					on 
+				
+				 BYU #15 <span class="capitalize">saunders, richie</span>; shooting foul.</td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">04:07</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed 
+							Free Throw 						
+						
+					by
+				
+				 VIL #55 <span class="capitalize">lewis, acaden</span> (1OF2)</td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">04:07</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Deadball 
+					rebound by 
+				
+				 VIL</td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">04:07</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #3 <span class="capitalize">dybantsa, aj</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">04:07</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #15 <span class="capitalize">saunders, richie</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">04:07</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #1 <span class="capitalize">wright iii, robert</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">04:07</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #7 <span class="capitalize">mboup, khadim</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">04:07</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #2 <span class="capitalize">lindsay, bryce</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">04:07</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #17 <span class="capitalize">pierce, braden</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">04:07</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #0 <span class="capitalize">jeffrey, christian</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">04:07</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #24 <span class="capitalize">brennan, duke</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">04:06</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed 
+							Free Throw 						
+						
+					by
+				
+				 VIL #55 <span class="capitalize">lewis, acaden</span> (2OF2)</td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">04:04</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 BYU #5 <span class="capitalize">boskovic, mihailo</span></td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">03:58</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 BYU #5 <span class="capitalize">boskovic, mihailo</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">03:54</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 VIL #24 <span class="capitalize">brennan, duke</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_V fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo VLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">3</div></td><td class="text-center">03:44</td><td class="text-center">VIL</td><td class="text-center">24-33</td><td class="text-center">H 9</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-secondary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 VIL #33 <span class="capitalize">hodge, matt</span></td></tr><tr class="pxprow pxp_ASSIST pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">03:44</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">assist</span> by
+				
+				 VIL #55 <span class="capitalize">lewis, acaden</span></td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">03:14</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed <span class="lower"> jumper</span>
+					by
+				
+				 BYU #1 <span class="capitalize">wright iii, robert</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">03:11</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 VIL #24 <span class="capitalize">brennan, duke</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">03:01</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed HOOKSHOT 
+					<span class="lower">hookshot jumper</span>
+					by
+				
+				 VIL #24 <span class="capitalize">brennan, duke</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">02:56</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 BYU #7 <span class="capitalize">mboup, khadim</span></td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">02:35</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed DRIVING 
+					<span class="lower">driving layup</span>
+					by
+				
+				 BYU #25 <span class="capitalize">baker, dawson</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">02:32</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 VIL #33 <span class="capitalize">hodge, matt</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_V fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo VLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">3</div></td><td class="text-center">02:28</td><td class="text-center">VIL</td><td class="text-center">27-33</td><td class="text-center">H 6</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-secondary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 VIL #0 <span class="capitalize">jeffrey, christian</span></td></tr><tr class="pxprow pxp_ASSIST pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">02:28</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">assist</span> by
+				
+				 VIL #55 <span class="capitalize">lewis, acaden</span></td></tr><tr class="pxprow pxp_TIMEOUT pxpteam_H underline"><td class="text-start noprint align-middle"></td><td class="text-center">02:26</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-light fw-bold  border ps-1 pe-1 text-center w-4 mx-auto">TIME</div></td><td class="text-start  text-capitalize">30-second Timeout called by
+				 BYU</td></tr><tr class="pxprow pxp_TIMEOUT pxpteam_ underline"><td class="text-start noprint align-middle"></td><td class="text-center">02:26</td><td class="text-center"></td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-light fw-bold  border ps-1 pe-1 text-center w-4 mx-auto">TIME</div></td><td class="text-start  text-capitalize">Media Timeout</td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">02:26</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #5 <span class="capitalize">boskovic, mihailo</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">02:26</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #7 <span class="capitalize">mboup, khadim</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">02:26</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #25 <span class="capitalize">baker, dawson</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">02:26</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #3 <span class="capitalize">dybantsa, aj</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">02:26</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #13 <span class="capitalize">keita, keba</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">02:26</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #15 <span class="capitalize">saunders, richie</span></td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">02:04</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed DRIVING 
+					<span class="lower">driving layup</span>
+					by
+				
+				 BYU #3 <span class="capitalize">dybantsa, aj</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">01:57</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Offensive 
+					rebound by 
+				
+				 BYU #13 <span class="capitalize">keita, keba</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">2</div></td><td class="text-center">01:57</td><td class="text-center">BYU</td><td class="text-center">27-35</td><td class="text-center">H 8</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-primary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made TIPINDUNK 
+					 second-chance <span class="lower">tipindunk jumper</span>
+					by
+				
+				 BYU #13 <span class="capitalize">keita, keba</span></td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">01:51</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Blocked DRIVING 
+					<span class="lower">driving layup</span>
+					by
+				
+				 VIL #0 <span class="capitalize">jeffrey, christian</span></td></tr><tr class="pxprow pxp_BLOCK pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">01:51</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">block</span> by
+				
+				 BYU #13 <span class="capitalize">keita, keba</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">01:51</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Offensive 
+					rebound by 
+				
+				 VIL</td></tr><tr class="pxprow pxp_GOOD pxpteam_V fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo VLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">2</div></td><td class="text-center">01:34</td><td class="text-center">VIL</td><td class="text-center">29-35</td><td class="text-center">H 6</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-primary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made  second-chance <span class="lower"> jumper</span>
+					by
+				
+				 VIL #0 <span class="capitalize">jeffrey, christian</span> in the paint</td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">01:20</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed DRIVING 
+					<span class="lower">driving layup</span>
+					by
+				
+				 BYU #1 <span class="capitalize">wright iii, robert</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">01:19</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 VIL</td></tr><tr class="pxprow pxp_MISS pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">01:05</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 VIL #7 <span class="capitalize">palmer, malachi</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">01:02</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Defensive 
+					rebound by 
+				
+				 BYU #3 <span class="capitalize">dybantsa, aj</span></td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">00:58</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 BYU #15 <span class="capitalize">saunders, richie</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">00:54</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Offensive 
+					rebound by 
+				
+				 BYU #3 <span class="capitalize">dybantsa, aj</span></td></tr><tr class="pxprow pxp_MISS pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">00:52</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller text-muted bg-muted border ps-1 pe-1 text-center w-4 mx-auto">miss</div></td><td class="text-start  text-capitalize">Missed  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 BYU #1 <span class="capitalize">wright iii, robert</span></td></tr><tr class="pxprow pxp_REBOUND pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">00:49</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize">Offensive 
+					rebound by 
+				
+				 BYU</td></tr><tr class="pxprow pxp_FOUL pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">00:49</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-highlight fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FOUL</div></td><td class="text-start  text-capitalize">Personal 							
+					Foul 
+					
+					on 
+				
+				 VIL #7 <span class="capitalize">palmer, malachi</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">1</div></td><td class="text-center">00:49</td><td class="text-center">BYU</td><td class="text-center">29-36</td><td class="text-center">H 7</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-info fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FT</div></td><td class="text-start  text-capitalize">Made  second-chance 
+							Free Throw 						
+						
+					by
+				
+				 BYU #3 <span class="capitalize">dybantsa, aj</span> (1OF2)</td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">1</div></td><td class="text-center">00:49</td><td class="text-center">BYU</td><td class="text-center">29-37</td><td class="text-center">H 8</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-info fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FT</div></td><td class="text-start  text-capitalize">Made  second-chance 
+							Free Throw 						
+						
+					by
+				
+				 BYU #3 <span class="capitalize">dybantsa, aj</span> (2OF2)</td></tr><tr class="pxprow pxp_FOUL pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">00:45</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-highlight fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FOUL</div></td><td class="text-start  text-capitalize">Personal 							
+					Foul 
+					
+					on 
+				
+				 VIL #0 <span class="capitalize">jeffrey, christian</span>; shooting foul.</td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">1</div></td><td class="text-center">00:45</td><td class="text-center">BYU</td><td class="text-center">29-38</td><td class="text-center">H 9</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-info fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FT</div></td><td class="text-start  text-capitalize">Made  second-chance 
+							Free Throw 						
+						
+					by
+				
+				 BYU #15 <span class="capitalize">saunders, richie</span> (1OF2)</td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">1</div></td><td class="text-center">00:45</td><td class="text-center">BYU</td><td class="text-center">29-39</td><td class="text-center">H 10</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-info fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FT</div></td><td class="text-start  text-capitalize">Made  second-chance 
+							Free Throw 						
+						
+					by
+				
+				 BYU #15 <span class="capitalize">saunders, richie</span> (2OF2)</td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">00:45</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 BYU #15 <span class="capitalize">saunders, richie</span></td></tr><tr class="pxprow pxp_SUB pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">00:45</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 BYU #7 <span class="capitalize">mboup, khadim</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">00:45</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">OUT</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 OUT: 
+				 VIL #7 <span class="capitalize">palmer, malachi</span></td></tr><tr class="pxprow pxp_SUB pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">00:45</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-less-dark border ps-1 pe-1 text-center w-4 mx-auto">IN</div></td><td class="text-start  text-capitalize">
+				Substitution 
+				 IN: 
+				 VIL #4 <span class="capitalize">perkins, tyler</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_V fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo VLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">3</div></td><td class="text-center">00:22</td><td class="text-center">VIL</td><td class="text-center">32-39</td><td class="text-center">H 7</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-secondary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 VIL #55 <span class="capitalize">lewis, acaden</span></td></tr><tr class="pxprow pxp_ASSIST pxpteam_V"><td class="text-start noprint align-middle"></td><td class="text-center">00:22</td><td class="text-center">VIL</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">assist</span> by
+				
+				 VIL #4 <span class="capitalize">perkins, tyler</span></td></tr><tr class="pxprow pxp_GOOD pxpteam_H fw-bold"><td class="text-start noprint align-middle"><div class="sb-team-logo HLogo sb-table-logo"></div><div class="align-middle ms-2 bg-dark fw-bold border border-light w-auto d-inline-block px-1">3</div></td><td class="text-center">00:02</td><td class="text-center">BYU</td><td class="text-center">32-42</td><td class="text-center">H 10</td><td class="text-center noprint align-middle"><div class="me-2 smaller bg-secondary fw-bold border ps-1 pe-1 text-center w-4 mx-auto">FG</div></td><td class="text-start  text-capitalize">Made  
+					
+							3PT <span class="lower"> jumper</span>
+					by
+				
+				 BYU #30 <span class="capitalize">davis jr., kennard</span></td></tr><tr class="pxprow pxp_ASSIST pxpteam_H"><td class="text-start noprint align-middle"></td><td class="text-center">00:02</td><td class="text-center">BYU</td><td class="text-center">-</td><td class="text-center"></td><td class="text-center noprint align-middle"></td><td class="text-start  text-capitalize"><span class="capitalize">assist</span> by
+				
+				 BYU #3 <span class="capitalize">dybantsa, aj</span></td></tr></tbody></table></div></div></div>
+</div>
+			</div>
+			<div id="statbroadcast-ad-bottom" class="statbroadcast-ad bg-stats w-100 hidden">
+				<div id="statbroadcast-ad-bottom-banner" class="statbroadcast-ad statbroadcast-ad-banner w-100"></div>
+			</div>
+		</main>
+		<footer id="statbroadcast-footer" class="footer mt-auto">
+			<div class="w-100 footer-transition"></div>
+			<div class="footer-content w-100 py-3">
+				<div class="container text-center small border-top">
+					StatBroadcast&#174; is a registered trademark and dba of Radiak Group LLC, an Arizona entity.<br/>
+					Copyright &#169; 2006-2026. Radiak Group LLC, Tempe AZ. All Rights Reserved.<br/>
+
+					<a class="link" target="_blank" href="https://www.statbroadcast.com/terms.php">Terms of Use</a> |
+					<a class="link" target="_blank" href="https://www.statbroadcast.com/privacy.php">Privacy Policy</a> |
+					<a class="link" target="_blank" href="https://www.statbroadcast.com/accessibility.php">Accessibility</a> |
+					<a class="link" target="_blank" href="https://www.statbroadcast.com/getintouch.php">Contact</a>
+					<span class="consent">
+					<br/>
+					<button id="pmLink">Privacy Manager</button>
+					</span>
+				</div>
+			</div>
+			<div id="hooks" class="sb-hooks"></div>
+			<div id="objects" class="sb-objects">
+				<a data-google-interstitial="false" href="#" id="scroll" style="display: none;"><span></span></a>
+				<div class="sb-overlay bg-primary hidden"></div>
+				<div class="sb-statbroadcast-logo-floater">&nbsp;</div>
+				<div class="sb-statbroadcast-banner-url hidden"></div>
+				<div id="statbroadcast-fixed-ad" class="fixed-bottom pb-2"></div>
+				<div id="statbroadcast-floating-ad" class="statbroadcast-ad"></div>
+				<div id="statbroadcast-loading-footer" class="fixed-bottom pb-2">
+					<a data-google-interstitial="false" class="loadlink link" onclick="this.style.display='none';" data-bs-toggle="collapse" href="#load-info" role="button" aria-expanded="false" aria-controls="collapseExample">Show Info on Terms, Privacy and more</a>
+					<div id="load-info" class="collapse">
+					<a class="link" target="_blank" href="https://www.statbroadcast.com/terms.php">Terms of Use</a> |
+					<a class="link" target="_blank" href="https://www.statbroadcast.com/privacy.php">Privacy Policy</a> |
+					<a class="link" target="_blank" href="https://www.statbroadcast.com/accessibility.php">Accessibility</a> |
+					<a class="link" target="_blank" href="https://www.statbroadcast.com/getintouch.php">Contact</a>
+					<span class="consent"><button id="pmLink">Privacy Manager</button></span>
+					</div>
+
+				</div>
+			</div>
+		</footer>
+	</body>
+</HTML>

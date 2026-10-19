@@ -15,6 +15,9 @@ import KillsSeason from "./views/Kills/KillsSeason";
 import KillsRouter from "./views/Kills/KillsRouter";
 import LatestGameRedirect from "./components/GameSwitcher/LatestGameRedirect";
 import Home from "./views/Home/Home";
+import BoxRouter, { LatestBox } from "./views/Box/BoxRouter";
+import Box from "./views/Box/Box";
+import { LiveRouter, LiveIndex, LiveGame, LiveBox, LiveKills, LiveLineups } from "./views/Box/LiveBox";
 import { views, COLLECTION_VIEW } from './constants/views';
 import AlumniRouter from "./views/Alumni/AlmuniRouter";
 import useMediaQuery from "./hooks/useMediaQuery";
@@ -22,7 +25,7 @@ import useHideOnScroll from "./hooks/useHideOnScroll";
 import { TouchPointsContextProvider } from "./contexts/TouchpointsContext";
 import { FeatureFlagsProvider, useFlag } from "./contexts/FeatureFlagsContext";
 import { CollectionProvider, useCollection } from "./contexts/CollectionContext";
-import { COLLECTION } from "./constants/featureFlags";
+import { COLLECTION, LIVE_GAME } from "./constants/featureFlags";
 
 // Admin pages are lazy-loaded so none of their code is in the main bundle. The gated
 // ones (alumni, recent games) load their editor only after the password is accepted.
@@ -50,6 +53,7 @@ function AppContent() {
   const isMobile = useMediaQuery("(max-width: 900px)"); // matches styles/mobile.css
   const topBarHidden = useHideOnScroll(isMobile, pathname);
   const collectionOn = useFlag(COLLECTION);
+  const liveOn = useFlag(LIVE_GAME);
   const { count: collectionCount } = useCollection();
   const navViews = useMemo(
     () => (collectionOn ? [...views, { ...COLLECTION_VIEW, badge: collectionCount }] : views),
@@ -86,6 +90,22 @@ function AppContent() {
               <Route path="latest" element={<LatestGameRedirect basePath="kills" />} />
               <Route path=":name" element={<Kills />} />
             </Route>
+            {/* Hidden while it is a local prototype: not in the nav, reachable at /box */}
+            <Route path="box" element={<BoxRouter />}>
+              <Route index element={<LatestBox />} />
+              <Route path=":name" element={<Box />} />
+            </Route>
+            {/* Behind the `liveGame` flag (?ff=liveGame): the in-game page, fed by the local live box server */}
+            {liveOn && (
+              <Route path="live" element={<LiveRouter />}>
+                <Route index element={<LiveIndex />} />
+                <Route path=":name" element={<LiveGame />}>
+                  <Route index element={<LiveBox />} />
+                  <Route path="kills" element={<LiveKills />} />
+                  <Route path="lineups" element={<LiveLineups />} />
+                </Route>
+              </Route>
+            )}
             <Route path="alumni" element={<AlumniRouter />} ></Route>
             {collectionOn && <Route path="collection" element={<Suspense fallback={null}><Collection /></Suspense>} />}
             {/* Hidden — not in nav, only reachable by navigating directly here */}
