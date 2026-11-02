@@ -33,6 +33,7 @@
 |  | BYU | Houston |
 |:---|---:|---:|
 | FG (made-att, %) | 21-51 (41.2%) | 26-58 (44.8%) |
+| 2PT (made-att, %) | 13-34 (38.2%) | 21-41 (51.2%) |
 | 3PT (made-att, %) | 8-17 (47.1%) | 5-17 (29.4%) |
 | 3-point rate (3PA / FGA) | 33.3% | 29.3% |
 | FT (made-att, %) | 16-19 (84.2%) | 16-20 (80.0%) |
@@ -74,7 +75,7 @@
 
 |  | BYU | Houston |
 |:---|---:|---:|
-| Missed rim attempts × 2 × rim FG% (pooled db rate 64.4%) | 7.7 | 9.0 |
+| Missed rim attempts × 2 × rim FG% (pooled db rate 64.5%) | 7.7 | 9.0 |
 | Advantage plays (transition + quick-off-make): scoreless / total | 6 / 12 | 2 / 5 |
 | …valued at the team’s own advantage PPP this game | 7.5 | 2.4 |
 
@@ -101,8 +102,10 @@
 | Havoc rate, strict (per opp possession) | 18.8% (13) | 27.1% (19) |
 | Havoc rate, weighted (w_late 0.5, w_early 0.25: placeholders) | 21.4% (14.8) | 28.6% (20.0) |
 | Havoc rate, broad (all turnovers) | 29.0% (20) | 32.9% (23) |
-| Live-ball havoc → shot/FT within 8s | 5 of 8; 1.75 pts/event | 7 of 16; 1.19 pts/event |
-| Dead-ball havoc → shot/FT within window | 0 of 10; 1.00 pts/event | 0 of 6; 0.67 pts/event |
+| Live-ball havoc → shot/FT within 8s | 5 of 8 | 7 of 16 |
+| ↳ points on the possessions that followed (per event) | 14 (1.75) | 19 (1.19) |
+| Dead-ball havoc → shot/FT within 8s | 0 of 10 | 0 of 6 |
+| ↳ points on the possessions that followed (per event) | 10 (1.00) | 4 (0.67) |
 | Squeeze rate (est. ≤5s on shot clock) | 17.4% (12 of 69) | 7.1% (5 of 70) |
 | Opp PPP squeezed vs other possessions | 0.83 vs 1.11 | 0.00 vs 1.02 |
 
@@ -138,35 +141,35 @@
 | Aleksej Kostić | 11.1 | 9 | 3-6 | 3-5 | 0-0 | 0 | 0 | 0 | 0 | 0 | 3 | 2 | +0/−3 (−3) | −2.9 | −4.8 | −15.7 | +23.0 |
 | AJ Dybantsa | 40.0 | 26 | 7-18 | 3-5 | 9-10 | 0 | 5 | 2 | 0 | 0 | 5 | 2 | +0/−5 (−5) | −5.0 | −6.5 | −17.2 | +41.3 |
 
-*How the points were scored (these five sum to PTS), then PTS, assist points, and points produced = PTS + assist points (every point he had a hand in; one basket can count for both scorer and passer, so it does not total to the team total).*
+*How the points were scored (these five sum to PTS), then PTS, assists (count), assist points, and points produced = PTS + assist points (every point he had a hand in; one basket can count for both scorer and passer, so it does not total to the team total).*
 
-| Player | FT | Assisted | Putback | Early (trans/quick) | Self-created HC | PTS | Assist pts | Pts produced |
-|:---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Keba Keita | 2 | 0 | 6 | 0 | 0 | 8 | 0 | 8 |
-| Dominique Diomande | 0 | 0 | 2 | 2 | 0 | 4 | 0 | 4 |
-| Kennard Davis Jr. | 2 | 0 | 0 | 0 | 2 | 4 | 3 | 7 |
-| Mihailo Boskovic | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| Abdullah Ahmed | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| TEAM | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| Khadim Mboup | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| Robert Wright III | 3 | 8 | 0 | 0 | 4 | 15 | 15 | 30 |
-| Aleksej Kostić | 0 | 9 | 0 | 0 | 0 | 9 | 0 | 9 |
-| AJ Dybantsa | 9 | 6 | 0 | 5 | 6 | 26 | 5 | 31 |
+| Player | FT | Putback | Early (trans/quick) | Self-created HC | Assisted | PTS | AST | Assist pts | Pts produced |
+|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Keba Keita | 2 | 6 | 0 | 0 | 0 | 8 | 0 | 0 | 8 (12.1%) |
+| Dominique Diomande | 0 | 2 | 2 | 0 | 0 | 4 | 0 | 0 | 4 (6.1%) |
+| Kennard Davis Jr. | 2 | 0 | 0 | 2 | 0 | 4 | 1 | 3 | 7 (10.6%) |
+| Mihailo Boskovic | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 (0.0%) |
+| Abdullah Ahmed | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 (0.0%) |
+| TEAM | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 (0.0%) |
+| Khadim Mboup | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 (0.0%) |
+| Robert Wright III | 3 | 0 | 0 | 4 | 8 | 15 | 5 | 15 | 30 (45.5%) |
+| Aleksej Kostić | 0 | 0 | 0 | 0 | 9 | 9 | 0 | 0 | 9 (13.6%) |
+| AJ Dybantsa | 9 | 0 | 5 | 6 | 6 | 26 | 2 | 5 | 31 (47.0%) |
 
 *Context columns (overlap by design; never total them across players):*
 
-| Player | Opp pts off his TO (live/dead) | Team pts off steal/charge/block | Pts after his OREB (quick/reset) | Opp FT pts off his fouls | Pts left at FT (league / own) | Pts left at rim | TO rate | On/off net per 100 (poss on/off) |
-|:---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Keba Keita | 0 / 0 | 1 / 0 / 5 | 6 / 2 | 3 | −0.56 / −0.87 | 2.6 | 0.0% | −27 (97/42) |
-| Dominique Diomande | 0 / 0 | 6 / 0 / 0 | 2 / 0 | 0 | 0.00 / 0.00 | 0.0 | 33.3% | +19 (53/86) |
-| Kennard Davis Jr. | 0 / 0 | 2 / 0 / 0 | 0 / 0 | 4 | +0.16 / +0.24 | 0.0 | 9.7% | −7 (134/5) |
-| Mihailo Boskovic | 0 / 0 | 0 / 0 / 0 | 0 / 0 | 2 | 0.00 / 0.00 | 0.0 | – | −50 (7/132) |
-| Abdullah Ahmed | 0 / 0 | 0 / 0 / 0 | 0 / 0 | 3 | 0.00 / 0.00 | 0.0 | – | +24 (42/97) |
-| TEAM | 0 / 0 | 0 / 0 / 0 | 0 / 0 | 0 | 0.00 / 0.00 | 0.0 | 100.0% | – (0/139) |
-| Khadim Mboup | 2 / 2 | 0 / 0 / 0 | 0 / 0 | 0 | 0.00 / 0.00 | 0.0 | 100.0% | −16 (51/88) |
-| Robert Wright III | 4 / 0 | 0 / 0 / 0 | 0 / 0 | 2 | −0.12 / +0.26 | 2.6 | 26.7% | −15 (131/8) |
-| Aleksej Kostić | 3 / 2 | 0 / 0 / 0 | 0 / 0 | 2 | 0.00 / 0.00 | 1.3 | 33.3% | −39 (41/98) |
-| AJ Dybantsa | 6 / 0 | 0 / 0 / 0 | 0 / 0 | 0 | −1.48 / −1.05 | 1.3 | 18.2% | −12 (139/0) |
+| Player | Opp pts off his TO (live/dead) | Team pts off steal/charge/block | Pts after his OREB (quick/reset) | Opp FT pts off his fouls | Pts left at FT (league / own) | Pts left at rim | TO rate | On-floor net pts (off / def poss) | Bench net pts (off / def poss) |
+|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Keba Keita | 0 / 0 | 1 / 0 / 5 | 6 / 2 | 3 | −0.56 / −0.87 | 2.6 | 0.0% | −12 (49 / 48) | +5 (21 / 21) |
+| Dominique Diomande | 0 / 0 | 6 / 0 / 0 | 2 / 0 | 0 | 0.00 / 0.00 | 0.0 | 33.3% | +6 (27 / 26) | −13 (43 / 43) |
+| Kennard Davis Jr. | 0 / 0 | 2 / 0 / 0 | 0 / 0 | 4 | +0.16 / +0.24 | 0.0 | 9.7% | −3 (68 / 66) | −4 (2 / 3) |
+| Mihailo Boskovic | 0 / 0 | 0 / 0 / 0 | 0 / 0 | 2 | 0.00 / 0.00 | 0.0 | – | −3 (3 / 4) | −4 (67 / 65) |
+| Abdullah Ahmed | 0 / 0 | 0 / 0 / 0 | 0 / 0 | 3 | 0.00 / 0.00 | 0.0 | – | +5 (21 / 21) | −12 (49 / 48) |
+| TEAM | 0 / 0 | 0 / 0 / 0 | 0 / 0 | 0 | 0.00 / 0.00 | 0.0 | 100.0% | 0 (0 / 0) | −7 (70 / 69) |
+| Khadim Mboup | 2 / 2 | 0 / 0 / 0 | 0 / 0 | 0 | 0.00 / 0.00 | 0.0 | 100.0% | −3 (26 / 25) | −4 (44 / 44) |
+| Robert Wright III | 4 / 0 | 0 / 0 / 0 | 0 / 0 | 2 | −0.12 / +0.26 | 2.6 | 26.7% | −9 (66 / 65) | +2 (4 / 4) |
+| Aleksej Kostić | 3 / 2 | 0 / 0 / 0 | 0 / 0 | 2 | 0.00 / 0.00 | 1.3 | 33.3% | −9 (20 / 21) | +2 (50 / 48) |
+| AJ Dybantsa | 6 / 0 | 0 / 0 / 0 | 0 / 0 | 0 | −1.48 / −1.05 | 1.3 | 18.2% | −7 (70 / 69) | 0 (0 / 0) |
 
 ### Houston player table
 
@@ -183,35 +186,35 @@
 | Isiah Harwell | 2.1 | 0 | 0-0 | 0-0 | 0-0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | +0/−0 (0) | 0.0 | 0.0 | 0.0 | 0.0 |
 | Mercy Miller | 14.5 | 6 | 2-4 | 0-1 | 2-2 | 0 | 0 | 0 | 0 | 0 | 1 | 3 | +0/−1 (−1) | −1.2 | −2.1 | −2.7 | +13.4 |
 
-*How the points were scored (these five sum to PTS), then PTS, assist points, and points produced = PTS + assist points (every point he had a hand in; one basket can count for both scorer and passer, so it does not total to the team total).*
+*How the points were scored (these five sum to PTS), then PTS, assists (count), assist points, and points produced = PTS + assist points (every point he had a hand in; one basket can count for both scorer and passer, so it does not total to the team total).*
 
-| Player | FT | Assisted | Putback | Early (trans/quick) | Self-created HC | PTS | Assist pts | Pts produced |
-|:---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Joseph Tugler | 2 | 4 | 4 | 0 | 2 | 12 | 8 | 20 |
-| Chase McCarty | 0 | 3 | 0 | 0 | 0 | 3 | 0 | 3 |
-| Emanuel Sharp | 10 | 3 | 0 | 0 | 0 | 13 | 0 | 13 |
-| Chris Cenac Jr | 0 | 6 | 4 | 0 | 0 | 10 | 0 | 10 |
-| Kingston Flemings | 1 | 0 | 0 | 0 | 16 | 17 | 7 | 24 |
-| Kalifa Sakho | 1 | 2 | 0 | 0 | 2 | 5 | 0 | 5 |
-| TEAM | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| Milos Uzan | 0 | 3 | 0 | 0 | 4 | 7 | 10 | 17 |
-| Isiah Harwell | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| Mercy Miller | 2 | 4 | 0 | 0 | 0 | 6 | 0 | 6 |
+| Player | FT | Putback | Early (trans/quick) | Self-created HC | Assisted | PTS | AST | Assist pts | Pts produced |
+|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Joseph Tugler | 2 | 4 | 0 | 2 | 4 | 12 | 4 | 8 | 20 (27.4%) |
+| Chase McCarty | 0 | 0 | 0 | 0 | 3 | 3 | 0 | 0 | 3 (4.1%) |
+| Emanuel Sharp | 10 | 0 | 0 | 0 | 3 | 13 | 0 | 0 | 13 (17.8%) |
+| Chris Cenac Jr | 0 | 4 | 0 | 0 | 6 | 10 | 0 | 0 | 10 (13.7%) |
+| Kingston Flemings | 1 | 0 | 0 | 16 | 0 | 17 | 3 | 7 | 24 (32.9%) |
+| Kalifa Sakho | 1 | 0 | 0 | 2 | 2 | 5 | 0 | 0 | 5 (6.8%) |
+| TEAM | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 (0.0%) |
+| Milos Uzan | 0 | 0 | 0 | 4 | 3 | 7 | 4 | 10 | 17 (23.3%) |
+| Isiah Harwell | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 (0.0%) |
+| Mercy Miller | 2 | 0 | 0 | 0 | 4 | 6 | 0 | 0 | 6 (8.2%) |
 
 *Context columns (overlap by design; never total them across players):*
 
-| Player | Opp pts off his TO (live/dead) | Team pts off steal/charge/block | Pts after his OREB (quick/reset) | Opp FT pts off his fouls | Pts left at FT (league / own) | Pts left at rim | TO rate | On/off net per 100 (poss on/off) |
-|:---|---:|---:|---:|---:|---:|---:|---:|---:|
-| Joseph Tugler | 2 / 2 | 2 / 0 / 2 | 6 / 2 | 4 | +0.68 / +0.79 | 1.3 | 30.0% | +47 (102/37) |
-| Chase McCarty | 0 / 0 | 2 / 0 / 0 | 0 / 1 | 0 | 0.00 / 0.00 | 0.0 | 0.0% | +12 (81/58) |
-| Emanuel Sharp | 0 / 0 | 0 / 2 / 0 | 2 / 0 | 3 | −3.00 / −2.74 | 0.0 | 6.9% | +16 (102/37) |
-| Chris Cenac Jr | 0 / 3 | 2 / 0 / 0 | 2 / 0 | 0 | +0.72 / +0.72 | 0.0 | 23.7% | +4 (98/41) |
-| Kingston Flemings | 2 / 0 | 5 / 0 / 0 | 0 / 0 | 2 | +1.68 / +1.70 | 5.2 | 10.9% | +19 (95/44) |
-| Kalifa Sakho | 0 / 0 | 0 / 0 / 0 | 0 / 0 | 0 | −0.28 / −0.28 | 0.0 | 0.0% | −88 (37/102) |
-| TEAM | 0 / 3 | 0 / 0 / 0 | 3 / 0 | 0 | 0.00 / 0.00 | 0.0 | 100.0% | – (0/139) |
-| Milos Uzan | 3 / 2 | 4 / 0 / 2 | 0 / 0 | 4 | 0.00 / 0.00 | 2.6 | 28.6% | +23 (120/19) |
-| Isiah Harwell | 0 / 0 | 0 / 0 / 0 | 0 / 0 | 0 | 0.00 / 0.00 | 0.0 | – | −125 (8/131) |
-| Mercy Miller | 2 / 0 | 0 / 0 / 0 | 0 / 0 | 3 | −0.56 / −0.56 | 0.0 | 17.0% | −4 (52/87) |
+| Player | Opp pts off his TO (live/dead) | Team pts off steal/charge/block | Pts after his OREB (quick/reset) | Opp FT pts off his fouls | Pts left at FT (league / own) | Pts left at rim | TO rate | On-floor net pts (off / def poss) | Bench net pts (off / def poss) |
+|:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| Joseph Tugler | 2 / 2 | 2 / 0 / 2 | 6 / 2 | 4 | +0.68 / +0.79 | 1.3 | 30.0% | +22 (50 / 52) | −15 (19 / 18) |
+| Chase McCarty | 0 / 0 | 2 / 0 / 0 | 0 / 1 | 0 | 0.00 / 0.00 | 0.0 | 0.0% | +4 (40 / 41) | +3 (29 / 29) |
+| Emanuel Sharp | 0 / 0 | 0 / 2 / 0 | 2 / 0 | 3 | −3.00 / −2.74 | 0.0 | 6.9% | +8 (51 / 51) | −1 (18 / 19) |
+| Chris Cenac Jr | 0 / 3 | 2 / 0 / 0 | 2 / 0 | 0 | +0.72 / +0.72 | 0.0 | 23.7% | +2 (49 / 49) | +5 (20 / 21) |
+| Kingston Flemings | 2 / 0 | 5 / 0 / 0 | 0 / 0 | 2 | +1.68 / +1.70 | 5.2 | 10.9% | +8 (47 / 48) | −1 (22 / 22) |
+| Kalifa Sakho | 0 / 0 | 0 / 0 / 0 | 0 / 0 | 0 | −0.28 / −0.28 | 0.0 | 0.0% | −15 (19 / 18) | +22 (50 / 52) |
+| TEAM | 0 / 3 | 0 / 0 / 0 | 3 / 0 | 0 | 0.00 / 0.00 | 0.0 | 100.0% | 0 (0 / 0) | +7 (69 / 70) |
+| Milos Uzan | 3 / 2 | 4 / 0 / 2 | 0 / 0 | 4 | 0.00 / 0.00 | 2.6 | 28.6% | +12 (59 / 61) | −5 (10 / 9) |
+| Isiah Harwell | 0 / 0 | 0 / 0 / 0 | 0 / 0 | 0 | 0.00 / 0.00 | 0.0 | – | −5 (4 / 4) | +12 (65 / 66) |
+| Mercy Miller | 2 / 0 | 0 / 0 / 0 | 0 / 0 | 3 | −0.56 / −0.56 | 0.0 | 17.0% | −1 (26 / 26) | +8 (43 / 44) |
 
 ## Win probability
 

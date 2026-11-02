@@ -8,18 +8,11 @@
 // list-bucket.js and collect-headshots.js's IMAGE_UPLOAD_API_URL.
 const fs = require('fs');
 const path = require('path');
+const { loadEnv } = require('../lib/env');
 const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
 
 const CONTENT_TYPES = { '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp' };
 const contentTypeFor = (file) => CONTENT_TYPES[path.extname(file).toLowerCase()] || 'application/octet-stream';
-
-function loadEnv() {
-  const file = path.join(__dirname, '../../../stat_explorer/.env.local');
-  fs.readFileSync(file, 'utf8').split('\n').forEach(line => {
-    const m = line.match(/^\s*([A-Z_]+)=(.*)$/);
-    if (m && !process.env[m[1]]) process.env[m[1]] = m[2].trim();
-  });
-}
 
 async function main() {
   const [localFile, s3Key] = process.argv.slice(2);

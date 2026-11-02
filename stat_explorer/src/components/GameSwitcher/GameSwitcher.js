@@ -31,22 +31,23 @@ function OpponentLabel({ info }) {
   );
 }
 
-// BYU's score always first. "at Team" on the road, "vs Team" at home, "(N)" on a neutral court.
+// BYU's score always first. "at Team" on the road, "vs Team" at home, "(N)" on a neutral court, "(exh.)" for an exhibition.
 function formatGame(g) {
   const byuHome = g.homeTeamId === FOCUS_TEAM;
   const opponentName = byuHome ? g.awayTeamName : g.homeTeamName;
   const byuScore = byuHome ? g.finalScoreHome : g.finalScoreAway;
   const oppScore = byuHome ? g.finalScoreAway : g.finalScoreHome;
   const hasScore = g.status === 'final' && byuScore != null && oppScore != null;
+  const suffix = `${g.neutralSite ? ' (N)' : ''}${g.isExhibition ? ' (exh.)' : ''}`;
   return {
     prefix: byuHome ? 'vs' : 'at',
-    opponentName: `${opponentName}${g.neutralSite ? ' (N)' : ''}`,
+    opponentName: `${opponentName}${suffix}`,
     opponentId: byuHome ? g.awayTeamId : g.homeTeamId,
     result: hasScore ? (byuScore > oppScore ? 'W' : 'L') : null,
     byuScore: hasScore ? byuScore : null,
     oppScore: hasScore ? oppScore : null,
     scoreText: hasScore ? `${byuScore}-${oppScore}` : null,
-    opponentText: `${byuHome ? 'vs' : 'at'} ${opponentName}${g.neutralSite ? ' (N)' : ''}`,
+    opponentText: `${byuHome ? 'vs' : 'at'} ${opponentName}${suffix}`,
   };
 }
 

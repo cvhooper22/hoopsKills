@@ -7,7 +7,7 @@ import Net from '../../../components/Net/Net';
 import SortableHeader from '../../../components/SortableHeader/SortableHeader';
 import { GAME_SORT_KEYS } from '../../../utils/gameLineupSorters';
 
-export default function LineupTable ({lineups, filterPlayers, summary, onSortClick, currSortKey, currSortDir}) {
+export default function LineupTable ({lineups, filterPlayers, summary, onSortClick, currSortKey, currSortDir, live = false}) {
   const [showSummary, setShowSummary] = useState(false);
   function handleToggleShow () {
     setShowSummary(!showSummary);
@@ -70,8 +70,8 @@ export default function LineupTable ({lineups, filterPlayers, summary, onSortCli
         <div className='lineup-table__legend pb-s'>
           <div className='circle-badge starter-badge mr-xs'>S</div>
           <span className="lineup-table__legend__text mr-s">- Starters</span>
-          <div className='circle-badge ender-badge mr-xs'>E</div>
-          <span className="lineup-table__legend__text">- End of game lineup</span>
+          <div className='circle-badge ender-badge mr-xs'>{live ? 'C' : 'E'}</div>
+          <span className="lineup-table__legend__text">{live ? '- Current lineup' : '- End of game lineup'}</span>
         </div>
         <div className='lineup-table__headers flex-aic'>
           <SortableHeader 
@@ -110,7 +110,7 @@ export default function LineupTable ({lineups, filterPlayers, summary, onSortCli
         <div className='lineup-table__body f1-scroll'>
           {
             lineups.map((l) => {
-            return (<LineupRow lineup={l} key={getLineupHash(l.names)}/>);
+            return (<LineupRow lineup={l} live={live} key={getLineupHash(l.names)}/>);
             }) 
           }
         </div>

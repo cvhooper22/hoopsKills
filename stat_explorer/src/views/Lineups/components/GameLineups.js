@@ -15,13 +15,13 @@ import { makeSortAscByKey, makeSortDescByKey } from "../../../utils/lineupSorter
 // The filters and the lineup table for one game's plays. Shared by the game page below and the in-game page
 // (views/Box/LiveBox.js), which passes plays that are still arriving: everything is derived from `plays`, so a new
 // array re-derives the lineups.
-export function LineupsPanel({ plays, topCombos = false }) {
+export function LineupsPanel({ plays, topCombos = false, focusTeamId, live = false }) {
   const [currSort, setCurrSort] = useState({key: GAME_SORT_KEYS.NET, direction: SORT_KEYS.DESC});
   const [filterPlayers, setFilterPlayers] = useState([]);
 
   const derived = useMemo(() => {
     try {
-      const bbgame = playsToBbgame(plays);
+      const bbgame = playsToBbgame(plays, focusTeamId);
       const lineupData = genLineupData(bbgame);
       const team = bbgame.team.find((t) => t.name === "BYU");
       const players = team.player.filter(p => p.checkname !== 'TEAM' && p.gp !== "0").map((p) => p.checkname);
@@ -30,7 +30,7 @@ export function LineupsPanel({ plays, topCombos = false }) {
       console.error(err);
       return { error: true };
     }
-  }, [plays]);
+  }, [plays, focusTeamId]);
 
   function onPlayerChange(player) {
     const newFilters = [...filterPlayers];
@@ -107,6 +107,7 @@ export function LineupsPanel({ plays, topCombos = false }) {
           onSortClick={handleSortClick}
           currSortKey={currSort.key}
           currSortDir={currSort.direction}
+          live={live}
       />
     </div>
   );

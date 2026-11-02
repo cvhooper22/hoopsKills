@@ -1,6 +1,7 @@
 const LINEUP_VIEW = "Lineups";
 const CLUTCH_VIEW = "Clutch";
 const KILLS_VIEW = "Kills";
+const EXHIBITIONS_VIEW = "Exhibitions";
 const HOME_VIEW = "Home";
 const ALMUNI_VIEW = "Alumni";
 const COLLECTION_VIEW_TITLE = "Collection";
@@ -36,4 +37,16 @@ const COLLECTION_VIEW = {
   route: '/collection',
   routeRoot: '/collection',
 };
-export { views, COLLECTION_VIEW, COLLECTION_VIEW_TITLE, HOME_VIEW, LINEUP_VIEW, CLUTCH_VIEW, KILLS_VIEW, ALMUNI_VIEW };
+// Added to the nav only while the `exhibitions` feature flag is on.
+const EXHIBITIONS_NAV_VIEW = {
+  title: EXHIBITIONS_VIEW,
+  route: '/exhibitions',
+  routeRoot: '/exhibitions',
+};
+// Added to the nav only while the `rankings` feature flag is on.
+const RANKINGS_VIEW = {
+  title: 'Rankings',
+  route: '/rankings',
+  routeRoot: '/rankings',
+};
+export { views, EXHIBITIONS_NAV_VIEW, RANKINGS_VIEW, COLLECTION_VIEW, COLLECTION_VIEW_TITLE, HOME_VIEW, LINEUP_VIEW, CLUTCH_VIEW, KILLS_VIEW, ALMUNI_VIEW };

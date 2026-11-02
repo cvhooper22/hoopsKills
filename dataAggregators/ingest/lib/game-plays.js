@@ -6,7 +6,8 @@ const PLAY_COLUMNS = `
   p.team_id, p.team_side, p.player_id, pl.name AS player_name,
   p.play_category, p.play_type, p.play_subtype, p.play_description,
   p.home_score_after, p.away_score_after, p.shot_value, p.is_made,
-  p.lineup_home, p.lineup_away`;
+  p.lineup_home, p.lineup_away,
+  p.court_x, p.court_y, p.raw_x, p.raw_y, p.goal_side, p.has_valid_location`;
 
 async function fetchGamePlays(client, gameId) {
   const { rows } = await client.query(

@@ -84,7 +84,8 @@ function categorize(item) {
   const id = String(item.type.id), text = item.type.text || '';
   if (SHOT_TYPES[id]) return { category: 'shot_attempt', type: SHOT_TYPES[id] };
   switch (id) {
-    case '540': return { category: 'free_throw', type: 'free_throw' };
+    // Other sources store the trip as "1of2"; downstream (win probability) splits it. Technical FTs say no count: 1of1.
+    case '540': { const m = /(\d) of (\d)/.exec(item.text || ''); return { category: 'free_throw', type: 'free_throw', subtype: m ? `${m[1]}of${m[2]}` : '1of1' }; }
     case '586': return { category: 'rebound', type: 'offensive' };
     case '587': return { category: 'rebound', type: 'defensive' };
     case '449': return { category: 'rebound', subtype: 'deadball' };

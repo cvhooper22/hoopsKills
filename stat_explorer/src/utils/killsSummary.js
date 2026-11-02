@@ -100,6 +100,7 @@ export function buildGameSummary({ plays, game, focusTeamId = 'byu', generatedAt
       // From the focus team's side plus the neutral flag, never from a source's event name.
       location: game.isNeutralSite ? 'neutral' : focusHome ? 'home' : 'away',
       isConferenceGame: !!game.isConferenceGame,
+      isExhibition: !!game.isExhibition, // tagged with tag-game.js; left out of season aggregations
       seasonType: game.seasonType || 'regular',
       tournamentRound: game.tournamentRound || null,
       result: scoreFor > scoreAgainst ? 'W' : 'L',

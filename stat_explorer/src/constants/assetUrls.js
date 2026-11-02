@@ -2,7 +2,12 @@
 // http://localhost:4444/data, i.e. public/data) to read the season kills and lineups files and the team
 // lookup from there instead of the CloudFront. Everything else still comes from the CloudFront.
 const previewBase = process.env.REACT_APP_PREVIEW_DATA_BASE;
-const liveBase = process.env.REACT_APP_LIVE_BOX_BASE || 'http://127.0.0.1:4610';
+// REACT_APP_LIVE_BOX_BASE picks the local server (default) or the deployed relay at build time; REACT_APP_LIVE_RELAY_BASE
+// is the relay's address for the runtime switch: /live?live=relay uses it, ?live=local forces the local server.
+const liveParam = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('live') : null;
+const liveBase = (liveParam === 'relay' && process.env.REACT_APP_LIVE_RELAY_BASE)
+  || (liveParam === 'local' && 'http://127.0.0.1:4610')
+  || process.env.REACT_APP_LIVE_BOX_BASE || 'http://127.0.0.1:4610';
 
 const urls = {
   espnPhotoStart: 'https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/',
@@ -24,6 +29,8 @@ const urls = {
   // Box scores are local-only for now: the prototype in dataAggregators/derivations writes them to public/data/box.
   boxGame: id => `${previewBase || '/data'}/box/${id}.json`,
   boxIndex: () => `${previewBase || '/data'}/box/index.json`,
+  // BYU's ratings over a season (dataAggregators/ingest/tools/export-rankings-timeline.js); local only for now.
+  rankingsTimeline: season => `${previewBase || '/data'}/rankings/timeline-${season}.json`,
   // In-game data comes from derivations/live-box-server.js (local only), not from the data CloudFront.
   liveGames: () => `${liveBase}/games`,
   liveBox: id => `${liveBase}/box/${id}`,

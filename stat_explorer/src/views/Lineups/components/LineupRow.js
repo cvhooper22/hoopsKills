@@ -18,7 +18,7 @@ const indexToLabel = {
   5: '4th Overtime'
 };
 
-export default function LineupRow ({lineup}) {
+export default function LineupRow ({lineup, live = false}) {
   const [showStints, setShowStints] = useState(false);
   const stintsByPeriod = lineup.stints.reduce((agg, stint) => {
     const startString = numberToGameTime(stint.start);
@@ -55,7 +55,7 @@ export default function LineupRow ({lineup}) {
         <div className='lr--lineup flex-center'>
           {lineupToString(lineup)}
           {lineup.isStartingLineup && <div className='circle-badge starter-badge ml-s'>S</div>}
-          {lineup.isEndingLineup && <div className='circle-badge ender-badge ml-s'>E</div>}
+          {lineup.isEndingLineup && <div className='circle-badge ender-badge ml-s'>{live ? 'C' : 'E'}</div>}
           </div>
         <div className="lr--time f1">{lineup.totalTime.toFixed(2)}</div>
         <div className='lr--stint-count f1'>{lineup.stints.length}</div>

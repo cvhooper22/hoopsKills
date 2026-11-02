@@ -1,44 +1,41 @@
 // Copies ESPN headshots for every player with an ESPN id into our S3 bucket, through the
 // same image-uploader Lambda the alumni editor uses, and records the hosted URL in player_images.
-// Skips players that already have a row. Usage: node ingest/tools/collect-headshots.js [--dry-run]
-const fs = require('fs');
-const path = require('path');
+// Skips players that already have a row. Usage: node ingest/tools/collect-headshots.js [--dry-run] [--team <teamId>]
+// --team limits it to players who have acted for that team in a play. Players from live (StatBroadcast) games
+// have no ESPN id until ingest/tools/backfill-espn-ids.js has run for the game.
 const fetch = require('node-fetch');
 const { connect } = require('../../db/client');
+const { loadEnv } = require('../lib/env');
 
 const ESPN_HEADSHOT = id => `https://a.espncdn.com/i/headshots/mens-college-basketball/players/full/${id}.png`;
 
-// The Lambda credentials live in the app's .env.local (IMAGE_UPLOAD_API_URL / IMAGE_UPLOAD_API_KEY).
-function loadEnv() {
-  const file = path.join(__dirname, '../../../stat_explorer/.env.local');
-  fs.readFileSync(file, 'utf8').split('\n').forEach(line => {
-    const m = line.match(/^\s*([A-Z_]+)=(.*)$/);
-    if (m && !process.env[m[1]]) process.env[m[1]] = m[2].trim();
-  });
-}
-
+// The Lambda sits behind the shared admin authorizer, so the app's .env.local supplies IMAGE_UPLOAD_API_URL
+// and ADMIN_PASSWORD (sent as the Authorization header). If the API method still requires an API key,
+// IMAGE_UPLOAD_API_KEY is sent too; without it API Gateway answers a bare 403 "Forbidden".
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-// API Gateway throttles the key, so back off and retry on 429.
-async function upload(apiUrl, apiKey, imageUrl, fileName) {
+// API Gateway throttles requests, so back off and retry on 429.
+async function upload(apiUrl, password, apiKey, imageUrl, fileName) {
   for (let attempt = 0; ; attempt++) {
     const res = await fetch(apiUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey },
+      headers: { 'Content-Type': 'application/json', Authorization: password, ...(apiKey && { 'x-api-key': apiKey }) },
       body: JSON.stringify({ imageUrl, category: 'player', fileName }),
     });
     if (res.status === 429 && attempt < 4) { await sleep(3000 * (attempt + 1)); continue; }
     const body = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(body.error || body.message || `HTTP ${res.status}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status} ${body.error || body.message || ''}`.trim());
     return body; // { key, url }
   }
 }
 
 async function main() {
   const dryRun = process.argv.includes('--dry-run');
+  const teamFlag = process.argv.indexOf('--team');
+  const team = teamFlag === -1 ? null : process.argv[teamFlag + 1];
   loadEnv();
-  const { IMAGE_UPLOAD_API_URL: apiUrl, IMAGE_UPLOAD_API_KEY: apiKey } = process.env;
-  if (!dryRun && (!apiUrl || !apiKey)) throw new Error('IMAGE_UPLOAD_API_URL / IMAGE_UPLOAD_API_KEY not set');
+  const { IMAGE_UPLOAD_API_URL: apiUrl, ADMIN_PASSWORD: password, IMAGE_UPLOAD_API_KEY: apiKey } = process.env;
+  if (!dryRun && (!apiUrl || !password)) throw new Error('IMAGE_UPLOAD_API_URL / ADMIN_PASSWORD not set');
 
   const client = await connect();
   try {
@@ -48,7 +45,8 @@ async function main() {
          JOIN player_external_ids e ON e.player_id = p.player_id AND e.source = 'espn'
          LEFT JOIN player_images i ON i.player_id = p.player_id
         WHERE i.player_id IS NULL
-        ORDER BY p.player_id`);
+          AND ($1::text IS NULL OR EXISTS (SELECT 1 FROM plays pl WHERE pl.player_id = p.player_id AND pl.team_id = $1))
+        ORDER BY p.player_id`, [team]);
     console.log(`${rows.length} players to fetch${dryRun ? ' (dry run)' : ''}`);
     let ok = 0;
     const failed = [];
@@ -56,7 +54,7 @@ async function main() {
       const sourceUrl = ESPN_HEADSHOT(espn_id);
       if (dryRun) { console.log(`  ${player_id} <- ${sourceUrl}`); continue; }
       try {
-        const { key, url } = await upload(apiUrl, apiKey, sourceUrl, player_id);
+        const { key, url } = await upload(apiUrl, password, apiKey, sourceUrl, player_id);
         await client.query(
           `INSERT INTO player_images (player_id, source, source_url, hosted_url, s3_key)
            VALUES ($1, 'espn', $2, $3, $4)`, [player_id, sourceUrl, url, key]);

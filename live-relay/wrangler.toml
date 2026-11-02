@@ -1,0 +1,14 @@
+name = "live"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+[[durable_objects.bindings]]
+name = "HUB"
+class_name = "Hub"
+
+# SQLite-backed Durable Objects are the ones available on the free plan
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Hub"]
+
+# Secret (not in this file): PUSH_TOKEN, set with `npx wrangler secret put PUSH_TOKEN`

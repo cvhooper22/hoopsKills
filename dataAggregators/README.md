@@ -21,6 +21,8 @@ Ingest is manual, run by hand after each game — there's no scheduler.
 # 1. Ingest from a source (repeat for whichever source(s) cover this game)
 node ingest/espn/ingest.js --id <espnGameId> --save-fixture fixtures/espn
 node ingest/wmt/ingest.js --id <wmtGameId>
+# NCAA.com is a fallback source (ESPN preferred). No --write = build and vet the rows without touching the database:
+node ingest/ncaa/ingest.js --id <ncaaContestId> [--write [--force-primary]]
 
 # 2. Export normalized plays + header facts for the game
 node ingest/tools/export-game-plays.js <gameId> /tmp/pbp-<gameId>.json
@@ -34,6 +36,10 @@ node ingest/tools/upload.js /tmp/meta-<gameId>.json pbp/games/<gameId>.meta.json
 node ingest/tools/export-games-index.js /tmp/games-index.json
 node ingest/tools/upload.js /tmp/games-index.json games/index.json
 ```
+
+Headshots: players from live (StatBroadcast) games have no ESPN id, so first run
+`node ingest/tools/backfill-espn-ids.js <gameId> [--team <teamId>] [--apply]` (matches names against ESPN rosters; dry run
+without `--apply`), then `node ingest/tools/collect-headshots.js [--dry-run] [--team <teamId>]`.
 
 ### Kills summaries and the season file
 
@@ -100,3 +106,77 @@ Season clutch follows the same flow: `node ingest/tools/export-game-clutch.js --
 `last2` tally (the same rule with a 2:00 window, regulation only, rules version 2); the per-game clutch
 page keeps its adjustable definition by working from the plays. Logic lives in
 `stat_explorer/src/utils/{clutchSummary,clutchSeason}.js`; bump `CLUTCH_RULES_VERSION` if it changes.
+
+The per-game box (Box score, Plays and Lineup timeline views) is one file per game: `node ingest/tools/export-game-box.js
+<game_id>` (or `--all`) writes `box/games/<id>.json` and rebuilds `box/index.json` under `--out-dir` (default: the temp
+dir). It holds the aggregations, the per-chance rows and the play log; the Plays and timeline views compute everything
+else in the browser. Upload with `upload.js` to `box/games/<id>.json` and `box/index.json`. It is the same payload
+`derivations/game-box-prototype.js` writes for the local preview.
+
+## Rankings (team ratings by system)
+
+Snapshots of team ratings from Torvik (with WAB), NCAA NET, Haslametrics, KenPom and EvanMiya go into the
+`rating_*` tables (migration `004_rankings.sql`), so a game can be joined to its opponent's rank either as of tip-off
+or as of the latest snapshot. All D-I teams are stored, not just BYU's opponents.
+
+```bash
+node ingest/rankings/run.js                                   # latest snapshot of every system (KenPom opens a Chrome window briefly)
+node ingest/rankings/run.js --systems torvik,net              # just these
+node ingest/rankings/run.js --backfill torvik --from 2025-10-27 --to 2026-04-14   # Torvik publishes dated history
+node ingest/rankings/status.js                                # what is stored (JSON)
+node --test ingest/rankings/rankings.test.js
+```
+
+The same run is a button on the hidden `/admin/rankings` page (`npm start` only). Run it on game day **before tip-off**:
+each snapshot is stamped with the date through which games are included (`through_date`), and a game on date G is
+compared with the latest snapshot whose `through_date` < G. Torvik, NET and Haslametrics state that date themselves;
+KenPom and EvanMiya do not, so a pull is assumed to be through yesterday, and BYU's record in each snapshot is checked
+against the games table to catch a mislabelled one.
+
+Team names differ per site. Every spelling is matched to this app's own canonical team list,
+`config/rating-teams.json` (id -> name). It started from Torvik's names, but nothing depends on his spelling: if a site
+renames a team the new spelling simply shows up as unmatched. Where a team also exists in the games `teams` table its id is
+that team's id, so games join to ratings directly. `ingest/rankings/lib/names.js` reduces spellings to comparable keys and
+`config/rating-team-synonyms.json` (spelling key -> team id) covers the rest. A collector reports names it could not
+match; on `/admin/rankings` (local only) map each to an existing team or add it as a new one, rename canonical teams, then
+re-run that system. The same edits are available on the command line: `node ingest/rankings/mappings.js` (see its header).
+
+### Joining games to opponent ratings
+
+Migration `005_game_opponent_ratings.sql` adds views; rank is constant within a game, so plays and players inherit it by
+joining to the game. `game_opponent_ratings` has one row per BYU game, system and basis for the opponent (and BYU's own
+rank): `at_game` is the latest snapshot of the game's season with `through_date` before the game date (always the pre-game
+picture), `latest` is the season's latest snapshot (the final ratings for a finished season). Each row carries rank, native
+rating, percentile and points above the D-I average (signed so higher is better, which makes systems comparable), plus the
+system's extra metrics (WAB, quad records, ...). A missing snapshot is a missing row, never a guess.
+
+```bash
+node ingest/rankings/game-ratings.js            # table: opponent rank at tip-off / latest, per system
+node ingest/rankings/game-ratings.js --check    # invariants (no game-day leak, one row per key, ...) and coverage
+```
+
+`ingest/tools/export-games-index.js` puts the same facts in each games-index entry as `opponentRatings`
+(`{ [system]: { atGame, latest } }`) and writes `rating-systems.json` beside it (labels, units, direction), so the app can
+filter games by opponent rank with no database. Upload both (`games/index.json` and `meta/rating-systems.json`). In the app,
+`stat_explorer/src/utils/opponentFilters.js` turns filters such as "top-40 at tip-off" or "defense <= 95.5" into a set of
+game ids, and `filterRows({ gameIds })` applies it to season rows; plays and players follow because they belong to games.
+
+### Rankings timeline page
+
+`/rankings` in `stat_explorer` (behind the `rankings` feature flag: `?ff=rankings`, or `REACT_APP_FF_RANKINGS`) charts BYU's rank
+by system over a season: overall, offense, defense and Torvik's WAB, with an average-and-spread band, W/L dots for each game, and a
+table of what each game did to BYU's Torvik rank. It reads `public/data/rankings/timeline-<season>.json`:
+
+```bash
+node ingest/tools/export-rankings-timeline.js --season 2025      # writes stat_explorer/public/data/rankings/timeline-2025.json
+```
+
+For 2025-26 the page also draws KenPom, EvanMiya and Haslametrics from `stat_explorer/src/constants/rankingsManual.js`, BYU's
+hand-tracked values through Feb 9, 2026 (those systems were not being collected yet). They are hardcoded for that season only; from
+2026-27 on every system comes from the database.
+
+### Exhibitions
+
+Hand-entered game tags live in `game_tags`. `node ingest/tools/tag-game.js <gameId> exhibition` marks an exhibition: it
+stays in the database and the games index (`isExhibition`) but is left out of the season aggregations
+(`derivations/aggregate-{kills,clutch,lineups}.js`; pass `--include-exhibitions` to keep it) and of the ratings record check.

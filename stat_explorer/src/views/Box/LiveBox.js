@@ -3,10 +3,20 @@ import { Link, Navigate, NavLink, Outlet, useOutletContext, useParams } from 're
 import YBallLoader from '../../components/Loaders/YBballLoader';
 import urls from '../../constants/assetUrls';
 import { BoxBody } from './Box';
+import { BoxTabs } from './BoxParts';
+import { StintComparePanel } from './BoxStintCompare';
+import { EventTimelinePanel } from './BoxEventTimeline';
+import { LineupTimelinePanel } from './BoxLineupTimeline';
+import { LineupComparePanel } from './BoxLineupCompare';
+import { FindPlaysPanel } from './BoxFind';
 import { KillsBody, gameFromMeta } from '../Kills/Kills';
 import { detectKills } from '../../utils/kills';
 import { LineupsPanel } from '../Lineups/components/GameLineups';
-import { periodLabel } from './boxFormat';
+import ShotChartPanel from '../../components/ShotChart/ShotChartPanel';
+import { liveClockText } from './boxFormat';
+import AskAi from '../../components/AskAi/AskAi';
+import { useFlag } from '../../contexts/FeatureFlagsContext';
+import { ASK_AI } from '../../constants/featureFlags';
 
 // In-game page: the same box-score sections as /box, fed by derivations/live-box-server.js. The server recomputes the whole
 // suite whenever new plays are stored and pushes it over server-sent events; this page just swaps the payload in. Behind the
@@ -48,10 +58,10 @@ function LiveBanner({ data, connection }) {
     <div className={`live-banner live-banner--${state}`} role="status">
       <span className="live-banner__dot" aria-hidden="true" />
       <strong>{final ? 'Final' : stale ? 'Feed stalled' : 'Live'}</strong>
-      {!final && l.period ? <span>{periodLabel(l.period)} {l.clock}</span> : null}
+      {!final && l.period ? <span>{liveClockText(l)}</span> : null}
       {!final && l.timeout ? <span className="live-banner__timeout">{l.timeout.label}</span> : null}
       <span className="live-banner__sep">·</span>
-      <span>{l.playCount} plays{l.lastChangedAt ? `, last new play ${ageText(now - Date.parse(l.lastChangedAt))}` : ''}</span>
+      <span>{l.lastChangedAt ? `last new play ${ageText(now - Date.parse(l.lastChangedAt))}` : ''}</span>
       {stale ? <span className="live-banner__note">No update from the feed for {Math.round(polledAge / 1000)}s: capture may have stopped.</span> : null}
       {connection === 'reconnecting' ? <span className="live-banner__note">Reconnecting to the live server…</span> : null}
       {l.failedChecks.length ? <span className="live-banner__note">Failing checks: {l.failedChecks.join('; ')}</span> : null}
@@ -59,17 +69,19 @@ function LiveBanner({ data, connection }) {
   );
 }
 
-// A small floating pill with the half and the clock, for dropping into screenshots. Drag it anywhere; the spot is remembered.
+// A small floating pill with the score, the half and the clock, for dropping into screenshots. Drag it anywhere; the spot is remembered.
 const PILL_POS_KEY = 'live-clock-pill-pos';
 function readPos() {
   try { return JSON.parse(window.localStorage.getItem(PILL_POS_KEY)) || null; } catch { return null; }
 }
-function ClockPill({ live }) {
+function ClockPill({ live, header }) {
   const [pos, setPos] = useState(readPos); // {x, y} in px from the top-left, or null for the default corner
   const drag = useRef(null);
   const final = live.status === 'final';
-  const text = final ? 'Final' : [live.period ? periodLabel(live.period) : null, live.clock].filter(Boolean).join(' ');
+  const text = final ? 'Final' : liveClockText(live);
   if (!text) return null;
+  const { final: pts, teams } = header || {};
+  const score = pts && teams ? `${teams.byu} ${pts.byu}–${pts.opp} ${teams.opp}` : null;
   const onPointerDown = (e) => {
     const box = e.currentTarget.getBoundingClientRect();
     drag.current = { dx: e.clientX - box.left, dy: e.clientY - box.top };
@@ -88,8 +100,9 @@ function ClockPill({ live }) {
       className="clock-pill"
       style={pos ? { left: pos.x, top: pos.y, right: 'auto', bottom: 'auto' } : undefined}
       onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} onPointerCancel={onPointerUp}
-      aria-label="Game clock (drag to move)"
+      aria-label="Score and game clock (drag to move)"
     >
+      {score ? <span className="clock-pill__score">{score}</span> : null}
       {text}
       {!final && live.timeout ? <span className="clock-pill__timeout">{live.timeout.kind === 'media' ? 'Media TO' : 'TO'}</span> : null}
     </div>
@@ -101,6 +114,7 @@ export function LiveGame() {
   const { name: gameId } = useParams();
   const live = useLiveGame(gameId);
   const { data, connection, problem } = live;
+  const askAiOn = useFlag(ASK_AI);
   if (!data) {
     return (
       <div className="box">
@@ -112,13 +126,13 @@ export function LiveGame() {
   return (
     <div className="box">
       <LiveBanner data={data} connection={connection} />
-      <ClockPill live={data.live} />
-      <nav className="live-tabs" aria-label="Live game views">
-        <NavLink end to={`/live/${gameId}`}>Box score</NavLink>
-        <NavLink to={`/live/${gameId}/kills`}>Kills</NavLink>
-        <NavLink to={`/live/${gameId}/lineups`}>Lineups</NavLink>
-      </nav>
+      <ClockPill live={data.live} header={data.header} />
+      <BoxTabs tabs={[
+        { to: `/live/${gameId}`, label: 'Box score', end: true }, { to: `/live/${gameId}/stint-compare`, label: 'Stint Compare' }, { to: `/live/${gameId}/event-timeline`, label: 'Event timeline' }, { to: `/live/${gameId}/find`, label: 'Find plays' }, { to: `/live/${gameId}/timeline`, label: 'Lineup timeline' }, { to: `/live/${gameId}/lineup-compare`, label: 'Lineup compare' },
+        { to: `/live/${gameId}/shots`, label: 'Shot chart' }, { to: `/live/${gameId}/kills`, label: 'Kills' }, { to: `/live/${gameId}/lineups`, label: 'Lineups' },
+      ]} />
       <Outlet context={{ ...live, gameId }} />
+      {askAiOn && <AskAi data={data} inProgress={data.live.status !== 'final'} />}
     </div>
   );
 }
@@ -126,6 +140,13 @@ export function LiveGame() {
 export function LiveBox() {
   const { data } = useOutletContext();
   return <BoxBody data={data} inLive />;
+}
+
+// Shot locations for the game so far, from the live plays (any feed's coordinates; see utils/shotLocation.js).
+export function LiveShots() {
+  const { playsData } = useOutletContext();
+  if (!playsData) return <YBallLoader />;
+  return <ShotChartPanel plays={playsData.plays} meta={playsData.meta} />;
 }
 
 // Kills for the game so far: the app's own detector (src/utils/kills.js) run in the browser on the live plays, BYU on defense.
@@ -137,11 +158,44 @@ export function LiveKills() {
   return <KillsBody plays={playsData.plays} game={game} result={result} gameId={gameId} />;
 }
 
+// Plays for the game so far: the box payload's per-chance rows, regrouped in the browser.
+export function LiveStintCompare() {
+  const { data, playsData } = useOutletContext();
+  return <StintComparePanel data={data} shotPlays={playsData ? playsData.plays : null} />;
+}
+
+// Event timeline for the game so far: every counting stat from the box payload's event log.
+export function LiveEventTimeline() {
+  const { data } = useOutletContext();
+  return <EventTimelinePanel data={data} />;
+}
+
+// Find plays for the game so far: search of the box payload's event log.
+export function LiveFind() {
+  const { data } = useOutletContext();
+  return <FindPlaysPanel data={data} />;
+}
+
+// Lineup timeline for the game so far, from the same per-chance rows as the Stint Compare tab.
+export function LiveTimeline() {
+  const { data } = useOutletContext();
+  return <LineupTimelinePanel data={data} />;
+}
+
+// Lineup compare for the game so far: on/off splits from the same per-chance rows.
+export function LiveLineupCompare() {
+  const { data, playsData } = useOutletContext();
+  return <LineupComparePanel data={data} shotPlays={playsData ? playsData.plays : null} />;
+}
+
 // Lineups for the game so far: the app's own lineup view, fed the live plays. BYU only, like the rest of the lineup views.
 export function LiveLineups() {
-  const { playsData } = useOutletContext();
-  if (!playsData) return <YBallLoader />;
-  return <LineupsPanel plays={playsData.plays} topCombos />;
+  const { playsData, data } = useOutletContext();
+  if (!playsData || !data) return <YBallLoader />;
+  // The box payload's focus team is whichever side of the game is not its opponent (BYU in a BYU game).
+  const { homeId, awayId } = playsData.meta;
+  const focusTeamId = data.header.oppId === homeId ? awayId : homeId;
+  return <LineupsPanel plays={playsData.plays} topCombos focusTeamId={focusTeamId} live={data.live.status !== 'final'} />;
 }
 
 // /live: the games the live server knows about; goes straight to the only live one when there is exactly one.

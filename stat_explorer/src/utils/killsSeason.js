@@ -23,6 +23,7 @@ export function gameRow(summary) {
     oppTeamId: game.oppTeamId,
     location: game.location,
     isConferenceGame: game.isConferenceGame,
+    isExhibition: !!game.isExhibition,
     seasonType: game.seasonType,
     tournamentRound: game.tournamentRound,
     result: game.result,
@@ -141,9 +142,13 @@ export function mergeCredit(summaries) {
 // Filters stack (AND). `location` is 'home' | 'away' | 'neutral'; neutral games never count as
 // home or away. `postseasonOnly` keeps conference-tournament and postseason games. `result` is 'W' or
 // 'L' to keep only wins or losses. Last N applies after the rest, so it is the last N wins, say.
-export function filterRows(rows, { conferenceOnly = false, location = null, postseasonOnly = false, result = null, lastN = null } = {}) {
+// Exhibitions (rows with isExhibition) are dropped unless `includeExhibitions` is set. `gameIds` (a Set, e.g. from
+// opponentGameIds in opponentFilters.js) keeps only those games, so opponent-rating filters compose with the rest.
+export function filterRows(rows, { conferenceOnly = false, location = null, postseasonOnly = false, result = null, lastN = null, includeExhibitions = false, gameIds = null } = {}) {
   let out = rows.filter((r) => (
-    (!conferenceOnly || r.isConferenceGame)
+    (includeExhibitions || !r.isExhibition)
+    && (!gameIds || gameIds.has(r.gameId))
+    && (!conferenceOnly || r.isConferenceGame)
     && (!location || r.location === location)
     && (!postseasonOnly || r.seasonType !== 'regular')
     && (!result || r.result === result)
@@ -154,7 +159,9 @@ export function filterRows(rows, { conferenceOnly = false, location = null, post
 
 // Build the whole season file from per-game summaries. Throws if the summaries were produced under
 // different kill rules; a game with no usable summary is passed in `skipped` and kept in the file.
-export function buildSeason({ season, team, summaries, skipped = [], generatedAt = new Date().toISOString() }) {
+// Exhibition games are left out unless `includeExhibitions` is set.
+export function buildSeason({ season, team, summaries: allSummaries, skipped = [], includeExhibitions = false, generatedAt = new Date().toISOString() }) {
+  const summaries = includeExhibitions ? allSummaries : allSummaries.filter((s) => !s.game.isExhibition);
   const versions = [...new Set(summaries.map((s) => s.rulesVersion))];
   if (versions.length > 1) {
     const byVersion = versions.map((v) => `v${v}: ${summaries.filter((s) => s.rulesVersion === v).map((s) => s.gameId).join(', ')}`);
