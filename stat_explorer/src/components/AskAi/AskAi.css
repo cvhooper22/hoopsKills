@@ -48,14 +48,26 @@
 .ask-ai__header {
   position: sticky;
   top: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
   padding: 0.7rem 1rem;
   background: var(--royal-blue);
   color: white;
 }
 
+.ask-ai__close {
+  display: flex;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
 .ask-ai__header h2 { margin: 0; font-size: 0.95rem; }
 
-.ask-ai__body { display: flex; flex-direction: column; gap: 0.6rem; padding: 0.8rem 1rem 1rem; font-size: 0.85rem; line-height: 1.45; }
+.ask-ai__body { display: flex; flex-direction: column; text-align: left; gap: 0.6rem; padding: 0.8rem 1rem 1rem; font-size: 0.85rem; line-height: 1.45; }
 .ask-ai__lede { margin: 0; color: var(--secondary-text); }
 .ask-ai__label { padding: 0; font-weight: 700; color: var(--royal-blue); }
 
@@ -109,5 +121,6 @@
 }
 
 .ask-ai__fail { margin: 0; color: var(--error-1); }
-.ask-ai__preview summary { cursor: pointer; color: var(--royal-blue); }
+.ask-ai__preview summary, .ask-ai__suggest summary { cursor: pointer; color: var(--royal-blue); }
+.ask-ai__suggest-hint { margin: 0.4rem 0; color: var(--secondary-text); font-size: 0.8rem; }
 .ask-ai__preview-text { margin-top: 0.4rem; }

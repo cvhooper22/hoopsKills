@@ -23,6 +23,7 @@
    "oppTotal": 198.20000000000002
   }
  },
+ "hasShotLocations": true,
  "params": {
   "TRANSITION_WINDOW_SEC": 5,
   "QUICK_WINDOW_SEC": 5,
@@ -46,8 +47,8 @@
  },
  "notes": {
   "unlinkedAssists": 0,
-  "rimPct": 0.6447823082239116,
-  "rimAttemptsInDb": 1447,
+  "rimPct": 0.6427118644067796,
+  "rimAttemptsInDb": 1475,
   "leagueFtPct": 0.72,
   "possessionsFormula": {
    "byu": {
@@ -486,7 +487,7 @@
    "advScoreless": 6,
    "advPPP": 1.25,
    "advLost": 7.5,
-   "rimLeft": 7.737387698686939,
+   "rimLeft": 7.712542372881355,
    "formula": {
     "fga": 51,
     "fta": 19,
@@ -504,7 +505,7 @@
    "advScoreless": 2,
    "advPPP": 1.2,
    "advLost": 2.4,
-   "rimLeft": 9.026952315134762,
+   "rimLeft": 8.997966101694914,
    "formula": {
     "fga": 58,
     "fta": 20,
@@ -599,7 +600,7 @@
    "ftLostMiss": 1,
    "ftWpLeague": 0.014096253324203611,
    "ftWpOwn": 0.03413210651874227,
-   "rimLeft": 2.5791292328956463,
+   "rimLeft": 2.5708474576271185,
    "possCreated": -4,
    "ptsCreated": 30,
    "tovRate": 0.2665245202558636,
@@ -679,7 +680,7 @@
    "ftMissOppExp": 1.0357142857142858,
    "ftWpLeague": -0.050995773238494746,
    "ftWpOwn": -0.03594216166785119,
-   "rimLeft": 1.2895646164478232,
+   "rimLeft": 1.2854237288135593,
    "possCreated": -5,
    "ptsCreated": 31,
    "tovRate": 0.18248175182481752,
@@ -752,7 +753,7 @@
     "tovL": 1,
     "tovD": 2
    },
-   "rimLeft": 1.2895646164478232,
+   "rimLeft": 1.2854237288135593,
    "possCreated": -3,
    "ptsCreated": 9,
    "tovRate": 0.3333333333333333,
@@ -828,7 +829,7 @@
    "ftLostMiss": 0,
    "ftWpLeague": -0.013936149206296877,
    "ftWpOwn": -0.02126985757307337,
-   "rimLeft": 2.5791292328956463,
+   "rimLeft": 2.5708474576271185,
    "possCreated": 10,
    "ptsCreated": 8,
    "tovRate": 0,
@@ -1279,7 +1280,7 @@
    "ftLostSecond": 0.725,
    "ftWpLeague": 0.01495303478452803,
    "ftWpOwn": 0.01528506892306225,
-   "rimLeft": 5.158258465791293,
+   "rimLeft": 5.141694915254237,
    "possCreated": 1,
    "ptsCreated": 24,
    "tovRate": 0.1091703056768559,
@@ -1431,7 +1432,7 @@
     "tovL": 2,
     "tovD": 2
    },
-   "rimLeft": 2.5791292328956463,
+   "rimLeft": 2.5708474576271185,
    "possCreated": 3,
    "ptsCreated": 17,
    "tovRate": 0.2857142857142857,
@@ -1511,7 +1512,7 @@
    "ftMissOppExp": 1,
    "ftWpLeague": 0.017994960091226697,
    "ftWpOwn": 0.02238720693424523,
-   "rimLeft": 1.2895646164478232,
+   "rimLeft": 1.2854237288135593,
    "possCreated": 6,
    "ptsCreated": 20,
    "tovRate": 0.3003003003003003,

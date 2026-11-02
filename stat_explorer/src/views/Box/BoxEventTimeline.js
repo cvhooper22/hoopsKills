@@ -222,31 +222,38 @@ export function EventTimelinePanel({ data }) {
           {[['flow', 'Game flow'], ['stack', 'Stacked']].map(([k, label]) => <button key={k} type="button" className={`plays-chip${mode === k ? ' plays-chip--on' : ''}`} onClick={() => setMode(k)}>{label}</button>)}
         </div>
 
-        <PlayerFilters players={players} filterPlayers={picked} onChange={togglePlayer} max={players.length} />
+        <div className="mt-l">
+          <PlayerFilters players={players} filterPlayers={picked} onChange={togglePlayer} max={players.length} />
+        </div>
 
-        <div className="plays-group__row etl-meta">
-          <span className="plays-group__label">Group</span>
-          {META.map((m) => <button key={m.key} type="button" className={`plays-chip${metaOn(m) ? ' plays-chip--on' : ''}`} aria-pressed={metaOn(m)} onClick={() => toggleMeta(m)}>{m.label}</button>)}
-        </div>
-        <div className="etl-legend" role="group" aria-label="Stats shown">
-          {KINDS.map((k) => (
-            <button key={k.key} type="button" className={`plays-chip plays-chip--small etl-chip${selected.includes(k.key) ? '' : ' etl-chip--off'}`} aria-pressed={selected.includes(k.key)} onClick={() => toggleKind(k.key)}>
-              <ShapeIcon name={k.shape} filled={k.filled} color={k.color} size={12} className="etl-chipicon" />{k.label}
-            </button>
-          ))}
-        </div>
-        {mode === 'flow' ? (
-          <div className="etl-keys">
-            <span><i className="etl-key etl-key--solid" />{teams.byu} score</span>
-            <span><i className="etl-key etl-key--dash" />{teams.opp} score</span>
-            <span className="etl-keys__note">{teams[side]}'s steals, blocks and defensive rebounds sit on the {teams[side === 'byu' ? 'opp' : 'byu']} line.</span>
+        <div className="mt-l">
+          <div className="plays-group__row etl-meta">
+            <span className="plays-group__label">Group</span>
+            {META.map((m) => <button key={m.key} type="button" className={`plays-chip${metaOn(m) ? ' plays-chip--on' : ''}`} aria-pressed={metaOn(m)} onClick={() => toggleMeta(m)}>{m.label}</button>)}
           </div>
-        ) : null}
+          <div className="etl-legend" role="group" aria-label="Stats shown">
+            {KINDS.map((k) => (
+              <button key={k.key} type="button" className={`plays-chip plays-chip--small etl-chip${selected.includes(k.key) ? '' : ' etl-chip--off'}`} aria-pressed={selected.includes(k.key)} onClick={() => toggleKind(k.key)}>
+                <ShapeIcon name={k.shape} filled={k.filled} color={k.color} size={12} className="etl-chipicon" />{k.label}
+              </button>
+            ))}
+          </div>
+        </div>
 
-        {rows.length ? <EventChart events={chartEvents} total={total} mode={mode} side={side} teams={teams} rows={rows} model={model} /> : <p className="box-foot">Pick a group or a stat to plot.</p>}
+        <div className="mt-l">
+          {mode === 'flow' ? (
+            <div className="etl-keys">
+              <span><i className="etl-key etl-key--solid" />{teams.byu} score</span>
+              <span><i className="etl-key etl-key--dash" />{teams.opp} score</span>
+              <span className="etl-keys__note">{teams[side]}'s steals, blocks and defensive rebounds sit on the {teams[side === 'byu' ? 'opp' : 'byu']} line.</span>
+            </div>
+          ) : null}
+
+          {rows.length ? <EventChart events={chartEvents} total={total} mode={mode} side={side} teams={teams} rows={rows} model={model} /> : <p className="box-foot">Pick a group or a stat to plot.</p>}
+        </div>
       </Section>
 
-      <Section title="Time between events" sub={`${teams[side]}${picked.length ? ', selected players only' : ''}. Game time, so halftime does not count. Averages and extremes need at least two.`}>
+      <Section title="Time between events">
         <BoxTable
           head={[{ label: 'Stat', className: 'box-table__label' }, { label: 'Count' }, { label: 'Since last', title: 'Time from the latest one to the latest play in the log' }, { label: 'Average gap' }, { label: 'Longest gap' }, { label: 'Shortest gap' }]}
           rows={gapRows}

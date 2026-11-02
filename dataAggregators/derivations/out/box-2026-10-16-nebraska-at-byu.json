@@ -23,6 +23,7 @@
    "oppTotal": 200.00000000000003
   }
  },
+ "hasShotLocations": false,
  "params": {
   "TRANSITION_WINDOW_SEC": 5,
   "QUICK_WINDOW_SEC": 5,
@@ -46,8 +47,8 @@
  },
  "notes": {
   "unlinkedAssists": 0,
-  "rimPct": 0.6447823082239116,
-  "rimAttemptsInDb": 1447,
+  "rimPct": 0.6427118644067796,
+  "rimAttemptsInDb": 1475,
   "leagueFtPct": 0.72,
   "possessionsFormula": {
    "byu": {
@@ -483,7 +484,7 @@
    "advScoreless": 7,
    "advPPP": 0.7692307692307693,
    "advLost": 5.384615384615385,
-   "rimLeft": 7.737387698686939,
+   "rimLeft": 7.712542372881355,
    "formula": {
     "fga": 63,
     "fta": 17,
@@ -501,7 +502,7 @@
    "advScoreless": 7,
    "advPPP": 0.8,
    "advLost": 5.6000000000000005,
-   "rimLeft": 1.2895646164478232,
+   "rimLeft": 1.2854237288135593,
    "formula": {
     "fga": 51,
     "fta": 16,
@@ -593,7 +594,7 @@
     "tovL": 1,
     "tovD": 1
    },
-   "rimLeft": 1.2895646164478232,
+   "rimLeft": 1.2854237288135593,
    "possCreated": 2,
    "ptsCreated": 12,
    "tovRate": 0.18181818181818182,
@@ -672,7 +673,7 @@
    "ftMissOppExp": 0.8846153846153846,
    "ftWpLeague": 0.06573545941821701,
    "ftWpOwn": 0.08089031332281515,
-   "rimLeft": 3.8686938493434697,
+   "rimLeft": 3.8562711864406776,
    "possCreated": -2,
    "ptsCreated": 37,
    "tovRate": 0.09689922480620154,
@@ -824,7 +825,7 @@
    "ftLostMiss": 0,
    "ftWpLeague": -0.051190847688132035,
    "ftWpOwn": -0.051190847688132035,
-   "rimLeft": 2.5791292328956463,
+   "rimLeft": 2.5708474576271185,
    "possCreated": 2,
    "ptsCreated": 21,
    "tovRate": 0.0617283950617284,
@@ -1424,7 +1425,7 @@
     "tovL": 0,
     "tovD": 0
    },
-   "rimLeft": 1.2895646164478232,
+   "rimLeft": 1.2854237288135593,
    "possCreated": 0,
    "ptsCreated": 13,
    "tovRate": 0,

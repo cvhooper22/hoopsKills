@@ -39,7 +39,7 @@ export default function ShotChartPanel({ plays, meta }) {
   }, [shots, meta]);
   const nameOf = (id) => (meta && meta.teams && meta.teams[id] && meta.teams[id].name) || id;
 
-  if (!shots.length) return <p className="mt-l">No shot locations in this game's data yet.</p>;
+  if (!shots.length) return <p className="mt-l">There is no shot chart data for this game.</p>;
   return (
     <div className="shot-chart-panel">
       <div className="shot-chart-panel__teams">

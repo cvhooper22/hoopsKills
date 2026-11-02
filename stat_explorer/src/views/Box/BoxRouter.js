@@ -8,7 +8,7 @@ import urls from '../../constants/assetUrls';
 export default function BoxRouter() {
   return (
     <div className="lineups flex">
-      <div className="lineups-content f1 flex-c pr-l">
+      <div className="lineups-content box-shell f1 flex-c pr-l">
         <Outlet />
       </div>
     </div>

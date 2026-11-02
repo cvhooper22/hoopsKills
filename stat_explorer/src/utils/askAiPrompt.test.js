@@ -7,7 +7,7 @@ function game() {
   return {
     header: { gameId: 'g', date: '2026-01-02', venue: null, focus: 'byu', teams: { byu: 'BYU', opp: 'Utah' }, final: { byu: 5, opp: 2 } },
     plays: [{ lu: { byu: A, opp: B } }],
-    notes: { possessionsFormula: { byu: { poss: 10 }, opp: { poss: 9.5 } } },
+    split: { byu: { poss: 10 }, opp: { poss: 9 } },
     players: [{ name: 'unattributed', side: 'byu', min: 0, pts: 0, fgm: 0, fga: 0, tpm: 0, tpa: 0, ftm: 0, fta: 0, oreb: 0, dreb: 0, ast: 0, stl: 0, blk: 0, tov: 0, pf: 0 }, { name: 'A1', side: 'byu', min: 20.04, pts: 5, fgm: 2, fga: 4, tpm: 1, tpa: 2, ftm: 0, fta: 0, oreb: 1, dreb: 2, ast: 1, stl: 0, blk: 0, tov: 1, pf: 2 }],
     events: [
       { per: 1, rem: 2380, side: 'byu', player: 'A1', cat: 'shot_attempt', type: 'jumpshot', sub: null, made: true, val: 3, sc: [3, 0], ast: 'A2' },

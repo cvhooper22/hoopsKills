@@ -49,16 +49,21 @@ export default function AskAi({ data, inProgress = false }) {
 
   return (
     <div className={`ask-ai${open ? ' ask-ai--open' : ''}`}>
-      <button type="button" className="ask-ai__tab" onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-label="Ask AI about this game">
-        <span className="material-symbols-sharp ask-ai__glyph" aria-hidden="true">{open ? 'close' : 'auto_awesome'}</span>
-      </button>
+      {!open && (
+        <button type="button" className="ask-ai__tab" onClick={() => setOpen(true)} aria-label="Ask AI about this game">
+          <span className="material-symbols-sharp ask-ai__glyph" aria-hidden="true">auto_awesome</span>
+        </button>
+      )}
       <section className="ask-ai__panel" aria-label="Ask AI about this game" aria-hidden={!open}>
         <header className="ask-ai__header">
+          <button type="button" className="ask-ai__close" onClick={() => setOpen(false)} aria-label="Close">
+            <span className="material-symbols-sharp ask-ai__glyph" aria-hidden="true">close</span>
+          </button>
           <h2>Ask AI about this game</h2>
         </header>
         <div className="ask-ai__body">
           <p className="ask-ai__lede">
-            Builds one prompt from this game's play-by-play. Copy it into ChatGPT, Claude, or any AI chat and ask away.
+            Build a prompt that includes context and play by play from this game. Copy it into ChatGPT, Claude, or any AI chat and ask away.
           </p>
 
           <label className="ask-ai__label" htmlFor="ask-ai-question">Your question</label>
@@ -70,13 +75,17 @@ export default function AskAi({ data, inProgress = false }) {
             onChange={(e) => { setQuestion(e.target.value); setCopied(null); }}
             placeholder="Leave blank to let the AI pick what's interesting"
           />
-          <div className="ask-ai__ideas" role="group" aria-label="Question ideas">
-            {QUESTION_IDEAS.map((idea) => (
-              <button key={idea.label} type="button" className="ask-ai__idea" onClick={() => { setQuestion(fillIdea(idea.text, team)); setCopied(null); }}>
-                {idea.label}
-              </button>
-            ))}
-          </div>
+          <details className="ask-ai__suggest">
+            <summary>Not sure what to ask?</summary>
+            <p className="ask-ai__suggest-hint">Click a suggestion topic to prefill a question.</p>
+            <div className="ask-ai__ideas" role="group" aria-label="Question ideas">
+              {QUESTION_IDEAS.map((idea) => (
+                <button key={idea.label} type="button" className="ask-ai__idea" onClick={() => { setQuestion(fillIdea(idea.text, team)); setCopied(null); }}>
+                  {idea.label}
+                </button>
+              ))}
+            </div>
+          </details>
 
           <fieldset className="ask-ai__include">
             <legend className="ask-ai__label">Include</legend>

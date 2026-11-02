@@ -75,7 +75,7 @@
 
 |  | BYU | Nebraska |
 |:---|---:|---:|
-| Missed rim attempts × 2 × rim FG% (pooled db rate 64.5%) | 7.7 | 1.3 |
+| Missed rim attempts × 2 × rim FG% (pooled db rate 64.3%) | 7.7 | 1.3 |
 | Advantage plays (transition + quick-off-make): scoreless / total | 7 / 13 | 7 / 10 |
 | …valued at the team’s own advantage PPP this game | 5.4 | 5.6 |
 
