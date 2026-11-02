@@ -59,6 +59,16 @@ const info = {
   "TYLERMRUS": { id: 5176299, no: 2, checkname: "MRUS,TYLER" },
   "TYLERPERKINS": { id: 5182412, no: 4, checkname: "PERKINS,TYLER" },
   "XAVIONSTATON": { id: 5143304, no: 33, checkname: "STATON,XAVION" },
+  "BRUCEBRANCH III": { id: 5210917, no: 3, checkname: "BRANCH III,BRUCE" },
+  "COLLINCHANDLER": { id: 5238207, no: 5, checkname: "CHANDLER,COLLIN" },
+  "JAXONKOHLER": { id: 5105815, no: 0, checkname: "KOHLER,JAXON" },
+  "TYLERBETSEY": { id: 4873141, no: 9, checkname: "BETSEY,TYLER" },
+  "NATEPICKENS": { id: 5107152, no: 2, checkname: "PICKENS,NATE" },
+  "DEANRUECKERT": { id: 5455680, no: 8, checkname: "RUECKERT,DEAN" },
+  "JAKEWAHLIN": { id: 5174977, no: 10, checkname: "WAHLIN,JAKE" },
+  "BROOKSBAHR": { id: 5455681, no: 13, checkname: "BAHR,BROOKS" },
+  "PETAROSTOJIC": { id: 5455683, no: 33, checkname: "OSTOJIC,PETAR" },
+  "BRODYKOZLOWSKI": { id: 5243214, no: 4, checkname: "KOZLOWSKI,BRODY" },
 };
 
 export default info;

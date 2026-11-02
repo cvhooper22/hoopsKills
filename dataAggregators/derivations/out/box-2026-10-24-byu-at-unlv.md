@@ -75,7 +75,7 @@
 
 |  | BYU | Unlv |
 |:---|---:|---:|
-| Missed rim attempts × 2 × rim FG% (pooled db rate 64.5%) | 10.3 | 10.3 |
+| Missed rim attempts × 2 × rim FG% (pooled db rate 64.3%) | 10.3 | 10.3 |
 | Advantage plays (transition + quick-off-make): scoreless / total | 7 / 14 | 4 / 10 |
 | …valued at the team’s own advantage PPP this game | 7.0 | 5.2 |
 
@@ -168,7 +168,7 @@
 
 | Player | Opp pts off his TO (live/dead) | Team pts off steal/charge/block | Pts after his OREB (quick/reset) | Opp FT pts off his fouls | Pts left at FT (league / own) | Pts left at rim | TO rate | On-floor net pts (off / def poss) | Bench net pts (off / def poss) |
 |:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Bruce Branch III | 0 / 0 | 3 / 0 / 0 | 0 / 2 | 2 | +0.88 / +0.62 | 5.2 | 0.0% | +12 (55 / 56) | 0 (19 / 17) |
+| Bruce Branch III | 0 / 0 | 3 / 0 / 0 | 0 / 2 | 2 | +0.88 / +0.62 | 5.1 | 0.0% | +12 (55 / 56) | 0 (19 / 17) |
 | Jaxon Kohler | 0 / 0 | 0 / 0 / 2 | 2 / 0 | 4 | 0.00 / 0.00 | 0.0 | 0.0% | +8 (46 / 46) | +4 (28 / 27) |
 | Brooks Bahr | 0 / 0 | 4 / 0 / 0 | 0 / 0 | 2 | 0.00 / 0.00 | 0.0 | 0.0% | −3 (13 / 13) | +15 (61 / 60) |
 | TEAM | 0 / 0 | 0 / 0 / 0 | 0 / 2 | 0 | 0.00 / 0.00 | 0.0 | – | 0 (0 / 0) | +12 (74 / 73) |

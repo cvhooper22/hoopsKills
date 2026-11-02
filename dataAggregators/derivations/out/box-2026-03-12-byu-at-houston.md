@@ -75,7 +75,7 @@
 
 |  | BYU | Houston |
 |:---|---:|---:|
-| Missed rim attempts × 2 × rim FG% (pooled db rate 64.5%) | 7.7 | 9.0 |
+| Missed rim attempts × 2 × rim FG% (pooled db rate 64.3%) | 7.7 | 9.0 |
 | Advantage plays (transition + quick-off-make): scoreless / total | 6 / 12 | 2 / 5 |
 | …valued at the team’s own advantage PPP this game | 7.5 | 2.4 |
 
@@ -209,7 +209,7 @@
 | Chase McCarty | 0 / 0 | 2 / 0 / 0 | 0 / 1 | 0 | 0.00 / 0.00 | 0.0 | 0.0% | +4 (40 / 41) | +3 (29 / 29) |
 | Emanuel Sharp | 0 / 0 | 0 / 2 / 0 | 2 / 0 | 3 | −3.00 / −2.74 | 0.0 | 6.9% | +8 (51 / 51) | −1 (18 / 19) |
 | Chris Cenac Jr | 0 / 3 | 2 / 0 / 0 | 2 / 0 | 0 | +0.72 / +0.72 | 0.0 | 23.7% | +2 (49 / 49) | +5 (20 / 21) |
-| Kingston Flemings | 2 / 0 | 5 / 0 / 0 | 0 / 0 | 2 | +1.68 / +1.70 | 5.2 | 10.9% | +8 (47 / 48) | −1 (22 / 22) |
+| Kingston Flemings | 2 / 0 | 5 / 0 / 0 | 0 / 0 | 2 | +1.68 / +1.70 | 5.1 | 10.9% | +8 (47 / 48) | −1 (22 / 22) |
 | Kalifa Sakho | 0 / 0 | 0 / 0 / 0 | 0 / 0 | 0 | −0.28 / −0.28 | 0.0 | 0.0% | −15 (19 / 18) | +22 (50 / 52) |
 | TEAM | 0 / 3 | 0 / 0 / 0 | 3 / 0 | 0 | 0.00 / 0.00 | 0.0 | 100.0% | 0 (0 / 0) | +7 (69 / 70) |
 | Milos Uzan | 3 / 2 | 4 / 0 / 2 | 0 / 0 | 4 | 0.00 / 0.00 | 2.6 | 28.6% | +12 (59 / 61) | −5 (10 / 9) |

@@ -143,8 +143,8 @@ function playerBoxSection(data) {
     teams[p.side], p.name, p.name === 'TEAM' ? '-' : starters.has(p.name) ? 'Y' : 'N', Math.round(p.min * 10) / 10, p.pts,
     `${p.fgm}-${p.fga}`, `${p.tpm}-${p.tpa}`, `${p.ftm}-${p.fta}`, p.oreb, p.dreb, p.ast, p.stl, p.blk, p.tov, p.pf,
   ].join(','));
-  const poss = data.notes && data.notes.possessionsFormula;
-  const possLine = poss ? `Estimated possessions: ${teams.byu} ${poss.byu.poss.toFixed(1)}, ${teams.opp} ${poss.opp.poss.toFixed(1)}.` : null;
+  const poss = data.split;
+  const possLine = poss ? `Possessions (counted from the play-by-play): ${teams.byu} ${poss.byu.poss}, ${teams.opp} ${poss.opp.poss}.` : null;
   return [head, ...lines, possLine].filter(Boolean).join('\n');
 }
 
@@ -153,7 +153,7 @@ function definitionsSection(data) {
   return [
     '- Points: made 2PT = 2, made 3PT = 3, made FT = 1.',
     '- FG% = FGM / FGA. eFG% = (FGM + 0.5 * 3PM) / FGA. TS% = PTS / (2 * (FGA + 0.44 * FTA)). 3-point rate = 3PA / FGA. Free-throw rate = FTA / FGA.',
-    '- Possessions (per team) = FGA - offensive rebounds + turnovers + 0.44 * FTA. Points per possession = points / possessions.',
+    '- Possessions (per team) are counted from the play-by-play: a possession ends on a made shot, a defensive rebound, or a turnover (the box data gives the count). Points per possession = points / possessions.',
     '- Margin = the first team\'s score minus the second\'s, from the score column. A run is consecutive points by one team with none by the other (a 10-0 run).',
     '- A stint is the time between two LINEUP rows for a team. Its length is the clock at the start minus the clock at the end (within one half). Its plus/minus is the change in score margin over that time.',
     '- Starters are the first LINEUP row for each team. Everyone else is the bench.',

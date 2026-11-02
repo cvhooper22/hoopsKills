@@ -40,7 +40,7 @@ export default function Box() {
   if (!data) return <div className="box"><YBallLoader /></div>;
   return (
     <div className="box">
-      <BoxTabs tabs={[{ to: `/box/${gameId}`, label: 'Box score', end: true }, { to: `/box/${gameId}/timeline`, label: 'Lineup timeline' }, { to: `/box/${gameId}/stint-compare`, label: 'Stint Compare' }, { to: `/box/${gameId}/event-timeline`, label: 'Event timeline' }, { to: `/box/${gameId}/lineup-compare`, label: 'Lineup compare' }, { to: `/box/${gameId}/find`, label: 'Find plays' }, { to: `/box/${gameId}/shots`, label: 'Shot chart' }]} />
+      <BoxTabs tabs={[{ to: `/box/${gameId}`, label: 'Box score', end: true }, { to: `/box/${gameId}/timeline`, label: 'Lineup timeline' }, { to: `/box/${gameId}/stint-compare`, label: 'Stint Compare' }, { to: `/box/${gameId}/event-timeline`, label: 'Event timeline' }, { to: `/box/${gameId}/lineup-compare`, label: 'Lineup compare' }, { to: `/box/${gameId}/find`, label: 'Find plays' }, data.hasShotLocations !== false && { to: `/box/${gameId}/shots`, label: 'Shot chart' }].filter(Boolean)} />
       <Outlet context={{ data }} />
       {askAiOn && <AskAi data={data} />}
     </div>
@@ -67,10 +67,10 @@ export function BoxBody({ data, inLive = false }) {
       <PointsBySource data={data} />
       <Shooting data={data} />
       <DefenseSplit data={data} />
-      <PossessionBattle data={data} />
       <HavocSqueeze data={data} />
-      <AtTheLine data={data} />
+      <PossessionBattle data={data} />
       <PossessionValue data={data} />
+      <AtTheLine data={data} />
       <PlayerBox data={data} />
 
       <p className="box-foot box-foot--end">
@@ -183,7 +183,7 @@ export function BoxLineupCompareTab() {
 export function BoxShotsTab() {
   const { name: gameId } = useParams();
   const { plays, meta, error } = useGamePlays(gameId);
-  if (error) return <p className="mt-l">No play-by-play file for this game, so no shot locations.</p>;
+  if (error) return <p className="mt-l">There is no shot chart data for this game.</p>;
   if (!plays) return <YBallLoader />;
   return <ShotChartPanel plays={plays} meta={meta} />;
 }

@@ -15,7 +15,7 @@ export function BoxTabs({ tabs }) {
 export function Section({ title, sub, children }) {
   return (
     <section className="box-section">
-      <h2 className="box-section__title">{title}</h2>
+      <h2 className={`box-section__title${sub ? '' : ' box-section__title--no-sub'}`}>{title}</h2>
       {sub && <p className="box-section__sub">{sub}</p>}
       {children}
     </section>
@@ -32,10 +32,11 @@ export function NetChip({ value, digits = 0 }) {
 // oppCols: indices of the opponent's columns, shaded so they read apart from the focus team's at a glance.
 // groups: optional [{ label, span, title? }] drawn as a header row above head; spans should add up to head.length.
 export function BoxTable({ head, rows, totals, stickyFirst = true, className = '', oppCols = [], groups }) {
+  const oppStart = oppCols.length ? Math.min(...oppCols) : -1; // divider between the two teams' columns
   const cell = (c, i, tag = 'td') => {
     const spec = c !== null && typeof c === 'object' && !Array.isArray(c) && 'v' in c ? c : { v: c };
     const Tag = tag;
-    const cls = [i === 0 && stickyFirst ? 'box-table__name' : '', spec.strong ? 'box-table__strong' : '', oppCols.includes(i) ? 'box-table__opp' : '', spec.className || ''].filter(Boolean).join(' ');
+    const cls = [i === 0 && stickyFirst ? 'box-table__name' : '', spec.strong ? 'box-table__strong' : '', oppCols.includes(i) ? `box-table__opp${i === oppStart ? ' box-table__opp--start' : ''}` : '', spec.className || ''].filter(Boolean).join(' ');
     return <Tag key={i} className={cls || undefined} colSpan={spec.colSpan}>{spec.v}</Tag>;
   };
   return (
@@ -51,7 +52,7 @@ export function BoxTable({ head, rows, totals, stickyFirst = true, className = '
           )}
           <tr>
             {head.map((h, i) => (
-              <th key={i} className={[i === 0 && stickyFirst ? 'box-table__name' : '', oppCols.includes(i) ? 'box-table__opp' : '', h.className || ''].filter(Boolean).join(' ') || undefined} title={h.title}>{h.label}</th>
+              <th key={i} className={[i === 0 && stickyFirst ? 'box-table__name' : '', oppCols.includes(i) ? `box-table__opp${i === oppStart ? ' box-table__opp--start' : ''}` : '', h.className || ''].filter(Boolean).join(' ') || undefined} title={h.title}>{h.label}</th>
             ))}
           </tr>
         </thead>

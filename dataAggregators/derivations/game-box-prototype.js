@@ -47,6 +47,10 @@ async function load(client, gameId) {
        JOIN players pl ON pl.player_id = pp.player_id WHERE p.game_id = $1`, [gameId]);
   const roles = {};
   for (const r of parts) (roles[r.sn] ||= {})[r.role] = r.name;
+  // does any shot in this game have a usable location? Mirrors what the front end's shot chart accepts (utils/shotLocation.js), so the tab can be hidden when it would be empty
+  const { rows: [{ has_locations: hasShotLocations }] } = await client.query(
+    `SELECT EXISTS (SELECT 1 FROM plays WHERE game_id = $1 AND play_category = 'shot_attempt' AND has_valid_location
+        AND ((court_x IS NOT NULL AND court_y IS NOT NULL) OR (raw_x IS NOT NULL AND raw_y IS NOT NULL AND goal_side IS NOT NULL))) AS has_locations`, [gameId]);
   const { rows: pn } = await client.query('SELECT player_id, name FROM players');
   const names = Object.fromEntries(pn.map((r) => [r.player_id, r.name]));
   const homeIsFocus = game.home_team_id === FOCUS;
@@ -59,7 +63,7 @@ async function load(client, gameId) {
   }));
   const finalByu = homeIsFocus ? game.final_score_home : game.final_score_away;
   const finalOpp = homeIsFocus ? game.final_score_away : game.final_score_home;
-  return { game, evs, roles, names, finalByu, finalOpp, oppId: homeIsFocus ? game.away_team_id : game.home_team_id };
+  return { game, evs, roles, names, hasShotLocations, finalByu, finalOpp, oppId: homeIsFocus ? game.away_team_id : game.home_team_id };
 }
 
 // ---------------------------------------------------------------------------------------------------------
@@ -755,7 +759,7 @@ function computeBox({ D, rim, W }) {
     minutes: { byuTotal: sum(roster('byu'), (r) => r.min), oppTotal: sum(roster('opp'), (r) => r.min) },
   };
   const notes = { unlinkedAssists: unlinked, rimPct, rimAttemptsInDb: rim.att, leagueFtPct: P.LEAGUE_FT_PCT, possessionsFormula: { byu: battle.byu.formula, opp: battle.opp.formula } };
-  const payload = { schema: 1, header, params: P, notes, split, shooting, margin: bucketRows, afterMake, ato, E: { byu: { ...E.byu, restPts: undefined }, opp: { ...E.opp, restPts: undefined } }, havoc, battle, line, players: Object.values(pl), checks, events: eventLog(D), plays: plays.map((p) => ({ offense: p.offense, poss: p.poss.id, k: p.k, per: p.poss.period, startRem: p.startRem, dur: p.dur, label: p.label, sub: p.sub, pts: p.points, start: p.poss.startType, end: p.endReason, timeoutBefore: p.timeoutBefore, ...chanceShots(p, evs, names) })) };
+  const payload = { schema: 1, header, hasShotLocations: !!D.hasShotLocations, params: P, notes, split, shooting, margin: bucketRows, afterMake, ato, E: { byu: { ...E.byu, restPts: undefined }, opp: { ...E.opp, restPts: undefined } }, havoc, battle, line, players: Object.values(pl), checks, events: eventLog(D), plays: plays.map((p) => ({ offense: p.offense, poss: p.poss.id, k: p.k, per: p.poss.period, startRem: p.startRem, dur: p.dur, label: p.label, sub: p.sub, pts: p.points, start: p.poss.startType, end: p.endReason, timeoutBefore: p.timeoutBefore, ...chanceShots(p, evs, names) })) };
   return { L, payload, checks, header };
 }
 

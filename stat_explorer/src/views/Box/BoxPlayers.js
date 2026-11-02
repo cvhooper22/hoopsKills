@@ -15,15 +15,15 @@ function rowsFor(players, side) {
 const label = (p) => (p.name === 'TEAM' ? 'Team (unassigned)' : p.name);
 
 function TradTable({ rows }) {
-  const head = ['Player', 'MIN', 'PTS', 'FG', '3P', 'FT', 'OREB', 'DREB', 'AST', 'STL', 'BLK', 'TO', 'PF', 'Poss +/−', 'EPA exp', 'EPA act'].map((l) => ({ label: l }));
+  const head = ['Player', 'MIN', 'PTS', 'FG', '3P', 'FT', 'OREB', 'DREB', 'AST', 'STL', 'BLK', 'TO', 'PF', 'Poss +/−'].map((l) => ({ label: l }));
   const body = rows.map((r) => [
     label(r), r.min > 0 ? mmss(r.min) : dash, { v: r.pts, strong: true }, shots(r, 'fgm', 'fga'), shots(r, 'tpm', 'tpa'), shots(r, 'ftm', 'fta'),
     r.oreb, r.dreb, r.ast, r.stl, r.blk, r.tov, r.pf,
-    `+${r.gains} / −${r.losses}`, signed(r.epaExp, 1), { v: signed(r.epaAct, 1), strong: true },
+    `+${r.gains} / −${r.losses}`, // EPA exp / EPA act columns hidden for now: signed(r.epaExp, 1), { v: signed(r.epaAct, 1), strong: true }
   ]);
   const totals = ['Team', mmss(sumOf(rows, 'min')), sumOf(rows, 'pts'), `${sumOf(rows, 'fgm')}-${sumOf(rows, 'fga')}`, `${sumOf(rows, 'tpm')}-${sumOf(rows, 'tpa')}`, `${sumOf(rows, 'ftm')}-${sumOf(rows, 'fta')}`,
     sumOf(rows, 'oreb'), sumOf(rows, 'dreb'), sumOf(rows, 'ast'), sumOf(rows, 'stl'), sumOf(rows, 'blk'), sumOf(rows, 'tov'), sumOf(rows, 'pf'),
-    `+${sumOf(rows, 'gains')} / −${sumOf(rows, 'losses')}`, signed(sumOf(rows, 'epaExp'), 1), signed(sumOf(rows, 'epaAct'), 1)];
+    `+${sumOf(rows, 'gains')} / −${sumOf(rows, 'losses')}`];
   return <BoxTable head={head} rows={body} totals={totals} />;
 }
 
@@ -65,8 +65,9 @@ const TURNOVER_GROUPS = [
     { label: 'TO rate', title: 'Turnovers / (FGA + 0.44 x FTA + turnovers)', get: (r) => (isNum(r.tovRate) ? pct(r.tovRate) : dash) },
   ] },
   { label: 'Opp pts off his turnovers', title: 'Points the opponent scored on the possession after his turnovers', cols: [
-    { label: 'Live', title: 'After live-ball turnovers (steals), which give the opponent transition chances', get: (r) => r.opp_pts_off_to_live },
-    { label: 'Dead', title: 'After dead-ball turnovers (out of bounds, travels, offensive fouls)', get: (r) => r.opp_pts_off_to_dead },
+    { label: 'Live', title: 'After live-ball turnovers (steals), which give the opponent transition chances', get: (r) => r.opp_pts_off_to_live, dim: true },
+    { label: 'Dead', title: 'After dead-ball turnovers (out of bounds, travels, offensive fouls)', get: (r) => r.opp_pts_off_to_dead, dim: true },
+    { label: 'Total', title: 'Live plus dead', get: (r) => (r.opp_pts_off_to_live || 0) + (r.opp_pts_off_to_dead || 0) },
   ] },
   { label: 'Steals', cols: [
     { label: 'STL', title: 'Steals', get: (r) => r.stl },
@@ -134,12 +135,12 @@ function GroupedTable({ rows, groups }) {
   const heads = [{ label: '', span: 1 }];
   groups.forEach((g) => {
     heads.push({ label: g.label, span: g.cols.length, title: g.title });
-    g.cols.forEach((c, i) => head.push({ label: c.label, title: c.title, className: i === 0 ? SEP : undefined }));
+    g.cols.forEach((c, i) => head.push({ label: c.label, title: c.title, className: [i === 0 ? SEP : '', c.dim ? 'box-table__dim' : ''].filter(Boolean).join(' ') || undefined }));
   });
   // 'unattributed' collects events with no player (a charge with no drawer named, say), so per-player context and on/off mean nothing for it
   const body = rows.filter((r) => r.name !== 'TEAM' && r.name !== 'unattributed').map((r) => [
     label(r),
-    ...groups.flatMap((g) => g.cols.map((c, i) => ({ v: c.get(r), strong: c.strong, className: i === 0 ? SEP : undefined }))),
+    ...groups.flatMap((g) => g.cols.map((c, i) => ({ v: c.get(r), strong: c.strong, className: [i === 0 ? SEP : '', c.dim ? 'box-table__dim' : ''].filter(Boolean).join(' ') || undefined }))),
   ]);
   return <BoxTable head={head} groups={heads} rows={body} />;
 }
@@ -171,7 +172,7 @@ export default function PlayerBox({ data }) {
   const [showOpp, setShowOpp] = useState(false);
   const { header: h } = data;
   return (
-    <Section title="Player box" sub="Sorted by expected points added from possession events, not by points">
+    <Section title="Player box">
       <TeamPlayers data={data} side="byu" />
       <button type="button" className="box-toggle" aria-expanded={showOpp} onClick={() => setShowOpp((s) => !s)}>
         {showOpp ? 'Hide' : 'View'} {h.teams.opp} box score
@@ -179,7 +180,7 @@ export default function PlayerBox({ data }) {
       </button>
       {showOpp && <TeamPlayers data={data} side="opp" />}
       <p className="box-foot">
-        Poss +/− counts possessions gained (steals, offensive rebounds, charges drawn, recovered blocks) against lost (turnovers); EPA values each one in expected points.
+        Poss +/− counts possessions gained (steals, offensive rebounds, charges drawn, recovered blocks) against lost (turnovers).
         Minutes come from the lineup data and can come up a few minutes short when a lineup is missing a player.
       </p>
     </Section>

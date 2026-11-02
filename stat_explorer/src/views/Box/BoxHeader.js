@@ -33,10 +33,6 @@ export default function BoxHeader({ data }) {
         <FlipPad condensed className="box-kpi--opp" label={`${h.teams.opp} pts / poss`} value={f2(theirs.ppp)} />
         <FlipPad condensed label="Chance margin" value={signed(chanceMargin, 0).replace('−', '-')} tone="auto" />
       </div>
-      <p className="box-header__note">
-        {h.teams.byu} {mine.chances} chances on {mine.poss} possessions; {h.teams.opp} {theirs.chances} on {theirs.poss}.
-        A chance is every shot opportunity, so each offensive rebound starts a new one. Counted from the play-by-play.
-      </p>
     </header>
   );
 }

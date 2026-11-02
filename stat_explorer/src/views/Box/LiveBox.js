@@ -129,8 +129,8 @@ export function LiveGame() {
       <ClockPill live={data.live} header={data.header} />
       <BoxTabs tabs={[
         { to: `/live/${gameId}`, label: 'Box score', end: true }, { to: `/live/${gameId}/stint-compare`, label: 'Stint Compare' }, { to: `/live/${gameId}/event-timeline`, label: 'Event timeline' }, { to: `/live/${gameId}/find`, label: 'Find plays' }, { to: `/live/${gameId}/timeline`, label: 'Lineup timeline' }, { to: `/live/${gameId}/lineup-compare`, label: 'Lineup compare' },
-        { to: `/live/${gameId}/shots`, label: 'Shot chart' }, { to: `/live/${gameId}/kills`, label: 'Kills' }, { to: `/live/${gameId}/lineups`, label: 'Lineups' },
-      ]} />
+        data.hasShotLocations !== false && { to: `/live/${gameId}/shots`, label: 'Shot chart' }, { to: `/live/${gameId}/kills`, label: 'Kills' }, { to: `/live/${gameId}/lineups`, label: 'Lineups' },
+      ].filter(Boolean)} />
       <Outlet context={{ ...live, gameId }} />
       {askAiOn && <AskAi data={data} inProgress={data.live.status !== 'final'} />}
     </div>
@@ -225,7 +225,7 @@ export function LiveIndex() {
 export function LiveRouter() {
   return (
     <div className="lineups flex">
-      <div className="lineups-content f1 flex-c pr-l"><Outlet /></div>
+      <div className="lineups-content box-shell f1 flex-c pr-l"><Outlet /></div>
     </div>
   );
 }

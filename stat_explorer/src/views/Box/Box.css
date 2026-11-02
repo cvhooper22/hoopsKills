@@ -7,6 +7,11 @@
   box-sizing: border-box;
 }
 
+/* Box and live pages have no game switcher pill, so skip the 56px of clearance .lineups-content reserves for it. That leaves the 24px of .lineups padding
+   under the nav, and the first element (the tabs, or the live banner) drops its own top margin so nothing adds to it. */
+.lineups-content.box-shell { padding-top: 0; }
+.lineups-content.box-shell .box > :first-child { margin-top: 0; }
+
 /* ---------- Header ---------- */
 .box-header {
   display: flex;
@@ -76,6 +81,8 @@
   font-weight: 800;
 }
 
+.box-section__title--no-sub { margin-bottom: 1rem; }
+
 .box-section__sub {
   margin: 0.15rem 0 1rem;
   color: var(--gray4);
@@ -88,6 +95,9 @@
 }
 
 .box-foot--end { margin-top: 2.5rem; text-align: center; }
+.box-foot p { margin: 0 0 0.6rem; }
+.box-foot ul { margin: 0 0 0.6rem; padding-left: 1.2rem; }
+.box-foot li { margin-bottom: 0.5rem; }
 
 /* ---------- Tables (the Clutch / Lineups table look) ---------- */
 .box-table-scroll {
@@ -152,6 +162,8 @@
 
 /* A sub-row under the row above it (e.g. the points behind a count) */
 .box-table td.box-table__indent { padding-left: 1.5rem; color: var(--secondary-text); font-size: 0.85rem; }
+/* a sub row (indented label) dims its values to match */
+.box-table tr:has(> td.box-table__indent) > td { color: var(--secondary-text); }
 
 /* Grouped column headers: a centered label over its sub-columns, with a divider where each group starts */
 .box-table th.box-table__group { text-align: center; border-bottom: 1px solid rgb(255 255 255 / 0.4); }
@@ -166,6 +178,8 @@
 /* Opponent columns: a translucent tint over whatever the row already is, so the striping still shows through */
 .box-table td.box-table__opp { background-image: linear-gradient(rgb(30 45 90 / 0.07), rgb(30 45 90 / 0.07)); }
 .box-table th.box-table__opp { background-image: linear-gradient(rgb(255 255 255 / 0.14), rgb(255 255 255 / 0.14)); }
+.box-table td.box-table__dim { color: var(--secondary-text); }
+.box-table .box-table__opp--start { border-left: 2px solid var(--gray3); }
 
 .box-table tbody tr.box-table__totals {
   background-color: white;
@@ -419,7 +433,7 @@
 
 .etl-stat__gap { display: inline-block; width: 13px; flex: none; }
 
-.box-table td.timeline-sub { font-size: 0.85em; opacity: 0.8; border-top: 0; padding-top: 0; }
+.box-table td.timeline-sub { font-size: 0.85em; color: var(--secondary-text); border-top: 0; padding-top: 0; }
 
 .stat-pair__dim { opacity: 0.5; }
 .stat-pair__sep { opacity: 0.35; }
