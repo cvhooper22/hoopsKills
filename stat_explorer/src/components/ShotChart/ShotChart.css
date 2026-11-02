@@ -1,0 +1,19 @@
+.shot-chart { display: block; width: 100%; max-width: 560px; margin: 0 auto; height: auto; background: #fbf7ef; border: 1px solid var(--lightest-blue); border-radius: 6px; }
+.shot-chart__court { stroke: #9a9488; stroke-width: 0.25; stroke-linejoin: round; }
+.shot-chart__court .shot-chart__dash { stroke-dasharray: 1 0.9; }
+.shot-chart__court .shot-chart__rim { stroke: #d9531e; stroke-width: 0.35; }
+.shot-chart__shot--made path { fill: rgba(0, 63, 162, 0.5); stroke: var(--royal-blue); stroke-width: 0.32; stroke-linecap: round; stroke-linejoin: round; }
+.shot-chart__shot--miss path { stroke: #c0392b; stroke-width: 0.42; stroke-linecap: round; fill: none; }
+.shot-chart__shot { cursor: default; }
+.shot-chart-panel__legend .made { color: var(--royal-blue); }
+.shot-chart-panel__legend .miss { color: #c0392b; }
+.shot-chart-panel__legend { display: flex; gap: 1rem; justify-content: center; margin-top: 0.5rem; font-size: 0.85rem; color: var(--secondary-text); }
+.shot-chart-panel__teams { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 0.75rem; }
+.shot-chart-panel__team { flex: 1 1 360px; min-width: 0; }
+.shot-chart-panel__name { margin: 0 0 0.25rem; text-align: center; color: var(--royal-blue); }
+.shot-chart-panel__table { margin: 0.5rem auto 1rem; border-collapse: collapse; font-size: 0.9rem; min-width: min(100%, 360px); }
+.shot-chart-panel__table th, .shot-chart-panel__table td { padding: 0.25rem 0.75rem; text-align: right; font-variant-numeric: tabular-nums; }
+.shot-chart-panel__table thead th { color: var(--secondary-text); font-weight: 600; font-size: 0.8rem; }
+.shot-chart-panel__table tbody th { text-align: left; font-weight: 600; }
+.shot-chart-panel__total th, .shot-chart-panel__total td { border-bottom: 1px solid var(--lightest-blue); }
+.shot-chart-panel__zone-head th { padding-top: 0.6rem; color: var(--secondary-text); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; }

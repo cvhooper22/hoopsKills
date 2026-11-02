@@ -35,6 +35,11 @@
   stroke-linejoin: round;
 }
 
+.chart-area {
+  fill: var(--lightest-blue, #edf4ff);
+  stroke: none;
+}
+
 .chart-band {
   fill: var(--lightest-blue, #edf4ff);
 }
@@ -178,3 +183,10 @@
 .chart-highlight__label { fill: var(--royal-blue, #003fa2); font-size: 0.72rem; font-weight: 700; }
 .chart-bubbles__dot { transition: r 100ms ease, fill-opacity 150ms ease; }
 .chart-bubbles__dot--dim { fill-opacity: 0.22; stroke-opacity: 0.4; }
+
+/* ---------- PointPicker ---------- */
+.chart-picker__surface {
+  fill: transparent;
+  touch-action: pan-y;
+  cursor: crosshair;
+}

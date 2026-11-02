@@ -1,6 +1,16 @@
+import { NavLink } from 'react-router-dom';
 import { signed } from './boxFormat';
 
 // Shared building blocks for the Box view, styled to match the Clutch and Kills pages.
+
+// Tab links shared by the finished-game page (/box/:name) and the live page (/live/:name).
+export function BoxTabs({ tabs }) {
+  return (
+    <nav className="live-tabs" aria-label="Game views">
+      {tabs.map((t) => <NavLink key={t.to} end={t.end} to={t.to}>{t.label}</NavLink>)}
+    </nav>
+  );
+}
 
 export function Section({ title, sub, children }) {
   return (
@@ -20,17 +30,25 @@ export function NetChip({ value, digits = 0 }) {
 
 // head: [{ label, align?, title? }]; rows: arrays of cells; cell may be { v, strong, className }.
 // oppCols: indices of the opponent's columns, shaded so they read apart from the focus team's at a glance.
-export function BoxTable({ head, rows, totals, stickyFirst = true, className = '', oppCols = [] }) {
+// groups: optional [{ label, span, title? }] drawn as a header row above head; spans should add up to head.length.
+export function BoxTable({ head, rows, totals, stickyFirst = true, className = '', oppCols = [], groups }) {
   const cell = (c, i, tag = 'td') => {
     const spec = c !== null && typeof c === 'object' && !Array.isArray(c) && 'v' in c ? c : { v: c };
     const Tag = tag;
     const cls = [i === 0 && stickyFirst ? 'box-table__name' : '', spec.strong ? 'box-table__strong' : '', oppCols.includes(i) ? 'box-table__opp' : '', spec.className || ''].filter(Boolean).join(' ');
-    return <Tag key={i} className={cls || undefined}>{spec.v}</Tag>;
+    return <Tag key={i} className={cls || undefined} colSpan={spec.colSpan}>{spec.v}</Tag>;
   };
   return (
-    <div className={`box-table-scroll ${className}`}>
+    <div className={`box-table-scroll mt-l ${className}`}>
       <table className="box-table">
         <thead>
+          {groups && (
+            <tr className="box-table__groups">
+              {groups.map((g, i) => (
+                <th key={i} colSpan={g.span} title={g.title} className={[i === 0 && stickyFirst ? 'box-table__name' : '', g.label ? 'box-table__group' : '', g.className || ''].filter(Boolean).join(' ') || undefined}>{g.label}</th>
+              ))}
+            </tr>
+          )}
           <tr>
             {head.map((h, i) => (
               <th key={i} className={[i === 0 && stickyFirst ? 'box-table__name' : '', oppCols.includes(i) ? 'box-table__opp' : '', h.className || ''].filter(Boolean).join(' ') || undefined} title={h.title}>{h.label}</th>

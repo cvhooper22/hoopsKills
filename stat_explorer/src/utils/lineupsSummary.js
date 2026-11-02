@@ -36,6 +36,7 @@ export function buildGameLineupsSummary({ plays, game, focusTeamId = 'byu', gene
       oppTeamId: focusHome ? game.awayTeamId : game.homeTeamId,
       location: game.isNeutralSite ? 'neutral' : focusHome ? 'home' : 'away',
       isConferenceGame: !!game.isConferenceGame,
+      isExhibition: !!game.isExhibition, // tagged with tag-game.js; left out of season aggregations
       seasonType: game.seasonType || 'regular',
       tournamentRound: game.tournamentRound || null,
       result: scoreFor > scoreAgainst ? 'W' : 'L',

@@ -46,7 +46,8 @@ async function main() {
   const outDir = opt('--out-dir') || path.join(os.tmpdir(), 'clutch');
 
   const index = await readJson(opt('--index') || join(base, 'games/index.json'));
-  const games = index.filter(g => g.seasonYear === season && g.status === 'final' && (g.homeTeamId === team || g.awayTeamId === team));
+  const withExhibitions = args.includes('--include-exhibitions'); // exhibitions are tagged with ingest/tools/tag-game.js and stay out of season files
+  const games = index.filter(g => g.seasonYear === season && g.status === 'final' && (g.homeTeamId === team || g.awayTeamId === team) && (withExhibitions || !g.isExhibition));
   if (!games.length) throw new Error(`no final ${team} games for season ${season} in the games index`);
 
   const summaries = [];

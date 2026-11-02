@@ -21,3 +21,11 @@ export const formatDate = (iso) => new Date(`${iso}T12:00:00`).toLocaleDateStrin
 
 // Period 1/2 are halves, later periods are overtimes.
 export const periodLabel = (p) => (p === 1 ? '1st half' : p === 2 ? '2nd half' : `OT${p - 2}`);
+
+// Where a live game is: "2nd half 07:24", or the feed's own words ("Halftime", "End of Period") during a break, when the
+// clock left over from the last play means nothing. null when there is nothing to show yet.
+const BREAK_RE = /half|end of|intermission/i;
+export const liveClockText = (l) => {
+  if (l.statusText && BREAK_RE.test(l.statusText)) return l.statusText;
+  return [l.period ? periodLabel(l.period) : null, l.clock].filter(Boolean).join(' ') || null;
+};

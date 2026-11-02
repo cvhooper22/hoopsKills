@@ -154,6 +154,45 @@ function segment(evs, live = false) {
   return { poss: real, techPts };
 }
 
+// The offense's shot and free-throw line inside one chance (technical FTs are never part of a chance), plus both teams'
+// five on the floor when it started (a sub mid-chance isn't tracked), for the Plays tab.
+function chanceShots(pl, evs, names) {
+  const out = { fga: 0, fgm: 0, tpa: 0, tpm: 0, fta: 0, ftm: 0 };
+  for (const i of pl.events) {
+    const e = evs[i];
+    if (e.cat === 'shot_attempt') { out.fga++; if (e.made) out.fgm++; if (e.val === 3) { out.tpa++; if (e.made) out.tpm++; } }
+    else if (e.cat === 'free_throw') { out.fta++; if (e.made) out.ftm++; }
+  }
+  const e0 = evs[pl.startIdx];
+  const five = (ids) => ids.map((id) => names[id]).filter(Boolean).sort();
+  out.lu = { byu: five(e0.lineupByu), opp: five(e0.lineupOpp) };
+  return out;
+}
+
+// Every play of the game for the Plays tab's search: who did what, when, and the score after it. Assists point at the shot
+// they set up and shots carry their assister and blocker, so "all of X's assists" and "all of X's made threes" both work.
+function eventLog(D) {
+  const { evs, roles, game } = D;
+  const homeIsFocus = game.home_team_id === FOCUS;
+  const assisted = {}; // shot play_id -> assister
+  for (const e of evs) if (e.cat === 'assist' && e.linked) assisted[e.linked] = e.name;
+  const byId = new Map(evs.map((e) => [e.play_id, e]));
+  return evs.filter((e) => e.cat !== 'period_admin').map((e) => {
+    const out = {
+      per: e.per, rem: e.rem, side: e.side, player: e.name || null, cat: e.cat, type: e.type || null, sub: e.sub || null,
+      made: e.made ?? null, val: e.val ?? null, sc: [homeIsFocus ? e.hs : e.as_, homeIsFocus ? e.as_ : e.hs],
+    };
+    if (e.cat === 'shot_attempt') {
+      if (assisted[e.play_id]) out.ast = assisted[e.play_id];
+      const blk = roles[e.sn] && roles[e.sn].blocker; if (blk) out.blk = blk;
+    } else if (e.cat === 'assist' && e.linked && byId.has(e.linked)) {
+      const sh = byId.get(e.linked);
+      out.of = { player: sh.name || null, val: sh.val ?? null, made: sh.made ?? null, type: sh.type || null, sub: sh.sub || null };
+    }
+    return out;
+  });
+}
+
 function labelPlays(poss) {
   const plays = [];
   for (const p of poss) {
@@ -400,7 +439,7 @@ function computeBox({ D, rim, W }) {
   const row = (name, side) => (pl[name === 'TEAM' || name === 'unattributed' ? `${name}:${side}` : name] ||= { name, side, min: (mins[side][name] || 0) / 60, pts: 0, fgm: 0, fga: 0, tpm: 0, tpa: 0, ftm: 0, fta: 0, oreb: 0, dreb: 0, ast: 0, stl: 0, blk: 0, tov: 0, pf: 0,
     pts_ft: 0, pts_assisted: 0, pts_putback: 0, pts_early: 0, pts_self_created_hc: 0, pts_produced: 0, assist_pts: 0, pts_and1_assisted: 0,
     opp_pts_off_to_live: 0, opp_pts_off_to_dead: 0, pts_off_steal: 0, pts_off_charge: 0, pts_off_block: 0, pts_off_oreb_quick: 0, pts_off_oreb_reset: 0, opp_pts_off_fouls: 0,
-    pts_left_ft_league: 0, pts_left_ft_own: 0, pts_left_rim: 0, rimMiss: 0,
+    pts_left_ft_league: 0, pts_left_ft_own: 0, pts_left_rim: 0, rimMiss: 0, rimAtt: 0, rimMade: 0,
     gains: 0, losses: 0, epaExp: 0, epaAct: 0, wpaGain: 0, wpaLoss: 0, wpaScoring: 0, cnt: { stl: 0, oreb: 0, recBlk: 0, chg: 0, tovL: 0, tovD: 0 } });
   // An and-one: the made free throw right after a made basket (same side, same clock, a 1-of-1 trip). It belongs to the
   // basket, so when the basket was assisted the free throw counts toward the passer's assist points too.
@@ -426,7 +465,7 @@ function computeBox({ D, rim, W }) {
     if (!who || !e.side) continue;
     const r = row(who, e.side);
     if (e.cat === 'shot_attempt') {
-      r.fga++; if (e.val === 3) r.tpa++; r.rimMiss += (P.TRIP_RIM_TYPES.includes(e.type) && !e.made) ? 1 : 0;
+      r.fga++; if (e.val === 3) r.tpa++; const atRim = P.TRIP_RIM_TYPES.includes(e.type); r.rimMiss += (atRim && !e.made) ? 1 : 0; r.rimAtt += atRim ? 1 : 0; r.rimMade += (atRim && e.made) ? 1 : 0;
       if (e.made) {
         r.fgm++; r.pts += e.val; if (e.val === 3) r.tpm++;
         const asst = assistedBy[e.play_id], lab = shotPlay.get(e.i);
@@ -457,6 +496,25 @@ function computeBox({ D, rim, W }) {
     }
     row(e.name, e.side).opp_pts_off_fouls += pts;
   }
+  // Points lost at the line: each missed free throw is a point, plus the second shot he never got to take after missing the front end of a one-and-one,
+  // valued at his own free-throw percentage (a 50% shooter forfeits 0.5 there). For a missed final free throw that the defense rebounded, also keep what the
+  // opponent actually scored on the next possession against their points per possession in this game before that free throw (their whole-game rate while
+  // fewer than MIN_N_FOR_RATE possessions have been played).
+  for (const t of W.trips) {
+    const r = row(t.shooter, t.team);
+    r.ftLostMiss = (r.ftLostMiss || 0) + (t.of - t.made);
+    if (t.type === 'one_and_one' && t.finalMissed && t.of === 1) r.ftLostSecond = (r.ftLostSecond || 0) + t.ownP;
+    if (t.finalMissed && t.reb === 'defense') {
+      const e = evs.find((x) => x.sn === t.sn), opp = other(t.team);
+      const lastFt = evs.slice(e.i).find((x) => x.cat === 'free_throw' && x.sub.split('of')[0] === x.sub.split('of')[1] && x.side === t.team);
+      const rb = lastFt && evs.slice(lastFt.i + 1).find((x) => x.cat === 'rebound' && x.sub !== 'deadball');
+      const nx = rb && posByStart.get(rb.sn);
+      const before = poss.filter((q) => q.team === opp && q.startIdx < e.i);
+      r.ftMissDefN = (r.ftMissDefN || 0) + 1;
+      r.ftMissOppPts = (r.ftMissOppPts || 0) + (nx ? nx.pts : 0);
+      r.ftMissOppExp = (r.ftMissOppExp || 0) + (before.length >= P.MIN_N_FOR_RATE ? sum(before, (q) => q.pts) / before.length : E[opp].norm);
+    }
+  }
   for (const t of W.trips) { const r = row(t.shooter, t.team); r.pts_left_ft_league += t.league.shortfall; r.pts_left_ft_own += t.own.shortfall; r.ftWpLeague = (r.ftWpLeague || 0) + t.league.wpCost; r.ftWpOwn = (r.ftWpOwn || 0) + t.own.wpCost; }
   for (const v of pv) {
     const r = row(v.name, v.side);
@@ -476,11 +534,11 @@ function computeBox({ D, rim, W }) {
   for (const r of Object.values(pl)) {
     r.possCreated = r.stl + r.oreb + r.cnt.chg + r.cnt.recBlk - r.tov; r.ptsCreated = r.pts + r.assist_pts; r.pts_produced = r.pts + r.assist_pts; // every point he had a hand in: scored plus assisted (a basket he scored off a teammate's pass counts for both)
     r.tovRate = div(r.tov, r.fga + 0.44 * r.fta + r.tov); r.per40 = r.min ? 40 / r.min : NaN;
-    // on / off (possession-level, lineup at the possession's first event)
-    const on = { off: [], def: [] }, offc = { off: [], def: [] };
-    for (const p of poss) { const L = lineupAt(p)[r.side]; const isOff = p.team === r.side; (L.has(r.name) ? on : offc)[isOff ? 'off' : 'def'].push(p); }
-    const ppp = (a) => div(sum(a, (p) => p.pts), a.length);
-    r.onoff = { onN: on.off.length + on.def.length, net: (ppp(on.off) - ppp(on.def)) * 100, offNet: (ppp(offc.off) - ppp(offc.def)) * 100, offN: offc.off.length + offc.def.length };
+    // on / off (possession-level, lineup at the possession's first event): his team's points minus the opponent's, and the possessions behind it, split by on the floor vs on the bench
+    const split = { on: { off: [], def: [] }, bench: { off: [], def: [] } };
+    for (const p of poss) split[lineupAt(p)[r.side].has(r.name) ? 'on' : 'bench'][p.team === r.side ? 'off' : 'def'].push(p);
+    const side = (g) => ({ net: sum(g.off, (p) => p.pts) - sum(g.def, (p) => p.pts), off: g.off.length, def: g.def.length });
+    r.onoff = { on: side(split.on), bench: side(split.bench) };
   }
   const roster = (s) => Object.values(pl).filter((r) => r.side === s);
   for (const s of sides) {
@@ -594,6 +652,7 @@ function computeBox({ D, rim, W }) {
   const sh = shooting;
   tbl(['', T.byu, T.opp], [
     ['FG (made-att, %)', ...sides.map((x) => `${sh[x].fgm}-${sh[x].fga} (${pct1(sh[x].fgPct)})`)],
+    ['2PT (made-att, %)', ...sides.map((x) => `${sh[x].twoM}-${sh[x].twoA} (${pct1(sh[x].twoPct)})`)],
     ['3PT (made-att, %)', ...sides.map((x) => `${sh[x].tpm}-${sh[x].tpa} (${pct1(sh[x].tpPct)})`)],
     ['3-point rate (3PA / FGA)', ...sides.map((x) => pct1(sh[x].tpRate))],
     ['FT (made-att, %)', ...sides.map((x) => `${sh[x].ftm}-${sh[x].fta} (${pct1(sh[x].ftPct)})`)],
@@ -675,8 +734,8 @@ function computeBox({ D, rim, W }) {
     L.push('*How the points were scored (these five sum to PTS), then PTS, assists (count), assist points, and points produced = PTS + assist points (every point he had a hand in; one basket can count for both scorer and passer, so it does not total to the team total).*', '');
     tbl(['Player', 'FT', 'Putback', 'Early (trans/quick)', 'Self-created HC', 'Assisted', 'PTS', 'AST', 'Assist pts', 'Pts produced'], R.map((r) => [r.name, r.pts_ft, r.pts_putback, r.pts_early, r.pts_self_created_hc, r.pts_assisted, r.pts, r.ast, r.assist_pts, `${r.pts_produced} (${pct1(div(r.pts_produced, finalPts[s]))})`]));
     L.push('*Context columns (overlap by design; never total them across players):*', '');
-    tbl(['Player', 'Opp pts off his TO (live/dead)', 'Team pts off steal/charge/block', 'Pts after his OREB (quick/reset)', 'Opp FT pts off his fouls', 'Pts left at FT (league / own)', 'Pts left at rim', 'TO rate', 'On/off net per 100 (poss on/off)'],
-      R.map((r) => [r.name, `${r.opp_pts_off_to_live} / ${r.opp_pts_off_to_dead}`, `${r.pts_off_steal} / ${r.pts_off_charge} / ${r.pts_off_block}`, `${r.pts_off_oreb_quick} / ${r.pts_off_oreb_reset}`, r.opp_pts_off_fouls, `${sgnf(r.pts_left_ft_league, 2)} / ${sgnf(r.pts_left_ft_own, 2)}`, f1(r.rimLeft), Number.isFinite(r.tovRate) ? f1(100 * r.tovRate) + '%' : '–', Number.isFinite(r.onoff.net) && Number.isFinite(r.onoff.offNet) ? `${sgnf(r.onoff.net, 0)} (${r.onoff.onN}/${r.onoff.offN})` : `${Number.isFinite(r.onoff.net) ? sgnf(r.onoff.net, 0) : '–'} (${r.onoff.onN}/${r.onoff.offN})`]));
+    tbl(['Player', 'Opp pts off his TO (live/dead)', 'Team pts off steal/charge/block', 'Pts after his OREB (quick/reset)', 'Opp FT pts off his fouls', 'Pts left at FT (league / own)', 'Pts left at rim', 'TO rate', 'On-floor net pts (off / def poss)', 'Bench net pts (off / def poss)'],
+      R.map((r) => [r.name, `${r.opp_pts_off_to_live} / ${r.opp_pts_off_to_dead}`, `${r.pts_off_steal} / ${r.pts_off_charge} / ${r.pts_off_block}`, `${r.pts_off_oreb_quick} / ${r.pts_off_oreb_reset}`, r.opp_pts_off_fouls, `${sgnf(r.pts_left_ft_league, 2)} / ${sgnf(r.pts_left_ft_own, 2)}`, f1(r.rimLeft), Number.isFinite(r.tovRate) ? f1(100 * r.tovRate) + '%' : '–', `${sgnf(r.onoff.on.net, 0)} (${r.onoff.on.off} / ${r.onoff.on.def})`, `${sgnf(r.onoff.bench.net, 0)} (${r.onoff.bench.off} / ${r.onoff.bench.def})`]));
   };
   L.push('## Player box', '');
   playerTable('byu'); playerTable('opp');
@@ -696,7 +755,7 @@ function computeBox({ D, rim, W }) {
     minutes: { byuTotal: sum(roster('byu'), (r) => r.min), oppTotal: sum(roster('opp'), (r) => r.min) },
   };
   const notes = { unlinkedAssists: unlinked, rimPct, rimAttemptsInDb: rim.att, leagueFtPct: P.LEAGUE_FT_PCT, possessionsFormula: { byu: battle.byu.formula, opp: battle.opp.formula } };
-  const payload = { schema: 1, header, params: P, notes, split, shooting, margin: bucketRows, afterMake, ato, E: { byu: { ...E.byu, restPts: undefined }, opp: { ...E.opp, restPts: undefined } }, havoc, battle, line, players: Object.values(pl), checks, plays: plays.map((p) => ({ offense: p.offense, per: p.poss.period, startRem: p.startRem, dur: p.dur, label: p.label, sub: p.sub, pts: p.points, start: p.poss.startType, end: p.endReason, timeoutBefore: p.timeoutBefore })) };
+  const payload = { schema: 1, header, params: P, notes, split, shooting, margin: bucketRows, afterMake, ato, E: { byu: { ...E.byu, restPts: undefined }, opp: { ...E.opp, restPts: undefined } }, havoc, battle, line, players: Object.values(pl), checks, events: eventLog(D), plays: plays.map((p) => ({ offense: p.offense, poss: p.poss.id, k: p.k, per: p.poss.period, startRem: p.startRem, dur: p.dur, label: p.label, sub: p.sub, pts: p.points, start: p.poss.startType, end: p.endReason, timeoutBefore: p.timeoutBefore, ...chanceShots(p, evs, names) })) };
   return { L, payload, checks, header };
 }
 

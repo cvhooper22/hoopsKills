@@ -142,10 +142,22 @@
   font-size: 0.75rem;
 }
 
+/* Minimum widths for columns whose content varies from table to table (a made-attempts cell, or "–" when empty; a play type or a
+   lineup), so tables stacked on the page keep their columns in line. */
+.box-table th.box-table__shot { min-width: 7rem; }
+.box-table th.box-table__label { min-width: 11rem; }
+.box-table th.box-table__lineup { min-width: 26rem; } /* the widest a name cell gets */
+
 .box-table__strong { font-weight: bold; }
 
 /* A sub-row under the row above it (e.g. the points behind a count) */
 .box-table td.box-table__indent { padding-left: 1.5rem; color: var(--secondary-text); font-size: 0.85rem; }
+
+/* Grouped column headers: a centered label over its sub-columns, with a divider where each group starts */
+.box-table th.box-table__group { text-align: center; border-bottom: 1px solid rgb(255 255 255 / 0.4); }
+.box-table th.box-table__sep,
+.box-table td.box-table__sep { border-left: 1px solid rgb(30 45 90 / 0.18); }
+.box-table th.box-table__sep { border-left-color: rgb(255 255 255 / 0.4); }
 
 /* An empty spacer column that visually separates two groups of columns */
 .box-table th.box-table__gap,
@@ -190,7 +202,7 @@
   color: var(--secondary-text);
 }
 
-.box-netbars__axis span:first-child { grid-column: 2; justify-self: start; }
+.box-netbars__axis span:first-child { grid-column: 2; grid-row: 1; justify-self: start; }
 .box-netbars__axis span:last-child { grid-column: 2; grid-row: 1; justify-self: end; }
 
 .box-netbar {
@@ -338,3 +350,83 @@
 }
 .clock-pill:active { cursor: grabbing; }
 .clock-pill__timeout { padding: 0.05rem 0.45rem; border-radius: 999px; font-size: 0.7rem; text-transform: uppercase; color: #5c3b00; background-color: #ffd98a; }
+.clock-pill__score { padding-right: 0.5rem; border-right: 1px solid rgb(255 255 255 / 45%); }
+
+/* ---------- Stint Compare tab (the plays-* classes are shared by the other Box tabs) ---------- */
+.plays-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); gap: 1rem; }
+.plays-group { padding: 0.75rem 1rem; border-radius: 0.5rem; background-color: var(--lightest-blue); }
+.plays-group__title { margin: 1.5rem 0 0.4rem; font-size: 1rem; color: var(--royal-blue); }
+.plays-group > .plays-group__title { margin-top: 0; }
+.box-table-scroll + .plays-chip { margin-top: 0.5rem; }
+.plays-group__row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; margin: 0.4rem 0; }
+/* the margins of stacked rows collapse, so this makes the gap between rows 8px bigger (14.4px) without touching the outer edges */
+.plays-group__row + .plays-group__row { margin-top: calc(0.4rem + 8px); }
+.plays-group__label { min-width: 2rem; font-weight: 600; font-size: 0.85rem; color: var(--secondary-text); }
+.plays-group input[type='number'] { width: 4.5rem; padding: 0.2rem 0.4rem; }
+.plays-compare { margin-top: 1rem; }
+.plays-chip { padding: 0.2rem 0.7rem; border: 1px solid var(--royal-blue); border-radius: 999px; background: white; color: var(--royal-blue); font-size: 0.85rem; cursor: pointer; }
+.plays-chip--on { background: var(--royal-blue); color: white; }
+.plays-chip--small { padding: 0.1rem 0.55rem; font-size: 0.75rem; margin-left: 0.5rem; }
+.flow { display: block; width: 100%; height: auto; color: var(--secondary-text); cursor: crosshair; touch-action: none; user-select: none; }
+.plays-name { flex: 1; min-width: 8rem; max-width: 16rem; }
+.plays-clock { width: 4rem; text-align: center; }
+.plays-group__hint { font-size: 0.85rem; color: var(--secondary-text); }
+.timeline { display: block; width: 100%; height: auto; color: var(--secondary-text); }
+.timeline-bar { outline: none; cursor: pointer; }
+.timeline-bar:focus-visible rect { stroke: var(--royal-blue); stroke-width: 2; }
+.timeline-tip { position: fixed; z-index: 1000; max-width: min(23rem, 90vw); display: grid; gap: 0.15rem; }
+.timeline-tip span { color: var(--secondary-text); }
+.timeline-strip { display: flex; }
+.timeline-names { flex: none; display: block; color: var(--secondary-text); }
+.timeline-strip__scroll { flex: 1; min-width: 0; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.timeline-lineup { display: inline-flex; align-items: center; gap: 0.75rem; }
+.timeline-totals { margin-bottom: 0.75rem; padding: 0.6rem 0.9rem; border-radius: 0.5rem; background-color: var(--lightest-blue); }
+.timeline-totals__title { margin: 0 0 0.4rem; font-weight: 600; color: var(--royal-blue); }
+.timeline-totals__title span { font-weight: 400; font-size: 0.85rem; color: var(--secondary-text); }
+.timeline-totals__stats { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; margin: 0; }
+.timeline-totals__stats dt { font-size: 0.75rem; color: var(--secondary-text); }
+.timeline-totals__stats dd { margin: 0; font-weight: 600; }
+.timeline-totals__stats small { font-weight: 400; color: var(--secondary-text); }
+.box-table th.box-table__center,
+.box-table td.box-table__center { text-align: center; }
+.timeline-mark { display: inline-flex; padding: 0.15rem; border: 0; border-radius: 4px; background: none; color: var(--secondary-text); cursor: pointer; }
+.timeline-mark:hover { color: var(--royal-blue); background-color: var(--lightest-blue); }
+.timeline-mark--on { color: white; background-color: var(--royal-blue); }
+.box-table td.timeline-hit { background-color: #fff1b8; font-weight: 600; }
+.plays-chip--off { background: white; color: #b4483a; border-color: #b4483a; text-decoration: line-through; }
+
+/* ---------- Event timeline ---------- */
+.etl-gap { margin-left: 1rem; }
+.etl-legend { display: flex; flex-wrap: wrap; gap: 0.35rem 0; margin: 0.5rem 0 0.25rem; }
+.etl-chip { display: inline-flex; align-items: center; gap: 0.3rem; margin-left: 0; margin-right: 0.4rem; }
+.etl-chip--off { opacity: 0.5; }
+.etl-chipicon { flex: none; }
+.etl-keys { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 1rem; font-size: 0.8rem; color: var(--secondary-text); margin: 0.25rem 0 0.5rem; }
+.etl-key { display: inline-block; width: 1.6rem; height: 0; border-top: 2px solid; vertical-align: middle; margin-right: 0.35rem; }
+.etl-key--solid { border-color: var(--royal-blue); }
+.etl-key--dash { border-color: #b4483a; border-top-style: dashed; }
+.etl-keys__note { flex-basis: 100%; }
+.etl-divider line { stroke: currentColor; stroke-dasharray: 3 3; opacity: 0.35; }
+.etl-period { font-size: 0.75rem; font-weight: 700; fill: var(--secondary-text); }
+.etl-rowline { stroke: currentColor; opacity: 0.12; }
+.etl-rowlabel { font-size: 0.75rem; fill: var(--secondary-text); }
+.etl-stat { display: inline-flex; align-items: center; gap: 0.4rem; white-space: nowrap; }
+.etl-tip { display: flex; gap: 0.6rem; align-items: center; }
+.etl-tip__what { display: flex; align-items: center; gap: 0.3rem; }
+.etl-tip__muted { color: var(--secondary-text); }
+.etl-avatar { flex: none; width: 40px; height: 40px; border-radius: 50%; border: 1px solid lightgray; object-fit: cover; background: white; }
+.etl-avatar--initials { display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; color: var(--royal-blue); border-color: var(--royal-blue); }
+
+.etl-stat__gap { display: inline-block; width: 13px; flex: none; }
+
+.box-table td.timeline-sub { font-size: 0.85em; opacity: 0.8; border-top: 0; padding-top: 0; }
+
+.stat-pair__dim { opacity: 0.5; }
+.stat-pair__sep { opacity: 0.35; }
+.stat-pair__head { font-weight: normal; }
+
+.stat-key { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.25rem 1rem; margin: 0.75rem 0 0.25rem; font-size: 0.85rem; }
+.stat-key__title { font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; font-size: 0.75rem; }
+
+.box-table td.player-sep { border-left: 2px solid rgb(30 45 90 / 0.55); }
+.box-table th.player-sep { border-left: 2px solid rgb(255 255 255 / 0.6); }

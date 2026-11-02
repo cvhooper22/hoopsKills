@@ -15,7 +15,7 @@ function PlayerPhoto({ src, name, initials, active }) {
   return <img className={active ? 'active' : ''} src={src} alt={name} onError={() => setFailed(true)}/>;
 }
 
-export default function PlayerFilters({ players, filterPlayers, onChange, delimiter=','}) {
+export default function PlayerFilters({ players, filterPlayers, onChange, delimiter=',', max=5, title='Filter by player'}) {
   function getCheckboxHandler(player) {
     return () => {
       const playerIsFiltered = filterPlayers.includes(player);
@@ -23,7 +23,7 @@ export default function PlayerFilters({ players, filterPlayers, onChange, delimi
         onChange(player);
         return;
       }
-      if (onChange && filterPlayers.length < 5) {
+      if (onChange && filterPlayers.length < max) {
         onChange(player);
       }
     };
@@ -40,7 +40,7 @@ export default function PlayerFilters({ players, filterPlayers, onChange, delimi
   // const displayPlayers = [...selected, ...unselected];
   return (
     <div className="player-filter flex-center">
-      <h4 className="player-filter__title">Filter by player</h4>
+      <h4 className="player-filter__title">{title}</h4>
       <div className="player-filters">
         {players.map((p) => {
           const firstName = p.split(delimiter)[1];
@@ -54,9 +54,11 @@ export default function PlayerFilters({ players, filterPlayers, onChange, delimi
             return (
                 <div className="player" role="button" title={displayName} onClick={getCheckboxHandler(p)} key={p}>
                   <PlayerPhoto src={imageUrl} name={p} initials={initials} active={isChecked}/>
-                  <div className="player__number">
-                    {`#${info?.no}`}
-                  </div>
+                  {info?.no != null && (
+                    <div className="player__number">
+                      {`#${info.no}`}
+                    </div>
+                  )}
                 </div>
             );
           })}

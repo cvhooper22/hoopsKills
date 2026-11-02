@@ -139,6 +139,14 @@ describe('foldRows', () => {
 });
 
 describe('filterRows and buildSeason', () => {
+  it('leave exhibitions out unless asked', () => {
+    const ex = summary('2025-10-20-x'); ex.game = { ...ex.game, isExhibition: true };
+    const real = summary('2025-12-01-a');
+    expect(buildSeason({ season: 2025, team: 'byu', summaries: [ex, real] }).byGame.map((r) => r.gameId)).toEqual(['2025-12-01-a']);
+    expect(buildSeason({ season: 2025, team: 'byu', summaries: [ex, real], includeExhibitions: true }).byGame).toHaveLength(2);
+    expect(filterRows([gameRow(ex), gameRow(real)]).map((r) => r.gameId)).toEqual(['2025-12-01-a']);
+  });
+
   it('reuses the kills game filters', () => {
     const rows = [
       gameRow(summary('2025-12-01-a')),

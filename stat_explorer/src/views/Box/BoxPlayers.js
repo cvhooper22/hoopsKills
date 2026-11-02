@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Section, BoxTable } from './BoxParts';
-import { f1, f2, pct, signed, mmss, isNum, dash } from './boxFormat';
+import { f1, pct, signed, mmss, isNum, dash } from './boxFormat';
 
 const sumOf = (rows, k) => rows.reduce((a, r) => a + (isNum(r[k]) ? r[k] : 0), 0);
 const shots = (r, m, a) => `${r[m]}-${r[a]}`;
@@ -54,20 +54,94 @@ function CreatedTable({ rows }) {
 }
 
 // Context columns overlap by design (one basket can credit a scorer and an assister), so no totals row.
-function ContextTable({ rows }) {
-  const head = [
-    { label: 'Player' },
-    { label: 'Opp pts off his TOs', title: 'Live-ball / dead-ball: points the opponent scored on the possession after his turnovers' },
-    { label: 'Team pts off his steals · charges · blocks' }, { label: 'Pts after his OREBs', title: 'Quick putback / reset' },
-    { label: 'Opp FT pts off his fouls' }, { label: 'Pts left at the line', title: 'Versus a league-average / his own free-throw rate' }, { label: 'Pts left at the rim' },
-    { label: 'TO rate' }, { label: 'On/off net per 100', title: 'Team points-per-possession margin with him on, with possessions on / off' },
-  ];
-  const body = rows.filter((r) => r.name !== 'TEAM').map((r) => [
-    label(r), `${r.opp_pts_off_to_live} / ${r.opp_pts_off_to_dead}`, `${r.pts_off_steal} · ${r.pts_off_charge} · ${r.pts_off_block}`,
-    `${r.pts_off_oreb_quick} / ${r.pts_off_oreb_reset}`, r.opp_pts_off_fouls, `${signed(r.pts_left_ft_league, 2)} / ${signed(r.pts_left_ft_own, 2)}`, f1(r.rimLeft),
-    isNum(r.tovRate) ? pct(r.tovRate) : dash, r.onoff && isNum(r.onoff.net) ? `${signed(r.onoff.net, 0)} (${r.onoff.onN}/${r.onoff.offN})` : dash,
+// Each group is a header over its sub-columns; the first column of every group gets a divider.
+const SEP = 'box-table__sep';
+const hasOnoff = (r) => r.onoff && r.onoff.on;
+const onoffCol = (which, key, label, title, fmt = (v) => v) => ({ label, title, get: (r) => (hasOnoff(r) && isNum(r.onoff[which][key]) ? fmt(r.onoff[which][key]) : dash) });
+
+const TURNOVER_GROUPS = [
+  { label: 'Turnovers', cols: [
+    { label: 'TO', title: 'Turnovers he committed', get: (r) => r.tov },
+    { label: 'TO rate', title: 'Turnovers / (FGA + 0.44 x FTA + turnovers)', get: (r) => (isNum(r.tovRate) ? pct(r.tovRate) : dash) },
+  ] },
+  { label: 'Opp pts off his turnovers', title: 'Points the opponent scored on the possession after his turnovers', cols: [
+    { label: 'Live', title: 'After live-ball turnovers (steals), which give the opponent transition chances', get: (r) => r.opp_pts_off_to_live },
+    { label: 'Dead', title: 'After dead-ball turnovers (out of bounds, travels, offensive fouls)', get: (r) => r.opp_pts_off_to_dead },
+  ] },
+  { label: 'Steals', cols: [
+    { label: 'STL', title: 'Steals', get: (r) => r.stl },
+    { label: 'Team pts', title: 'Points his team scored on the possession after his steals', get: (r) => r.pts_off_steal },
+  ] },
+  { label: 'Charges drawn', cols: [
+    { label: 'Drawn', title: 'Charges drawn', get: (r) => (r.cnt ? r.cnt.chg : dash) },
+    { label: 'Team pts', title: 'Points his team scored on the possession after his charges drawn', get: (r) => r.pts_off_charge },
+  ] },
+  { label: 'Blocks', cols: [
+    { label: 'BLK', title: 'Blocked shots', get: (r) => r.blk },
+    { label: 'Team pts', title: 'Points his team scored on the possession after his blocks that his team recovered', get: (r) => r.pts_off_block },
+  ] },
+];
+
+const FREE_THROW_GROUPS = [
+  { label: 'Free throws', title: 'His free throws, and the points left at the line versus an expected rate', cols: [
+    { label: 'FT', title: 'Made / attempted', get: (r) => `${r.ftm} / ${r.fta}` },
+    { label: 'Pts lost', title: 'Points lost to missed free throws: 1 per miss, plus the second shot he never got to take after missing the front end of a one-and-one, valued at his own free-throw percentage', get: (r) => (isNum(r.ftLostMiss) ? f1((r.ftLostMiss || 0) + (r.ftLostSecond || 0)) : '0.0'), strong: true },
+    { label: 'Adj pts lost', title: 'Points lost beyond what his own free-throw percentage predicts for those attempts. Never below 0: if he did better than his rate predicts, nothing was lost', get: (r) => f1(Math.max(0, r.pts_left_ft_own)) },
+  ] },
+  { label: 'After a missed final FT the defense rebounded', title: 'Only misses on the last free throw of a trip that the opponent rebounded. They get the ball after a made free throw too, so this is context for the miss, not its cost.', cols: [
+    { label: 'Misses', title: 'Missed final free throws the opponent rebounded', get: (r) => r.ftMissDefN || 0 },
+    { label: 'Opp expected', title: 'Points the opponent would be expected to score on those possessions: their points per possession in this game before each free throw (their whole-game rate until 10 possessions have been played)', get: (r) => (r.ftMissDefN ? f1(r.ftMissOppExp) : '0.0') },
+    { label: 'Opp pts', title: 'Points the opponent scored on the possession right after those rebounds', get: (r) => (r.ftMissDefN ? r.ftMissOppPts : 0) },
+    { label: 'Luck', title: 'Opp expected minus Opp pts. Negative is bad luck: the opponent scored more than they normally would on those possessions. Positive is good luck: they scored less.', get: (r) => (r.ftMissDefN ? signed(r.ftMissOppExp - r.ftMissOppPts, 1) : signed(0, 1)) },
+  ] },
+  { label: 'Swing', title: 'Points the opponent scored after his missed final free throws, plus the points he lost at the line', cols: [
+    { label: 'Net swing', title: 'Opp pts plus Pts lost', get: (r) => f1((r.ftMissDefN ? r.ftMissOppPts : 0) + (r.ftLostMiss || 0) + (r.ftLostSecond || 0)) },
+    { label: 'Adj net swing', title: 'Opp pts plus Adj pts lost', get: (r) => f1((r.ftMissDefN ? r.ftMissOppPts : 0) + Math.max(0, r.pts_left_ft_own)) },
+  ] },
+];
+
+const OTHER_GROUPS = [
+  { label: 'Offensive rebounds', title: 'His offensive rebounds and the points scored after them', cols: [
+    { label: 'OREB', get: (r) => r.oreb },
+    { label: 'Putback pts', title: 'Points scored on an immediate putback after his offensive rebounds', get: (r) => r.pts_off_oreb_quick },
+    { label: 'Reset pts', title: 'Points scored after his offensive rebounds when the team reset and ran the offense again', get: (r) => r.pts_off_oreb_reset },
+  ] },
+  { label: 'Fouls', cols: [
+    { label: 'PF', title: 'Fouls he committed', get: (r) => r.pf },
+    { label: 'Opp FT pts', title: 'Free-throw points the opponent scored after fouls he committed', get: (r) => r.opp_pts_off_fouls },
+  ] },
+  { label: 'Rim', cols: [
+    { label: 'Rim FG', title: 'Made / attempted at the rim (layups, dunks, tips, alley-oops)', get: (r) => (isNum(r.rimAtt) ? `${r.rimMade} / ${r.rimAtt}` : dash) },
+    { label: 'Pts left', title: 'Missed rim attempts x 2 x the pooled rim FG%', get: (r) => f1(r.rimLeft) },
+  ] },
+];
+
+const ONOFF_GROUPS = [
+  { label: 'On the floor', title: 'While he was on the floor', cols: [
+    onoffCol('on', 'net', 'Net pts', 'His team\'s points minus the opponent\'s over the possessions he was on the floor', (v) => signed(v, 0)),
+    onoffCol('on', 'off', 'Off poss', 'His team\'s possessions on offense while he was on the floor'),
+    onoffCol('on', 'def', 'Def poss', 'The opponent\'s possessions (his team on defense) while he was on the floor'),
+  ] },
+  { label: 'On the bench', title: 'While he was on the bench. Small samples swing wildly, so read net next to the possession counts.', cols: [
+    onoffCol('bench', 'net', 'Net pts', 'His team\'s points minus the opponent\'s over the possessions he was on the bench', (v) => signed(v, 0)),
+    onoffCol('bench', 'off', 'Off poss', 'His team\'s possessions on offense while he was on the bench'),
+    onoffCol('bench', 'def', 'Def poss', 'The opponent\'s possessions (his team on defense) while he was on the bench'),
+  ] },
+];
+
+function GroupedTable({ rows, groups }) {
+  const head = [{ label: 'Player' }];
+  const heads = [{ label: '', span: 1 }];
+  groups.forEach((g) => {
+    heads.push({ label: g.label, span: g.cols.length, title: g.title });
+    g.cols.forEach((c, i) => head.push({ label: c.label, title: c.title, className: i === 0 ? SEP : undefined }));
+  });
+  // 'unattributed' collects events with no player (a charge with no drawer named, say), so per-player context and on/off mean nothing for it
+  const body = rows.filter((r) => r.name !== 'TEAM' && r.name !== 'unattributed').map((r) => [
+    label(r),
+    ...groups.flatMap((g) => g.cols.map((c, i) => ({ v: c.get(r), strong: c.strong, className: i === 0 ? SEP : undefined }))),
   ]);
-  return <BoxTable head={head} rows={body} />;
+  return <BoxTable head={head} groups={heads} rows={body} />;
 }
 
 function TeamPlayers({ data, side }) {
@@ -79,9 +153,15 @@ function TeamPlayers({ data, side }) {
       <TradTable rows={rows} />
       <h4 className="box-team__sub">How the points were created</h4>
       <CreatedTable rows={rows} />
+      <h4 className="box-team__sub">Turnovers and takeaways</h4>
+      <GroupedTable rows={rows} groups={TURNOVER_GROUPS} />
+      <h4 className="box-team__sub">On and off the floor</h4>
+      <GroupedTable rows={rows} groups={ONOFF_GROUPS} />
+      <h4 className="box-team__sub">Free throws</h4>
+      <GroupedTable rows={rows} groups={FREE_THROW_GROUPS} />
       <details className="box-details">
-        <summary>More on each player (overlapping columns, so they don't add up to the team)</summary>
-        <ContextTable rows={rows} />
+        <summary>More on each player (rebounds, fouls, rim)</summary>
+        <GroupedTable rows={rows} groups={OTHER_GROUPS} />
       </details>
     </div>
   );

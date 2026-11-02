@@ -4,17 +4,8 @@
 // Credentials come from stat_explorer/.env.local (AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY
 // / AWS_SESSION_TOKEN / AWS_REGION / BUCKET_NAME) — explicit keys, not a shared profile,
 // so this never touches ~/.aws/config or ~/.aws/credentials.
-const fs = require('fs');
-const path = require('path');
+const { loadEnv } = require('../lib/env');
 const { S3Client, ListObjectsV2Command } = require('@aws-sdk/client-s3');
-
-function loadEnv() {
-  const file = path.join(__dirname, '../../../stat_explorer/.env.local');
-  fs.readFileSync(file, 'utf8').split('\n').forEach(line => {
-    const m = line.match(/^\s*([A-Z_]+)=(.*)$/);
-    if (m && !process.env[m[1]]) process.env[m[1]] = m[2].trim();
-  });
-}
 
 async function main() {
   const prefix = process.argv[2] || '';

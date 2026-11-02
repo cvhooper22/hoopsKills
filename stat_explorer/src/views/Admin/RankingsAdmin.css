@@ -1,0 +1,49 @@
+.rankings-admin {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 16px 24px 48px;
+  box-sizing: border-box;
+  text-align: left;
+  font-family: sans-serif;
+  color: #002e52;
+}
+
+.rankings-admin h2 { margin: 0 0 4px; font-size: 18px; }
+.rankings-admin__lede { margin: 0 0 16px; color: #4a6076; max-width: 720px; font-size: 14px; }
+.rankings-admin__bar { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+.rankings-admin__bar button,
+.rankings-admin__row-run {
+  padding: 8px 16px;
+  border: 1px solid #002e52;
+  border-radius: var(--radius-control, 16px);
+  background: #002e52;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+.rankings-admin__row-run { padding: 4px 12px; background: white; color: #002e52; }
+.rankings-admin button:disabled { opacity: 0.5; cursor: default; }
+.rankings-admin__status--ok { color: #1a7f37; }
+.rankings-admin__status--error { color: #c62828; }
+.rankings-admin__note { color: #4a6076; font-size: 13px; }
+
+.rankings-admin__table { width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 24px; }
+.rankings-admin__table th { text-align: left; padding: 6px 8px; border-bottom: 2px solid #dde3ea; white-space: nowrap; }
+.rankings-admin__table td { padding: 6px 8px; border-bottom: 1px solid #eef1f4; vertical-align: top; }
+.rankings-admin__num { font-variant-numeric: tabular-nums; }
+.rankings-admin__stale { color: #b26a00; }
+.rankings-admin__warn { color: #c62828; font-size: 12px; }
+
+.rankings-admin__backfill { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 8px 0 24px; font-size: 14px; }
+.rankings-admin__backfill input { padding: 4px 6px; border: 1px solid #b7c4d0; border-radius: 4px; }
+
+.rankings-admin__runs { font-size: 13px; }
+.rankings-admin__runs li { margin-bottom: 4px; }
+
+.rankings-admin h3 { margin: 16px 0 6px; font-size: 15px; }
+.rankings-admin__map-row { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 6px; font-size: 14px; }
+.rankings-admin__map-row > span { min-width: 220px; }
+.rankings-admin__map-row input, .rankings-admin__filter { padding: 4px 6px; border: 1px solid #b7c4d0; border-radius: 4px; min-width: 220px; }
+.rankings-admin__filter { margin-bottom: 8px; }
+.rankings-admin__mappings { margin-bottom: 24px; }

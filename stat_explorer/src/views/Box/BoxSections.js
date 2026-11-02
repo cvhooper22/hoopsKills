@@ -1,4 +1,5 @@
 import { Section, BoxTable, NetBars, NetChip } from './BoxParts';
+import { tagRebounds, reboundLines, hasShotLines } from '../../utils/playGroups';
 import { f1, f2, f3, pct, signed, dash, isNum } from './boxFormat';
 
 const SIDES = ['byu', 'opp'];
@@ -37,6 +38,7 @@ export function Shooting({ data }) {
   const row = (label, unit, fn) => [{ v: <>{label}<small>{unit}</small></> }, ...SIDES.map((s) => fn(shooting[s]))];
   const rows = [
     row('Field goals', 'made-att (%)', (x) => made(x, 'fgm', 'fga', 'fgPct')),
+    row('Two-pointers', 'made-att (%)', (x) => made(x, 'twoM', 'twoA', 'twoPct')),
     row('Three-pointers', 'made-att (%)', (x) => made(x, 'tpm', 'tpa', 'tpPct')),
     row('3-point rate', '3PA / FGA', (x) => ({ v: pct(x.tpRate), strong: true })),
     row('Free throws', 'made-att (%)', (x) => made(x, 'ftm', 'fta', 'ftPct')),
@@ -82,9 +84,15 @@ export function DefenseSplit({ data }) {
 export function PossessionBattle({ data }) {
   const { header: h, split, battle, afterMake, ato, params } = data;
   const two = (fn) => SIDES.map((s) => fn(s));
+  // offensive rebound % needs the other team's defensive rebounds, which come from the per-chance rows (absent in older games)
+  const tagged = data.plays?.length && hasShotLines(data.plays) ? tagRebounds(data.plays) : null;
+  const orebPct = (s) => (tagged ? pct(reboundLines(tagged.filter((p) => p.offense === s), tagged.filter((p) => p.offense !== s)).orebPct) : dash);
   const rows = [
     ['Possessions (event count / box formula)', ...two((s) => `${split[s].poss} / ${f1(battle[s].formula.poss)}`)],
     ['Chances (possessions + offensive rebounds)', ...two((s) => f1(battle[s].formula.poss + battle[s].formula.orb))],
+    ['Offensive rebounds', ...two((s) => battle[s].formula.orb)],
+    ['Offensive rebounds per possession', ...two((s) => (split[s].poss ? f2(battle[s].formula.orb / split[s].poss) : dash))],
+    ['Offensive rebound % (of own misses)', ...two(orebPct)],
     ['Turnovers (live-ball / dead-ball)', ...two((s) => `${battle[s].tov} (${battle[s].liveTO} / ${battle[s].deadTO})`)],
     [`Pushed after a make (scored within ${params.QUICK_MAKE_WINDOW_SEC}s)`, ...two((s) => `${afterMake[s].quick} of ${afterMake[s].pop} · ${afterMake[s].quickPts} pts`)],
     ['After own timeout, scored on', ...two((s) => scoredOn(ato[s].own))],

@@ -231,9 +231,107 @@ module.exports = function (app) {
     });
   });
 
+  // Dev-only: the hidden /admin/rankings page. "Run" collects the latest ratings snapshots (Torvik, NET, Haslametrics,
+  // KenPom, EvanMiya) into the local Postgres by running dataAggregators/ingest/rankings/run.js; "status" reads what is
+  // stored. KenPom opens a visible Chrome window for a few seconds (its bot check turns headless browsers away).
+  // One run at a time. The database is whatever DATABASE_URL the `npm start` environment has, else the local default.
+  app.use('/api/rankings', express.json({ limit: '10kb' }));
+
+  const AGGREGATORS = path.join(__dirname, '..', '..', 'dataAggregators');
+  const RANKING_SYSTEMS = ['torvik', 'net', 'haslam', 'kenpom', 'evanmiya'];
+  let rankingsBusy = false;
+
+  const runNode = (args, timeoutMs, tag, res, onDone) => {
+    log(tag, `node ${args.join(' ')}`);
+    const child = spawn('node', args, { cwd: AGGREGATORS });
+    let stdout = '';
+    let stderr = '';
+    let timedOut = false;
+    const timer = setTimeout(() => { timedOut = true; child.kill(); }, timeoutMs);
+    child.stdout.on('data', (d) => { stdout += d; });
+    child.stderr.on('data', (d) => { stderr += d; });
+    child.on('error', (err) => {
+      clearTimeout(timer);
+      onDone();
+      logError(tag, '500 could not start node:', err);
+      if (!res.headersSent) res.status(500).json({ error: `Could not start node: ${err.message}` });
+    });
+    child.on('close', (code) => {
+      clearTimeout(timer);
+      onDone();
+      if (res.headersSent) return;
+      if (timedOut) { res.status(504).json({ error: `Timed out after ${Math.round(timeoutMs / 60000)} minutes` }); return; }
+      if (code !== 0) {
+        const msg = (stderr.trim().split('\n').slice(-3).join(' ') || `exit ${code}`);
+        logError(tag, `500 ${msg}`);
+        res.status(500).json({ error: msg });
+        return;
+      }
+      try {
+        const lines = stdout.trim().split('\n');
+        res.json({ ...JSON.parse(lines[lines.length - 1]), stderr: stderr.trim() || undefined });
+      } catch (err) {
+        logError(tag, '500 unreadable output:', err.message);
+        res.status(500).json({ error: 'The script printed something that is not JSON' });
+      }
+    });
+  };
+
+  app.get('/api/rankings/status', (req, res) => {
+    runNode(['ingest/rankings/status.js'], 30 * 1000, 'api/rankings', res, () => {});
+  });
+
+  app.post('/api/rankings/run', (req, res) => {
+    const { systems, backfill } = req.body || {};
+    if (rankingsBusy) { res.status(409).json({ error: 'A rankings run is already in progress' }); return; }
+    const args = ['ingest/rankings/run.js', '--json', '--trigger', 'admin'];
+    if (backfill) {
+      const { from, to } = backfill;
+      const isDate = (d) => typeof d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d);
+      if (!isDate(from) || !isDate(to) || from > to) { res.status(400).json({ error: 'backfill needs from and to as YYYY-MM-DD, from <= to' }); return; }
+      args.push('--backfill', 'torvik', '--from', from, '--to', to);
+    } else if (systems !== undefined) {
+      if (!Array.isArray(systems) || !systems.length || systems.some((s) => !RANKING_SYSTEMS.includes(s))) {
+        res.status(400).json({ error: `systems must be a non-empty subset of ${RANKING_SYSTEMS.join(', ')}` });
+        return;
+      }
+      args.push('--systems', systems.join(','));
+    }
+    rankingsBusy = true;
+    runNode(args, 10 * 60 * 1000, 'api/rankings', res, () => { rankingsBusy = false; });
+  });
+
+
+  // The app's canonical team list for ratings and the spelling -> team mapping (dataAggregators/config/rating-teams.json and
+  // rating-team-synonyms.json), editable from the admin page. These edit files in the repo, so like everything in this
+  // block they only exist under `npm start`.
+  const textArg = (v) => typeof v === 'string' && v.trim().length > 0 && v.length <= 100;
+  const mappings = (res, args) => runNode(['ingest/rankings/mappings.js', ...args], 30 * 1000, 'api/rankings', res, () => {});
+  app.get('/api/rankings/mappings', (req, res) => mappings(res, ['state']));
+  app.post('/api/rankings/mappings', (req, res) => {          // map a site's spelling to a canonical team (id or name)
+    const { alias, team } = req.body || {};
+    if (!textArg(alias) || !textArg(team)) { res.status(400).json({ error: 'Expected { alias, team }' }); return; }
+    mappings(res, ['map', '--alias', alias.trim(), '--team', team.trim()]);
+  });
+  app.delete('/api/rankings/mappings', (req, res) => {
+    const { key } = req.body || {};
+    if (!textArg(key)) { res.status(400).json({ error: 'Expected { key }' }); return; }
+    mappings(res, ['unmap', '--key', key.trim()]);
+  });
+  app.post('/api/rankings/teams', (req, res) => {             // add a canonical team (optionally with the spelling that reported it)
+    const { name, alias } = req.body || {};
+    if (!textArg(name) || (alias !== undefined && !textArg(alias))) { res.status(400).json({ error: 'Expected { name, alias? }' }); return; }
+    mappings(res, ['add-team', '--name', name.trim(), ...(alias ? ['--alias', alias.trim()] : [])]);
+  });
+  app.post('/api/rankings/teams/rename', (req, res) => {
+    const { id, name } = req.body || {};
+    if (!textArg(id) || !textArg(name)) { res.status(400).json({ error: 'Expected { id, name }' }); return; }
+    mappings(res, ['rename', '--id', id.trim(), '--name', name.trim()]);
+  });
+
   // Catches errors from the body parsers above (malformed JSON, payload too
   // large) which otherwise never reach the route handlers or the terminal.
-  app.use(['/api/admin', '/api/recent-games', '/api/recent-games-save', '/api/recent-games-publish', '/api/stops'], (err, req, res, next) => {
+  app.use(['/api/admin', '/api/recent-games', '/api/recent-games-save', '/api/recent-games-publish', '/api/stops', '/api/rankings'], (err, req, res, next) => {
     logError(req.originalUrl, `${err.status || 500} ${err.type || ''} ${err.message}`);
     res.status(err.status || 500).json({ error: err.message });
   });

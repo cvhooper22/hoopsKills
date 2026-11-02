@@ -118,6 +118,48 @@ describe('filterRows', () => {
   });
 });
 
+describe('filterRows gameIds', () => {
+  it('keeps only the given games and stacks with the other filters', () => {
+    const rows = [
+      gameRow(summary('2025-11-01-a', { game: { location: 'home' } })),
+      gameRow(summary('2025-11-05-b', { game: { location: 'away' } })),
+      gameRow(summary('2025-11-09-c', { game: { location: 'home' } })),
+    ];
+    const ids = (rs) => rs.map((r) => r.gameId);
+    expect(ids(filterRows(rows, { gameIds: new Set(['2025-11-05-b', '2025-11-09-c']) }))).toEqual(['2025-11-05-b', '2025-11-09-c']);
+    expect(ids(filterRows(rows, { gameIds: new Set(['2025-11-05-b', '2025-11-09-c']), location: 'home' }))).toEqual(['2025-11-09-c']);
+    expect(filterRows(rows, { gameIds: null })).toHaveLength(3);
+  });
+});
+
+describe('exhibitions', () => {
+  const exhibition = summary('2025-10-20-x', { game: { isExhibition: true }, byu: { kills: 9, potential: 9, stops: 30 } });
+  const real = summary('2025-11-01-a', { byu: { kills: 2, potential: 1, stops: 9 } });
+
+  it('are left out of a season file unless asked for', () => {
+    const season = buildSeason({ season: 2025, team: 'byu', summaries: [exhibition, real] });
+    expect(season.byGame.map((r) => r.gameId)).toEqual(['2025-11-01-a']);
+    expect(season.gamesIncluded).toBe(1);
+    expect(season.totals.kills).toBe(2);
+    const withIt = buildSeason({ season: 2025, team: 'byu', summaries: [exhibition, real], includeExhibitions: true });
+    expect(withIt.byGame).toHaveLength(2);
+    expect(withIt.totals.kills).toBe(11);
+  });
+
+  it('are dropped by filterRows by default, kept with includeExhibitions', () => {
+    const rows = [gameRow(exhibition), gameRow(real)];
+    expect(filterRows(rows).map((r) => r.gameId)).toEqual(['2025-11-01-a']);
+    expect(filterRows(rows, { includeExhibitions: true })).toHaveLength(2);
+    expect(filterRows(rows, { lastN: 1 }).map((r) => r.gameId)).toEqual(['2025-11-01-a']);   // last N counts real games only
+  });
+
+  it('summaries made before the flag existed still count', () => {
+    const old = summary('2025-11-05-b');
+    delete old.game.isExhibition;
+    expect(buildSeason({ season: 2025, team: 'byu', summaries: [old] }).byGame).toHaveLength(1);
+  });
+});
+
 describe('buildSeason', () => {
   const summaries = [
     summary('2025-11-01-a', { byu: { kills: 2, potential: 1, stops: 9, gainSum: 6, gainCount: 2, credit: { 'A B': { steals: 2, blocks: 0 } } } }),

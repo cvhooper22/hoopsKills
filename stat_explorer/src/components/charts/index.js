@@ -1,6 +1,7 @@
 export { default as Chart } from "./Chart";
 export { default as Axis } from "./Axis";
 export { default as Line } from "./Line";
+export { default as Area } from "./Area";
 export { default as Band } from "./Band";
 export { default as Highlight } from "./Highlight";
 export { default as ReferenceLine } from "./ReferenceLine";
@@ -8,6 +9,7 @@ export { default as Marker } from "./Marker";
 export { default as Annotation } from "./Annotation";
 export { default as HoverLayer } from "./HoverLayer";
 export { default as Tooltip } from "./Tooltip";
+export { default as PointPicker } from "./PointPicker";
 export { default as Donut } from "./Donut";
 export { default as BubbleStream } from "./BubbleStream";
 export { default as StopwatchFrame } from "./StopwatchFrame";

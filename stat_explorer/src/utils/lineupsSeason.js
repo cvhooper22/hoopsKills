@@ -17,6 +17,7 @@ function gameInfo(summary) {
     oppTeamId: game.oppTeamId,
     location: game.location,
     isConferenceGame: game.isConferenceGame,
+    isExhibition: !!game.isExhibition,
     seasonType: game.seasonType,
     tournamentRound: game.tournamentRound,
     result: game.result,
@@ -42,7 +43,9 @@ function playersOf(lineups) {
     .sort((a, b) => b.minutes - a.minutes || a.name.localeCompare(b.name));
 }
 
-export function buildSeason({ season, team = 'byu', summaries, skipped = [], generatedAt = new Date().toISOString() }) {
+// Exhibition games are left out unless `includeExhibitions` is set.
+export function buildSeason({ season, team = 'byu', summaries: allSummaries, skipped = [], includeExhibitions = false, generatedAt = new Date().toISOString() }) {
+  const summaries = includeExhibitions ? allSummaries : allSummaries.filter((s) => !s.game.isExhibition);
   const versions = [...new Set(summaries.map((s) => s.rulesVersion))];
   if (versions.length > 1) {
     throw new Error(`mixed lineups rules versions (${versions.join(', ')}); regenerate every game summary`);

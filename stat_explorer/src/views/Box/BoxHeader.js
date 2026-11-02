@@ -1,5 +1,5 @@
 import FlipPad from '../../components/FlipPad/FlipPad';
-import { f2, formatDate, signed, periodLabel } from './boxFormat';
+import { f2, formatDate, signed, liveClockText } from './boxFormat';
 
 const SEASON_TYPE = { regular: null, conf_tourney: 'Conference tournament', postseason: 'Postseason' };
 
@@ -8,14 +8,14 @@ const SEASON_TYPE = { regular: null, conf_tourney: 'Conference tournament', post
 const teamLine = (s) => ({ poss: s.poss, chances: s.plays, ppp: s.ppp, ppc: s.ppPlay });
 
 // "LIVE 2nd half 07:24"
-const liveEyebrow = (l) => ['LIVE', l.period ? periodLabel(l.period) : null, l.clock].filter(Boolean).join(' ');
+const liveEyebrow = (l) => ['LIVE', liveClockText(l)].filter(Boolean).join(' ');
 
 export default function BoxHeader({ data }) {
   const { header: h, split } = data;
   const liveNow = !!data.live && data.live.status === 'live';
   const mine = teamLine(split.byu);
   const theirs = teamLine(split.opp);
-  const eyebrow = [formatDate(h.date), h.venue, h.neutral ? 'Neutral site' : null, SEASON_TYPE[h.seasonType], liveNow ? liveEyebrow(data.live) : 'Final'].filter(Boolean);
+  const eyebrow = [h.dateLabel || formatDate(h.date), h.venue, h.neutral ? 'Neutral site' : null, SEASON_TYPE[h.seasonType], liveNow ? liveEyebrow(data.live) : 'Final'].filter(Boolean);
   const chanceMargin = mine.chances - theirs.chances;
   return (
     <header className="box-header">

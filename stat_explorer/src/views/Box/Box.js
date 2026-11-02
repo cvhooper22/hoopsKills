@@ -1,11 +1,22 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Outlet, useOutletContext, useParams } from 'react-router-dom';
 import YBallLoader from '../../components/Loaders/YBballLoader';
 import Glossary, { GlossaryEntry, GlossaryTerm, GlossaryDefinition } from '../../components/Glossary/Glossary';
 import urls from '../../constants/assetUrls';
 import BoxHeader from './BoxHeader';
 import { PointsBySource, Shooting, DefenseSplit, PossessionBattle, HavocSqueeze, AtTheLine, PossessionValue } from './BoxSections';
 import PlayerBox from './BoxPlayers';
+import { BoxTabs } from './BoxParts';
+import { StintComparePanel } from './BoxStintCompare';
+import { EventTimelinePanel } from './BoxEventTimeline';
+import { LineupTimelinePanel } from './BoxLineupTimeline';
+import { LineupComparePanel } from './BoxLineupCompare';
+import { FindPlaysPanel } from './BoxFind';
+import ShotChartPanel from '../../components/ShotChart/ShotChartPanel';
+import useGamePlays from '../../hooks/useGamePlays';
+import AskAi from '../../components/AskAi/AskAi';
+import { useFlag } from '../../contexts/FeatureFlagsContext';
+import { ASK_AI } from '../../constants/featureFlags';
 import './Box.css';
 
 // Single-game "box score" built from the metrics prototype in dataAggregators/derivations
@@ -14,6 +25,7 @@ export default function Box() {
   const { name: gameId } = useParams();
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
+  const askAiOn = useFlag(ASK_AI);
 
   useEffect(() => {
     setData(null);
@@ -26,7 +38,24 @@ export default function Box() {
 
   if (error) return <div className="box"><p className="mt-l">Could not load this box score.</p></div>;
   if (!data) return <div className="box"><YBallLoader /></div>;
-  return <BoxBody data={data} />;
+  return (
+    <div className="box">
+      <BoxTabs tabs={[{ to: `/box/${gameId}`, label: 'Box score', end: true }, { to: `/box/${gameId}/timeline`, label: 'Lineup timeline' }, { to: `/box/${gameId}/stint-compare`, label: 'Stint Compare' }, { to: `/box/${gameId}/event-timeline`, label: 'Event timeline' }, { to: `/box/${gameId}/lineup-compare`, label: 'Lineup compare' }, { to: `/box/${gameId}/find`, label: 'Find plays' }, { to: `/box/${gameId}/shots`, label: 'Shot chart' }]} />
+      <Outlet context={{ data }} />
+      {askAiOn && <AskAi data={data} />}
+    </div>
+  );
+}
+
+export function BoxScoreTab() {
+  const { data } = useOutletContext();
+  return <BoxBody data={data} inLive />;
+}
+
+export function BoxStintCompareTab() {
+  const { data } = useOutletContext();
+  const { plays } = useGamePlays(data.header.gameId);
+  return <StintComparePanel data={data} shotPlays={plays} />;
 }
 
 // Everything below the loading logic, shared with the live page (views/Box/LiveBox.js).
@@ -132,4 +161,34 @@ export function BoxBody({ data, inLive = false }) {
       </Glossary>
     </div>
   );
+}
+
+export function BoxEventTimelineTab() {
+  const { data } = useOutletContext();
+  return <EventTimelinePanel data={data} />;
+}
+
+export function BoxTimelineTab() {
+  const { data } = useOutletContext();
+  return <LineupTimelinePanel data={data} />;
+}
+
+export function BoxLineupCompareTab() {
+  const { data } = useOutletContext();
+  const { plays } = useGamePlays(data.header.gameId);
+  return <LineupComparePanel data={data} shotPlays={plays} />;
+}
+
+// Shot locations for a finished game: needs the game's plays file in the data bucket (the box JSON has no coordinates).
+export function BoxShotsTab() {
+  const { name: gameId } = useParams();
+  const { plays, meta, error } = useGamePlays(gameId);
+  if (error) return <p className="mt-l">No play-by-play file for this game, so no shot locations.</p>;
+  if (!plays) return <YBallLoader />;
+  return <ShotChartPanel plays={plays} meta={meta} />;
+}
+
+export function BoxFindTab() {
+  const { data } = useOutletContext();
+  return <FindPlaysPanel data={data} />;
 }

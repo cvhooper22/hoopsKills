@@ -27,6 +27,7 @@ export function gameRow(summary) {
     oppTeamId: game.oppTeamId,
     location: game.location,
     isConferenceGame: game.isConferenceGame,
+    isExhibition: !!game.isExhibition,
     seasonType: game.seasonType,
     tournamentRound: game.tournamentRound,
     result: game.result,
@@ -158,7 +159,9 @@ export function foldRows(rows) {
 // Build the whole season file from per-game summaries. Throws if the summaries were produced under
 // different rules; a game with no usable summary is passed in `skipped` and kept in the file.
 // `headshots` maps player id to photo url; it is kept for the players in these games only.
-export function buildSeason({ season, team, summaries, skipped = [], headshots = {}, generatedAt = new Date().toISOString() }) {
+// Exhibition games are left out unless `includeExhibitions` is set.
+export function buildSeason({ season, team, summaries: allSummaries, skipped = [], headshots = {}, includeExhibitions = false, generatedAt = new Date().toISOString() }) {
+  const summaries = includeExhibitions ? allSummaries : allSummaries.filter((s) => !s.game.isExhibition);
   const versions = [...new Set(summaries.map((s) => s.rulesVersion))];
   if (versions.length > 1) {
     const byVersion = versions.map((v) => `v${v}: ${summaries.filter((s) => s.rulesVersion === v).map((s) => s.gameId).join(', ')}`);

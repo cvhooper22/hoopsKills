@@ -8,7 +8,7 @@ which parses it and keeps `plays` / `live_game_state` current in Postgres.
 1. Start the receiver (use a scratch database while testing):
    `DATABASE_URL=postgres://postgres:postgres@localhost:5544/pbp_live_test node ingest/statbroadcast/receiver.js`
 2. Chrome → `chrome://extensions` → Developer mode → **Load unpacked** → this folder.
-3. Open the game (`https://stats.statbroadcast.com/broadcast/?id=<event>`) in its **own window**. Reload it once
+3. Open the game (`https://stats.statbroadcast.com/broadcast/?id=<event>`, or the `/statmonitr/?id=<event>` form) in its **own window**. Reload it once
    after installing the extension.
 4. Click the extension icon, fill in game date, home and away team ids (`byu`, `villanova`), **Start capture**.
 

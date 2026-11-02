@@ -7,7 +7,7 @@
   "host_permissions": ["https://stats.statbroadcast.com/*", "http://127.0.0.1:4600/*", "http://localhost:4600/*"],
   "background": { "service_worker": "background.js" },
   "content_scripts": [
-    { "matches": ["https://stats.statbroadcast.com/broadcast/*", "https://stats.statbroadcast.com/mobile/*"], "js": ["content.js"], "run_at": "document_idle" }
+    { "matches": ["https://stats.statbroadcast.com/broadcast/*", "https://stats.statbroadcast.com/mobile/*", "https://stats.statbroadcast.com/statmonitr/*"], "js": ["content.js"], "run_at": "document_idle" }
   ],
   "action": { "default_popup": "popup.html", "default_title": "StatBroadcast capture" }
 }

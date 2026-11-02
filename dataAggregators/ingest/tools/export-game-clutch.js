@@ -13,7 +13,8 @@ const { clutchSummary } = require('../../derivations/app-modules');
 const GAME_SQL = `
   SELECT game_id, to_char(game_date, 'YYYY-MM-DD') AS game_date, season_year, season_type, tournament_round,
          home_team_id, away_team_id, final_score_home, final_score_away,
-         is_neutral_site, is_conference_game, primary_source, status
+         is_neutral_site, is_conference_game, primary_source, status,
+         EXISTS (SELECT 1 FROM game_tags t WHERE t.game_id = games.game_id AND t.tag = 'exhibition') AS is_exhibition
   FROM games`;
 
 function toGame(g) {
@@ -29,6 +30,7 @@ function toGame(g) {
     finalScoreAway: g.final_score_away,
     isNeutralSite: g.is_neutral_site,
     isConferenceGame: g.is_conference_game,
+    isExhibition: g.is_exhibition,
     primarySource: g.primary_source,
   };
 }

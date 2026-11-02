@@ -111,4 +111,6 @@ async function main() {
   if (failed) process.exit(1);
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = { ingestBundle };
