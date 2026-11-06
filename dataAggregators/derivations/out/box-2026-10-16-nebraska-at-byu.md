@@ -75,7 +75,7 @@
 
 |  | BYU | Nebraska |
 |:---|---:|---:|
-| Missed rim attempts × 2 × rim FG% (pooled db rate 64.3%) | 7.7 | 1.3 |
+| Missed rim attempts × 2 × rim FG% (pooled db rate 64.8%) | 7.8 | 1.3 |
 | Advantage plays (transition + quick-off-make): scoreless / total | 7 / 13 | 7 / 10 |
 | …valued at the team’s own advantage PPP this game | 5.4 | 5.6 |
 
@@ -106,7 +106,12 @@
 | ↳ points on the possessions that followed (per event) | 14 (1.27) | 10 (1.00) |
 | Dead-ball havoc → shot/FT within 8s | 0 of 8 | 0 of 4 |
 | ↳ points on the possessions that followed (per event) | 9 (1.13) | 0 (0.00) |
+| Shot-clock violations forced (counted in squeeze) | 1 (1) | 0 (0) |
 | Squeeze rate (est. ≤5s on shot clock) | 11.8% (8 of 68) | 10.4% (7 of 67) |
+| ↳ late play ended: turnover / made FG / missed FG / FTs | 2 / 1 / 4 / 1 | 0 / 4 / 3 / 0 |
+| ↳ finished off: made FG / FTs / turnover / defensive rebound | 1 / 1 / 2 / 4 | 4 / 0 / 0 / 3 |
+| ↳ offensive rebounds off a missed late play (pts after) | 0 of 4 (0) | 1 of 3 (0) |
+| ↳ opp FG · 3P · FT on those plays | 1-5 · 0-1 · 2-2 | 4-7 · 2-4 · 0-0 |
 | Opp PPP squeezed vs other possessions | 0.50 vs 0.95 | 1.43 vs 1.03 |
 
 *Shot clock is not in the data: late-clock/squeeze use game-clock time since the play started (minus 3s after made baskets). Approximate; a single game cannot fit the weights.*

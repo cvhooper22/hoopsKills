@@ -53,6 +53,18 @@ test('on/off matching', () => {
   expect(specIsEmpty({ on: [], off: [] })).toBe(true);
 });
 
+test('at least N of a group', () => {
+  const five = ['A', 'B', 'C', 'D', 'E'];
+  expect(lineupMatches(five, { on: [], off: [], anyOf: ['A', 'B', 'X'], atLeast: 2 })).toBe(true);
+  expect(lineupMatches(five, { on: [], off: [], anyOf: ['A', 'X', 'Y'], atLeast: 2 })).toBe(false);
+  expect(lineupMatches(five, { on: [], off: [], anyOf: ['A', 'X'], atLeast: 1 })).toBe(true);
+  expect(lineupMatches(five, { on: [], off: [], anyOf: ['X', 'Y'], atLeast: 1 })).toBe(false);
+  expect(lineupMatches(five, { on: ['A'], off: ['E'], anyOf: ['B', 'C'], atLeast: 2 })).toBe(false); // E is required off
+  expect(lineupMatches(five, { on: ['A'], off: ['Z'], anyOf: ['B', 'C'], atLeast: 2 })).toBe(true);
+  expect(lineupMatches(five, { on: [], off: [], anyOf: [], atLeast: 3 })).toBe(true);                  // no group, no condition
+  expect(specIsEmpty({ on: [], off: [], anyOf: ['A'], atLeast: 1 })).toBe(false);
+});
+
 test('a split has the team\'s offense and defense, and the inverse is the rest of the time', () => {
   const spec = { on: ['B'], off: [] };
   const on = lineupSplit(PLAYS, 'byu', spec);

@@ -190,3 +190,29 @@
   touch-action: pan-y;
   cursor: crosshair;
 }
+
+/* ---------- Butterfly bars ---------- */
+.chart-butterfly__row { outline: none; cursor: default; }
+.chart-butterfly__hit { fill: transparent; }
+.chart-butterfly__row--active .chart-butterfly__hit { fill: var(--lightest-blue, #edf4ff); }
+.chart-butterfly__row:focus-visible .chart-butterfly__hit { stroke: var(--royal-blue, #003fa2); stroke-dasharray: 4 3; }
+.chart-butterfly__side { fill: var(--gray4, #666); font-size: 0.75rem; }
+.chart-butterfly__label { fill: currentColor; font-size: 0.8rem; font-weight: 700; }
+.chart-butterfly__sub { fill: var(--gray4, #666); font-size: 0.68rem; }
+.chart-butterfly__value { fill: currentColor; font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+.chart-butterfly__value--in { fill: #fff; font-weight: 700; }
+.chart-butterfly__outer { fill: var(--gray4, #666); font-size: 0.8rem; font-variant-numeric: tabular-nums; }
+.chart-butterfly__outer--lead { fill: currentColor; font-weight: 700; }
+.chart-butterfly__outer--thin { opacity: 0.5; }
+
+/* ---------- Radial bars ---------- */
+.chart-radial__ring { fill: none; stroke: var(--gray2, #c5c5c5); stroke-dasharray: 3 3; }
+.chart-radial__tick { fill: var(--gray4, #666); font-size: 0.65rem; }
+.chart-radial__wedge { outline: none; }
+.chart-radial__hit { fill: transparent; }
+.chart-radial__bar { transition: opacity 150ms ease; }
+.chart-radial__bar--muted { opacity: 0.5; }
+.chart-radial__value { fill: currentColor; font-size: 0.68rem; font-variant-numeric: tabular-nums; pointer-events: none; }
+.chart-radial__label { fill: currentColor; font-size: 0.75rem; font-weight: 700; pointer-events: none; }
+.chart-radial:has(.chart-radial__wedge--active) .chart-radial__wedge:not(.chart-radial__wedge--active) { opacity: 0.55; }
+.chart-radial__wedge:focus-visible .chart-radial__hit { stroke: var(--navy-blue, #002e52); stroke-dasharray: 4 3; }

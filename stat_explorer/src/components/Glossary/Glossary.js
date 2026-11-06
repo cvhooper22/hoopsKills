@@ -43,6 +43,16 @@ export function GlossaryDefinition({ children }) {
   return <div className="glossary__definition">{children}</div>;
 }
 
+// Renders a list of { id, term, definition } entries (see constants/glossaryEntries.js).
+export function GlossaryEntries({ entries }) {
+  return entries.map((e) => (
+    <GlossaryEntry key={e.id}>
+      <GlossaryTerm>{e.term}</GlossaryTerm>
+      <GlossaryDefinition>{e.definition}</GlossaryDefinition>
+    </GlossaryEntry>
+  ));
+}
+
 export default function Glossary({ children, storageKey = 'glossary-dismissed', title = 'Glossary' }) {
   const [dismissed, setDismissed] = useState(() => readDismissed(storageKey));
   const [open, setOpen] = useState(false);

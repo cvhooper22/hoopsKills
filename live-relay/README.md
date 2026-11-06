@@ -48,8 +48,8 @@ capture -> Postgres -> live-box-server.js (127.0.0.1:4610) -> live-relay-push.js
    ```bash
    RELAY_URL=https://hoops-live-relay.<your-subdomain>.workers.dev RELAY_TOKEN=<token> node derivations/live-relay-push.js
    ```
-   By default it follows every game whose status is `live`, including stale ones left over from earlier captures, so add
-   `--game <id>` to push only the game you want. Stop it with Ctrl-C to go private again.
+   By default it follows games marked `live` that changed in the last 10 minutes, so stale ones from earlier captures are
+   skipped; add `--game <id>` to push exactly the game you want. Only games it pushes appear on the public games list. Stop it with Ctrl-C to go private again.
 3. Point the front end at the relay. Either:
    - **Build time:** `REACT_APP_LIVE_BOX_BASE=https://hoops-live-relay.<your-subdomain>.workers.dev` for the deployed build.
    - **Runtime switch** (dev or a build that has `REACT_APP_LIVE_RELAY_BASE` set): open the live page with `?live=relay`
@@ -57,7 +57,8 @@ capture -> Postgres -> live-box-server.js (127.0.0.1:4610) -> live-relay-push.js
 
 ## After the game
 
-The pusher stops following a game once it is final. The relay drops a game's data about 36 hours after its last push,
+The pusher stops following a game once it is final. If a game is still marked live but nothing has been pushed for 5 minutes,
+the relay lists it as "not updating". The relay drops a game's data about 36 hours after its last push,
 and the normal S3 export is still the permanent record. Nothing needs to be spun down.
 
 ## Rotating the token

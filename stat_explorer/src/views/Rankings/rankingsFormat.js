@@ -20,3 +20,5 @@ export const formatDate = (iso, opts = { month: 'short', day: 'numeric' }) => {
 // +3 = moved up three places (the rank number fell); a rank gets a "#", WAB does not.
 export const signed = (n, digits = 0) => (n > 0 ? `+${n.toFixed(digits)}` : n < 0 ? `−${Math.abs(n).toFixed(digits)}` : '0');
 export const rank = (n) => (n === null || n === undefined ? '–' : `#${n}`);
+// an average of ranks keeps a decimal: whole numbers would hide most of the movement between two days
+export const rankAvg = (n) => (n === null || n === undefined ? '–' : `#${n.toFixed(1)}`);

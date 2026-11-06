@@ -16,7 +16,7 @@ const d2 = (a, b) => (isNum(a) && isNum(b) ? signed(a - b, 2) : dash);
 const d1 = (a, b) => (isNum(a) && isNum(b) ? signed(a - b, 1) : dash);
 const d0 = (a, b) => signed(a - b);
 
-const EMPTY = () => ({ name: '', on: [], off: [] });
+const EMPTY = () => ({ name: '', on: [], off: [], anyOf: [], atLeast: 1 });
 
 // Everything the table shows for one spec: the team's offense, its defense (what the other team did against it) and minutes.
 function lineSummary(plays, stints, side, spec, invert, total, luOf) {
@@ -64,14 +64,19 @@ const REBOUND_ROWS = [
 ];
 
 // One lineup definition: a name, a "pick a five" shortcut, and a chip per player (click: on the floor, again: off, again: neither).
-function SpecEditor({ title, spec, onChange, roster, lineups }) {
+export function SpecEditor({ title, spec, onChange, roster, lineups }) {
   const set = (patch) => onChange({ ...spec, ...patch });
   const state = (n) => (spec.on.includes(n) ? 'on' : spec.off.includes(n) ? 'off' : 'none');
   const cycle = (n) => {
     const s = state(n);
     set({ on: s === 'none' ? [...spec.on, n] : spec.on.filter((x) => x !== n), off: s === 'on' ? [...spec.off, n] : spec.off.filter((x) => x !== n) });
   };
-  const key = spec.on.length === 5 && !spec.off.length ? [...spec.on].sort().join('|') : '';
+  const key = spec.on.length === 5 && !spec.off.length && !spec.anyOf.length ? [...spec.on].sort().join('|') : '';
+  // the "at least N of" group: toggling a player in or out keeps N within the group's size
+  const toggleAny = (n) => {
+    const anyOf = spec.anyOf.includes(n) ? spec.anyOf.filter((x) => x !== n) : [...spec.anyOf, n];
+    set({ anyOf, atLeast: Math.min(Math.max(spec.atLeast, 1), Math.max(anyOf.length, 1)) });
+  };
   return (
     <div className="plays-group">
       <h3 className="plays-group__title">{spec.name.trim() || title}</h3>
@@ -81,11 +86,11 @@ function SpecEditor({ title, spec, onChange, roster, lineups }) {
       </div>
       <div className="plays-group__row">
         <span className="plays-group__label">Lineup</span>
-        <Select size="sm" aria-label={`${title} lineup`} value={key} onChange={(e) => set(e.target.value ? { on: e.target.value.split('|'), off: [] } : { on: [], off: [] })}>
-          <option value="">{key || spec.on.length || spec.off.length ? 'Pick a five…' : 'Everyone (whole game)'}</option>
+        <Select size="sm" aria-label={`${title} lineup`} value={key} onChange={(e) => set(e.target.value ? { on: e.target.value.split('|'), off: [], anyOf: [], atLeast: 1 } : { on: [], off: [], anyOf: [], atLeast: 1 })}>
+          <option value="">{key || !specIsEmpty(spec) ? 'Pick a five…' : 'Everyone (whole game)'}</option>
           {lineups.map((l) => <option key={l.key} value={l.key}>{l.names.map(shortName).join(', ')} ({l.poss} poss.)</option>)}
         </Select>
-        <button type="button" className="plays-chip" onClick={() => set({ on: [], off: [] })}>Clear</button>
+        <button type="button" className="plays-chip" onClick={() => set({ on: [], off: [], anyOf: [], atLeast: 1 })}>Clear</button>
       </div>
       <div className="plays-group__row">
         <span className="plays-group__label" title="Click a player once to require them on the floor, twice to require them off it">Players</span>
@@ -99,6 +104,19 @@ function SpecEditor({ title, spec, onChange, roster, lineups }) {
           );
         })}
       </div>
+      <div className="plays-group__row">
+        <span className="plays-group__label" title="Match when at least this many of the chosen players are on the floor at once (1 = any of them)">At least</span>
+        <Select size="sm" aria-label={`${title} how many of the group`} value={spec.atLeast} disabled={!spec.anyOf.length} onChange={(e) => set({ atLeast: Number(e.target.value) })}>
+          {Array.from({ length: Math.max(spec.anyOf.length, 1) }, (_, i) => <option key={i + 1} value={i + 1}>{i + 1}</option>)}
+        </Select>
+        <span className="plays-group__label">of</span>
+        {roster.map((n) => (
+          <button key={n} type="button" className={`plays-chip${spec.anyOf.includes(n) ? ' plays-chip--on' : ''}`} aria-pressed={spec.anyOf.includes(n)}
+            title={spec.anyOf.includes(n) ? 'In the group (click to remove)' : 'Click to add to the group'} onClick={() => toggleAny(n)}>
+            {shortName(n)}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
@@ -107,6 +125,7 @@ const describe = (spec) => {
   const bits = [];
   if (spec.on.length) bits.push(`${spec.on.map(shortName).join(', ')} on`);
   if (spec.off.length) bits.push(`${spec.off.map(shortName).join(', ')} off`);
+  if (spec.anyOf.length) bits.push(`at least ${spec.atLeast} of ${spec.anyOf.map(shortName).join(', ')}`);
   return bits.join('; ') || 'everyone';
 };
 

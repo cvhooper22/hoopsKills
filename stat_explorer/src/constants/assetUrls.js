@@ -26,12 +26,13 @@ const urls = {
   teamsMeta: () => `${previewBase || urls.assetBase}/meta/teams.json`,
   clutchSeason: season => `${previewBase || urls.assetBase}/clutch/seasons/${season}.json`,
   clutchSeasonsIndex: () => `${previewBase || urls.assetBase}/clutch/seasons/index.json`,
-  // Box scores are local-only for now: the prototype in dataAggregators/derivations writes them to public/data/box.
-  boxGame: id => `${previewBase || '/data'}/box/${id}.json`,
-  boxIndex: () => `${previewBase || '/data'}/box/index.json`,
-  // BYU's ratings over a season (dataAggregators/ingest/tools/export-rankings-timeline.js); local only for now.
-  rankingsTimeline: season => `${previewBase || '/data'}/rankings/timeline-${season}.json`,
-  // In-game data comes from derivations/live-box-server.js (local only), not from the data CloudFront.
+  // Box scores come from the CloudFront (ingest/tools/export-game-box.js); with REACT_APP_PREVIEW_DATA_BASE set they
+  // are read from the local layout the prototype in dataAggregators/derivations writes (public/data/box/<id>.json).
+  boxGame: id => (previewBase ? `${previewBase}/box/${id}.json` : `${urls.assetBase}/box/games/${id}.json`),
+  boxIndex: () => `${previewBase || urls.assetBase}/box/index.json`,
+  // BYU's ratings over a season (dataAggregators/ingest/tools/export-rankings-timeline.js).
+  rankingsTimeline: season => `${previewBase || urls.assetBase}/rankings/timeline-${season}.json`,
+  // In-game data comes from derivations/live-box-server.js, or the live-relay Worker that mirrors it, not from the data CloudFront.
   liveGames: () => `${liveBase}/games`,
   liveBox: id => `${liveBase}/box/${id}`,
   liveBoxStream: id => `${liveBase}/box/${id}/stream`,

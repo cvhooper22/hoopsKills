@@ -216,7 +216,7 @@ export default function KillsFlow({ plays, result, game }) {
 
   return (
     <section className="kills-flow rhythm-card">
-      <h2>How the kills moved the margin</h2>
+      <h2>Kills Timeline</h2>
       <div className="kills-flow__legend" aria-hidden="true">
         <span><i className="kills-flow__key kills-flow__key--byu" />BYU leading</span>
         <span><i className="kills-flow__key kills-flow__key--trail" />BYU trailing</span>

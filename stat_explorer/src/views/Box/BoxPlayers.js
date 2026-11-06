@@ -179,10 +179,6 @@ export default function PlayerBox({ data }) {
         <span className={`box-chevron${showOpp ? ' box-chevron--open' : ''}`} aria-hidden="true" />
       </button>
       {showOpp && <TeamPlayers data={data} side="opp" />}
-      <p className="box-foot">
-        Poss +/− counts possessions gained (steals, offensive rebounds, charges drawn, recovered blocks) against lost (turnovers).
-        Minutes come from the lineup data and can come up a few minutes short when a lineup is missing a player.
-      </p>
     </Section>
   );
 }

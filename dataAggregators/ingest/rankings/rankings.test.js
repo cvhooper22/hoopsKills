@@ -101,3 +101,14 @@ test('haslam: written-out date in <dt>', () => {
   const r = parseHaslam(`<mydata>${teams}<dt md="November 1, 2026" /></mydata>`, '2026-11-02');
   assert.equal(r.throughDate, '2026-11-01');
 });
+
+test('haslam: off/def come from the component fields the site uses, not the xml oe / de', () => {
+  // site OE = ftpct*oftar/100 + 2*(ofgmr - otpmr) + 3*otpmr; DE the same on the d* fields
+  const mk = (i, ftpct, oftar, ofgmr, otpmr, oe) => `<mr t="T${i}" c="X" id="${i}" w="0" l="0" rk="${i}" oe="${oe}" de="100" ftpct="${ftpct}" oftar="${oftar}" ofgmr="${ofgmr}" otpmr="${otpmr}" dftpct="70" dftar="20" dfgmr="40" dtpmr="10" />`;
+  const teams = Array.from({ length: 299 }, (_, i) => mk(i + 1, 70, 20, 40, 10, 120)).join('') + mk(300, 76, 30, 44, 13, 100);
+  const p = parseHaslam(`<mydata>${teams}<dt md="3/16/2026" /></mydata>`, '2026-03-17');
+  const t = p.rows.find((r) => r.name === 'T300');
+  assert.ok(Math.abs(t.off.rating - (76 * 30 / 100 + 2 * (44 - 13) + 3 * 13)) < 1e-9);   // 123.8, though the xml oe says 100
+  assert.strictEqual(t.off.rank, 1);   // 123.8 vs 14 + 60 + 30 = 104 for the rest, so first on the recomputed number only
+  assert.strictEqual(t.metrics.xml_oe, 100);
+});

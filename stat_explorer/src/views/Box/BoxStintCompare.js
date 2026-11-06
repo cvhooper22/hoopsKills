@@ -13,6 +13,8 @@ import BoxPlayerCompare from './BoxPlayerCompare';
 import CompareShotCharts, { useLocatedShots } from './BoxShotCharts';
 import { eventLines, inWindow, playerContext, windowSpans, complementSpans } from '../../utils/boxStats';
 
+// a shot's chance passes the group's play-type filter (no filter: every shot does)
+const inBuckets = (play, g) => !g.buckets.length || (!!play && g.buckets.includes(bucketOf(play)));
 const madeAtt = (m, a, p) => (a ? `${m}-${a} (${pct(p)})` : dash);
 const clock = (p) => { const s = clockSec(p); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
 const pp = (a, b) => (isNum(a) && isNum(b) ? signed((a - b) * 100, 1) + ' pts' : dash);
@@ -60,7 +62,7 @@ function TimeBound({ isEnd, value, onChange, periods }) {
   );
 }
 
-function GroupEditor({ title, group, onChange, teams, periods }) {
+export function GroupEditor({ title, group, onChange, teams, periods }) {
   const set = (patch) => onChange({ ...group, ...patch });
   const toggle = (key, v) => set({ [key]: group[key].includes(v) ? group[key].filter((x) => x !== v) : [...group[key], v] });
   return (
@@ -125,7 +127,7 @@ function LineupTable({ title, offPlays, defPlays, side, luOf }) {
       <h3 className="plays-group__title">{title}</h3>
       {rows.length ? (
         <>
-          <BoxTable className="lineup-table" head={[{ label: 'Lineup', className: 'box-table__lineup' }, { label: 'Off. poss.' }, { label: 'Pts' }, { label: 'Pts / poss.' }, { label: 'Def. poss.' }, { label: 'Opp. pts' }, { label: 'Opp. pts / poss.' }, { label: 'Net / poss.', title: 'Points per possession scored minus points per possession allowed' }]} rows={shown} totals={totals} />
+          <BoxTable className="lineup-table" stickyFirst={false} head={[{ label: 'Lineup', className: 'box-table__lineup' }, { label: 'Off. poss.' }, { label: 'Pts' }, { label: 'Pts / poss.' }, { label: 'Def. poss.' }, { label: 'Opp. pts' }, { label: 'Opp. pts / poss.' }, { label: 'Net / poss.', title: 'Points per possession scored minus points per possession allowed' }]} rows={shown} totals={totals} />
           {rows.length > LIMIT ? <button type="button" className="plays-chip" onClick={() => setAll((v) => !v)}>{all ? `Show the top ${LIMIT}` : `Show all ${rows.length} lineups`}</button> : null}
         </>
       ) : <p className="box-foot">No plays in this group.</p>}
@@ -292,10 +294,9 @@ export function StintComparePanel({ data, shotPlays }) {
       </Section>
 
       <CompareShotCharts located={located} teams={teams}
-        note={a.buckets.length || (mode === 'custom' && b.buckets.length) ? 'Shot charts follow the offense, period and time window only; the play-type filter does not apply to them.' : null}
         slices={[
-          { name: nameA, side: a.side, pick: (e) => inWindow(e, a) },
-          ...(mode === 'rest' ? [{ name: nameB, side: a.side, pick: (e) => !inWindow(e, a) }] : mode === 'custom' ? [{ name: nameB, side: b.side, pick: (e) => inWindow(e, b) }] : []),
+          { name: nameA, side: a.side, pick: (e, i, p) => inWindow(e, a) && inBuckets(p, a) },
+          ...(mode === 'rest' ? [{ name: nameB, side: a.side, pick: (e, i, p) => !(inWindow(e, a) && inBuckets(p, a)) }] : mode === 'custom' ? [{ name: nameB, side: b.side, pick: (e, i, p) => inWindow(e, b) && inBuckets(p, b) }] : []),
         ]} />
     </div>
   );

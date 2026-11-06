@@ -45,9 +45,11 @@ export function playerFloorTime(stints) {
   return [...by.values()].sort((a, b) => b.mins - a.mins || (a.name < b.name ? -1 : 1));
 }
 
-// ---- on/off comparisons. A spec is { on: [names who must be on the floor], off: [names who must not be] }; an empty spec
+// ---- on/off comparisons. A spec is { on: [names who must be on the floor], off: [names who must not be] }, optionally with
+// anyOf: [names] and atLeast: N, meaning at least N of those names are on the floor (N = 1 is "any of them"). An empty spec
 // matches every lineup. "Rest of the time" is the same spec inverted. The lineup is the one at the start of each chance.
-export const lineupMatches = (names, spec) => spec.on.every((n) => names.includes(n)) && !spec.off.some((n) => names.includes(n));
+export const lineupMatches = (names, spec) => spec.on.every((n) => names.includes(n)) && !spec.off.some((n) => names.includes(n))
+  && (!spec.anyOf || !spec.anyOf.length || spec.anyOf.filter((n) => names.includes(n)).length >= (spec.atLeast || 1));
 
 // The team's chances while the spec holds (or, inverted, while it doesn't): its own possessions (off) and the other team's (def).
 export function lineupSplit(plays, side, spec, invert = false, luOf = (p, s) => p.lu[s]) {
@@ -58,7 +60,7 @@ export function lineupSplit(plays, side, spec, invert = false, luOf = (p, s) => 
 // Minutes of game time the spec held (or didn't), from the stints.
 export const minutesOn = (stints, spec, invert = false) => stints.filter((s) => lineupMatches(s.names, spec) !== invert).reduce((m, s) => m + s.mins, 0);
 
-export const specIsEmpty = (spec) => !spec.on.length && !spec.off.length;
+export const specIsEmpty = (spec) => !spec.on.length && !spec.off.length && !(spec.anyOf && spec.anyOf.length);
 
 // Points per possession scored minus allowed; null until both sides have a possession.
 export const netRating = (t) => (t.offPoss && t.defPoss ? t.scored / t.offPoss - t.allowed / t.defPoss : null);

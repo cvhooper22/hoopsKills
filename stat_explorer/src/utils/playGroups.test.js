@@ -120,6 +120,9 @@ test('clock text parsing', () => {
   expect(parseClock('abc')).toBeNull();
   expect(formatClock(750)).toBe('12:30');
   expect(formatClock(65)).toBe('1:05');
+  expect(formatClock(58.200000000000045)).toBe('0:58');
+  expect(formatClock(44.799999999999955)).toBe('0:45');
+  expect(formatClock(59.6)).toBe('1:00');
 });
 
 import { selectOpposing, selectOpposingRest } from './playGroups';

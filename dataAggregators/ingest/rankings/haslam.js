@@ -17,6 +17,20 @@ function attrs(tag) {
   return out;
 }
 
+// The team pages do not show the XML's oe / de: haslam.js recomputes both from the component fields (its own `OE=` / `DE=`
+// lines, with the oe / de attributes commented out) and ranks every team on those, so the site's offense and defense
+// ranks follow these numbers. (BYU, Nov 2026: oe 126.45 is 10th, the page's 126.75 is 5th.) Falls back to the XML's own
+// value when a component is missing.
+const has = (...v) => v.every((x) => x !== null);
+function offense(t) {
+  const [ft, tar, fgmr, tpmr] = [num(t.ftpct), num(t.oftar), num(t.ofgmr), num(t.otpmr)];
+  return has(ft, tar, fgmr, tpmr) ? (ft * tar) / 100 + 2 * (fgmr - tpmr) + 3 * tpmr : num(t.oe);
+}
+function defense(t) {
+  const [ft, tar, fgmr, tpmr] = [num(t.dftpct), num(t.dftar), num(t.dfgmr), num(t.dtpmr)];
+  return has(ft, tar, fgmr, tpmr) ? (ft * tar) / 100 + 2 * (fgmr - tpmr) + 3 * tpmr : num(t.de);
+}
+
 const rankBy = (rows, get, descending) => {
   const sorted = rows.filter((r) => get(r) !== null).sort((a, b) => (descending ? get(b) - get(a) : get(a) - get(b)));
   sorted.forEach((r, i) => { r.__rank = (r.__rank || {}); });
@@ -44,13 +58,14 @@ function parseHaslam(xml, collectedOn) {
 
   const teams = [...xml.matchAll(/<mr\s+([^>]*?)\/>/g)].map((x) => attrs(x[1]));
   if (teams.length < 300) throw new Error(`haslam: only ${teams.length} teams in ratings.xml`);
+  teams.forEach((t) => { t.__oe = offense(t); t.__de = defense(t); });
   const rows = teams.map((t) => ({
     name: t.t, conference: t.c, record: `${t.w}-${t.l}`,
-    overall: { rank: num(t.rk), rating: num(t.oe) !== null && num(t.de) !== null ? +(num(t.oe) - num(t.de)).toFixed(3) : null },
-    off: { rank: null, rating: num(t.oe) },
-    def: { rank: null, rating: num(t.de) },
+    overall: { rank: num(t.rk), rating: t.__oe !== null && t.__de !== null ? +(t.__oe - t.__de).toFixed(3) : null },
+    off: { rank: null, rating: t.__oe },
+    def: { rank: null, rating: t.__de },
     metrics: {
-      espn_id: t.id, tempo: num(t.ou) !== null && num(t.du) !== null ? +((num(t.ou) + num(t.du)) / 2).toFixed(3) : null,
+      espn_id: t.id, xml_oe: num(t.oe), xml_de: num(t.de), tempo: num(t.ou) !== null && num(t.du) !== null ? +((num(t.ou) + num(t.du)) / 2).toFixed(3) : null,
       sos: num(t.sos), momentum: num(t.mom), ap_score: num(t.ap), win_rating: num(t.wr), rpi: num(t.rpi),
       quad1: t.r_q1, quad2: t.r_q2, quad3: t.r_q3, quad4: t.r_q4,
       vs_1_50: t.r_1_50, vs_51_100: t.r_51_100, vs_101_150: t.r_101_150, vs_151_200: t.r_151_200, vs_201_250: t.r_201_250, vs_251_300: t.r_251_300, vs_301_up: t.r_301_up,
@@ -66,7 +81,9 @@ async function fetchLatest(collectedOn = new Date().toISOString().slice(0, 10)) 
   if (!res.ok) throw new Error(`haslam ratings.xml: HTTP ${res.status}`);
   const xml = await res.text();
   const parsed = parseHaslam(xml, collectedOn);
-  return { system: 'haslam', ...parsed, raw: { url: URL, bytes: xml.length } }; // the XML (~860 KB) is not stored; it is re-fetchable only for today, so keep the parsed rows
+  // the whole XML is kept: the site only serves today's file, and off / def are derived from its component fields,
+  // so a later fix to the derivation can be re-run on it (ingest/rankings/recompute.js)
+  return { system: 'haslam', ...parsed, raw: { url: URL, xml } };
 }
 
-module.exports = { parseHaslam, fetchLatest };
+module.exports = { parseHaslam, fetchLatest, parseMd };

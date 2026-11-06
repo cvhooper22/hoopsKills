@@ -45,7 +45,7 @@ export function FindPlays({ events, teams, floorAt }) {
   const rows = found.slice(0, LIMIT).map((e) => [
     `${periodLabel(e.per)} ${formatClock(clockSec({ per: e.per, startRem: e.rem }))}`,
     e.side ? teams[e.side] : dash, e.player || dash, eventText(e),
-    e.sc && e.sc[0] !== null ? `${teams.byu} ${e.sc[0]}–${e.sc[1]} ${teams.opp}` : dash,
+    e.made && e.sc && e.sc[0] !== null ? `${teams.byu} ${e.sc[0]}–${e.sc[1]} ${teams.opp}` : dash,
   ]);
 
   return (

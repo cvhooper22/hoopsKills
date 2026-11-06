@@ -11,6 +11,8 @@ export { default as HoverLayer } from "./HoverLayer";
 export { default as Tooltip } from "./Tooltip";
 export { default as PointPicker } from "./PointPicker";
 export { default as Donut } from "./Donut";
+export { default as ButterflyBars } from "./ButterflyBars";
+export { default as RadialBars } from "./RadialBars";
 export { default as BubbleStream } from "./BubbleStream";
 export { default as StopwatchFrame } from "./StopwatchFrame";
 export { nearestIndex } from "./nearest";

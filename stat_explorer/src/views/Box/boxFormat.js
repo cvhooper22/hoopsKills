@@ -29,3 +29,6 @@ export const liveClockText = (l) => {
   if (l.statusText && BREAK_RE.test(l.statusText)) return l.statusText;
   return [l.period ? periodLabel(l.period) : null, l.clock].filter(Boolean).join(' ') || null;
 };
+
+// The opponent's accent as a CSS variable on the .box root (tiles and table columns read it, falling back to slate).
+export const oppColorStyle = (header) => (header && header.oppColor ? { '--opp-color': header.oppColor } : undefined);

@@ -1,7 +1,7 @@
 /* The tab sits on the right edge below the top bar (like the alumni "?"); the panel slides out from behind it. */
 .ask-ai {
   position: fixed;
-  top: calc(var(--top-bar-height) + 25px);
+  top: calc(var(--top-bar-height) + 50px);
   right: 0;
   z-index: 25;
   width: var(--ask-ai-panel-w);
@@ -38,7 +38,7 @@
 
 .ask-ai__panel {
   width: var(--ask-ai-panel-w);
-  max-height: calc(100vh - var(--top-bar-height) - 50px);
+  max-height: calc(100vh - var(--top-bar-height) - 75px);
   overflow-y: auto;
   background: var(--app-bg);
   border-radius: var(--radius-card) 0 0 var(--radius-card);

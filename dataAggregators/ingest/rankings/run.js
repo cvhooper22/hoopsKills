@@ -4,12 +4,16 @@
 //   node ingest/rankings/run.js                              latest snapshot of every system (KenPom opens a browser window briefly)
 //   node ingest/rankings/run.js --systems torvik,net         just these
 //   node ingest/rankings/run.js --backfill torvik --from 2025-10-27 --to 2026-04-14     one Torvik snapshot per day
+//   a run that stores anything also rewrites stat_explorer/public/data/rankings/timeline-<season>.json for the seasons it touched
+//   (what the /rankings page reads); --no-export skips that
 //   add --trigger admin to label the run in rating_runs; --json prints the run result as one JSON line (for the admin page)
 //
 // Every system's team names are matched to the app's canonical list (config/rating-teams.json); unmatched ones are reported.
 const { connect } = require('../../db/client');
 const { ensureSystems, writeSnapshot } = require('./lib/store');
 const { syncCanonical } = require('./lib/canonical');
+const { spawnSync } = require('child_process');
+const path = require('path');
 const torvik = require('./torvik');
 
 const COLLECTORS = {
@@ -48,6 +52,28 @@ async function storeOne(client, system, snap) {
   const note = await focusRecordNote(client, snap, snap.throughDate, season);
   if (note) snap.notes = { ...(snap.notes || {}), ...note };
   return writeSnapshot(client, snap);
+}
+
+// Seasons whose snapshots this run changed (a system re-reported as unchanged, or in error, touches nothing).
+function touchedSeasons(results) {
+  const { seasonOf } = require('./lib/store');
+  const seasons = new Set();
+  for (const r of Object.values(results)) {
+    if (r.throughDate && (r.status === 'inserted' || r.status === 'replaced')) seasons.add(seasonOf(r.throughDate));
+  }
+  if (opt('--backfill') && results.torvik && results.torvik.status === 'ok' && results.torvik.inserted + results.torvik.replaced > 0) {
+    for (let y = seasonOf(opt('--from')); y <= seasonOf(opt('--to', torvik.iso(new Date()))); y++) seasons.add(y);
+  }
+  return [...seasons].sort();
+}
+
+// Regenerates the front end's timeline file(s) so /rankings picks the new snapshots up without a second command.
+function exportTimelines(results) {
+  for (const season of touchedSeasons(results)) {
+    const r = spawnSync(process.execPath, [path.join(__dirname, '../tools/export-rankings-timeline.js'), '--season', String(season)], { encoding: 'utf8' });
+    if (r.status === 0) log(r.stdout.trim());
+    else console.error(`timeline export for ${season} failed: ${(r.stderr || r.stdout || '').trim()}`);
+  }
 }
 
 async function main() {
@@ -95,6 +121,7 @@ async function main() {
     await client.query('UPDATE rating_runs SET finished_at = now(), results = $2 WHERE run_id = $1', [run_id, JSON.stringify(results)]);
     await client.end();
   }
+  if (!flag('--no-export')) exportTimelines(results);
   if (flag('--json')) console.log(JSON.stringify({ runId: run_id, results }));
   if (opt('--backfill')) { const t = results.torvik; log(`\ndone: ${t.inserted} inserted, ${t.replaced} replaced, ${t.unchanged} unchanged, ${t.missing} missing${t.mismatches.length ? `, ${t.mismatches.length} record mismatches` : ''}${t.unresolved.length ? `, unresolved: ${t.unresolved.join('; ')}` : ''}`); }
 }

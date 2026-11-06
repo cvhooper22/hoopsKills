@@ -3,17 +3,18 @@
 // Run it next to live-box-server.js when you want a game public; stop it and the local view is unaffected.
 //
 //   RELAY_URL=https://hoops-live-relay.<you>.workers.dev RELAY_TOKEN=... node derivations/live-relay-push.js
-//   options: --local http://127.0.0.1:4610   --game <id> (repeatable; default: every game with status 'live')
+//   options: --local http://127.0.0.1:4610   --game <id> (repeatable; default: every game with status 'live' that changed in the last 10 minutes)
 //
 // For each game it follows the local /box/:id/stream, keeps the latest box + plays, and sends both to the relay
-// (debounced, skipped when nothing changed). The games list is pushed every scan. A game is dropped once it is final.
+// (debounced, skipped when nothing changed) along with the game's own row from the local /games, which is what the relay's
+// public games list is built from: only games pushed here ever appear there. A game is dropped once it is final.
 const args = process.argv.slice(2);
 const arg = (name) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : null; };
 const local = (arg('--local') || 'http://127.0.0.1:4610').replace(/\/$/, '');
 const relay = (process.env.RELAY_URL || arg('--url') || '').replace(/\/$/, '');
 const token = process.env.RELAY_TOKEN;
 const fixed = args.flatMap((a, i) => (a === '--game' ? [args[i + 1]] : []));
-const SCAN_MS = 15000, DEBOUNCE_MS = 200;
+const SCAN_MS = 15000, DEBOUNCE_MS = 200, RECENT_MS = 10 * 60 * 1000; // by default only follow live games that changed in the last RECENT_MS
 const stamp = () => new Date().toISOString().slice(11, 19);
 
 if (!relay || !token) { console.error('Set RELAY_URL and RELAY_TOKEN (see live-relay/README.md).'); process.exit(1); }
@@ -23,7 +24,7 @@ const put = (path, body) => fetch(relay + path, {
 }).then((r) => { if (!r.ok) throw new Error(`${path} -> ${r.status}`); });
 
 const following = new Map(); // gameId -> AbortController
-let lastGames = '';
+const getGames = async () => (await fetch(`${local}/games`)).json();
 
 async function follow(gameId) {
   const ctl = new AbortController();
@@ -31,7 +32,10 @@ async function follow(gameId) {
   let box = null, plays = null, lastSent = '', timer = null;
   const flush = async () => {
     if (!box || !plays) return;
-    const body = JSON.stringify({ box, plays });
+    let summary;
+    try { summary = (await getGames()).find((g) => g.game_id === gameId); } catch (e) { console.error(`${stamp()} ${gameId}: local /games failed: ${e.message}`); return; }
+    if (!summary) return;
+    const body = JSON.stringify({ box, plays, summary });
     if (body === lastSent) return;
     try { await put(`/game/${encodeURIComponent(gameId)}`, body); lastSent = body; console.log(`${stamp()} ${gameId}: pushed ${plays.plays.length} plays (${Math.round(body.length / 1024)} KB)`); }
     catch (e) { console.error(`${stamp()} ${gameId}: push failed: ${e.message}`); }
@@ -62,10 +66,8 @@ async function follow(gameId) {
 
 async function scan() {
   try {
-    const games = await (await fetch(`${local}/games`)).json();
-    const body = JSON.stringify(games);
-    if (body !== lastGames) { await put('/games', body); lastGames = body; }
-    const wanted = fixed.length ? fixed : games.filter((g) => g.status === 'live').map((g) => g.game_id);
+    const games = await getGames();
+    const wanted = fixed.length ? fixed : games.filter((g) => g.status === 'live' && Date.now() - Date.parse(g.last_changed_at) < RECENT_MS).map((g) => g.game_id);
     for (const id of wanted) if (!following.has(id)) { console.log(`${stamp()} following ${id}`); follow(id); }
   } catch (e) { console.error(`${stamp()} scan failed: ${e.message}`); }
 }
