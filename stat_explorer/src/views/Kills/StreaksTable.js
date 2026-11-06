@@ -68,7 +68,7 @@ export default function StreaksTable({ result }) {
 
   return (
     <section className="streaks-section">
-      <h2>What broke the streaks</h2>
+      <h2>What broke the stop streaks</h2>
 
       <div className="streaks-callout">
         <p className="streaks-callout__headline">

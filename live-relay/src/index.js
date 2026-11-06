@@ -1,16 +1,18 @@
 // Live relay. The laptop pushes (outbound only, bearer token); viewers read. It mirrors the local
 // derivations/live-box-server.js API so the front end only changes its base URL:
 //
-//   GET /games                      list of live games (what the laptop last pushed)
+//   GET /games                      games the laptop has pushed (newest first); a game still marked live that has not been
+//                                   pushed for STALL_AFTER_MS is reported as 'stalled'
 //   GET /box/:gameId                latest box payload
 //   GET /plays/:gameId              latest {meta, plays}
 //   GET /box/:gameId/stream         server-sent events: `event: box` and `event: plays`, same as the local server
-//   PUT /games                      (auth) replace the games list
-//   PUT /game/:gameId               (auth) body {box, plays}: store the snapshot and send it to watchers
+//   PUT /game/:gameId               (auth) body {box, plays, summary}: store the snapshot and send it to watchers; `summary`
+//                                   is the game's row from the local /games and is what the list above is built from
 //
 // One Durable Object ("hub") holds everything. A game is a few hundred plays, so snapshots are small, and plays are
 // always replaced whole because the ingest deletes and renumbers them.
 const GAME_TTL_MS = 36 * 60 * 60 * 1000; // a game's data is dropped this long after its last push
+const STALL_AFTER_MS = 5 * 60 * 1000;    // a 'live' game with no push for this long is listed as 'stalled'
 
 const CORS = { 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, OPTIONS' };
 const json = (status, obj) => new Response(JSON.stringify(obj), { status, headers: { 'content-type': 'application/json', ...CORS } });
@@ -56,24 +58,28 @@ export class Hub {
     const url = new URL(req.url);
 
     if (req.method === 'PUT') {
-      if (url.pathname === '/games') {
-        await this.state.storage.put('games', await req.json());
-        return json(200, { ok: true });
-      }
       const pm = /^\/game\/([^/]+)$/.exec(url.pathname);
       if (!pm) return json(404, { error: 'not found' });
       const id = decodeURIComponent(pm[1]);
-      const { box, plays } = await req.json();
-      if (!box || !plays) return json(400, { error: 'need box and plays' });
+      const { box, plays, summary } = await req.json();
+      if (!box || !plays || !summary) return json(400, { error: 'need box, plays and summary' });
       const g = { box, plays, at: Date.now() };
       this.latest.set(id, g);
       await this.state.storage.put(`game:${id}`, g);
+      await this.state.storage.put(`sum:${id}`, { summary, at: g.at }); // kept apart so listing games never loads the big snapshots
       await this.state.storage.setAlarm(Date.now() + GAME_TTL_MS);
       await this.broadcast(id, g);
       return json(200, { ok: true, watchers: (this.watchers.get(id) || new Set()).size });
     }
 
-    if (url.pathname === '/games') return json(200, (await this.state.storage.get('games')) || []);
+    if (url.pathname === '/games') {
+      const now = Date.now();
+      const rows = [...(await this.state.storage.list({ prefix: 'sum:' })).values()]
+        .filter((r) => now - r.at < GAME_TTL_MS)
+        .map((r) => (r.summary.status === 'live' && now - r.at > STALL_AFTER_MS ? { ...r.summary, status: 'stalled' } : r.summary));
+      rows.sort((a, b) => String(b.last_changed_at).localeCompare(String(a.last_changed_at)));
+      return json(200, rows);
+    }
 
     const m = /^\/(box|plays)\/([^/]+)(\/stream)?$/.exec(url.pathname);
     if (!m) return json(404, { error: 'not found' });
@@ -110,11 +116,11 @@ export class Hub {
 
   // drop games that haven't been pushed for GAME_TTL_MS
   async alarm() {
-    const all = await this.state.storage.list({ prefix: 'game:' });
+    const all = await this.state.storage.list({ prefix: 'sum:' });
     let next = null;
-    for (const [k, g] of all) {
-      const expires = (g.at || 0) + GAME_TTL_MS;
-      if (expires <= Date.now()) { await this.state.storage.delete(k); this.latest.delete(k.slice(5)); }
+    for (const [k, r] of all) {
+      const expires = (r.at || 0) + GAME_TTL_MS;
+      if (expires <= Date.now()) { const id = k.slice(4); await this.state.storage.delete([k, `game:${id}`]); this.latest.delete(id); }
       else next = Math.min(next ?? expires, expires);
     }
     if (next) await this.state.storage.setAlarm(next);

@@ -13,6 +13,10 @@ const season = Number(opt('--season') || 2025);
 const outArg = args.find((a, i) => !a.startsWith('--') && args[i - 1] !== '--season');
 const out = outArg || path.join(__dirname, '../../../stat_explorer/public/data/rankings', `timeline-${season}.json`);
 
+// the logo key is the opponent's team id when assets/logos/<id>.png exists (the app loads it from the data CloudFront), else null
+const LOGOS = path.join(__dirname, '../../assets/logos');
+const logoKey = (teamId) => (fs.existsSync(path.join(LOGOS, `${teamId}.png`)) ? teamId : null);
+
 const num = (v) => (v === null || v === undefined ? null : Number(v));
 const day = (d) => (d.toISOString ? d.toISOString().slice(0, 10) : String(d).slice(0, 10));
 
@@ -21,7 +25,7 @@ async function main() {
   try {
     const { rows: sys } = await client.query('SELECT system, name, kind, metric_meta FROM rating_systems WHERE active ORDER BY system');
     const { rows: pts } = await client.query(
-      `SELECT s.system, s.through_date, t.record, t.overall_rank, t.overall_rating, t.off_rank, t.off_rating, t.def_rank, t.def_rating, t.metrics,
+      `SELECT s.system, s.through_date, t.record, t.overall_rank, t.overall_rating, std.off_rank, std.off_rating, std.def_rank, std.def_rating, t.metrics,   -- offense / defense from the view: hidden (NULL) for snapshots flagged off_def_valid = false
               std.margin_vs_avg, std.n_teams
        FROM team_ratings t JOIN rating_snapshots s USING (snapshot_id) JOIN team_ratings_std std ON std.snapshot_id = t.snapshot_id AND std.rating_team_id = t.rating_team_id
        WHERE t.rating_team_id = 'byu' AND s.season_year = $1 ORDER BY s.system, s.through_date`, [season]);
@@ -63,7 +67,7 @@ async function main() {
       const scoreFor = home ? g.final_score_home : g.final_score_away, scoreAgainst = home ? g.final_score_away : g.final_score_home;
       const opponentId = home ? g.away_team_id : g.home_team_id;
       return {
-        gameId: g.game_id, date: g.date, opponentId, opponentName: names[opponentId] || opponentId,
+        gameId: g.game_id, date: g.date, opponentId, opponentName: names[opponentId] || opponentId, opponentLogo: logoKey(opponentId),
         location: g.is_neutral_site ? 'neutral' : home ? 'home' : 'away', isConferenceGame: !!g.is_conference_game, seasonType: g.season_type || 'regular',
         isExhibition: g.is_exhibition, result: g.status === 'final' ? (scoreFor > scoreAgainst ? 'W' : 'L') : null,
         scoreFor: g.status === 'final' ? scoreFor : null, scoreAgainst: g.status === 'final' ? scoreAgainst : null,

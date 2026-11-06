@@ -2,20 +2,22 @@ import { useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import YBallLoader from '../../components/Loaders/YBballLoader';
 import urls from '../../constants/assetUrls';
+import GameSwitcher from '../../components/GameSwitcher/GameSwitcher';
 
-// Same shell as Kills and Clutch, minus the game switcher: box scores are a local prototype
-// (public/data/box), so there is no games index to switch between yet.
+// Same shell as Kills and Clutch: game/season pill on top, the box score below. Games without a
+// derived box file (public/data/box) show a load error until the prototype has been run for them.
 export default function BoxRouter() {
   return (
     <div className="lineups flex">
-      <div className="lineups-content box-shell f1 flex-c pr-l">
+      <GameSwitcher basePath="games" />
+      <div className="lineups-content box-shell box-shell--pill f1 flex-c pr-l">
         <Outlet />
       </div>
     </div>
   );
 }
 
-// /box -> the newest game in public/data/box/index.json
+// /games -> the newest game in public/data/box/index.json
 export function LatestBox() {
   const [id, setId] = useState(null);
   const [error, setError] = useState(false);
@@ -26,5 +28,5 @@ export function LatestBox() {
       .catch(() => setError(true));
   }, []);
   if (error) return <div className="mt-l">No box scores found. Run the prototype in dataAggregators/derivations.</div>;
-  return id ? <Navigate replace to={`/box/${id}`} /> : <YBallLoader />;
+  return id ? <Navigate replace to={`/games/${id}`} /> : <YBallLoader />;
 }

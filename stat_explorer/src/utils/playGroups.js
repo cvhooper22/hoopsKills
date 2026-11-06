@@ -161,7 +161,11 @@ export function fromMinute(min, isEnd = false) {
   return { per, clockSec: Math.max(0, Math.round((periodStartMin(per) + periodLenMin(per) - min) * 60)) };
 }
 
-export const formatClock = (sec) => `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`;
+// Rounds to the nearest second; sub ins can carry fractional clock values.
+export const formatClock = (sec) => {
+  const s = Math.round(sec);
+  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
+};
 
 // "12:30", "12" (minutes) or "12.5" -> seconds, or null when it isn't a time.
 export function parseClock(text) {

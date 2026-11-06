@@ -8,7 +8,7 @@ import {
   hasLineups, lineupRows, shortName, periodLenMin, toMinute, fromMinute, formatClock, parseClock,
 } from '../../utils/playGroups';
 
-// Tab links shared by the finished-game page (/box/:name) and the live page (/live/:name).
+// Tab links shared by the finished-game page (/games/:name) and the live page (/live/:name).
 export function BoxTabs({ tabs }) {
   return (
     <nav className="live-tabs" aria-label="Game views">

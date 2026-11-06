@@ -32,7 +32,9 @@ _BROWSER_UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.
 
 
 def is_team_page(url: str) -> bool:
-    return bool(re.search(r"^https?://worldtour\.fiba3x3\.com/\d{4}/[^/]+/teams/[0-9a-f-]{36}", url))
+    """World Tour (``worldtour.fiba3x3.com``) and other event sites
+    (``fiba3x3.com/<year>/americup/...``) share the same team-page layout."""
+    return bool(re.search(r"^https?://(?:[a-z0-9-]+\.)?fiba3x3\.com/\d{4}/[^/]+/teams/[0-9a-f-]{36}", url))
 
 
 def fetch_page(url: str) -> str:

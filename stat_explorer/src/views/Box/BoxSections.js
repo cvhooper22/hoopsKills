@@ -15,12 +15,12 @@ export function PointsBySource({ data }) {
   const live = margin.filter((r) => r.byu.n || r.opp.n || r.byu.pts || r.opp.pts);
   const head = [
     { label: 'Source' }, { label: `${h.teams.byu} pts` }, { label: 'Chances', title: 'Plays: every shot opportunity, so each offensive rebound starts a new one' }, { label: 'Pts / chance' },
-    { label: `${h.teams.opp} pts` }, { label: 'Chances' }, { label: 'Pts / chance' }, { label: 'Net' },
+    { label: `${h.teams.opp} pts` }, { label: 'Chances' }, { label: 'Pts / chance' }, { label: 'Net', className: 'box-table__center' },
   ];
   const rows = live.map((r) => [
-    r.label, r.byu.pts, r.byu.n, perChance(r.byu.pts, r.byu.n), r.opp.pts, r.opp.n, perChance(r.opp.pts, r.opp.n), { v: <NetChip value={r.net} /> },
+    r.label, r.byu.pts, r.byu.n, perChance(r.byu.pts, r.byu.n), r.opp.pts, r.opp.n, perChance(r.opp.pts, r.opp.n), { v: <NetChip value={r.net} />, className: 'box-table__center' },
   ]);
-  const totals = ['Total', h.final.byu, split.byu.plays, f2(split.byu.ppPlay), h.final.opp, split.opp.plays, f2(split.opp.ppPlay), { v: <NetChip value={h.margin} /> }];
+  const totals = ['Total', h.final.byu, split.byu.plays, f2(split.byu.ppPlay), h.final.opp, split.opp.plays, f2(split.opp.ppPlay), { v: <NetChip value={h.margin} />, className: 'box-table__center' }];
   return (
     <Section title="Chance Margins">
       <NetBars rows={live} focusName={h.teams.byu} oppName={h.teams.opp} />
@@ -47,7 +47,7 @@ export function Shooting({ data }) {
     row('True shooting %', 'PTS / (2 × (FGA + 0.44 × FTA))', (x) => pct(x.ts)),
   ];
   return (
-    <Section title="Shooting" sub="How each team's points were taken: how often it shot threes and got to the line, and how efficiently">
+    <Section title="Shooting">
       <BoxTable head={[{ label: '' }, { label: h.teams.byu }, { label: h.teams.opp }]} rows={rows} />
     </Section>
   );
@@ -69,7 +69,6 @@ export function DefenseSplit({ data }) {
   return (
     <Section title="Offensive summary">
       <BoxTable head={[{ label: 'Metric' }, { label: `${h.teams.byu} offense` }, { label: `${h.teams.opp} offense` }]} rows={rows} />
-      <p className="box-foot">Second-chance points are the quick putback and reset points from the Chance Margins table above.</p>
     </Section>
   );
 }
@@ -116,12 +115,20 @@ export function HavocSqueeze({ data }) {
     ['Steals · blocks (recovered) · forced turnovers', ...two((x) => `${x.steals} · ${x.blocks} (${x.recBlocks}) · ${x.forced}`)],
     // [`Havoc rate, weighted (placeholder weights ${params.HAVOC_W_LATE} late, ${params.HAVOC_W_EARLY} early)`, ...two((x) => `${pct(x.rate.mid)} (${f1(x.mid)})`)],
     [`Havoc rate`, ...two((x) => `${pct(x.rate.mid)} (${f1(x.mid)})`)],
+    ['Shot-clock violations forced', ...two((x) => x.shotClock.n)],
     [`Squeeze rate`, ...two((x) => `${pct(x.squeeze.rate)} (${x.squeeze.n} of ${x.oppPoss})`)],
+    ['Opponent pts per possession: squeezed vs. other', ...two((x) => `${f2(x.squeeze.ppp)} vs. ${f2(x.squeeze.otherPPP)}`)],
+    // How the opponent's late play ended on squeezed possessions (games ingested before this field existed have none)
+    [sub('Ended in a turnover'), ...two((x) => (x.squeeze.ends ? `${x.squeeze.ends.turnover} of ${x.squeeze.n} (${pct(x.squeeze.ends.turnover / x.squeeze.n)})` : dash))],
+    [sub('Ended in a shot or free throws'), ...two((x) => { const e = x.squeeze.ends; return e ? `${x.squeeze.n - e.turnover} of ${x.squeeze.n}` : dash; })],
+    [sub('FG · 3P · FT'), ...two((x) => { const g = x.squeeze.shooting; return g ? `${g.fgm}-${g.fga} · ${g.tpm}-${g.tpa} · ${g.ftm}-${g.fta}` : dash; })],
+    [sub('Possession finally finished off: made FG · FTs · turnover · defensive rebound'), ...two((x) => { const f = x.squeeze.finish; return f ? `${f.made_fg} · ${f.ft} · ${f.turnover} · ${f.def_rebound}${f.other ? ` (+${f.other} other)` : ''}` : dash; })],
+    [sub('Offensive rebounds off a missed late play (points after)'), ...two((x) => (isNum(x.squeeze.misses) ? `${x.squeeze.oreb} of ${x.squeeze.misses} (${x.squeeze.orebPts})` : dash))],
+    [sub('eFG% on those plays'), ...two((x) => { const g = x.squeeze.shooting; return g && g.fga ? pct((g.fgm + 0.5 * g.tpm) / g.fga) : dash; })],
     [`Live-ball havoc turned into a shot or free throws within ${params.CONVERT_WINDOW_SEC}s`, ...two((x) => convCount(x.convLive))],
     [sub('Points on the possessions that followed'), ...two((x) => convPts(x.convLive))],
-    [`Dead-ball havoc turned into a shot or free throws within ${params.CONVERT_WINDOW_SEC}s`, ...two((x) => convCount(x.convDead))],
-    [sub('Points on the possessions that followed'), ...two((x) => convPts(x.convDead))],
-    ['Opponent pts per possession: squeezed vs. other', ...two((x) => `${f2(x.squeeze.ppp)} vs. ${f2(x.squeeze.otherPPP)}`)],
+    // [`Dead-ball havoc turned into a shot or free throws within ${params.CONVERT_WINDOW_SEC}s`, ...two((x) => convCount(x.convDead))],
+    // [sub('Points on the possessions that followed'), ...two((x) => convPts(x.convDead))], probably don't need this one, doesn't make as much sense
   ];
   return (
     <Section title="Havoc and squeeze">

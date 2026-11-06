@@ -1,10 +1,10 @@
-# BYU 89, Unlv 77 — 2026-10-24 (null)
+# BYU 89, UNLV 77 — 2026-10-24 (null)
 
 **Won by 12: +9 reset second chances, +6 half-court, −5 quick putbacks.**
 
 *Prototype, single game. Season averages, league baselines and "net vs expected" are not shown because only this game is loaded; ratings come from the KenPom snapshot you supplied. Rates under 10 chances show points on chances.*
 
-|  | BYU | Unlv |
+|  | BYU | UNLV |
 |:---|---:|---:|
 | Final | 89 | 77 |
 | Possessions (event count) | 74 | 73 |
@@ -17,7 +17,7 @@
 
 ## Points by source (what decided the game)
 
-| Source | BYU pts | BYU chances | BYU PPP | Unlv pts | Unlv chances | Unlv PPP | Net |
+| Source | BYU pts | BYU chances | BYU PPP | UNLV pts | UNLV chances | UNLV PPP | Net |
 |:---|---:|---:|---:|---:|---:|---:|---:|
 | Transition | 14 | 14 | 1.00 | 13 | 7 | 13 on 7 | +1 |
 | Quick off a make | 0 | 0 | – | 0 | 3 | 0 on 3 | 0 |
@@ -30,7 +30,7 @@
 
 ## Shooting
 
-|  | BYU | Unlv |
+|  | BYU | UNLV |
 |:---|---:|---:|
 | FG (made-att, %) | 32-69 (46.4%) | 28-59 (47.5%) |
 | 2PT (made-att, %) | 22-39 (56.4%) | 22-41 (53.7%) |
@@ -43,7 +43,7 @@
 
 ## Defense split (each team on offense; BYU defense = Houston row)
 
-| Metric (unit) | BYU offense | Unlv offense |
+| Metric (unit) | BYU offense | UNLV offense |
 |:---|---:|---:|
 | Possessions | 74 | 73 |
 | Plays | 89 | 89 |
@@ -61,7 +61,7 @@
 
 ## Possession battle & situational
 
-|  | BYU | Unlv |
+|  | BYU | UNLV |
 |:---|---:|---:|
 | Turnovers (live / dead) | 10 (5 / 5) | 18 (9 / 9) |
 | Push after a make: quick / chances (rate) | 0 / 26 (0.0%) | 3 / 27 (11.1%) |
@@ -73,15 +73,15 @@
 
 ## Points left on the table
 
-|  | BYU | Unlv |
+|  | BYU | UNLV |
 |:---|---:|---:|
-| Missed rim attempts × 2 × rim FG% (pooled db rate 64.3%) | 10.3 | 10.3 |
+| Missed rim attempts × 2 × rim FG% (pooled db rate 64.8%) | 10.4 | 10.4 |
 | Advantage plays (transition + quick-off-make): scoreless / total | 7 / 14 | 4 / 10 |
 | …valued at the team’s own advantage PPP this game | 7.0 | 5.2 |
 
 ## At the line
 
-|  | BYU | Unlv |
+|  | BYU | UNLV |
 |:---|---:|---:|
 | Trips (made/att) | 12 (15/21) | 13 (15/21) |
 | FT shortfall vs league 72% / vs own (points; negative = above baseline) | −0.08 / +0.02 | +1.16 / +1.16 |
@@ -94,7 +94,7 @@
 
 ## Havoc, conversion and squeeze (credited to the defense named in the column)
 
-|  | BYU defense | Unlv defense |
+|  | BYU defense | UNLV defense |
 |:---|---:|---:|
 | Opponent possessions | 73 | 74 |
 | Steals / blocks (recovered) / forced TOs | 9 / 2 (2) / 3 | 5 / 5 (1) / 0 |
@@ -106,20 +106,25 @@
 | ↳ points on the possessions that followed (per event) | 15 (1.36) | 12 (2.00) |
 | Dead-ball havoc → shot/FT within 8s | 3 of 9 | 1 of 5 |
 | ↳ points on the possessions that followed (per event) | 6 (0.67) | 2 (0.40) |
+| Shot-clock violations forced (counted in squeeze) | 2 (2) | 0 (0) |
 | Squeeze rate (est. ≤5s on shot clock) | 5.5% (4 of 73) | 6.8% (5 of 74) |
+| ↳ late play ended: turnover / made FG / missed FG / FTs | 1 / 1 / 2 / 0 | 2 / 1 / 2 / 0 |
+| ↳ finished off: made FG / FTs / turnover / defensive rebound | 1 / 0 / 3 / 0 | 1 / 0 / 2 / 2 |
+| ↳ offensive rebounds off a missed late play (pts after) | 2 of 2 (0) | 1 of 2 (2) |
+| ↳ opp FG · 3P · FT on those plays | 1-3 · 0-1 · 0-0 | 1-3 · 0-0 · 0-0 |
 | Opp PPP squeezed vs other possessions | 0.50 vs 1.09 | 0.80 vs 1.23 |
 
 *Shot clock is not in the data: late-clock/squeeze use game-clock time since the play started (minus 3s after made baskets). Approximate; a single game cannot fit the weights.*
 
 ## Possession value (count and expected points)
 
-| Baseline (this game only) | BYU | Unlv |
+| Baseline (this game only) | BYU | UNLV |
 |:---|---:|---:|
 | E_norm: PPP all possessions | 1.20 | 1.05 |
 | E_liveTO: PPP after live-ball TO (raw, n) → shrunk K=20 | 1.44 (9) → 1.28 | 2.40 (5) → 1.32 |
 | E_oreb: points left in possession after an OREB (n) | 1.33 (15) | 0.94 (16) |
 
-|  | BYU | Unlv |
+|  | BYU | UNLV |
 |:---|---:|---:|
 | Possession gains / losses (count) | 27 / 10 | 21 / 18 |
 | EPA expected / actual (points) | +20.0 / +14.5 | +3.0 / +6.7 |
@@ -168,7 +173,7 @@
 
 | Player | Opp pts off his TO (live/dead) | Team pts off steal/charge/block | Pts after his OREB (quick/reset) | Opp FT pts off his fouls | Pts left at FT (league / own) | Pts left at rim | TO rate | On-floor net pts (off / def poss) | Bench net pts (off / def poss) |
 |:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Bruce Branch III | 0 / 0 | 3 / 0 / 0 | 0 / 2 | 2 | +0.88 / +0.62 | 5.1 | 0.0% | +12 (55 / 56) | 0 (19 / 17) |
+| Bruce Branch III | 0 / 0 | 3 / 0 / 0 | 0 / 2 | 2 | +0.88 / +0.62 | 5.2 | 0.0% | +12 (55 / 56) | 0 (19 / 17) |
 | Jaxon Kohler | 0 / 0 | 0 / 0 / 2 | 2 / 0 | 4 | 0.00 / 0.00 | 0.0 | 0.0% | +8 (46 / 46) | +4 (28 / 27) |
 | Brooks Bahr | 0 / 0 | 4 / 0 / 0 | 0 / 0 | 2 | 0.00 / 0.00 | 0.0 | 0.0% | −3 (13 / 13) | +15 (61 / 60) |
 | TEAM | 0 / 0 | 0 / 0 / 0 | 0 / 2 | 0 | 0.00 / 0.00 | 0.0 | – | 0 (0 / 0) | +12 (74 / 73) |
@@ -183,7 +188,7 @@
 | Dean Rueckert | 0 / 2 | 0 / 0 / 0 | 0 / 0 | 0 | 0.00 / 0.00 | 0.0 | 100.0% | −4 (12 / 12) | +16 (62 / 61) |
 | Robert Wright III | 5 / 0 | 2 / 0 / 0 | 0 / 3 | 1 | −0.84 / −0.61 | 3.9 | 19.7% | +15 (52 / 52) | −3 (22 / 21) |
 
-### Unlv player table
+### UNLV player table
 
 | Player | MIN | PTS | FG | 3P | FT | OR | DR | A | S | B | TO | PF | Poss +/− | EPA exp | EPA act | WPA poss (pts WP) | WPA scoring |
 |:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -242,21 +247,21 @@ Model: pregame BYU WP 20.0% from expected margin 5.91, σ 11, possession swing 1
 | Check | Result | Detail |
 |:---|---:|---:|
 | BYU points: plays + tech FT = final | pass | 89 + 0 vs 89 |
-| Unlv points: plays + tech FT = final | pass | 77 + 0 vs 77 |
+| UNLV points: plays + tech FT = final | pass | 77 + 0 vs 77 |
 | BYU identity: points = sum of labels | pass |  |
 | BYU identity: possessions = transition + initial plays | pass | 74 vs 14+60 |
 | BYU identity: PPP = pts/play × plays/poss | pass |  |
-| Unlv identity: points = sum of labels | pass |  |
-| Unlv identity: possessions = transition + initial plays | pass | 73 vs 7+66 |
-| Unlv identity: PPP = pts/play × plays/poss | pass |  |
+| UNLV identity: points = sum of labels | pass |  |
+| UNLV identity: possessions = transition + initial plays | pass | 73 vs 7+66 |
+| UNLV identity: PPP = pts/play × plays/poss | pass |  |
 | §8.1 nets sum to final margin | pass | 12 vs 12 |
 | BYU player PTS sum = final | pass | 89 vs 89 |
 | BYU §7.1 buckets sum to PTS (every player) | pass |  |
 | BYU assist points = points on assisted baskets + their and-one FTs | pass | 44 vs 43 + 1 |
 | BYU minutes sum ≈ 200 | pass | 200.0 |
-| Unlv player PTS sum = final | pass | 77 vs 77 |
-| Unlv §7.1 buckets sum to PTS (every player) | pass |  |
-| Unlv assist points = points on assisted baskets + their and-one FTs | pass | 28 vs 28 + 0 |
-| Unlv minutes sum ≈ 200 | pass | 200.0 |
+| UNLV player PTS sum = final | pass | 77 vs 77 |
+| UNLV §7.1 buckets sum to PTS (every player) | pass |  |
+| UNLV assist points = points on assisted baskets + their and-one FTs | pass | 28 vs 28 + 0 |
+| UNLV minutes sum ≈ 200 | pass | 200.0 |
 
 Assists unlinked to a shot: 1. Possessions: 147; plays: 178; timeouts by type: media 6, team 4.

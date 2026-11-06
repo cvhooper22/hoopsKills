@@ -12,7 +12,7 @@ const { loadPriors, expectedMargin } = require('./priors');
 
 // ---- parameters (named, per handoff ground rules) ----
 const GAME_ID = process.argv[2] && !process.argv[2].startsWith('--') ? process.argv[2] : '2026-03-12-byu-at-houston';
-const FOCUS = 'byu';
+const FOCUS = process.env.FOCUS_TEAM || 'byu';
 // The pregame prior (expected BYU margin) is per game, from config/game-priors.csv (see priors.js).
 // With no row for a game the model runs with an even prior (mu = 0) and the output says so.
 const EXPECTED_POSS = (63.3 + 69.8) / 2;
@@ -145,6 +145,11 @@ function computeWp({ game, plays, roles, ftHist, quals }, { mu = 0, prior = 'non
   // ---- free-throw trips and wp_cost (handoff §7.5, both baselines) ----
   const trips = [];
   let cur = null;
+  // ESPN plays carry no qualifiers, so the foul's `oneandone` tag is never there: see the inference below.
+  const noQuals = !Object.values(quals).some((q) => q.length);
+  // a made shot by the same player in the same second or two just before the free throw: this free throw is an and-one
+  const isAndOne = (s) => ev.slice(Math.max(0, s.i - 6), s.i).some((x) => x.p.play_category === 'shot_attempt' && x.p.is_made && x.p.player_name === s.p.player_name
+    && x.p.period_number === s.p.period_number && Math.abs(x.p.clock_seconds_remaining - s.p.clock_seconds_remaining) <= 2);
   for (const e of ev) {
     if (e.p.play_category !== 'free_throw') continue;
     const [n, m] = e.p.play_subtype.split('of').map(Number);
@@ -155,7 +160,10 @@ function computeWp({ game, plays, roles, ftHist, quals }, { mu = 0, prior = 'non
       // trip type comes from the foul that caused it (WMT labels a missed 1-and-1 front end "1of1" and a made one "1of2/2of2")
       const foul = ev.slice(Math.max(0, cur.start.i - 10), cur.start.i).reverse().find((x) => x.p.play_category === 'foul' && x.s !== cur.team);
       const fq = foul ? quals[foul.p.sequence_number] : [];
-      const type = fq.includes('oneandone') ? 'one_and_one' : fq.includes('shooting') && fq.includes('1freethrow') ? 'one_shot_and_one' : m === 1 ? 'one_shot_other' : m === 2 ? 'two_shot' : 'three_shot';
+      let type = fq.includes('oneandone') ? 'one_and_one' : fq.includes('shooting') && fq.includes('1freethrow') ? 'one_shot_and_one' : m === 1 ? 'one_shot_other' : m === 2 ? 'two_shot' : 'three_shot';
+      // Without qualifiers: a lone free throw that was missed, that is not an and-one or a technical, can only be the front end of a one-and-one
+      // (a made front end is followed by a second shot, so it is labelled "1of2", never "1of1").
+      if (noQuals && type === 'one_shot_other' && !e.p.is_made && foul && !/technical/i.test(foul.p.play_type || '') && !isAndOne(cur.start)) type = 'one_and_one';
       const made = cur.shots.filter((x) => x.p.is_made).length;
       const own = ftOwn(cur.shooter);
       const exp = (p) => (type === 'one_and_one' ? p + p * p : m * p);

@@ -114,6 +114,8 @@ function EditText({ value, label, onCommit }) {
 export default function CombinedRecentGames({ results, teams, alumByName, generatedAt, dropped, onDrop, onRestoreAll, edits, onEdit, onResetEdits }) {
   const [sort, setSort] = useState({ key: 'gameScore', dir: -1 });
   const [expanded, setExpanded] = useState(false);
+  const [pageSize, setPageSize] = useState('20');
+  const [page, setPage] = useState(0);
   const [dropMode, setDropMode] = useState(false);
   const [shareable, setShareable] = useState(false);
 
@@ -125,7 +127,13 @@ export default function CombinedRecentGames({ results, teams, alumByName, genera
     const col = COLUMNS.find((c) => c.key === sort.key);
     return [...rows].sort((a, b) => compare(col.sort(a), col.sort(b), sort.dir) || compare(b.gameScore, a.gameScore, 1));
   }, [rows, sort]);
-  const shown = expanded ? sorted : sorted.slice(0, TOP);
+  // Free-typed row limit for the expanded table; blank/invalid shows everything.
+  const limit = parseInt(pageSize, 10);
+  const paged = expanded && limit > 0;
+  const pageCount = paged ? Math.max(1, Math.ceil(sorted.length / limit)) : 1;
+  const curPage = Math.min(page, pageCount - 1);
+  const shown = !expanded ? sorted.slice(0, TOP)
+    : paged ? sorted.slice(curPage * limit, (curPage + 1) * limit) : sorted;
   // "To Shareable" for screenshots: short dates, W/L only, no turnovers.
   const columns = shareable
     ? COLUMNS.filter((c) => c.key !== 'tov').map((c) => (
@@ -135,6 +143,7 @@ export default function CombinedRecentGames({ results, teams, alumByName, genera
     : COLUMNS;
 
   function onSort(col) {
+    setPage(0);
     setSort((s) => (s.key === col.key ? { key: col.key, dir: -s.dir } : { key: col.key, dir: col.numeric ? -1 : 1 }));
   }
 
@@ -157,8 +166,27 @@ export default function CombinedRecentGames({ results, teams, alumByName, genera
         {dropped.size > 0 && (
           <button type="button" onClick={onRestoreAll} title="Bring back every game you dropped">Restore {dropped.size} dropped</button>
         )}
+        {expanded && (
+          <label title="How many rows to show (blank = all)">
+            Rows{' '}
+            <input
+              type="number"
+              min="1"
+              value={pageSize}
+              onChange={(e) => { setPageSize(e.target.value); setPage(0); }}
+              style={{ width: '4.5em' }}
+            />
+          </label>
+        )}
+        {paged && pageCount > 1 && (
+          <span className="recent-games__note">
+            <button type="button" disabled={curPage === 0} onClick={() => setPage(curPage - 1)}>‹ Prev</button>
+            {' '}Page {curPage + 1} of {pageCount}{' '}
+            <button type="button" disabled={curPage >= pageCount - 1} onClick={() => setPage(curPage + 1)}>Next ›</button>
+          </span>
+        )}
         {rows.length > TOP && (
-          <button type="button" onClick={() => setExpanded((e) => !e)}>{expanded ? `Show top ${TOP}` : `Show all ${rows.length}`}</button>
+          <button type="button" onClick={() => { setExpanded((e) => !e); setPage(0); }}>{expanded ? `Show top ${TOP}` : `Show all ${rows.length}`}</button>
         )}
       </div>
       {rows.length === 0 ? (

@@ -1,4 +1,4 @@
-import { buildSeries, pointAt, allDates, envelope, gameImpact, rankDomain, toIso, toTime } from './rankingsTimeline';
+import { buildSeries, pointAt, allDates, envelope, gameImpact, rankDomain, averageImpact, opponentAverage, toIso, toTime } from './rankingsTimeline';
 
 const days = (start, n) => Array.from({ length: n }, (_, i) => toIso(toTime(start) + i * 86400000));
 const dailyTorvik = (ranks, start = '2025-11-01') => ({
@@ -94,5 +94,23 @@ describe('rankDomain', () => {
     expect(rankDomain(s, 'overall')).toEqual([40, 1]);
     const small = buildSeries({ timeline: { season: 2025, systems: { torvik: dailyTorvik([3, 4]) } }, manual: null });
     expect(rankDomain(small, 'overall')).toEqual([15, 1]);
+  });
+});
+
+describe('rank type for the games table', () => {
+  const [t] = buildSeries({ timeline: { season: 2025, systems: { torvik: dailyTorvik([10, 8, 12, 12]) } }, manual: null });
+  it('averages BYU\'s move for the chosen part (offense is overall + 2, defense overall - 1 in the fixture)', () => {
+    expect(averageImpact([t], { date: '2025-11-02' }).change).toBe(2);
+    expect(averageImpact([t], { date: '2025-11-02' }, 'off')).toMatchObject({ before: 12, after: 10, change: 2 });
+    expect(averageImpact([t], { date: '2025-11-02' }, 'def')).toMatchObject({ before: 9, after: 7, change: 2 });
+  });
+  it('averages the opponent\'s offensive or defensive rank, skipping systems without one', () => {
+    const game = { opponentRatings: {
+      torvik: { latest: { overallRank: 10, offRank: 20, defRank: 5 } },
+      kenpom: { latest: { overallRank: 14, offRank: 30, defRank: null } },
+    } };
+    expect(opponentAverage(game, 'latest').avg).toBe(12);
+    expect(opponentAverage(game, 'latest', {}, null, 'off')).toMatchObject({ avg: 25, n: 2 });
+    expect(opponentAverage(game, 'latest', {}, null, 'def')).toMatchObject({ avg: 5, n: 1 });
   });
 });

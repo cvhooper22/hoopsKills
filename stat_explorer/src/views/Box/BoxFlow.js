@@ -13,7 +13,7 @@ const TIMEOUT_SNAP = 0.75; // minutes: how close an edge has to land to a timeou
 
 // `timeouts` are the media timeouts' game minutes (a diamond along the bottom) and `teamTimeouts` ([{ t, side }]) the teams' own (a T
 // in the team's color). With `snap` on, a selection's edges land on the nearest timeout of either kind within 45 seconds of them.
-export default function GameFlow({ plays, events, teams, ranges, active, names, onSelect, timeouts = [], teamTimeouts = [], snap = false }) {
+export default function GameFlow({ plays, events, teams, ranges, active, names, onSelect, timeouts = [], teamTimeouts = [], snap = false, colors = SLOT_COLORS }) {
   const total = gameMinutes(plays);
   // exact running score when the event log is there, else the margin from the chances' points (no score to show)
   const line = useMemo(() => (events ? scoreTimeline(events) : marginTimeline(plays)), [plays, events]);
@@ -61,7 +61,7 @@ export default function GameFlow({ plays, events, teams, ranges, active, names, 
   return (
     <svg ref={svg} className="flow" viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Score margin over the game; drag to select a stretch of plays"
       onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerLeave={() => setHover(null)} onPointerCancel={() => { setDrag(null); setHover(null); }}>
-      {bands.map((r, i) => (r ? <rect key={i} x={x(r.from)} y={PAD.t} width={Math.max(1, x(r.to) - x(r.from))} height={H - PAD.t - PAD.b} fill={SLOT_COLORS[i]} opacity="0.18" /> : null))}
+      {bands.map((r, i) => (r ? <rect key={i} x={x(r.from)} y={PAD.t} width={Math.max(1, x(r.to) - x(r.from))} height={H - PAD.t - PAD.b} fill={colors[i % colors.length]} opacity="0.18" /> : null))}
       {[bound, 0, -bound].map((m) => <line key={m} x1={PAD.l} x2={W - PAD.r} y1={y(m)} y2={y(m)} stroke="currentColor" opacity={m === 0 ? 0.5 : 0.15} />)}
       {[bound, 0, -bound].map((m) => <text key={m} x={PAD.l - 4} y={y(m) + 4} textAnchor="end" fontSize="11" fill="currentColor" opacity="0.7">{m > 0 ? `+${m}` : m}</text>)}
       <text x={PAD.l + 4} y={PAD.t + 11} fontSize="11" fill="currentColor" opacity="0.7">{teams.byu} ahead</text>
@@ -76,7 +76,7 @@ export default function GameFlow({ plays, events, teams, ranges, active, names, 
       {ticks.map((k) => <text key={k.t} x={x(k.t)} y={H - 22} textAnchor="middle" fontSize="11" fill="currentColor" opacity="0.7">{k.label}</text>)}
       {periods.map((p) => <text key={p.per} x={x(p.start + p.len / 2)} y={H - 6} textAnchor="middle" fontSize="12" fontWeight="700" fill="currentColor" opacity="0.8">{periodLabel(p.per)}</text>)}
       <path d={path + tail} fill="none" stroke="var(--royal-blue)" strokeWidth="2" />
-      {bands.map((r, i) => (r ? <text key={i} x={x(r.from) + 4} y={H - PAD.b - 4 - i * 13} fontSize="12" fontWeight="700" fill={SLOT_COLORS[i]}>{names[i]}</text> : null))}
+      {bands.map((r, i) => (r ? <text key={i} x={x(r.from) + 4} y={H - PAD.b - 4 - i * 13} fontSize="12" fontWeight="700" fill={colors[i % colors.length]}>{names[i]}</text> : null))}
       {teamTimeouts.map(({ t, side }) => <text key={`${side}${t}`} x={x(t)} y={H - PAD.b + 12} textAnchor="middle" fontSize="11" fontWeight="800" fill={TEAM_COLORS[side]} opacity={onEdge(t) ? 1 : 0.7} pointerEvents="none">T</text>)}
       {hover !== null ? <HoverTip t={hover} x={x(hover)} dotY={y(pointAt(line, hover).margin)} line={line} teams={teams} top={PAD.t} bottom={H - PAD.b} left={PAD.l} right={W - PAD.r} hasScore={!!events} note={noteAt(hover)} /> : null}
     </svg>

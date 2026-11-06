@@ -132,6 +132,7 @@ class Fiba3x3Tests(unittest.TestCase):
         from finder import fiba3x3
         self.assertTrue(fiba3x3.is_team_page(self.URL))
         self.assertFalse(fiba3x3.is_team_page("https://play.fiba3x3.com/players/13845922-6dbd-4257-a072-a27b34c4fe2f/activity"))
+        self.assertTrue(fiba3x3.is_team_page("https://fiba3x3.com/2026/americup/teams/d6ca6105-9271-40d6-9299-364ef130cbac"))
 
 
 class Fiba3x3ScoreTests(unittest.TestCase):

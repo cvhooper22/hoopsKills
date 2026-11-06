@@ -78,6 +78,11 @@ function combineHavoc(hs) {
       rate: div(h.squeeze.n, h.oppPoss),
       ppp: wavg(hs, (x) => x.squeeze.ppp, (x) => x.squeeze.n),
       otherPPP: wavg(hs, (x) => x.squeeze.otherPPP, squeezeOther),
+      ends: sumDeep(hs.map((x) => x.squeeze.ends)),
+      shooting: sumDeep(hs.map((x) => x.squeeze.shooting)),
+      finish: sumDeep(hs.map((x) => x.squeeze.finish)),
+      misses: h.squeeze.misses, oreb: h.squeeze.oreb, orebPts: h.squeeze.orebPts,
+      // per-play detail is single-game only
     },
   };
 }

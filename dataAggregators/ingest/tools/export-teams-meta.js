@@ -2,6 +2,7 @@
 // team id, for the stat_explorer to resolve opponent labels and logos. Shaped like the teams
 // table it will become. Usage: node ingest/tools/export-teams-meta.js [out_path]
 //   then: node ingest/tools/upload.js <out_path> meta/teams.json
+// color is the opponent accent (ingest/lib/teamColor.js picks ESPN's primary or alternate, see tools/fetch-team-colors.js).
 // logoKey is the team id when assets/logos/<team_id>.png exists (the app loads it from the
 // data CloudFront's assets/logos/), otherwise null. Fill missing abbreviations by hand in
 // config/team-labels.json ({ "<team_id>": { "abbrev": "...", "shortName": "..." } }).
@@ -9,6 +10,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const { connect } = require('../../db/client');
+const { teamColor } = require('../lib/teamColor');
 
 const LOGOS = path.join(__dirname, '../../assets/logos');
 const LABELS = path.join(__dirname, '../../config/team-labels.json');
@@ -28,6 +30,7 @@ async function main() {
         abbrev,
         shortName: label.shortName || t.name,
         logoKey: fs.existsSync(path.join(LOGOS, `${t.team_id}.png`)) ? t.team_id : null,
+        color: teamColor(t.team_id), // from config/team-colors.json; null when no usable colour (the app falls back to slate)
       };
     });
     fs.mkdirSync(path.dirname(out), { recursive: true });

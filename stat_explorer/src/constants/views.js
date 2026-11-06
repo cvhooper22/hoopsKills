@@ -1,6 +1,7 @@
 const LINEUP_VIEW = "Lineups";
 const CLUTCH_VIEW = "Clutch";
 const KILLS_VIEW = "Kills";
+const GAMES_VIEW = "Games";
 const EXHIBITIONS_VIEW = "Exhibitions";
 const HOME_VIEW = "Home";
 const ALMUNI_VIEW = "Alumni";
@@ -14,6 +15,11 @@ const views = [
       title: LINEUP_VIEW,
       route: '/lineups',
       routeRoot: '/lineups',
+    },
+    {
+      title: GAMES_VIEW,
+      route: '/games',
+      routeRoot: '/games',
     },
     {
       title: KILLS_VIEW,
@@ -49,4 +55,4 @@ const RANKINGS_VIEW = {
   route: '/rankings',
   routeRoot: '/rankings',
 };
-export { views, EXHIBITIONS_NAV_VIEW, RANKINGS_VIEW, COLLECTION_VIEW, COLLECTION_VIEW_TITLE, HOME_VIEW, LINEUP_VIEW, CLUTCH_VIEW, KILLS_VIEW, ALMUNI_VIEW };
+export { views, EXHIBITIONS_NAV_VIEW, RANKINGS_VIEW, COLLECTION_VIEW, COLLECTION_VIEW_TITLE, HOME_VIEW, LINEUP_VIEW, CLUTCH_VIEW, KILLS_VIEW, GAMES_VIEW, ALMUNI_VIEW };

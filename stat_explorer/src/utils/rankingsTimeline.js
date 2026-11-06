@@ -96,12 +96,12 @@ export function envelope(series, part, dates, { minSystems = 2 } = {}) {
 /**
  * What one game did to BYU's standing in a daily series: the last point before the game day against the point on it
  * (which already includes the game). `change` is positive when BYU moved up (rank number fell). Null when the series
- * can't say (not daily, or no point on both sides).
+ * can't say (no recent point before the game day, or none on it). Early in a season the series is not yet
+ * "daily" by its median gap, but two consecutive days are all this needs.
  */
 export function gameImpact(series, game) {
-  if (!series.daily) return null;
   const dayBefore = toIso(toTime(game.date) - DAY);
-  const before = pointAt(series, dayBefore, 3);
+  const before = pointAt(series, dayBefore, series.daily ? 3 : 0);  // a sparse series only says something across two consecutive days
   const after = series.points.find((p) => p.date === game.date) || null;
   if (!before || !after) return null;
   const rank = (key) => (before[key] != null && after[key] != null ? { before: before[key], after: after[key], change: before[key] - after[key] } : null);
@@ -117,4 +117,35 @@ export function rankDomain(series, part) {
   const worst = Math.max(10, ...series.flatMap((s) => s.points.map((p) => p[key]).filter((v) => v != null)));
   const step = worst > 60 ? 20 : worst > 30 ? 10 : 5;
   return [Math.ceil((worst + 1) / step) * step, 1];
+}
+
+/**
+ * The mean of an opponent's overall rank over the rating systems that have one, for one basis ('atGame' | 'latest' of
+ * game.opponentRatings). `names` maps a system key to its label for the breakdown; `include`, when given, is the set of
+ * system keys that count. Null when no system has a rank.
+ */
+export function opponentAverage(game, basis, names = {}, include = null, part = 'overall') {
+  const key = partRankKey(part);
+  const parts = Object.entries(game.opponentRatings || {})
+    .filter(([system]) => !include || include.has(system))
+    .map(([system, o]) => ({ system, name: names[system] || system, rank: o && o[basis] && o[basis][key] != null ? o[basis][key] : null }))
+    .filter((p) => p.rank != null)
+    .sort((a, b) => a.rank - b.rank);
+  if (!parts.length) return null;
+  return { avg: parts.reduce((sum, p) => sum + p.rank, 0) / parts.length, n: parts.length, parts };
+}
+
+/**
+ * What a game did to BYU's average rank across the given series: for each one that can say (gameImpact has a point the day
+ * before and on the game day) its overall rank before and after, averaged over those same systems so the move compares like
+ * with like. `change` is positive when BYU moved up. Null when none of the series can say.
+ */
+export function averageImpact(seriesList, game, part = 'overall') {
+  const parts = seriesList
+    .map((s) => { const o = gameImpact(s, game); return o && o[part] ? { system: s.system, name: s.name, ...o[part] } : null; })
+    .filter(Boolean);
+  if (!parts.length) return null;
+  const mean = (key) => parts.reduce((sum, p) => sum + p[key], 0) / parts.length;
+  const before = mean('before'), after = mean('after');
+  return { before, after, change: before - after, n: parts.length, parts };
 }

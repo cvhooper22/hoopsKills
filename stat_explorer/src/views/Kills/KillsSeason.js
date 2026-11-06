@@ -131,13 +131,6 @@ export default function KillsSeason() {
       <div className="kills-header season-kills__header">
         {gamesNote && <p className="kills-header__meta">{gamesNote}</p>}
         <h1 className="kills-header__title"><span className="kills-header__byu">{seasonLabel(data.season)}</span> kills</h1>
-        {seasons.length > 1 && (
-          <div className="season-kills__controls">
-            <select className="season-kills__select" value={season} onChange={(e) => updateParams({ season: e.target.value })} aria-label="Season">
-              {seasons.map((s) => <option key={s.season} value={s.season}>{seasonLabel(s.season)}</option>)}
-            </select>
-          </div>
-        )}
       </div>
 
       {rows.length === 0 ? (

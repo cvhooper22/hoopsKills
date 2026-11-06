@@ -1,0 +1,65 @@
+.glossary-page {
+  height: 100%;
+  overflow-y: auto;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem 1rem 3rem;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.glossary-page__search {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1rem;
+  padding: 0.6rem 0.8rem;
+  font: inherit;
+  border: 1px solid var(--gray1);
+  border-radius: var(--radius-control);
+}
+.glossary-page [hidden] { display: none; }
+
+.glossary-page h1 { color: var(--royal-blue); }
+.glossary-page__group h2 { color: var(--royal-blue); border-bottom: 2px solid var(--royal-blue); padding-bottom: 0.25rem; }
+
+.glossary-page__tray {
+  margin-bottom: 1.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-card);
+  background: var(--app-bg);
+  border: 2px solid var(--royal-blue);
+}
+
+.glossary-page__tray-head { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+.glossary-page__tray-head h2 { margin: 0; font-size: 1rem; }
+.glossary-page__count { margin-left: 0.5rem; font-size: 0.8rem; font-weight: 400; color: var(--secondary-text); }
+.glossary-page__empty { margin: 0.5rem 0 0; color: var(--secondary-text); }
+
+.glossary-page__tray-item { display: flex; align-items: flex-start; gap: 1rem; border-bottom: 1px solid var(--gray1); }
+.glossary-page__tray-item:last-child { border-bottom: 0; }
+.glossary-page__tray-item .glossary__entry { flex: 1; min-width: 0; border: 0; }
+.glossary-page__remove { flex: none; margin-top: 0.7rem; background: var(--gray1) !important; color: inherit !important; }
+
+.glossary-page button {
+  padding: 0.35rem 0.8rem;
+  border: 0;
+  border-radius: var(--radius-control);
+  background: var(--royal-blue);
+  color: white;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.glossary-page button:disabled { opacity: 0.45; cursor: default; }
+
+.glossary-page__entry { display: flex; align-items: flex-start; gap: 1rem; border-bottom: 1px solid var(--gray1); }
+.glossary-page__entry .glossary__entry { flex: 1; min-width: 0; border: 0; }
+.glossary-page__add { flex: none; margin-top: 0.7rem; }
+
+@media (max-width: 600px) {
+  .glossary-page__entry { flex-direction: column; gap: 0; padding-bottom: 0.6rem; }
+  .glossary-page__add { margin-top: 0; }
+}

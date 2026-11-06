@@ -9,6 +9,8 @@ const path = require('path');
 const { connect } = require('../db/client');
 const { computeWp, loadWpInput } = require('./wp-prototype');
 const { loadPriors, expectedMargin } = require('./priors');
+const TEAM_LABELS = require('../config/team-labels.json');
+const { teamColor } = require('../ingest/lib/teamColor');
 
 // ---- parameters (named, per handoff ground rules; not hard-coded below) ----
 const P = {
@@ -23,7 +25,7 @@ const FORCED_TO = new Set(['offensive', 'shotclock', '5sec', '10sec']);
 const args = process.argv.slice(2);
 const VALIDATE = args.includes('--validate');
 const GAME_ID = VALIDATE ? '2026-02-07-houston-at-byu' : args.find((a) => !a.startsWith('--')) || '2026-03-12-byu-at-houston';
-const FOCUS = 'byu';
+const FOCUS = process.env.FOCUS_TEAM || 'byu'; // FOCUS_TEAM=<team id> temporarily makes another team the focus side
 const sides = ['byu', 'opp'];
 const other = (s) => (s === 'byu' ? 'opp' : s === 'opp' ? 'byu' : null);
 const f1 = (x) => (Number.isFinite(x) ? x.toFixed(1) : '–');
@@ -63,7 +65,16 @@ async function load(client, gameId) {
   }));
   const finalByu = homeIsFocus ? game.final_score_home : game.final_score_away;
   const finalOpp = homeIsFocus ? game.final_score_away : game.final_score_home;
-  return { game, evs, roles, names, hasShotLocations, finalByu, finalOpp, oppId: homeIsFocus ? game.away_team_id : game.home_team_id };
+  const oppId = homeIsFocus ? game.away_team_id : game.home_team_id;
+  // display label and short code per side, resolved like meta/teams.json (config/team-labels.json over the teams table)
+  const { rows: tm } = await client.query('SELECT team_id, name, abbrev FROM teams WHERE team_id = ANY($1)', [[FOCUS, oppId]]);
+  const teamLabel = (id) => {
+    const t = tm.find((r) => r.team_id === id) || {};
+    const l = TEAM_LABELS[id] || {};
+    const label = l.shortName || t.name || id.replace(/-/g, ' ').replace(/\b[a-z]/g, (c) => c.toUpperCase());
+    return { label, abbr: l.abbrev || t.abbrev || label, color: teamColor(id) };
+  };
+  return { game, evs, roles, names, hasShotLocations, finalByu, finalOpp, oppId, teamLabels: { byu: teamLabel(FOCUS), opp: teamLabel(oppId) } };
 }
 
 // ---------------------------------------------------------------------------------------------------------
@@ -308,7 +319,7 @@ function computeBox({ D, rim, W }) {
   const live = game.status === 'live';
   const { poss, techPts } = segment(evs, live);
   const plays = labelPlays(poss);
-  const teamName = { byu: 'BYU', opp: D.oppId[0].toUpperCase() + D.oppId.slice(1) };
+  const teamName = { byu: D.teamLabels.byu.label, opp: D.teamLabels.opp.label };
   const finalPts = { byu: D.finalByu, opp: D.finalOpp };
 
   // ----- identities / checks -----
@@ -566,7 +577,7 @@ function computeBox({ D, rim, W }) {
       else if (e.cat === 'block' && e.side === d) { const rb = evs.slice(e.i + 1).find((x) => x.cat === 'rebound' || x.cat === 'shot_attempt' || x.cat === 'turnover'); const rec = rb && rb.cat === 'rebound' && rb.type === 'defensive' && rb.side === d; ev.push({ sn: e.sn, kind: 'block', group: 'full', live: true, recovered: rec, nxt: rec ? posByStart.get(rb.sn) : null }); }
       else if (e.cat === 'turnover' && e.side === o && !evs.some((x, j) => Math.abs(j - e.i) <= 3 && x.cat === 'steal' && x.per === e.per && x.clk === e.clk && x.side === d)) {
         const nxt = posByStart.get(e.sn);
-        if (FORCED_TO.has(e.type)) ev.push({ sn: e.sn, kind: 'forced_to:' + e.type, group: 'full', live: false, nxt });
+        if (FORCED_TO.has(e.type)) ev.push({ sn: e.sn, kind: 'forced_to:' + e.type, group: 'full', live: false, nxt, poss: (plays.find((x) => x.events.includes(e.i)) || {}).poss });
         else {
           const play = plays.find((x) => x.events.includes(e.i)), elapsed = play ? estElapsed(play) : NaN;
           const late = elapsed >= P.SHOT_CLOCK_LEN - P.SQUEEZE_REMAINING_SEC;
@@ -584,6 +595,20 @@ function computeBox({ D, rim, W }) {
     const liveEv = ev.filter((x) => x.live), deadEv = ev.filter((x) => !x.live);
     const offPlays = plays.filter((p) => p.offense === o);
     const squeezedPoss = new Set(offPlays.filter((p) => p.endReason !== 'period_end' && p.endReason !== 'held_ball' && estElapsed(p) >= P.SHOT_CLOCK_LEN - P.SQUEEZE_REMAINING_SEC).map((p) => p.poss));
+    // how each squeezed possession's late play ended, and how the offense did on those plays (first late play of the possession)
+    const sqPlays = []; const seenSq = new Set();
+    for (const p of offPlays) {
+      if (!squeezedPoss.has(p.poss) || seenSq.has(p.poss) || p.endReason === 'period_end' || p.endReason === 'held_ball' || estElapsed(p) < P.SHOT_CLOCK_LEN - P.SQUEEZE_REMAINING_SEC) continue;
+      seenSq.add(p.poss);
+      const to = p.events.map((i) => evs[i]).find((e) => e.cat === 'turnover'), nextPlay = p.poss.plays[p.poss.plays.indexOf(p) + 1];
+      sqPlays.push({ per: p.poss.period, startRem: p.startRem, endRem: p.endRem, est: +estElapsed(p).toFixed(1), end: p.endReason, toType: to ? to.type : null, pts: p.points, poss: p.poss.id, possPts: p.poss.pts, oreb: nextPlay ? nextPlay.kind === 'oreb' : false, finish: p.poss.endReason, possPlays: p.poss.plays.length, ...(({ lu, ...c }) => c)(chanceShots(p, evs, names)) });
+    }
+    const sqEnds = {}; for (const x of sqPlays) sqEnds[x.end] = (sqEnds[x.end] || 0) + 1;
+    // possession-level: how the possession was finally finished off, and the offensive rebounds after missed late plays
+    const sqFinish = {}; for (const x of sqPlays) sqFinish[x.finish] = (sqFinish[x.finish] || 0) + 1;
+    const sqOreb = sqPlays.filter((x) => x.oreb), sqMiss = sqPlays.filter((x) => x.end === 'missed_fg' || x.end === 'ft_miss');
+    const sqSum = (k) => sum(sqPlays, (x) => x[k]);
+    const scv = ev.filter((x) => x.kind === 'forced_to:shotclock');
     const sq = [...squeezedPoss], nsq = poss.filter((p) => p.team === o && !squeezedPoss.has(p));
     havoc[d] = {
       otherTOs: ev.filter((x) => x.kind.startsWith('other_to')).map((x) => `${x.kind.slice(9)}@${x.elapsed}s`), oppPoss: offPoss, steals: ev.filter((x) => x.kind === 'steal').length, blocks: ev.filter((x) => x.kind === 'block').length, recBlocks: ev.filter((x) => x.kind === 'block' && x.recovered).length,
@@ -591,7 +616,14 @@ function computeBox({ D, rim, W }) {
       strict: full.length, broad: full.length + lateTO.length + earlyTO.length, mid: h(P.HAVOC_W_LATE, P.HAVOC_W_EARLY),
       rate: { strict: div(full.length, offPoss), broad: div(full.length + lateTO.length + earlyTO.length, offPoss), mid: div(h(P.HAVOC_W_LATE, P.HAVOC_W_EARLY), offPoss) },
       convLive: conv(liveEv), convDead: conv(deadEv), convAll: conv(ev),
-      squeeze: { n: sq.length, rate: div(sq.length, offPoss), ppp: div(sum(sq, (p) => p.pts), sq.length), otherPPP: div(sum(nsq, (p) => p.pts), nsq.length) },
+      shotClock: { n: scv.length, squeezed: scv.filter((x) => squeezedPoss.has(x.poss)).length },
+      squeeze: { n: sq.length, rate: div(sq.length, offPoss), ppp: div(sum(sq, (p) => p.pts), sq.length), otherPPP: div(sum(nsq, (p) => p.pts), nsq.length),
+        // opponent's late play on squeezed possessions: ends counts + shooting totals (rates are derived from these; plays is single-game only)
+        ends: { turnover: sqEnds.turnover || 0, made_fg: sqEnds.made_fg || 0, missed_fg: sqEnds.missed_fg || 0, ft: sqEnds.ft || 0, ft_miss: sqEnds.ft_miss || 0 },
+        misses: sqMiss.length, oreb: sqOreb.length, orebPts: sum(sqOreb, (x) => x.possPts - x.pts),
+        finish: { made_fg: sqFinish.made_fg || 0, ft: sqFinish.ft || 0, turnover: sqFinish.turnover || 0, def_rebound: sqFinish.def_rebound || 0, other: sqPlays.length - (sqFinish.made_fg || 0) - (sqFinish.ft || 0) - (sqFinish.turnover || 0) - (sqFinish.def_rebound || 0) },
+        shooting: { plays: sqPlays.length, pts: sqSum('pts'), fga: sqSum('fga'), fgm: sqSum('fgm'), tpa: sqSum('tpa'), tpm: sqSum('tpm'), fta: sqSum('fta'), ftm: sqSum('ftm') },
+        plays: sqPlays },
     };
   }
 
@@ -716,7 +748,12 @@ function computeBox({ D, rim, W }) {
     ['↳ points on the possessions that followed (per event)', ...sides.map((s) => `${H[s].convLive.pts} (${f2(H[s].convLive.ppe)})`)],
     [`Dead-ball havoc → shot/FT within ${P.CONVERT_WINDOW_SEC}s`, ...sides.map((s) => `${H[s].convDead.quick} of ${H[s].convDead.n}`)],
     ['↳ points on the possessions that followed (per event)', ...sides.map((s) => `${H[s].convDead.pts} (${f2(H[s].convDead.ppe)})`)],
+    ['Shot-clock violations forced (counted in squeeze)', ...sides.map((s) => `${H[s].shotClock.n} (${H[s].shotClock.squeezed})`)],
     [`Squeeze rate (est. ≤${P.SQUEEZE_REMAINING_SEC}s on shot clock)`, ...sides.map((s) => `${f1(100 * H[s].squeeze.rate)}% (${H[s].squeeze.n} of ${H[s].oppPoss})`)],
+    ['↳ late play ended: turnover / made FG / missed FG / FTs', ...sides.map((s) => { const e = H[s].squeeze.ends; return `${e.turnover} / ${e.made_fg} / ${e.missed_fg} / ${e.ft + e.ft_miss}`; })],
+    ['↳ finished off: made FG / FTs / turnover / defensive rebound', ...sides.map((s) => { const f = H[s].squeeze.finish; return `${f.made_fg} / ${f.ft} / ${f.turnover} / ${f.def_rebound}${f.other ? ` (+${f.other} other)` : ''}`; })],
+    ['↳ offensive rebounds off a missed late play (pts after)', ...sides.map((s) => `${H[s].squeeze.oreb} of ${H[s].squeeze.misses} (${H[s].squeeze.orebPts})`)],
+    ['↳ opp FG · 3P · FT on those plays', ...sides.map((s) => { const g = H[s].squeeze.shooting; return `${g.fgm}-${g.fga} · ${g.tpm}-${g.tpa} · ${g.ftm}-${g.fta}`; })],
     ['Opp PPP squeezed vs other possessions', ...sides.map((s) => `${f2(H[s].squeeze.ppp)} vs ${f2(H[s].squeeze.otherPPP)}`)],
   ]);
   L.push(`*Shot clock is not in the data: late-clock/squeeze use game-clock time since the play started (minus ${P.LAG_AFTER_MAKE_SEC}s after made baskets). Approximate; a single game cannot fit the weights.*`, '');
@@ -755,10 +792,10 @@ function computeBox({ D, rim, W }) {
 
   const header = {
     gameId: game.game_id, date: game.game_date.toISOString().slice(0, 10), venue: game.venue, seasonType: game.season_type, neutral: !!game.is_neutral_site,
-    focus: 'byu', teams: { byu: T.byu, opp: T.opp }, oppId: D.oppId, final: { byu: D.finalByu, opp: D.finalOpp }, margin, headline,
+    focus: 'byu', teams: { byu: T.byu, opp: T.opp }, teamAbbrs: { byu: D.teamLabels.byu.abbr, opp: D.teamLabels.opp.abbr }, oppColor: D.teamLabels.opp.color, oppId: D.oppId, final: { byu: D.finalByu, opp: D.finalOpp }, margin, headline,
     minutes: { byuTotal: sum(roster('byu'), (r) => r.min), oppTotal: sum(roster('opp'), (r) => r.min) },
   };
-  const notes = { unlinkedAssists: unlinked, rimPct, rimAttemptsInDb: rim.att, leagueFtPct: P.LEAGUE_FT_PCT, possessionsFormula: { byu: battle.byu.formula, opp: battle.opp.formula } };
+  const notes = { unlinkedAssists: unlinked, rimPct, rimAttemptsInDb: rim.att, leagueFtPct: P.LEAGUE_FT_PCT, possessionsFormula: { byu: battle.byu.formula, opp: battle.opp.formula }, qualityFlags: checks.filter((c) => !c.ok).map((c) => `${c.name}: ${c.detail}`) };
   const payload = { schema: 1, header, hasShotLocations: !!D.hasShotLocations, params: P, notes, split, shooting, margin: bucketRows, afterMake, ato, E: { byu: { ...E.byu, restPts: undefined }, opp: { ...E.opp, restPts: undefined } }, havoc, battle, line, players: Object.values(pl), checks, events: eventLog(D), plays: plays.map((p) => ({ offense: p.offense, poss: p.poss.id, k: p.k, per: p.poss.period, startRem: p.startRem, dur: p.dur, label: p.label, sub: p.sub, pts: p.points, start: p.poss.startType, end: p.endReason, timeoutBefore: p.timeoutBefore, ...chanceShots(p, evs, names) })) };
   return { L, payload, checks, header };
 }

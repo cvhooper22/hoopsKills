@@ -75,17 +75,28 @@ async function makeResolver(client, system) {
 
 /**
  * snap: { system, throughDate:'YYYY-MM-DD', asofLabel, rows:[{name, conference, record, overall:{rank,rating}, off:{..}, def:{..}, metrics:{..}}],
- *         teamsExpected, raw (any JSON, kept in raw_payloads), notes }
+ *         teamsExpected, raw (any JSON, kept in raw_payloads; omitted on a re-derive, which keeps the stored one),
+ *         offDefValid (default true; false hides the snapshot's offense / defense in the views), notes }
  * Returns { status: 'inserted'|'replaced'|'unchanged', snapshotId, covered, unresolved:[names] }.
  */
 async function writeSnapshot(client, snap) {
   const season = seasonOf(snap.throughDate);
   const hash = crypto.createHash('sha1').update(JSON.stringify(snap.rows)).digest('hex');
   const existing = (await client.query(
-    'SELECT snapshot_id, content_hash, teams_covered FROM rating_snapshots WHERE system = $1 AND season_year = $2 AND through_date = $3',
+    'SELECT snapshot_id, content_hash, teams_covered, raw_id FROM rating_snapshots WHERE system = $1 AND season_year = $2 AND through_date = $3',
     [snap.system, season, snap.throughDate])).rows[0];
   // same content AND every team matched last time (an earlier partial match is retried after a synonym is added)
-  if (existing && existing.content_hash === hash && existing.teams_covered === snap.rows.length) return { status: 'unchanged', snapshotId: existing.snapshot_id };
+  if (existing && existing.content_hash === hash && existing.teams_covered === snap.rows.length) {
+    if (snap.raw !== undefined) {   // same ratings, but the raw data kept for them may be missing or an older, thinner form: keep the fuller one
+      const { rows: [same] } = await client.query(
+        'SELECT EXISTS (SELECT 1 FROM raw_payloads WHERE raw_id = $1 AND payload = $2::jsonb) AS same', [existing.raw_id, JSON.stringify(snap.raw)]);
+      if (!same.same) {
+        const rawId = await insertRaw(client, snap.system, snap.throughDate, 'ratings', snap.raw);
+        await client.query('UPDATE rating_snapshots SET raw_id = $2 WHERE snapshot_id = $1', [existing.snapshot_id, rawId]);
+      }
+    }
+    return { status: 'unchanged', snapshotId: existing.snapshot_id };
+  }
 
   await client.query('BEGIN');
   try {
@@ -96,19 +107,20 @@ async function writeSnapshot(client, snap) {
       if (id) resolved.push({ ...r, id }); else unresolved.push(r.name);
     }
     const rawId = snap.raw === undefined ? null : await insertRaw(client, snap.system, snap.throughDate, 'ratings', snap.raw);
+    const offDefValid = snap.offDefValid !== false;   // a collector that knows its offense / defense are off says so
     const notes = { ...(snap.notes || {}), ...(unresolved.length ? { unresolved } : {}) };
     let snapshotId;
     if (existing) {
       snapshotId = existing.snapshot_id;
       await client.query('DELETE FROM team_ratings WHERE snapshot_id = $1', [snapshotId]);
       await client.query(
-        `UPDATE rating_snapshots SET asof_label=$2, captured_at=now(), teams_covered=$3, teams_expected=$4, content_hash=$5, raw_id=$6, notes=$7 WHERE snapshot_id=$1`,
-        [snapshotId, snap.asofLabel || null, resolved.length, snap.teamsExpected || snap.rows.length, hash, rawId, JSON.stringify(notes)]);
+        `UPDATE rating_snapshots SET asof_label=$2, captured_at=now(), teams_covered=$3, teams_expected=$4, content_hash=$5, raw_id=COALESCE($6, raw_id), notes=$7, off_def_valid=$8 WHERE snapshot_id=$1`,
+        [snapshotId, snap.asofLabel || null, resolved.length, snap.teamsExpected || snap.rows.length, hash, rawId, JSON.stringify(notes), offDefValid]);
     } else {
       snapshotId = (await client.query(
-        `INSERT INTO rating_snapshots (system, season_year, through_date, asof_label, teams_covered, teams_expected, content_hash, raw_id, notes)
-         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING snapshot_id`,
-        [snap.system, season, snap.throughDate, snap.asofLabel || null, resolved.length, snap.teamsExpected || snap.rows.length, hash, rawId, JSON.stringify(notes)])).rows[0].snapshot_id;
+        `INSERT INTO rating_snapshots (system, season_year, through_date, asof_label, teams_covered, teams_expected, content_hash, raw_id, notes, off_def_valid)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING snapshot_id`,
+        [snap.system, season, snap.throughDate, snap.asofLabel || null, resolved.length, snap.teamsExpected || snap.rows.length, hash, rawId, JSON.stringify(notes), offDefValid])).rows[0].snapshot_id;
     }
     for (const r of resolved) {
       await client.query(

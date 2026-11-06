@@ -17,8 +17,8 @@ import LatestGameRedirect from "./components/GameSwitcher/LatestGameRedirect";
 import Home from "./views/Home/Home";
 import Exhibitions from "./views/Exhibitions/Exhibitions";
 import BoxRouter, { LatestBox } from "./views/Box/BoxRouter";
-import Box, { BoxScoreTab, BoxStintCompareTab, BoxFindTab, BoxTimelineTab, BoxLineupCompareTab, BoxEventTimelineTab, BoxShotsTab } from "./views/Box/Box";
-import { LiveRouter, LiveIndex, LiveGame, LiveBox, LiveStintCompare, LiveEventTimeline, LiveFind, LiveTimeline, LiveLineupCompare, LiveKills, LiveLineups, LiveShots } from "./views/Box/LiveBox";
+import Box, { BoxScoreTab, BoxStintCompareTab, BoxFindTab, BoxTimelineTab, BoxLineupCompareTab, BoxEventTimelineTab, BoxShotsTab, BoxShotCompareTab } from "./views/Box/Box";
+import { LiveRouter, LiveIndex, LiveGame, LiveBox, LiveStintCompare, LiveEventTimeline, LiveFind, LiveTimeline, LiveLineupCompare, LiveKills, LiveLineups, LiveShots, LiveShotCompare } from "./views/Box/LiveBox";
 import { views, COLLECTION_VIEW, RANKINGS_VIEW, EXHIBITIONS_NAV_VIEW } from './constants/views';
 import AlumniRouter from "./views/Alumni/AlmuniRouter";
 import useMediaQuery from "./hooks/useMediaQuery";
@@ -33,6 +33,7 @@ import { COLLECTION, LIVE_GAME, RANKINGS, EXHIBITIONS } from "./constants/featur
 const AlumniAdminRoute = lazy(() => import("./views/Admin/AdminRoutes").then((m) => ({ default: m.AlumniAdminRoute })));
 const RecentGamesAdminRoute = lazy(() => import("./views/Admin/AdminRoutes").then((m) => ({ default: m.RecentGamesAdminRoute })));
 const StopsEditor = lazy(() => import("./views/Admin/StopsEditor"));
+const GlossaryPage = lazy(() => import("./views/Glossary/GlossaryPage"));
 const RankingsAdmin = lazy(() => import("./views/Admin/RankingsAdmin"));
 // Behind the `collection` feature flag (see constants/featureFlags.js).
 const Collection = lazy(() => import("./views/Collection/Collection"));
@@ -49,6 +50,12 @@ export default function App() {
       </CollectionProvider>
     </FeatureFlagsProvider>
   );
+}
+
+// /box/... was the prototype home of the box score; it now lives under /games.
+function BoxLegacyRedirect() {
+  const { pathname, search } = useLocation();
+  return <Navigate replace to={pathname.replace(/^\/box/, "/games") + search} />;
 }
 
 function AppContent() {
@@ -96,9 +103,9 @@ function AppContent() {
               <Route path="latest" element={<LatestGameRedirect basePath="kills" />} />
               <Route path=":name" element={<Kills />} />
             </Route>
-            {/* Hidden while it is a local prototype: not in the nav, reachable at /box */}
             {exhibitionsOn && <Route path="exhibitions" element={<Exhibitions />} />}
-            <Route path="box" element={<BoxRouter />}>
+            <Route path="box/*" element={<BoxLegacyRedirect />} />
+            <Route path="games" element={<BoxRouter />}>
               <Route index element={<LatestBox />} />
               <Route path=":name" element={<Box />}>
                 <Route index element={<BoxScoreTab />} />
@@ -108,6 +115,7 @@ function AppContent() {
                 <Route path="event-timeline" element={<BoxEventTimelineTab />} />
                 <Route path="lineup-compare" element={<BoxLineupCompareTab />} />
                 <Route path="shots" element={<BoxShotsTab />} />
+                <Route path="shot-compare" element={<BoxShotCompareTab />} />
               </Route>
             </Route>
             {/* Behind the `liveGame` flag (?ff=liveGame): the in-game page, fed by the local live box server */}
@@ -124,6 +132,7 @@ function AppContent() {
                   <Route path="kills" element={<LiveKills />} />
                   <Route path="lineups" element={<LiveLineups />} />
                   <Route path="shots" element={<LiveShots />} />
+                  <Route path="shot-compare" element={<LiveShotCompare />} />
                 </Route>
               </Route>
             )}
@@ -131,6 +140,7 @@ function AppContent() {
             {rankingsOn && <Route path="rankings" element={<Suspense fallback={null}><RankingsTimeline /></Suspense>} />}
             {collectionOn && <Route path="collection" element={<Suspense fallback={null}><Collection /></Suspense>} />}
             {/* Hidden — not in nav, only reachable by navigating directly here */}
+            <Route path="glossary" element={<Suspense fallback={null}><GlossaryPage /></Suspense>} />
             <Route path="admin/alumni" element={<Suspense fallback={null}><AlumniAdminRoute /></Suspense>} ></Route>
             <Route path="admin/recent-games" element={<Suspense fallback={null}><RecentGamesAdminRoute /></Suspense>} ></Route>
             {rankingsOn && <Route path="admin/rankings" element={<Suspense fallback={null}><RankingsAdmin /></Suspense>} />}

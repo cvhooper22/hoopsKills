@@ -9,8 +9,13 @@
   "focus": "byu",
   "teams": {
    "byu": "BYU",
-   "opp": "Unlv"
+   "opp": "UNLV"
   },
+  "teamAbbrs": {
+   "byu": "BYU",
+   "opp": "UNLV"
+  },
+  "oppColor": "#cf0a2c",
   "oppId": "unlv",
   "final": {
    "byu": 89,
@@ -47,8 +52,8 @@
  },
  "notes": {
   "unlinkedAssists": 1,
-  "rimPct": 0.6427118644067796,
-  "rimAttemptsInDb": 1475,
+  "rimPct": 0.6477732793522267,
+  "rimAttemptsInDb": 1482,
   "leagueFtPct": 0.72,
   "possessionsFormula": {
    "byu": {
@@ -418,11 +423,124 @@
     "pts": 21,
     "ppe": 1.05
    },
+   "shotClock": {
+    "n": 2,
+    "squeezed": 2
+   },
    "squeeze": {
     "n": 4,
     "rate": 0.0547945205479452,
     "ppp": 0.5,
-    "otherPPP": 1.0869565217391304
+    "otherPPP": 1.0869565217391304,
+    "ends": {
+     "turnover": 1,
+     "made_fg": 1,
+     "missed_fg": 2,
+     "ft": 0,
+     "ft_miss": 0
+    },
+    "misses": 2,
+    "oreb": 2,
+    "orebPts": 0,
+    "finish": {
+     "made_fg": 1,
+     "ft": 0,
+     "turnover": 3,
+     "def_rebound": 0,
+     "other": 0
+    },
+    "shooting": {
+     "plays": 4,
+     "pts": 2,
+     "fga": 3,
+     "fgm": 1,
+     "tpa": 1,
+     "tpm": 0,
+     "fta": 0,
+     "ftm": 0
+    },
+    "plays": [
+     {
+      "per": 1,
+      "startRem": 1588,
+      "endRem": 1557,
+      "est": 28,
+      "end": "made_fg",
+      "toType": null,
+      "pts": 2,
+      "poss": 51,
+      "possPts": 2,
+      "oreb": false,
+      "finish": "made_fg",
+      "possPlays": 1,
+      "fga": 1,
+      "fgm": 1,
+      "tpa": 0,
+      "tpm": 0,
+      "fta": 0,
+      "ftm": 0
+     },
+     {
+      "per": 1,
+      "startRem": 1481,
+      "endRem": 1453,
+      "est": 28,
+      "end": "missed_fg",
+      "toType": null,
+      "pts": 0,
+      "poss": 57,
+      "possPts": 0,
+      "oreb": true,
+      "finish": "turnover",
+      "possPlays": 2,
+      "fga": 1,
+      "fgm": 0,
+      "tpa": 0,
+      "tpm": 0,
+      "fta": 0,
+      "ftm": 0
+     },
+     {
+      "per": 1,
+      "startRem": 1279,
+      "endRem": 1251,
+      "est": 25,
+      "end": "turnover",
+      "toType": "badpass",
+      "pts": 0,
+      "poss": 69,
+      "possPts": 0,
+      "oreb": false,
+      "finish": "turnover",
+      "possPlays": 1,
+      "fga": 0,
+      "fgm": 0,
+      "tpa": 0,
+      "tpm": 0,
+      "fta": 0,
+      "ftm": 0
+     },
+     {
+      "per": 2,
+      "startRem": 467,
+      "endRem": 437,
+      "est": 30,
+      "end": "missed_fg",
+      "toType": null,
+      "pts": 0,
+      "poss": 119,
+      "possPts": 0,
+      "oreb": true,
+      "finish": "turnover",
+      "possPlays": 2,
+      "fga": 1,
+      "fgm": 0,
+      "tpa": 1,
+      "tpm": 0,
+      "fta": 0,
+      "ftm": 0
+     }
+    ]
    }
   },
   "opp": {
@@ -469,11 +587,144 @@
     "pts": 14,
     "ppe": 1.2727272727272727
    },
+   "shotClock": {
+    "n": 0,
+    "squeezed": 0
+   },
    "squeeze": {
     "n": 5,
     "rate": 0.06756756756756757,
     "ppp": 0.8,
-    "otherPPP": 1.2318840579710144
+    "otherPPP": 1.2318840579710144,
+    "ends": {
+     "turnover": 2,
+     "made_fg": 1,
+     "missed_fg": 2,
+     "ft": 0,
+     "ft_miss": 0
+    },
+    "misses": 2,
+    "oreb": 1,
+    "orebPts": 2,
+    "finish": {
+     "made_fg": 1,
+     "ft": 0,
+     "turnover": 2,
+     "def_rebound": 2,
+     "other": 0
+    },
+    "shooting": {
+     "plays": 5,
+     "pts": 2,
+     "fga": 3,
+     "fgm": 1,
+     "tpa": 0,
+     "tpm": 0,
+     "fta": 0,
+     "ftm": 0
+    },
+    "plays": [
+     {
+      "per": 1,
+      "startRem": 1891,
+      "endRem": 1861,
+      "est": 27,
+      "end": "missed_fg",
+      "toType": null,
+      "pts": 0,
+      "poss": 30,
+      "possPts": 0,
+      "oreb": false,
+      "finish": "def_rebound",
+      "possPlays": 1,
+      "fga": 1,
+      "fgm": 0,
+      "tpa": 0,
+      "tpm": 0,
+      "fta": 0,
+      "ftm": 0
+     },
+     {
+      "per": 1,
+      "startRem": 1682,
+      "endRem": 1652,
+      "est": 27,
+      "end": "made_fg",
+      "toType": null,
+      "pts": 2,
+      "poss": 46,
+      "possPts": 2,
+      "oreb": false,
+      "finish": "made_fg",
+      "possPlays": 1,
+      "fga": 1,
+      "fgm": 1,
+      "tpa": 0,
+      "tpm": 0,
+      "fta": 0,
+      "ftm": 0
+     },
+     {
+      "per": 1,
+      "startRem": 1230,
+      "endRem": 1202,
+      "est": 28,
+      "end": "turnover",
+      "toType": "badpass",
+      "pts": 0,
+      "poss": 72,
+      "possPts": 0,
+      "oreb": false,
+      "finish": "turnover",
+      "possPlays": 1,
+      "fga": 0,
+      "fgm": 0,
+      "tpa": 0,
+      "tpm": 0,
+      "fta": 0,
+      "ftm": 0
+     },
+     {
+      "per": 2,
+      "startRem": 768,
+      "endRem": 732,
+      "est": 33,
+      "end": "missed_fg",
+      "toType": null,
+      "pts": 0,
+      "poss": 100,
+      "possPts": 2,
+      "oreb": true,
+      "finish": "def_rebound",
+      "possPlays": 2,
+      "fga": 1,
+      "fgm": 0,
+      "tpa": 0,
+      "tpm": 0,
+      "fta": 0,
+      "ftm": 0
+     },
+     {
+      "per": 2,
+      "startRem": 81,
+      "endRem": 52,
+      "est": 29,
+      "end": "turnover",
+      "toType": "travel",
+      "pts": 0,
+      "poss": 142,
+      "possPts": 0,
+      "oreb": false,
+      "finish": "turnover",
+      "possPlays": 1,
+      "fga": 0,
+      "fgm": 0,
+      "tpa": 0,
+      "tpm": 0,
+      "fta": 0,
+      "ftm": 0
+     }
+    ]
    }
   }
  },
@@ -487,7 +738,7 @@
    "advScoreless": 7,
    "advPPP": 1,
    "advLost": 7,
-   "rimLeft": 10.283389830508472,
+   "rimLeft": 10.364372469635628,
    "formula": {
     "fga": 69,
     "fta": 21,
@@ -505,7 +756,7 @@
    "advScoreless": 4,
    "advPPP": 1.3,
    "advLost": 5.2,
-   "rimLeft": 10.283389830508474,
+   "rimLeft": 10.364372469635628,
    "formula": {
     "fga": 59,
     "fta": 21,
@@ -673,7 +924,7 @@
    "ftLostMiss": 0,
    "ftWpLeague": -0.041665005698564905,
    "ftWpOwn": -0.03007188795108101,
-   "rimLeft": 3.8562711864406776,
+   "rimLeft": 3.8866396761133606,
    "possCreated": 0,
    "ptsCreated": 31,
    "tovRate": 0.19685039370078738,
@@ -752,7 +1003,7 @@
    "ftMissOppExp": 2.228695652173913,
    "ftWpLeague": 0.061840779572401416,
    "ftWpOwn": 0.05093342733616357,
-   "rimLeft": 5.141694915254237,
+   "rimLeft": 5.182186234817814,
    "possCreated": 2,
    "ptsCreated": 29,
    "tovRate": 0,
@@ -1056,7 +1307,7 @@
     "tovL": 0,
     "tovD": 0
    },
-   "rimLeft": 1.2854237288135593,
+   "rimLeft": 1.2955465587044535,
    "possCreated": 2,
    "ptsCreated": 3,
    "tovRate": 0,
@@ -1501,7 +1752,7 @@
    "ftMissOppExp": 1.1041666666666667,
    "ftWpLeague": 0.0978196987634724,
    "ftWpOwn": 0.0978196987634724,
-   "rimLeft": 2.5708474576271185,
+   "rimLeft": 2.591093117408907,
    "possCreated": 3,
    "ptsCreated": 11,
    "tovRate": 0,
@@ -1577,7 +1828,7 @@
    "ftLostMiss": 1,
    "ftWpLeague": -0.00010471718181159773,
    "ftWpOwn": -0.00010471718181159773,
-   "rimLeft": 1.2854237288135593,
+   "rimLeft": 1.2955465587044535,
    "possCreated": 1,
    "ptsCreated": 15,
    "tovRate": 0.28735632183908044,
@@ -1653,7 +1904,7 @@
    "ftLostMiss": 1,
    "ftWpLeague": -0.005903582674081753,
    "ftWpOwn": -0.005903582674081753,
-   "rimLeft": 3.8562711864406776,
+   "rimLeft": 3.8866396761133606,
    "possCreated": -2,
    "ptsCreated": 24,
    "tovRate": 0.2545824847250509,
@@ -1809,7 +2060,7 @@
    "ftLostMiss": 0,
    "ftWpLeague": -0.06698345610791884,
    "ftWpOwn": -0.06698345610791884,
-   "rimLeft": 2.5708474576271185,
+   "rimLeft": 2.591093117408907,
    "possCreated": 0,
    "ptsCreated": 33,
    "tovRate": 0.04310344827586207,
@@ -2276,7 +2527,7 @@
    "detail": "89 + 0 vs 89"
   },
   {
-   "name": "Unlv points: plays + tech FT = final",
+   "name": "UNLV points: plays + tech FT = final",
    "ok": true,
    "detail": "77 + 0 vs 77"
   },
@@ -2296,17 +2547,17 @@
    "detail": ""
   },
   {
-   "name": "Unlv identity: points = sum of labels",
+   "name": "UNLV identity: points = sum of labels",
    "ok": true,
    "detail": ""
   },
   {
-   "name": "Unlv identity: possessions = transition + initial plays",
+   "name": "UNLV identity: possessions = transition + initial plays",
    "ok": true,
    "detail": "73 vs 7+66"
   },
   {
-   "name": "Unlv identity: PPP = pts/play × plays/poss",
+   "name": "UNLV identity: PPP = pts/play × plays/poss",
    "ok": true,
    "detail": ""
   },
@@ -2336,22 +2587,22 @@
    "detail": "200.0"
   },
   {
-   "name": "Unlv player PTS sum = final",
+   "name": "UNLV player PTS sum = final",
    "ok": true,
    "detail": "77 vs 77"
   },
   {
-   "name": "Unlv §7.1 buckets sum to PTS (every player)",
+   "name": "UNLV §7.1 buckets sum to PTS (every player)",
    "ok": true,
    "detail": ""
   },
   {
-   "name": "Unlv assist points = points on assisted baskets + their and-one FTs",
+   "name": "UNLV assist points = points on assisted baskets + their and-one FTs",
    "ok": true,
    "detail": "28 vs 28 + 0"
   },
   {
-   "name": "Unlv minutes sum ≈ 200",
+   "name": "UNLV minutes sum ≈ 200",
    "ok": true,
    "detail": "200.0"
   }

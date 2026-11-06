@@ -9,18 +9,21 @@ import { EventTimelinePanel } from './BoxEventTimeline';
 import { LineupTimelinePanel } from './BoxLineupTimeline';
 import { LineupComparePanel } from './BoxLineupCompare';
 import { FindPlaysPanel } from './BoxFind';
+import { ShotComparePanel } from './BoxShotCompare';
 import { KillsBody, gameFromMeta } from '../Kills/Kills';
 import { detectKills } from '../../utils/kills';
 import { LineupsPanel } from '../Lineups/components/GameLineups';
 import ShotChartPanel from '../../components/ShotChart/ShotChartPanel';
-import { liveClockText } from './boxFormat';
+import { liveClockText, oppColorStyle } from './boxFormat';
 import AskAi from '../../components/AskAi/AskAi';
 import { useFlag } from '../../contexts/FeatureFlagsContext';
 import { ASK_AI } from '../../constants/featureFlags';
 
 // In-game page: the same box-score sections as /box, fed by derivations/live-box-server.js. The server recomputes the whole
 // suite whenever new plays are stored and pushes it over server-sent events; this page just swaps the payload in. Behind the
-// `liveGame` feature flag (see App.js). Local only: the server is on this machine.
+// `liveGame` feature flag (see App.js). The base URL is the local server or, when deployed, the live-relay Worker (see assetUrls.js).
+const UNAVAILABLE = "Live game data isn't available right now.";
+const STATUS_LABEL = { live: 'live', stalled: 'not updating' }; // anything else reads as final
 const STALE_AFTER_MS = 90 * 1000; // capture polls every 5-30 seconds (the popup's interval), so this long without one means it has stopped
 
 function useLiveGame(gameId) {
@@ -37,7 +40,7 @@ function useLiveGame(gameId) {
     stream.addEventListener('box', (e) => { setData(JSON.parse(e.data)); setProblem(null); setConnection('open'); });
     stream.addEventListener('plays', (e) => setPlaysData(JSON.parse(e.data)));
     // the stream sends the latest payload on connect, but a game with no plays stored yet has none: say so instead of spinning
-    fetch(urls.liveBox(gameId)).then((r) => { if (r.status === 404) setProblem('No plays stored for this game yet. Start capture, or check the game id.'); }).catch(() => {});
+    fetch(urls.liveBox(gameId)).then((r) => { if (r.status === 404) setProblem('No live data for this game yet. Check back once the game has started.'); }).catch(() => {});
     return () => stream.close();
   }, [gameId]);
 
@@ -119,17 +122,17 @@ export function LiveGame() {
     return (
       <div className="box">
         {problem ? <p className="mt-l">{problem}</p> : <YBallLoader />}
-        {connection === 'reconnecting' ? <p className="mt-l">Can't reach the live server at {urls.liveGames().replace('/games', '')}. Start it with <code>node derivations/live-box-server.js</code>.</p> : null}
+        {connection === 'reconnecting' ? <p className="mt-l">{UNAVAILABLE}</p> : null}
       </div>
     );
   }
   return (
-    <div className="box">
+    <div className="box" style={oppColorStyle(data.header)}>
       <LiveBanner data={data} connection={connection} />
       <ClockPill live={data.live} header={data.header} />
       <BoxTabs tabs={[
         { to: `/live/${gameId}`, label: 'Box score', end: true }, { to: `/live/${gameId}/stint-compare`, label: 'Stint Compare' }, { to: `/live/${gameId}/event-timeline`, label: 'Event timeline' }, { to: `/live/${gameId}/find`, label: 'Find plays' }, { to: `/live/${gameId}/timeline`, label: 'Lineup timeline' }, { to: `/live/${gameId}/lineup-compare`, label: 'Lineup compare' },
-        data.hasShotLocations !== false && { to: `/live/${gameId}/shots`, label: 'Shot chart' }, { to: `/live/${gameId}/kills`, label: 'Kills' }, { to: `/live/${gameId}/lineups`, label: 'Lineups' },
+        data.hasShotLocations !== false && { to: `/live/${gameId}/shots`, label: 'Shot chart' }, data.hasShotLocations !== false && { to: `/live/${gameId}/shot-compare`, label: 'Shot chart compare' }, { to: `/live/${gameId}/kills`, label: 'Kills' }, { to: `/live/${gameId}/lineups`, label: 'Lineups' },
       ].filter(Boolean)} />
       <Outlet context={{ ...live, gameId }} />
       {askAiOn && <AskAi data={data} inProgress={data.live.status !== 'final'} />}
@@ -147,6 +150,11 @@ export function LiveShots() {
   const { playsData } = useOutletContext();
   if (!playsData) return <YBallLoader />;
   return <ShotChartPanel plays={playsData.plays} meta={playsData.meta} />;
+}
+
+export function LiveShotCompare() {
+  const { data, playsData } = useOutletContext();
+  return <ShotComparePanel data={data} shotPlays={playsData ? playsData.plays : null} />;
 }
 
 // Kills for the game so far: the app's own detector (src/utils/kills.js) run in the browser on the live plays, BYU on defense.
@@ -205,17 +213,17 @@ export function LiveIndex() {
   useEffect(() => {
     fetch(urls.liveGames()).then((r) => r.json()).then(setGames).catch(() => setError(true));
   }, []);
-  if (error) return <div className="box"><p className="mt-l">Can't reach the live server at {urls.liveGames().replace('/games', '')}. Start it with <code>node derivations/live-box-server.js</code>.</p></div>;
+  if (error) return <div className="box"><p className="mt-l">{UNAVAILABLE}</p></div>;
   if (!games) return <div className="box"><YBallLoader /></div>;
   const live = games.filter((g) => g.status === 'live');
   if (live.length === 1) return <Navigate replace to={`/live/${live[0].game_id}`} />;
-  if (!games.length) return <div className="box"><p className="mt-l">No games have been captured yet.</p></div>;
+  if (!games.length) return <div className="box"><p className="mt-l">No live games right now.</p></div>;
   return (
     <div className="box">
-      <h2 className="mt-l">Captured games</h2>
+      <h2 className="mt-l">Games</h2>
       <ul>
         {games.map((g) => (
-          <li key={g.game_id}><Link to={`/live/${g.game_id}`}>{g.game_id}</Link> · {g.status === 'live' ? 'live' : 'final'} · {g.away_score}-{g.home_score} · {g.play_count} plays</li>
+          <li key={g.game_id}><Link to={`/live/${g.game_id}`}>{g.game_id}</Link> · {STATUS_LABEL[g.status] || 'final'} · {g.away_score}-{g.home_score} · {g.play_count} plays</li>
         ))}
       </ul>
     </div>

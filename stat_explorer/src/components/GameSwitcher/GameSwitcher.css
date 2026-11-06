@@ -182,3 +182,25 @@
 .game-pill--radii .game-pill__list-inner { border-radius: var(--radius-card); }
 
 .game-pill__game-row--season { font-weight: 600; }
+
+/* Mobile: season pills wrap onto their own row under the main pill instead of sliding off-screen */
+@media (max-width: 600px) {
+  .game-pill__row {
+    flex-wrap: wrap;
+  }
+
+  .game-pill__seasons {
+    flex-basis: 100%;
+    flex-wrap: wrap;
+    max-width: none;
+    max-height: 0;
+    transform: translateY(-8px);
+    transition: max-height 350ms ease, opacity 250ms ease, transform 350ms ease;
+  }
+
+  .game-pill--open .game-pill__seasons {
+    max-width: none;
+    max-height: 200px;
+    transform: none;
+  }
+}
