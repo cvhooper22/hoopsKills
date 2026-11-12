@@ -17,3 +17,4 @@ playwright/.cache/
 
 # Design exports
 design/
+stat_explorer/public/data/box/
