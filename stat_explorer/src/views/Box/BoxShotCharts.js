@@ -31,17 +31,28 @@ export function useLocatedShots(shotPlays, data) {
     const shots = [];
     const playOf = playsByEvent(data.events, data.plays, 'shot_attempt', 'fga');
     const ftPlayOf = playsByEvent(data.events, data.plays, 'free_throw', 'fta');
-    let unmatched = 0, i = -1;
+    // Match each located shot to its box event by period, clock, make and shooter rather than by position: the event log can carry
+    // events the play list doesn't (assists, split rebounds), which throws a position match off for the rest of the game.
+    const pool = new Map();
+    data.events.forEach((event, idx) => {
+      if (event.cat !== 'shot_attempt') return;
+      const k = `${event.per}|${event.rem}|${!!event.made}`;
+      if (!pool.has(k)) pool.set(k, []);
+      pool.get(k).push(idx);
+    });
+    let unmatched = 0;
     for (const p of shotPlays) {
-      if (p.play_category === 'period_admin') continue;
-      i++;
       const shot = normalizeShot(p);
       if (!shot) continue;
-      const event = data.events[i];
       const rem = p.period_number <= 2 ? (2 - p.period_number) * 1200 + (p.clock_seconds_remaining ?? 0) : (p.clock_seconds_remaining ?? 0);
-      const before = i > 0 ? data.events[i - 1].sc : [0, 0]; // the running score is on each event, after it
-      if (event && event.cat === 'shot_attempt' && event.per === p.period_number && event.rem === rem) shots.push({ shot: { ...shot, score: { before, after: event.sc } }, event, i, play: playOf.get(event) ?? null });
-      else unmatched++;
+      const cands = pool.get(`${p.period_number}|${rem}|${!!p.is_made}`) || [];
+      const at = Math.max(0, cands.findIndex((idx) => data.events[idx].player === p.player_name));
+      const [i] = cands.splice(at, 1);
+      const event = i === undefined ? null : data.events[i];
+      if (event) {
+        const before = i > 0 ? data.events[i - 1].sc : [0, 0]; // the running score is on each event, after it
+        shots.push({ shot: { ...shot, score: { before, after: event.sc } }, event, i, play: playOf.get(event) ?? null });
+      } else unmatched++;
     }
     // free throws have no location, so they are not charted, but they count in a slice's summary
     const fts = data.events.map((event, i) => ({ event, i, play: ftPlayOf.get(event) ?? null })).filter((x) => x.event.cat === 'free_throw');

@@ -1,6 +1,9 @@
 // One game's header facts and player headshots (the stat_explorer ".meta.json" shape). Shared by
 // ingest/tools/export-game-meta.js and the live box server, so both produce the same object.
+const { teamLabel, loadLabels } = require('./team-labels');
+
 async function fetchGameMeta(client, gameId) {
+  const labels = loadLabels();
   const { rows: [g] } = await client.query(
     `SELECT g.game_id, to_char(g.game_date, 'YYYY-MM-DD') AS game_date, g.venue, g.is_neutral_site, g.status,
             g.home_team_id, g.away_team_id, g.final_score_home, g.final_score_away
@@ -26,7 +29,7 @@ async function fetchGameMeta(client, gameId) {
     homeId: g.home_team_id,
     awayId: g.away_team_id,
     final: { [g.home_team_id]: g.final_score_home, [g.away_team_id]: g.final_score_away },
-    teams: Object.fromEntries(teams.map((t) => [t.team_id, { name: t.name, abbrev: t.abbrev }])),
+    teams: Object.fromEntries(teams.map((t) => [t.team_id, teamLabel(t, labels)])),
     headshots: Object.fromEntries(images.map((i) => [i.player_id, i.hosted_url])),
   };
 }

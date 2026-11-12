@@ -301,6 +301,13 @@ module.exports = function (app) {
     runNode(args, 10 * 60 * 1000, 'api/rankings', res, () => { rankingsBusy = false; });
   });
 
+  // Uploads the timeline files (public/data/rankings) and the logos they use to the shared bucket, where the app reads them.
+  app.post('/api/rankings/upload', (req, res) => {
+    if (rankingsBusy) { res.status(409).json({ error: 'A rankings run is already in progress' }); return; }
+    rankingsBusy = true;
+    runNode(['ingest/tools/upload-rankings.js', '--json'], 2 * 60 * 1000, 'api/rankings', res, () => { rankingsBusy = false; });
+  });
+
 
   // The app's canonical team list for ratings and the spelling -> team mapping (dataAggregators/config/rating-teams.json and
   // rating-team-synonyms.json), editable from the admin page. These edit files in the repo, so like everything in this
@@ -329,9 +336,76 @@ module.exports = function (app) {
     mappings(res, ['rename', '--id', id.trim(), '--name', name.trim()]);
   });
 
+  // Dev-only: the hidden /admin/games page. Shows what is deployed for each game ("status") and runs the steps that
+  // get a game there (dataAggregators/ingest/tools/game-pipeline.js): ingest, build the per-game files, deploy
+  // (upload + indexes + season rollups). Those take a while, so they run as a job: POST starts one (one at a time),
+  // GET /api/games/job returns the latest job with its log so the page can poll it.
+  app.use('/api/games', express.json({ limit: '10kb' }));
+
+  const PIPELINE = 'ingest/tools/game-pipeline.js';
+  const GAME_STEPS = ['plays', 'meta', 'kills', 'clutch', 'lineups', 'box'];
+  const GAME_ID = /^[\w-]+$/;
+  let gamesJob = null;
+
+  const startGamesJob = (label, argv) => {
+    const job = { id: String(Date.now()), label, status: 'running', log: [], startedAt: new Date().toISOString() };
+    gamesJob = job;
+    log('api/games', `job "${label}": node ${PIPELINE} ${argv.join(' ')}`);
+    const child = spawn('node', [PIPELINE, ...argv], { cwd: AGGREGATORS });
+    const push = (d) => String(d).split('\n').filter(Boolean).forEach((l) => { job.log.push(l); if (job.log.length > 2000) job.log.shift(); });
+    child.stdout.on('data', push);
+    child.stderr.on('data', push);
+    const timer = setTimeout(() => { job.log.push('timed out after 15 minutes'); child.kill(); }, 15 * 60 * 1000);
+    const finish = (status, error) => { clearTimeout(timer); job.status = status; job.error = error; job.finishedAt = new Date().toISOString(); };
+    child.on('error', (err) => finish('error', `Could not start node: ${err.message}`));
+    child.on('close', (code) => {
+      if (job.status !== 'running') return;
+      finish(code === 0 ? 'done' : 'error', code === 0 ? undefined : (job.log[job.log.length - 1] || `exit ${code}`));
+      log('api/games', `job "${label}" ${job.status}`);
+    });
+    return job;
+  };
+
+  app.get('/api/games/status', (req, res) => {
+    runNode([PIPELINE, 'status'], 2 * 60 * 1000, 'api/games', res, () => {});
+  });
+
+  app.get('/api/games/job', (req, res) => res.json({ job: gamesJob }));
+
+  app.post('/api/games/jobs', (req, res) => {
+    const { action, gameId, gameIds, steps, url, wmtId, espnId, seasons } = req.body || {};
+    if (gamesJob && gamesJob.status === 'running') { res.status(409).json({ error: `"${gamesJob.label}" is still running` }); return; }
+    const bad = (msg) => res.status(400).json({ error: msg });
+    if (action === 'ingest') {
+      if (typeof url === 'string') {
+        let u;
+        try { u = new URL(url); } catch (e) { return bad('url is not a valid URL'); }
+        if (u.protocol !== 'https:') return bad('url must be https');
+        return res.json({ job: startGamesJob('Ingest from box score link', ['ingest', '--url', u.href]) });
+      }
+      if (/^\d+$/.test(String(wmtId || ''))) return res.json({ job: startGamesJob(`Ingest WMT ${wmtId}`, ['ingest', '--wmt', String(wmtId)]) });
+      if (/^\d+$/.test(String(espnId || ''))) return res.json({ job: startGamesJob(`Ingest ESPN ${espnId}`, ['ingest', '--espn', String(espnId)]) });
+      return bad('ingest needs url, wmtId or espnId');
+    }
+    if (action === 'build') {
+      if (typeof gameId !== 'string' || !GAME_ID.test(gameId)) return bad('Bad game id');
+      if (steps !== undefined && (!Array.isArray(steps) || !steps.length || steps.some((s) => !GAME_STEPS.includes(s)))) return bad(`steps must be a non-empty subset of ${GAME_STEPS.join(', ')}`);
+      return res.json({ job: startGamesJob(`Build ${gameId}${steps ? ` (${steps.join(', ')})` : ''}`, ['build', gameId, ...(steps ? ['--steps', steps.join(',')] : [])]) });
+    }
+    if (action === 'deploy') {
+      if (!Array.isArray(gameIds) || !gameIds.length || gameIds.length > 50 || gameIds.some((g) => typeof g !== 'string' || !GAME_ID.test(g))) return bad('Expected gameIds: 1-50 game ids');
+      return res.json({ job: startGamesJob(`Deploy ${gameIds.length === 1 ? gameIds[0] : `${gameIds.length} games`}`, ['deploy', ...gameIds]) });
+    }
+    if (action === 'rollups') {
+      if (!Array.isArray(seasons) || !seasons.length || seasons.some((s) => !/^\d{4}$/.test(String(s)))) return bad('Expected seasons: 4-digit years');
+      return res.json({ job: startGamesJob(`Rebuild season rollups ${seasons.join(', ')}`, ['rollups', ...seasons.map(String)]) });
+    }
+    return bad('Unknown action');
+  });
+
   // Catches errors from the body parsers above (malformed JSON, payload too
   // large) which otherwise never reach the route handlers or the terminal.
-  app.use(['/api/admin', '/api/recent-games', '/api/recent-games-save', '/api/recent-games-publish', '/api/stops', '/api/rankings'], (err, req, res, next) => {
+  app.use(['/api/admin', '/api/recent-games', '/api/recent-games-save', '/api/recent-games-publish', '/api/stops', '/api/rankings', '/api/games'], (err, req, res, next) => {
     logError(req.originalUrl, `${err.status || 500} ${err.type || ''} ${err.message}`);
     res.status(err.status || 500).json({ error: err.message });
   });

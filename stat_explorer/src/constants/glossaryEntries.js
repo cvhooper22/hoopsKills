@@ -118,8 +118,59 @@ export const KILLS_GLOSSARY = [
   { id: 'kill-efficiency', term: 'Efficiency', definition: <EfficiencyDefinition showLabel={false} /> },
 ];
 
+export const ANALYTICALLY_FINAL_GLOSSARY = [
+  {
+    id: 'analytically-final',
+    term: 'Analytically Final',
+    definition: (
+      <>
+        <p>A lead is analytically final once the seconds left in the game are at most (lead − 5)². A lead of 5 or less is only final when the clock hits zero. The idea and the formula are Haslametrics'. Who has the ball is ignored, and overtime uses the same formula with the overtime clock.</p>
+        <p className="glossary__example"><strong>Example:</strong> a 10-point lead is final with 25 seconds left: (10 − 5)² = 25. A 21-point lead is final with 4:16 left: (21 − 5)² = 256 seconds.</p>
+      </>
+    ),
+  },
+  {
+    id: 'points-short',
+    term: 'Points short of final',
+    definition: (
+      <>
+        <p>How many more points the leader would need, at this moment, for the game to be analytically final: 5 + √(seconds left) − lead, and 0 once it is final.</p>
+        <p className="glossary__example"><strong>Example:</strong> up 8 with 25 seconds left: 5 + √25 = 10, so the leader is 2 points short.</p>
+      </>
+    ),
+  },
+  {
+    id: 'times-close',
+    term: 'Times close / time close',
+    definition: (
+      <>
+        <p>The game is close to final while the leader is within a set number of points of the safe line (3 by default, adjustable on the page) without being final. Times close counts each approach once (the lead has to fall more than one point past that range before the next one counts), and time close adds up the game clock spent in range.</p>
+      </>
+    ),
+  },
+  {
+    id: 'af-near-miss-reversal',
+    term: 'Near miss, dip and reversal',
+    definition: (
+      <>
+        <p>A near miss is an approach that ended with the lead cut back out of range by more than one extra point. A dip counts every time a lead in range is pushed back out of it, with no extra margin, so it can be higher than near misses when a game hovers at the edge. A reversal is a game that went final and then lost it, with the trailing team scoring enough to drop the lead back under the line.</p>
+      </>
+    ),
+  },
+  {
+    id: 'af-pushed-over',
+    term: 'The play that pushed it over',
+    definition: (
+      <>
+        <p>The first play after the game crossed the line. If the leader scored, that score gets the credit. If the trailing team's possession ended with a miss or a turnover, or the leader got a steal, block or defensive rebound, that stop gets it. Otherwise it was just the clock running, and a lead of 5 or less goes final at the final buzzer.</p>
+      </>
+    ),
+  },
+];
+
 // Add a new group's entries here to have them show up on /glossary.
 export const GLOSSARY_GROUPS = [
   { id: 'box', label: 'Box score', entries: BOX_GLOSSARY },
   { id: 'kills', label: 'Kills', entries: KILLS_GLOSSARY },
+  { id: 'analytically-final', label: 'Analytically Final', entries: ANALYTICALLY_FINAL_GLOSSARY },
 ];

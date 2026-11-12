@@ -1,0 +1,39 @@
+.admin-home {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 16px 24px 48px;
+  box-sizing: border-box;
+  text-align: left;
+  font-family: sans-serif;
+  color: #002e52;
+}
+.admin-home h2 { margin: 0 0 4px; font-size: 18px; }
+.admin-home__lede { margin: 0 0 16px; color: #4a6076; font-size: 14px; }
+.admin-home__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  max-width: 900px;
+}
+.admin-home__card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  border: 1px solid #dde3ea;
+  border-radius: 8px;
+  background: white;
+  color: inherit;
+  text-decoration: none;
+}
+a.admin-home__card:hover { border-color: #002e52; }
+.admin-home__card--off { opacity: 0.55; }
+.admin-home__title { font-weight: 600; font-size: 15px; }
+.admin-home__badge { margin-left: 8px; padding: 1px 6px; border-radius: 4px; background: #eef1f4; color: #4a6076; font-size: 11px; font-weight: 400; }
+.admin-home__desc { color: #4a6076; font-size: 13px; line-height: 1.35; }

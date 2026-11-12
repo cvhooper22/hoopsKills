@@ -2,7 +2,7 @@
 // from the local server and PUTs to the relay with a bearer token, so nothing on the internet can reach this machine.
 // Run it next to live-box-server.js when you want a game public; stop it and the local view is unaffected.
 //
-//   RELAY_URL=https://hoops-live-relay.<you>.workers.dev RELAY_TOKEN=... node derivations/live-relay-push.js
+//   node derivations/live-relay-push.js     (asks for the relay URL, defaulting to DEFAULT_RELAY, and the token; RELAY_URL / RELAY_TOKEN skip the questions)
 //   options: --local http://127.0.0.1:4610   --game <id> (repeatable; default: every game with status 'live' that changed in the last 10 minutes)
 //
 // For each game it follows the local /box/:id/stream, keeps the latest box + plays, and sends both to the relay
@@ -11,13 +11,19 @@
 const args = process.argv.slice(2);
 const arg = (name) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : null; };
 const local = (arg('--local') || 'http://127.0.0.1:4610').replace(/\/$/, '');
-const relay = (process.env.RELAY_URL || arg('--url') || '').replace(/\/$/, '');
-const token = process.env.RELAY_TOKEN;
+const DEFAULT_RELAY = 'https://live.byuhoopstats-live-relay.workers.dev';
+let relay = process.env.RELAY_URL || arg('--url') || '';
+let token = process.env.RELAY_TOKEN || '';
 const fixed = args.flatMap((a, i) => (a === '--game' ? [args[i + 1]] : []));
 const SCAN_MS = 15000, DEBOUNCE_MS = 200, RECENT_MS = 10 * 60 * 1000; // by default only follow live games that changed in the last RECENT_MS
 const stamp = () => new Date().toISOString().slice(11, 19);
 
-if (!relay || !token) { console.error('Set RELAY_URL and RELAY_TOKEN (see live-relay/README.md).'); process.exit(1); }
+// Ask on the terminal for whatever the environment did not provide; the token is not echoed.
+function ask(question, hidden = false) {
+  const rl = require('readline').createInterface({ input: process.stdin, output: process.stdout, terminal: true });
+  if (hidden) rl._writeToOutput = (t) => { if (t.includes(question)) process.stdout.write(question); };
+  return new Promise((resolve) => rl.question(question, (a) => { rl.close(); if (hidden) process.stdout.write('\n'); resolve(a.trim()); }));
+}
 
 const put = (path, body) => fetch(relay + path, {
   method: 'PUT', headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json' }, body,
@@ -72,7 +78,13 @@ async function scan() {
   } catch (e) { console.error(`${stamp()} scan failed: ${e.message}`); }
 }
 
-console.log(`pushing ${local} -> ${relay}`);
-scan();
-setInterval(scan, SCAN_MS);
+(async () => {
+  if (!relay) relay = (await ask(`Relay URL [${DEFAULT_RELAY}]: `)) || DEFAULT_RELAY;
+  if (!token) token = await ask('Relay token: ', true);
+  relay = relay.replace(/\/$/, '');
+  if (!token) { console.error('A relay token is required (the PUSH_TOKEN secret set on the Worker).'); process.exit(1); }
+  console.log(`pushing ${local} -> ${relay}`);
+  scan();
+  setInterval(scan, SCAN_MS);
+})();
 process.on('SIGINT', () => process.exit(0));

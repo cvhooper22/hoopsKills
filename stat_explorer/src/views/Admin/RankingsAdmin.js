@@ -185,6 +185,7 @@ export default function RankingsAdmin() {
   const [error, setError] = useState('');
   const [running, setRunning] = useState(false);
   const [lastRun, setLastRun] = useState(null);
+  const [uploaded, setUploaded] = useState(null);
   const [backfill, setBackfill] = useState({ from: '2025-10-27', to: '2026-04-14' });
 
   const load = useCallback(async () => {
@@ -212,6 +213,21 @@ export default function RankingsAdmin() {
     }
   };
 
+  // Sends the timeline files and their opponent logos to the shared bucket, which is where the /rankings page reads them.
+  const upload = async () => {
+    if (!window.confirm('Upload the rankings timeline files and their opponent logos to the shared S3 bucket?')) return;
+    setRunning(true);
+    setUploaded(null);
+    try {
+      setUploaded(await api('/api/rankings/upload', { method: 'POST' }));
+      setError('');
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setRunning(false);
+    }
+  };
+
   const systems = status ? status.systems : SYSTEMS.map((system) => ({ system, name: system, snapshots: 0 }));
   return (
     <div className="rankings-admin">
@@ -222,10 +238,18 @@ export default function RankingsAdmin() {
       </p>
       <div className="rankings-admin__bar">
         <button type="button" disabled={running} onClick={() => run({})}>{running ? 'Running…' : 'Run all systems'}</button>
+        <button type="button" disabled={running} onClick={upload}>Upload timeline to S3</button>
         <button type="button" disabled={running} onClick={load}>Refresh</button>
         {running && <span className="rankings-admin__note">KenPom opens a Chrome window; this takes about a minute.</span>}
         {error && <span className="rankings-admin__status--error">{error}</span>}
       </div>
+      {uploaded && (
+        <p className={uploaded.failed.length ? 'rankings-admin__status--error' : 'rankings-admin__status--ok'}>
+          Uploaded {uploaded.uploaded.length} file{uploaded.uploaded.length === 1 ? '' : 's'} ({uploaded.uploaded.filter((k) => k.startsWith('rankings/')).join(', ') || 'no timeline'} and {uploaded.uploaded.filter((k) => k.startsWith('assets/')).length} logos).
+          {uploaded.failed.length > 0 && ` Failed: ${uploaded.failed.map((f) => `${f.key} (${f.error})`).join('; ')}`}
+          {' '}The page can lag by up to 5 minutes (cache).
+        </p>
+      )}
 
       <table className="rankings-admin__table">
         <thead>

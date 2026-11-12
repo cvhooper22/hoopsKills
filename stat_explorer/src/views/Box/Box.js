@@ -15,6 +15,7 @@ import { EventTimelinePanel } from './BoxEventTimeline';
 import { LineupTimelinePanel } from './BoxLineupTimeline';
 import { LineupComparePanel } from './BoxLineupCompare';
 import { FindPlaysPanel } from './BoxFind';
+import { AnalyticallyFinalPanel } from './BoxAnalyticallyFinal';
 import { ShotComparePanel } from './BoxShotCompare';
 import ShotChartPanel from '../../components/ShotChart/ShotChartPanel';
 import useGamePlays from '../../hooks/useGamePlays';
@@ -44,7 +45,7 @@ export default function Box() {
   if (!data) return <div className="box"><YBallLoader /></div>;
   return (
     <div className="box" style={oppColorStyle(data.header)}>
-      <BoxTabs tabs={[{ to: `/games/${gameId}`, label: 'Box score', end: true }, { to: `/games/${gameId}/timeline`, label: 'Lineup timeline' }, { to: `/games/${gameId}/stint-compare`, label: 'Stint Compare' }, { to: `/games/${gameId}/event-timeline`, label: 'Event timeline' }, { to: `/games/${gameId}/lineup-compare`, label: 'Lineup compare' }, { to: `/games/${gameId}/find`, label: 'Find plays' }, data.hasShotLocations !== false && { to: `/games/${gameId}/shots`, label: 'Shot chart' }, data.hasShotLocations !== false && { to: `/games/${gameId}/shot-compare`, label: 'Shot chart compare' }].filter(Boolean)} />
+      <BoxTabs tabs={[{ to: `/games/${gameId}`, label: 'Box score', end: true }, { to: `/games/${gameId}/timeline`, label: 'Lineup timeline' }, { to: `/games/${gameId}/stint-compare`, label: 'Stint Compare' }, { to: `/games/${gameId}/event-timeline`, label: 'Event timeline' }, { to: `/games/${gameId}/lineup-compare`, label: 'Lineup compare' }, { to: `/games/${gameId}/find`, label: 'Find plays' }, { to: `/games/${gameId}/analytically-final`, label: 'Analytically Final' }, data.hasShotLocations !== false && { to: `/games/${gameId}/shots`, label: 'Shot chart' }, data.hasShotLocations !== false && { to: `/games/${gameId}/shot-compare`, label: 'Shot chart compare' }].filter(Boolean)} />
       <Outlet context={{ data }} />
       {askAiOn && <AskAi data={data} />}
     </div>
@@ -118,4 +119,9 @@ export function BoxShotCompareTab() {
 export function BoxFindTab() {
   const { data } = useOutletContext();
   return <FindPlaysPanel data={data} />;
+}
+
+export function BoxAnalyticallyFinalTab() {
+  const { data } = useOutletContext();
+  return <AnalyticallyFinalPanel data={data} />;
 }

@@ -1,4 +1,4 @@
-import { elapsedSec, matches } from './playGroups';
+import { elapsedSec, matches, bucketOf, BUCKETS } from './playGroups';
 
 // Searching the box payload's event log (`data.events`, written by dataAggregators/derivations/game-box-prototype.js): one
 // row per play, with who did it, when, and the score after.
@@ -13,7 +13,7 @@ const KIND_OF = {
 };
 export const kindOf = (e) => KIND_OF[e.cat] || e.cat;
 
-export const emptySearch = () => ({ side: 'both', player: '', kinds: [], result: 'all', points: 'all', reb: 'all', inGroup: false, on: [], off: [] });
+export const emptySearch = () => ({ side: 'both', player: '', kinds: [], result: 'all', points: 'all', reb: 'all', situations: [], inGroup: false, on: [], off: [] });
 
 const SHOT_NAMES = { jumpshot: 'jump shot', layup: 'layup', dunk: 'dunk', tip: 'tip-in', hookshot: 'hook shot', stepback: 'step-back', alleyoop: 'alley-oop', driving: 'driving layup', tipinlayup: 'tip-in layup' };
 const shotName = (type, sub) => {
@@ -46,6 +46,40 @@ export function eventText(e) {
 
 export const eventElapsed = (e) => elapsedSec({ per: e.per, startRem: e.rem });
 
+// Situations: the Box page's chance types plus squeezed and havoc plays, tagged onto events by clock (the payload has no
+// per-event link). Each event gets `sit`, an array of keys (chance bucket keys, 'squeezed', 'havoc').
+export const SITUATIONS = [...BUCKETS, ['squeezed', 'Squeezed'], ['havoc', 'Havoc']];
+const flip = (s) => (s === 'byu' ? 'opp' : 'byu');
+// Steals, blocks and defensive rebounds are logged to the defense; every other event's side is the team on offense.
+const defensive = (e) => e.cat === 'steal' || e.cat === 'block' || (e.cat === 'rebound' && e.type === 'defensive');
+const offenseOf = (e) => (e.side ? (defensive(e) ? flip(e.side) : e.side) : null);
+const within = (e, per, from, to) => e.per === per && e.rem <= from && e.rem >= to;
+
+export function tagSituations(events, plays = [], havoc = null) {
+  const squeezed = [];
+  for (const d of ['byu', 'opp']) for (const q of (havoc && havoc[d] && havoc[d].squeeze.plays) || []) squeezed.push({ ...q, offense: flip(d) });
+  // Events are in game order, so on a boundary shared by two chances a shot or free throw goes to the earlier chance only while
+  // it still has unassigned attempts (its fga / fta); an offensive rebound opens the next chance; the rest close the earlier one.
+  const used = new Map();
+  const usedOf = (p, key) => (used.get(p) || {})[key] || 0;
+  const take = (p, key) => used.set(p, { ...(used.get(p) || {}), [key]: usedOf(p, key) + 1 });
+  return events.map((e) => {
+    const o = offenseOf(e), sit = [];
+    if (o && e.cat !== 'foul' && e.cat !== 'substitution' && e.cat !== 'timeout') {
+      const hits = plays.filter((p) => p.offense === o && within(e, p.per, p.startRem, p.startRem - p.dur));
+      const cap = e.cat === 'shot_attempt' ? 'fga' : e.cat === 'free_throw' ? 'fta' : null;
+      let hit = hits[0];
+      if (e.cat === 'rebound' && e.type === 'offensive') hit = hits[hits.length - 1];
+      else if (cap) hit = hits.find((p) => usedOf(p, cap) < p[cap]) || hits[hits.length - 1];
+      if (hit) { sit.push(bucketOf(hit)); if (cap) take(hit, cap); }
+      if (squeezed.some((q) => q.offense === o && within(e, q.per, q.startRem, q.endRem))) sit.push('squeezed');
+    }
+    // Havoc: the defense's steals and blocks, and the offense's turnovers.
+    if (e.side && (e.cat === 'steal' || e.cat === 'block' || e.cat === 'turnover')) sit.push('havoc');
+    return sit.length ? { ...e, sit } : e;
+  });
+}
+
 // Sub-filters (result, shot value, rebound type) only constrain their own kind, and only when that kind is picked.
 // `floorAt(seq)` -> { byu: [names], opp: [names] } (the lineup model's `lineupAtSeq`) enables the on/off floor filter: every name in
 // `f.on` must be on the floor for the play, and none in `f.off`. Names are matched against whichever team's five they are in.
@@ -59,6 +93,7 @@ export function searchEvents(events, f, group = null, floorAt = null) {
     }
     if (f.side !== 'both' && e.side !== f.side) return false;
     if (f.player && e.player !== f.player) return false;
+    if (f.situations && f.situations.length && !f.situations.some((x) => e.sit && e.sit.includes(x))) return false;
     const k = kindOf(e);
     if (f.kinds.length && !f.kinds.includes(k)) return false;
     if (f.kinds.includes(k)) {

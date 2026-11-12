@@ -24,4 +24,5 @@
 .kills-check { color: var(--secondary-text); font-size: 0.85rem; }
 
 /* Tint the page behind the Kills views so white cards lift off it. */
-.lineups:has(.kills) { background-color: var(--page-bg); }
+/* Skipped in the live view (.live-shell), which keeps the app background like its other tabs. */
+.lineups:not(.live-shell):has(.kills) { background-color: var(--page-bg); }

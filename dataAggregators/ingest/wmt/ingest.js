@@ -1,6 +1,7 @@
 // Usage:
 //   node ingest/wmt/ingest.js --file fixtures/wmt/6490506.json
 //   node ingest/wmt/ingest.js --id 6490506
+//   node ingest/wmt/ingest.js --url https://byucougars.com/boxscore/25257   (looks up the WMT id from the page)
 //   node ingest/wmt/ingest.js --ids-file config/wmt_game_ids.txt
 const fs = require('fs');
 const fetch = require('node-fetch');
@@ -83,6 +84,7 @@ async function main() {
   let jobs = [];
   if (opt('--file')) jobs = [{ file: opt('--file') }];
   else if (opt('--id')) jobs = [{ id: opt('--id') }];
+  else if (opt('--url')) jobs = [{ id: await require('./resolve-id').resolveWmtId(opt('--url')) }];
   else if (opt('--ids-file')) {
     jobs = fs.readFileSync(opt('--ids-file'), 'utf8').split('\n')
       .map(l => l.trim()).filter(l => l && !l.startsWith('#')).map(id => ({ id }));

@@ -21,7 +21,7 @@
   "miami-fl": {"color":"#f47423","altColor":"#035131"},
   "montana-st": {"color":"#00205c","altColor":"#bc955c"},
   "nebraska": {"color":"#e31937","altColor":"#ffffff"},
-  "nebraska-omaha": {"color":"#e3193e","altColor":"#474648"},
+  "omaha": {"color":"#e3193e","altColor":"#474648"},
   "northern-colorado": {"color":"#13558d","altColor":"#ffc533"},
   "northwestern": {"color":"#492f92","altColor":"#ffffff"},
   "ohio-state": {"color":"#ba0c2f","altColor":"#a8adb4"},
