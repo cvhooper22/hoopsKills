@@ -17,8 +17,8 @@ import LatestGameRedirect from "./components/GameSwitcher/LatestGameRedirect";
 import Home from "./views/Home/Home";
 import Exhibitions from "./views/Exhibitions/Exhibitions";
 import BoxRouter, { LatestBox } from "./views/Box/BoxRouter";
-import Box, { BoxScoreTab, BoxStintCompareTab, BoxFindTab, BoxTimelineTab, BoxLineupCompareTab, BoxEventTimelineTab, BoxShotsTab, BoxShotCompareTab } from "./views/Box/Box";
-import { LiveRouter, LiveIndex, LiveGame, LiveBox, LiveStintCompare, LiveEventTimeline, LiveFind, LiveTimeline, LiveLineupCompare, LiveKills, LiveLineups, LiveShots, LiveShotCompare } from "./views/Box/LiveBox";
+import Box, { BoxScoreTab, BoxStintCompareTab, BoxFindTab, BoxTimelineTab, BoxLineupCompareTab, BoxEventTimelineTab, BoxShotsTab, BoxShotCompareTab, BoxAnalyticallyFinalTab } from "./views/Box/Box";
+import { LiveRouter, LiveIndex, LiveGame, LiveBox, LiveStintCompare, LiveEventTimeline, LiveFind, LiveAnalyticallyFinal, LiveTimeline, LiveLineupCompare, LiveKills, LiveLineups, LiveShots, LiveShotCompare } from "./views/Box/LiveBox";
 import { views, COLLECTION_VIEW, RANKINGS_VIEW, EXHIBITIONS_NAV_VIEW } from './constants/views';
 import AlumniRouter from "./views/Alumni/AlmuniRouter";
 import useMediaQuery from "./hooks/useMediaQuery";
@@ -32,6 +32,8 @@ import { COLLECTION, LIVE_GAME, RANKINGS, EXHIBITIONS } from "./constants/featur
 // ones (alumni, recent games) load their editor only after the password is accepted.
 const AlumniAdminRoute = lazy(() => import("./views/Admin/AdminRoutes").then((m) => ({ default: m.AlumniAdminRoute })));
 const RecentGamesAdminRoute = lazy(() => import("./views/Admin/AdminRoutes").then((m) => ({ default: m.RecentGamesAdminRoute })));
+const AdminHomeRoute = lazy(() => import("./views/Admin/AdminRoutes").then((m) => ({ default: m.AdminHomeRoute })));
+const GamesAdminRoute = lazy(() => import("./views/Admin/AdminRoutes").then((m) => ({ default: m.GamesAdminRoute })));
 const StopsEditor = lazy(() => import("./views/Admin/StopsEditor"));
 const GlossaryPage = lazy(() => import("./views/Glossary/GlossaryPage"));
 const RankingsAdmin = lazy(() => import("./views/Admin/RankingsAdmin"));
@@ -110,6 +112,7 @@ function AppContent() {
               <Route path=":name" element={<Box />}>
                 <Route index element={<BoxScoreTab />} />
                 <Route path="find" element={<BoxFindTab />} />
+                <Route path="analytically-final" element={<BoxAnalyticallyFinalTab />} />
                 <Route path="timeline" element={<BoxTimelineTab />} />
                 <Route path="stint-compare" element={<BoxStintCompareTab />} />
                 <Route path="event-timeline" element={<BoxEventTimelineTab />} />
@@ -127,6 +130,7 @@ function AppContent() {
                   <Route path="stint-compare" element={<LiveStintCompare />} />
                   <Route path="event-timeline" element={<LiveEventTimeline />} />
                   <Route path="find" element={<LiveFind />} />
+                  <Route path="analytically-final" element={<LiveAnalyticallyFinal />} />
                   <Route path="timeline" element={<LiveTimeline />} />
                   <Route path="lineup-compare" element={<LiveLineupCompare />} />
                   <Route path="kills" element={<LiveKills />} />
@@ -141,6 +145,8 @@ function AppContent() {
             {collectionOn && <Route path="collection" element={<Suspense fallback={null}><Collection /></Suspense>} />}
             {/* Hidden — not in nav, only reachable by navigating directly here */}
             <Route path="glossary" element={<Suspense fallback={null}><GlossaryPage /></Suspense>} />
+            <Route path="admin" element={<Suspense fallback={null}><AdminHomeRoute /></Suspense>} ></Route>
+            <Route path="admin/games" element={<Suspense fallback={null}><GamesAdminRoute /></Suspense>} ></Route>
             <Route path="admin/alumni" element={<Suspense fallback={null}><AlumniAdminRoute /></Suspense>} ></Route>
             <Route path="admin/recent-games" element={<Suspense fallback={null}><RecentGamesAdminRoute /></Suspense>} ></Route>
             {rankingsOn && <Route path="admin/rankings" element={<Suspense fallback={null}><RankingsAdmin /></Suspense>} />}

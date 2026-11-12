@@ -1,0 +1,70 @@
+.games-admin {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 16px 24px 48px;
+  box-sizing: border-box;
+  text-align: left;
+  font-family: sans-serif;
+  color: #002e52;
+}
+.games-admin h2 { margin: 0 0 4px; font-size: 18px; }
+.games-admin h3 { margin: 24px 0 6px; font-size: 15px; }
+.games-admin code { font-size: 12px; background: #eef1f4; padding: 1px 4px; border-radius: 3px; }
+.games-admin__crumb { margin: 0 0 8px; font-size: 13px; }
+.games-admin__lede { margin: 0 0 16px; color: #4a6076; max-width: 760px; font-size: 14px; line-height: 1.4; }
+.games-admin__note { color: #4a6076; font-size: 12px; }
+.games-admin__error { color: #c62828; font-size: 13px; }
+.games-admin__num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.games-admin button {
+  padding: 5px 12px;
+  border: 1px solid #002e52;
+  border-radius: var(--radius-control, 16px);
+  background: white;
+  color: #002e52;
+  font-size: 13px;
+  cursor: pointer;
+}
+.games-admin button:disabled { opacity: 0.45; cursor: default; }
+.games-admin button.games-admin__primary { background: #002e52; color: white; }
+.games-admin button.games-admin__link { border-color: transparent; background: none; text-decoration: underline; padding: 5px 6px; }
+
+.games-admin__bar { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.games-admin__source { flex: 1 1 340px; max-width: 560px; padding: 6px 8px; border: 1px solid #b7c4d0; border-radius: 4px; font-size: 13px; }
+
+.games-admin__summary { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.games-admin__toggle { margin-left: auto; font-size: 13px; }
+
+.games-admin__table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.games-admin__table th { text-align: left; padding: 6px 8px; border-bottom: 2px solid #dde3ea; white-space: nowrap; font-size: 13px; }
+.games-admin__table td { padding: 6px 8px; border-bottom: 1px solid #eef1f4; vertical-align: top; }
+.games-admin__row--open td { border-bottom-color: transparent; }
+.games-admin__actions { white-space: nowrap; }
+.games-admin__actions button { margin-right: 4px; }
+.games-admin__detail td { background: #f6f8fa; }
+.games-admin__steps { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+
+.games-admin__state { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 12px; white-space: nowrap; background: #eef1f4; color: #4a6076; }
+.games-admin__state--deployed { background: #e3f4e8; color: #1a7f37; }
+.games-admin__state--stale, .games-admin__state--partial { background: #fdf1dc; color: #9a5b00; }
+.games-admin__state--not-deployed { background: #fde7e7; color: #c62828; }
+.games-admin__state--live { background: #e0edfb; color: #0b5cad; }
+
+.games-admin__dots { display: inline-flex; gap: 3px; }
+.games-admin__dot { width: 18px; height: 18px; line-height: 18px; text-align: center; border-radius: 50%; font-size: 10px; font-weight: 600; box-sizing: border-box; }
+.games-admin__dot--ok { background: #1a7f37; color: white; }
+.games-admin__dot--old { background: #d98a00; color: white; }
+.games-admin__dot--missing { background: #dde3ea; color: #4a6076; }
+.games-admin__dot--na { border: 1px dashed #b7c4d0; color: #b7c4d0; }
+.games-admin__dot--staged { outline: 2px solid #0b5cad; outline-offset: 1px; }
+
+.games-admin__chip { display: inline-block; margin-right: 4px; padding: 1px 6px; border-radius: 4px; font-size: 11px; background: #eef1f4; color: #4a6076; }
+.games-admin__chip--ok { background: #e3f4e8; color: #1a7f37; }
+.games-admin__chip--missing { background: #fde7e7; color: #c62828; }
+
+.games-admin__job { margin: 0 0 16px; padding: 10px 12px; border: 1px solid #dde3ea; border-radius: 8px; background: #f6f8fa; }
+.games-admin__job h3 { margin: 0 0 6px; }
+.games-admin__job pre { margin: 0; max-height: 240px; overflow: auto; font-size: 12px; line-height: 1.35; white-space: pre-wrap; word-break: break-word; }
+.games-admin__rollups { font-size: 13px; padding-left: 18px; }
+.games-admin__rollups li { margin-bottom: 4px; }

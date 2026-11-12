@@ -1,4 +1,4 @@
-import { kindOf, eventText, searchEvents, shotTotals, emptySearch, logPlayers } from './playSearch';
+import { kindOf, eventText, searchEvents, shotTotals, emptySearch, logPlayers, tagSituations } from './playSearch';
 
 const shot = (over) => ({ per: 1, rem: 2300, side: 'byu', player: 'Bruce Branch III', cat: 'shot_attempt', type: 'jumpshot', sub: null, made: true, val: 3, sc: [3, 0], ...over });
 const EVENTS = [
@@ -63,4 +63,24 @@ test('on/off floor filter', () => {
   expect(searchEvents(EVENTS, { ...emptySearch(), on: ['Bruce Branch III'] }, null, floorAt)).toEqual(EVENTS.slice(0, 3));
   expect(searchEvents(EVENTS, { ...emptySearch(), on: ['Collin Chandler', 'Pryce Sandfort'] }, null, floorAt)).toEqual(EVENTS.slice(3));
   expect(searchEvents(EVENTS, { ...emptySearch(), off: ['Bruce Branch III'] }, null, floorAt)).toEqual(EVENTS.slice(3));
+});
+
+test('situations: chance types, squeezed and havoc', () => {
+  const plays = [
+    { offense: 'byu', per: 1, startRem: 2300, dur: 20, label: 'transition' },
+    { offense: 'byu', per: 1, startRem: 2200, dur: 30, label: 'initial_halfcourt', sub: 'standard' },
+  ];
+  const havoc = { opp: { squeeze: { plays: [{ per: 1, startRem: 2200, endRem: 2170 }] } }, byu: { squeeze: { plays: [] } } };
+  const evs = [
+    shot({ rem: 2290 }),
+    shot({ rem: 2190 }),
+    { per: 1, rem: 2185, side: 'opp', player: 'X', cat: 'steal', sc: [0, 0] },
+    { per: 1, rem: 2100, side: 'opp', player: 'Y', cat: 'rebound', type: 'defensive', sc: [0, 0] },
+  ];
+  const t = tagSituations(evs, plays, havoc);
+  expect(searchEvents(t, { ...emptySearch(), situations: ['transition'] })).toEqual([t[0]]);
+  expect(searchEvents(t, { ...emptySearch(), situations: ['standard'] })).toEqual([t[1], t[2]]);
+  expect(searchEvents(t, { ...emptySearch(), situations: ['squeezed'] })).toEqual([t[1], t[2]]);
+  expect(searchEvents(t, { ...emptySearch(), situations: ['havoc'] })).toEqual([t[2]]);
+  expect(searchEvents(t, { ...emptySearch(), situations: ['transition', 'havoc'] })).toEqual([t[0], t[2]]);
 });

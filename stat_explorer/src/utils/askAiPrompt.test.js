@@ -54,6 +54,28 @@ describe('buildParts', () => {
   });
 });
 
+describe('on/off section', () => {
+  const g = game();
+  g.plays = [
+    { offense: 'byu', poss: 1, per: 1, startRem: 2390, dur: 10, pts: 2, lu: { byu: A, opp: B } },
+    { offense: 'opp', poss: 2, per: 1, startRem: 2380, dur: 10, pts: 3, lu: { byu: A, opp: B } },
+    { offense: 'byu', poss: 3, per: 1, startRem: 1000, dur: 10, pts: 0, lu: { byu: [...A.slice(0, 4), 'A6'], opp: B } },
+    { offense: 'opp', poss: 4, per: 1, startRem: 990, dur: 10, pts: 0, lu: { byu: [...A.slice(0, 4), 'A6'], opp: B } },
+  ];
+  g.events = [{ per: 1, rem: 1500, side: 'byu', player: 'A5', cat: 'substitution', sub: 'out', sc: [2, 3] }, { per: 1, rem: 1500, side: 'byu', player: 'A6', cat: 'substitution', sub: 'in', sc: [2, 3] }];
+  const lines = buildParts(g).onOff.split('\n');
+
+  it('splits a player\'s on and off numbers from the same stints', () => {
+    // A5 was on for the first stint (2 for, 3 against, 1 poss each way) and off for the second (0 and 0, 1 poss each way)
+    expect(lines).toContain('BYU,A5,15,2,3,1,1,200,300,-100,8.7,0,0,1,1,0,0,0');
+  });
+
+  it('lists one row per stint and can be switched off', () => {
+    expect(lines.filter((l) => l.startsWith('BYU,') && l.includes('"A1, A2, A3, A4, A')).length).toBe(2);
+    expect(assemblePrompt(buildParts(g), { ...DEFAULT_INCLUDE, onOff: false }, '')).not.toContain('# On/off');
+  });
+});
+
 describe('assemblePrompt', () => {
   const parts = buildParts(game());
 

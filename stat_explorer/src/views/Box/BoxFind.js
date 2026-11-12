@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { Section, BoxTable } from './BoxParts';
 import { pct, dash, periodLabel } from './boxFormat';
 import { clockSec, formatClock } from '../../utils/playGroups';
-import { KINDS, emptySearch, searchEvents, eventText, shotTotals, logPlayers } from '../../utils/playSearch';
+import { KINDS, SITUATIONS, tagSituations, emptySearch, searchEvents, eventText, shotTotals, logPlayers } from '../../utils/playSearch';
 import useLineupModel from './useLineupModel';
 import { Select } from '../../components/Field/Field';
 
@@ -14,7 +14,8 @@ const Chip = ({ on, onClick, children }) => (
 );
 
 // "Find plays": search the whole game's play log by team, player and type (any mix of field goals, assists, rebounds, ...).
-export function FindPlays({ events, teams, floorAt }) {
+export function FindPlays({ events: rawEvents, plays, havoc, teams, floorAt }) {
+  const events = useMemo(() => tagSituations(rawEvents, plays, havoc), [rawEvents, plays, havoc]);
   const [f, setF] = useState(emptySearch);
   const set = (patch) => setF((cur) => ({ ...cur, ...patch }));
   const players = useMemo(() => logPlayers(events), [events]);
@@ -22,6 +23,9 @@ export function FindPlays({ events, teams, floorAt }) {
   const totals = useMemo(() => shotTotals(found), [found]);
   const has = (k) => f.kinds.includes(k);
   const toggleKind = (k) => set({ kinds: has(k) ? f.kinds.filter((x) => x !== k) : [...f.kinds, k] });
+
+  const hasSit = (k) => f.situations.includes(k);
+  const toggleSit = (k) => set({ situations: hasSit(k) ? f.situations.filter((x) => x !== k) : [...f.situations, k] });
 
   const onPlayer = (name) => {
     const side = players.byu.includes(name) ? 'byu' : players.opp.includes(name) ? 'opp' : 'both';
@@ -48,6 +52,22 @@ export function FindPlays({ events, teams, floorAt }) {
     e.made && e.sc && e.sc[0] !== null ? `${teams.byu} ${e.sc[0]}–${e.sc[1]} ${teams.opp}` : dash,
   ]);
 
+  // Plain-text export of every play currently found (not just the first LIMIT shown), one per line.
+  const [copied, setCopied] = useState(false);
+  const copyText = async () => {
+    const text = found.map((e) => {
+      const clock = `${periodLabel(e.per)} ${formatClock(clockSec({ per: e.per, startRem: e.rem }))}`;
+      const who = [e.side ? teams[e.side] : null, e.player].filter(Boolean).join(' ');
+      const score = e.made && e.sc && e.sc[0] !== null ? ` (${teams.byu} ${e.sc[0]}–${e.sc[1]} ${teams.opp})` : '';
+      return `${clock} - ${who ? `${who}: ` : ''}${eventText(e)}${score}`;
+    }).join('\n');
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch (err) { /* clipboard unavailable */ }
+  };
+
   return (
     <Section>
       <div className="plays-group">
@@ -68,6 +88,11 @@ export function FindPlays({ events, teams, floorAt }) {
           <span className="plays-group__label">Type</span>
           <Chip on={!f.kinds.length} onClick={() => set({ kinds: [] })}>Any</Chip>
           {KINDS.map(([k, label]) => <Chip key={k} on={has(k)} onClick={() => toggleKind(k)}>{label}</Chip>)}
+        </div>
+        <div className="plays-group__row">
+          <span className="plays-group__label">Situation</span>
+          <Chip on={!f.situations.length} onClick={() => set({ situations: [] })}>Any</Chip>
+          {SITUATIONS.map(([k, label]) => <Chip key={k} on={hasSit(k)} onClick={() => toggleSit(k)}>{label}</Chip>)}
         </div>
         {floorAt ? floorPick('on', 'On floor') : null}
         {floorAt ? floorPick('off', 'Off floor') : null}
@@ -92,6 +117,7 @@ export function FindPlays({ events, teams, floorAt }) {
       </div>
       <p className="box-foot">
         {found.length} {found.length === 1 ? 'play' : 'plays'}
+        {found.length ? <> · <Chip on={copied} onClick={copyText}>{copied ? 'Copied!' : 'Copy plays as text'}</Chip></> : null}
       </p>
       <BoxTable head={[{ label: 'When (clock left)' }, { label: 'Team' }, { label: 'Player' }, { label: 'Play' }, { label: 'Score after' }]} rows={rows} stickyFirst={false} />
       {found.length > LIMIT ? <p className="box-foot">Showing the first {LIMIT} of {found.length}. Narrow the search to see the rest.</p> : null}
@@ -104,5 +130,5 @@ export function FindPlaysPanel({ data }) {
   const { model } = useLineupModel(data);
   const floorAt = useMemo(() => (model ? (seq) => ({ byu: model.lineupAtSeq('byu', seq), opp: model.lineupAtSeq('opp', seq) }) : null), [model]);
   if (!data.events) return <Section title="Find plays"><p>This game's box file predates play search. Regenerate it with <code>node derivations/game-box-prototype.js {data.header.gameId}</code>.</p></Section>;
-  return <div className="plays"><FindPlays events={data.events} teams={data.header.teams} floorAt={floorAt} /></div>;
+  return <div className="plays"><FindPlays events={data.events} plays={data.plays} havoc={data.havoc} teams={data.header.teams} floorAt={floorAt} /></div>;
 }

@@ -64,12 +64,20 @@ async function resolvePlayer(client, source, externalId, name, teamId = null) {
   if (found.rows.length) return found.rows[0].player_id;
 
   if (teamId) {
-    const pool = (await client.query(
-      `SELECT p.player_id, p.name FROM players p
-       WHERE EXISTS (SELECT 1 FROM plays WHERE player_id = p.player_id AND team_id = $1)
-         AND NOT EXISTS (SELECT 1 FROM player_external_ids e WHERE e.player_id = p.player_id AND e.source = $2)`,
+    // Everyone who has played for this team. A player may already hold an id from this source (sources
+    // reissue ids, e.g. WMT per season), so a new id is attached to the same person by exact name.
+    const all = (await client.query(
+      `SELECT p.player_id, p.name,
+              EXISTS (SELECT 1 FROM player_external_ids e WHERE e.player_id = p.player_id AND e.source = $2) AS has_source_id
+       FROM players p
+       WHERE EXISTS (SELECT 1 FROM plays WHERE player_id = p.player_id AND team_id = $1)`,
       [teamId, source])).rows;
-    let cands = pool.filter(c => nameKey(c.name) === nameKey(name));
+    const pool = all.filter(c => !c.has_source_id);   // players this source has never named
+    let cands = all.filter(c => nameKey(c.name) === nameKey(name));
+    if (cands.length > 1) {                           // same name twice: prefer the one without an id yet
+      const unclaimed = cands.filter(c => !c.has_source_id);
+      if (unclaimed.length) cands = unclaimed;
+    }
     if (!cands.length) cands = pool.filter(c => sameLastNameFirstPrefix(c.name, name)); // Chris / Christian
     if (cands.length === 1) {
       await client.query('INSERT INTO player_external_ids (player_id, source, external_id) VALUES ($1, $2, $3)',

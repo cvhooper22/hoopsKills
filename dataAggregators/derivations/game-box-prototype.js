@@ -56,6 +56,15 @@ async function load(client, gameId) {
   const { rows: pn } = await client.query('SELECT player_id, name FROM players');
   const names = Object.fromEntries(pn.map((r) => [r.player_id, r.name]));
   const homeIsFocus = game.home_team_id === FOCUS;
+  // ESPN has no separate assist plays (WMT does): the passer rides on the made shot as an 'assister' participant. Add the
+  // assist play right after the shot so everything downstream sees the same shape as the other feeds.
+  if (!rows.some((r) => r.cat === 'assist')) {
+    for (let k = rows.length - 1; k >= 0; k--) {
+      const r = rows[k], who = r.cat === 'shot_attempt' && r.made && roles[r.sn] && roles[r.sn].assister;
+      if (who) rows.splice(k + 1, 0, { ...r, cat: 'assist', type: null, sub: null, made: null, val: null, quals: null, name: who, linked: r.play_id,
+        play_id: `${r.play_id}-ast`, player_id: Object.keys(names).find((id) => names[id] === who) || null });
+    }
+  }
   const evs = rows.map((r, i) => ({
     ...r, i, side: r.team_id === FOCUS ? 'byu' : r.team_id ? 'opp' : null,
     rem: r.per <= 2 ? (2 - r.per) * 1200 + (r.clk ?? 0) : (r.clk ?? 0),

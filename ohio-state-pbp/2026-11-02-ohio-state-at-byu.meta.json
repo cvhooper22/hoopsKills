@@ -1,0 +1,34 @@
+{
+ "gameId": "2026-11-02-ohio-state-at-byu",
+ "date": "2026-11-02",
+ "venue": "Delta Center",
+ "neutralSite": true,
+ "status": "final",
+ "homeId": "byu",
+ "awayId": "ohio-state",
+ "final": {
+  "byu": 94,
+  "ohio-state": 83
+ },
+ "teams": {
+  "byu": {
+   "name": "BYU",
+   "abbrev": "BYU"
+  },
+  "ohio-state": {
+   "name": "Ohio State",
+   "abbrev": null
+  }
+ },
+ "headshots": {
+  "khadim-mboup": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/khadim-mboup.png",
+  "robert-wright-iii": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/robert-wright-iii.png",
+  "collin-chandler": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/collin-chandler.png",
+  "jake-wahlin-2": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/jake-wahlin-2.png",
+  "jaxon-kohler": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/jaxon-kohler.png",
+  "nate-pickens": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/nate-pickens.png",
+  "tyler-betsey": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/tyler-betsey.png",
+  "brooks-bahr": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/brooks-bahr.png",
+  "bruce-branch-iii": "https://dd0v7fgd2sjsh.cloudfront.net/assets/alum/players/bruce-branch-iii.png"
+ }
+}

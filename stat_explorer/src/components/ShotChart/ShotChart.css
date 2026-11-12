@@ -1,4 +1,4 @@
-.shot-chart-wrap { position: relative; width: 100%; max-width: 560px; margin: 0 auto; }
+.shot-chart-wrap { position: relative; width: 100%; max-width: 448px; margin: 0 auto; }
 .shot-chart { display: block; width: 100%; height: auto; background: #fff; border: 1px solid var(--lightest-blue); border-radius: 6px; }
 .shot-chart__bg-hoop { stop-color: #e6f0fb; }
 .shot-chart__bg-far { stop-color: #fff; }

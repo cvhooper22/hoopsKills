@@ -46,7 +46,7 @@ capture -> Postgres -> live-box-server.js (127.0.0.1:4610) -> live-relay-push.js
 1. Start capture and the local server as usual (`node derivations/live-box-server.js` from `dataAggregators/`).
 2. In another terminal, start the pusher (from `dataAggregators/`):
    ```bash
-   RELAY_URL=https://hoops-live-relay.<your-subdomain>.workers.dev RELAY_TOKEN=<token> node derivations/live-relay-push.js
+   node derivations/live-relay-push.js   # asks for the relay URL (defaults to the byuhoopstats-live-relay one) and the token; RELAY_URL / RELAY_TOKEN skip the prompts
    ```
    By default it follows games marked `live` that changed in the last 10 minutes, so stale ones from earlier captures are
    skipped; add `--game <id>` to push exactly the game you want. Only games it pushes appear on the public games list. Stop it with Ctrl-C to go private again.

@@ -1,6 +1,6 @@
 import { useMemo, useRef, useState } from 'react';
 import { periodLabel } from './boxFormat';
-import { marginTimeline, scoreTimeline, pointAt, gameMinutes, axisLayout, fromMinute, formatClock, snapNear } from '../../utils/playGroups';
+import { marginTimeline, scoreTimeline, pointAt, gameMinutes, axisLayout, fromMinute, formatClock, snapNear, periodStartMin } from '../../utils/playGroups';
 
 // Game-flow graph for the Stint Compare tab: the score margin over the game (up = focus team ahead). Drag across it to select a
 // stretch for the active group; click to clear that group's stretch. `ranges` is [{ from, to }] per slot (null = not set).
@@ -32,7 +32,10 @@ export default function GameFlow({ plays, events, teams, ranges, active, names, 
     const px = ((e.clientX - r.left) / r.width) * W;
     const t = ((px - PAD.l) / (W - PAD.l - PAD.r)) * total;
     const t0 = Math.min(total, Math.max(0, Math.round(t / SNAP) * SNAP));
-    const near = snap ? snapNear(t, [...timeouts, ...teamTimeouts.map((m) => m.t)], TIMEOUT_SNAP) : t;
+    // period boundaries (halftime, OT starts) are snap points too, and a timeout never pulls an edge across one
+    const bounds = []; for (let per = 2; periodStartMin(per) < total; per++) bounds.push(periodStartMin(per));
+    const side = (m) => bounds.filter((b) => m >= b).length;
+    const near = snap ? snapNear(t, [...bounds, ...[...timeouts, ...teamTimeouts.map((m) => m.t)].filter((m) => side(m) === side(t))], TIMEOUT_SNAP) : t;
     return near !== t ? Math.min(total, Math.max(0, near)) : t0;
   };
   const down = (e) => { svg.current.setPointerCapture(e.pointerId); const t = toMin(e); setDrag({ a: t, b: t }); };
